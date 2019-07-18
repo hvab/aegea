@@ -1,0 +1,35 @@
+.e2-pages {
+  margin-bottom: 40px;
+  font-family: var(--smallFontFamily);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.e2-pages a {
+  padding-top: .4em;
+}
+
+.e2-page-unavailable {
+  color: var(--disabledColor);
+}
+
+.e2-pages-prev,
+.e2-pages-between,
+.e2-pages-next {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.e2-pages-prev,
+.e2-pages-next {
+  max-width: 40%;
+}
+
+.e2-pages-between {
+  white-space: nowrap;
+}
+
+.e2-pages-prev + .e2-pages-between,
+.e2-pages-between + .e2-pages-next {
+  padding-left: 1em;
+}

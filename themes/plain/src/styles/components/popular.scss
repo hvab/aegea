@@ -1,0 +1,25 @@
+.e2-popular {
+  max-width: 700px;
+  columns: 3;
+  column-gap: 40px;
+  margin: 0 0 24px 0;
+}
+
+.e2-popular p {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 0 6px 0;
+}
+
+.e2-popular a {
+  padding-top: .4em;
+}
+
+@media #{$ArePopularVertical} {
+  .e2-popular {
+    max-width: none;
+    columns: 1;
+  }
+}
+

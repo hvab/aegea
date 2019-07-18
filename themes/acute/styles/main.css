@@ -1,0 +1,102 @@
+:root {
+    
+  --backgroundColor:             rgb( 255, 255, 255      );
+  --backgroundTransparentColor: rgba( 255, 255, 255, .8  );
+  --sheetBackgroundColor:       rgba( 240, 240, 240, .8  );
+
+  --foregroundColor:             rgb( 107, 122, 118      );
+  --thinRuleColor:              rgba( 107, 122, 118, .12 );
+
+  --headingsColor:               rgb(   0,   0,   0      );
+  --headingsUnderlineColor:     rgba(   0,   0,   0, .12 );
+  --boldColor:                     var(--headingsColor);
+  --boldUnderlineColor:            var(--headingsUnderlineColor);
+  --linkColor:                   rgb(  33,  63, 255      );
+  --linkUnderlineColor:         rgba(  33,  63, 255, .12 );
+  --linkColorVisited:            rgb(   0,   0,   0      );
+  --linkUnderlineColorVisited:  rgba(   0,   0,   0, .12 );
+  --hoverColor:                  rgb( 205,  80,  85      );
+  --hoverUnderlineColor:        rgba( 205,  80,  85, .12 );
+  --tagColor:                    rgb(   0,   0,   0      );
+  --tagUnderlineColor:          rgba(   0,   0,   0, .12 );
+  --adminColor:                  rgb(  33, 160, 170      );
+  --adminUnderlineColor:        rgba(  33, 160, 170, .12 );
+  --engineTextColor:             var(--foregroundColor);
+  --engineTextUnderlineColor:    var(--thinRuleColor);
+
+  --markedTextBackground:        rgb( 255, 242, 128);
+  --markedImageBorderColor:      rgb( 255, 242, 128);
+
+  --inputBackgroundColor: #ebf0f0;
+  --inputTextColor: #000;
+
+  /* --imageBorderColor */
+  /* --disabledColor */
+  /* --activeColor */
+  /* --errorColor */
+  /* --currentItemBackgroundColor */
+  /* --windowBackgroundColor */
+  /* --unsavedIndicatorColor */
+  
+  /* to match .likely */
+  /* --subscribeButtonBackground: rgba(231,231,231,.8); */
+  /* --subscribeButtonHoverBackground: rgba(212,212,212,.8); */
+  /* --subscribeButtonTextColor: #000; */
+
+  /* to match .likely-light */
+  /* --subscribeButtonBackground: rgba(236,236,236,.16); */
+  /* --subscribeButtonHoverBackground: rgba(255,255,255,.48); */
+  /* --subscribeButtonTextColor: #fff; */
+  
+  --marginTop: 48px;
+  --marginLeft: 6%;
+  --marginRight: 6%;
+  --marginTopCompact: 14px;
+  --marginLeftCompact: 3%;
+  --marginRightCompact: 3%;
+
+  --displayLogoMarginal: none;
+  --displayLogo: block;
+  --displayLogoCompact: block;
+
+  /* --columnSpacing */
+
+  --logoTop: -8px;
+  --blogTitleFontSize: 28px;
+  --blogTitleLineHeight: 32px;
+  --pageHeadingFontSize: 36px;
+  --pageHeadingLineHeight: 42px;
+  --noteTitleFontSize: 28px;
+  --noteTitleLineHeight: 32px;
+  --noteTitleFavouriteFontSize: 40px;
+  --noteTitleFavouriteLineHeight: 48px;
+  --noteTextFontSize: 20px;
+  --noteTextLineHeight: 28px;
+
+  /* --mainFontFamily: "Helvetica Neue", "Helvetica", "Arial", sans-serif; */
+  /* --noteMainFontFamily: Georgia, serif; */
+  /* --smallFontFamily */
+
+  /* --time */
+
+}
+
+.e2-text .lead,
+.e2-note-favourite .e2-text .lead {
+  font-family: var(--mainFontFamily);
+  font-size: var(--noteTextFontSize);
+  line-height: var(--noteTextLineHeight);
+  margin: 0 0 28px;
+}
+
+.e2-text .loud {
+  font-family: var(--mainFontFamily);
+  font-weight: normal;
+  font-size: 40px;
+  color: var(--boldColor);
+  line-height: 44px;
+  max-width: 720px;  
+  border: none;
+  padding: 0;
+  margin: 20px 0 40px;
+}

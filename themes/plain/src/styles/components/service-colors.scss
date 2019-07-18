@@ -1,0 +1,87 @@
+.e2-service-color-twitter:link, .e2-service-color-twitter:visited { 
+  color: #00b8f2;
+  border-color: transparentize(#00b8f2, $thin);
+}
+
+.e2-service-color-facebook:link, .e2-service-color-facebook:visited { 
+  color: #3850a1;
+  border-color: transparentize(#3850a1, $thin);
+}
+
+.e2-service-color-vk:link, .e2-service-color-vk:visited { 
+  color: #5b7ea1;
+  border-color: transparentize(#5b7ea1, $thin);
+}
+
+.e2-service-color-telegram:link, .e2-service-color-telegram:visited { 
+  color: #37a1d8;
+  border-color: transparentize(#37a1d8, $thin);
+}
+
+.e2-service-color-gplus:link, .e2-service-color-gplus:visited { 
+  color: #dd4241;
+  border-color: transparentize(#dd4241, $thin);
+}
+
+.e2-service-color-linkedin:link, .e2-service-color-linkedin:visited { 
+  color: #0077b5;
+  border-color: transparentize(#0077b5, $thin);
+}
+
+.e2-service-color-odnoklassniki:link, .e2-service-color-odnoklassniki:visited { 
+  color: #f6903b;
+  border-color: transparentize(#f6903b, $thin);
+}
+
+.e2-service-color-pinterest:link, .e2-service-color-pinterest:visited { 
+  color: #bd081c;
+  border-color: transparentize(#bd081c, $thin);
+}
+
+.e2-service-color-rss:link, .e2-service-color-rss:visited { 
+  color: #de601c;
+  border-color: transparentize(#de601c, $thin);
+}
+
+.e2-service-color-jsonfeed:link, .e2-service-color-jsonfeed:visited { 
+  color: #6cbf00;
+  border-color: transparentize(#6cbf00, $thin);
+}
+
+.e2-service-color-email:link, .e2-service-color-email:visited { 
+  color: var(--foregroundColor);
+  border-color: var(--thinRuleColor);
+}
+
+.e2-service-color-neutral:link, .e2-service-color-neutral:visited { 
+  color: var(--foregroundColor);
+  border-color: var(--thinRuleColor);
+}
+
+.e2-service-color-twitter:hover,
+.e2-service-color-twitter.hover,
+.e2-service-color-facebook:hover,
+.e2-service-color-facebook.hover,
+.e2-service-color-vk:hover,
+.e2-service-color-vk.hover,
+.e2-service-color-telegram:hover,
+.e2-service-color-telegram.hover,
+.e2-service-color-gplus:hover,
+.e2-service-color-gplus.hover,
+.e2-service-color-linkedin:hover,
+.e2-service-color-linkedin.hover,
+.e2-service-color-odnoklassniki:hover,
+.e2-service-color-odnoklassniki.hover,
+.e2-service-color-pinterest:hover,
+.e2-service-color-pinterest.hover,
+.e2-service-color-rss:hover,
+.e2-service-color-rss.hover,
+.e2-service-color-jsonfeed:hover,
+.e2-service-color-jsonfeed.hover,
+.e2-service-color-email:hover,
+.e2-service-color-email.hover,
+.e2-service-color-neutral:hover,
+.e2-service-color-neutral.hover {
+  color: var(--hoverColor);
+  border-color: var(--hoverUnderlineColor);
+ }
