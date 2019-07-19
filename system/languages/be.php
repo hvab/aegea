@@ -25,7 +25,6 @@ function e2l_load_strings () {
   'gs--ask-hoster-how-to-create-db' => 'Удакладніце ў хостэра, як стварыць базу, калі яе няма',
   'er--double-check-db-params' => 'Пераправерце рэквізіты базы',
   'gs--instantiated-version' => 'Інстанцыявана версія',
-  'pt--installer-loading' => 'Загрузка...',
   'gs--database' => 'База звестак',
   'gs--password-for-blog' => 'Пароль, які хочаце выкарыстоўваць для доступу да блогу',
   'gs--data-exists' => 'У гэтай базе ўжо ёсць блог. Усталёўнік проста падключыцца да яе.',
@@ -58,7 +57,6 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Памылка пры змяненні нататкі',
   'er--error-deleting-post-tag-info' => 'Памылка пры выдаленні дадзеных аб тэгах нататкі',
   'er--wrong-datetime-format' => 'Няправільны фармат даты-часу. Павінен быць: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',
-  'er--cannot-get-post-from-db' => 'Не атрымалася выцягнуць нататку з базы',
   'er--unsupported-file' => 'Падтрымлiваюцца толькi выявы PNG, JPG, GIF, SVG i аудыёфайлы MP3.',
   'er--cannot-create-thumbnail' => 'Не атрымалася стварыць паменшаную выяву',
   'er--cannot-upload' => 'Не атрымалася запампаваць файл',
@@ -85,7 +83,6 @@ function e2l_load_strings () {
   'gs--post-will-be-deleted' => 'Нататка «$[post]» будзе выдалена разам з усімі каментарамі.',
 
   // frontpage
-  'er--cannot-show-latest-notes' => 'Немагчыма адлюстраваць апошнія нататкі',
   'nm--posts' => 'Нататкі',
   'gs--next-posts' => 'наступныя',
   'gs--prev-posts' => 'папярэднія',
@@ -112,7 +109,6 @@ function e2l_load_strings () {
   'gs--you-are-not-subscribed' => 'Здаецца, вы і так не падпісаны на каментары да гэтай нататкі',
   'gs--you-are-no-longer-subscribed' => 'Вы больш не падпісаны на каментары да нататкі',
   'gs--unsubscription-didnt-work' => 'Чамусьці адпіска не спрацавала',
-  'gs--comment-not-found' => 'каментар не знойдзены',
   'gs--post-not-found' => 'Нататка не знойдзена',
   'gs--comment-too-long' => 'Занадта доўгі каментар',
   'gs--comment-too-long-description' => 'Вы даслалі занадта доўгі каментар, таму ён не быў захаваны.',
@@ -208,6 +204,7 @@ function e2l_load_strings () {
   'em--follow-this-link' => 'Перайдзіце па гэтай спасылцы, каб скінуць пароль:',
 
   'pt--sessions' => 'Адкрытыя сесіі',
+  'gs--sessions' => 'адкрытыя сесіі',
   'gs--sessions-description' => 'Калі вы заходзіце пад сваім паролем на некалькіх прыладах ці з дапамогай некалькіх браўзераў, тут адлюстроўваецца спіс усіх такіх сесій. Калі нейкая з іх выклікае падазрэнні, завяршыце ўсе сесіі акрамя бягучай, а потым змяніце пароль ад блогу.',
   'gs--sessions-browser-or-device' => 'Браўзер ці прылада',
   'gs--sessions-when' => 'Калі',
@@ -363,8 +360,9 @@ function e2l_load_strings () {
   'gs--page-not-found' => 'Старонка не знойдзена.',
 
   'er--cannot-find-db' => 'Не магу знайсці базу звестак',
+  'er--db-connect-timeout' => 'Не атрымалася дачакацца адказу сервера базы звестак за $[timeout] с',
   'er--cannot-connect-to-db' => 'Не магу злучыцца з базай звестак',
-  'er--error-in-query' => 'Памылка пры запыце',
+  'er--mysql-version-too-old' => 'Версія базы звестак занадта старая ($[v1], патрэбна $[v2]+)',
   'er--error-occurred' => 'Адбылася памылка',
   'er--too-many-errors' => 'Занадта шмат памылак',
   'gs--rss' => 'РСС',
@@ -373,6 +371,8 @@ function e2l_load_strings () {
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Выканана абнаўленне з версіі $[from] да версіі $[to]',
   'gs--good-blogs' => 'Добрыя блогі ды сайты',
+
+  'gs--range-separator' => '<span style="margin-left: .07em; letter-spacing: .07em">...</span>',
 
   '--secondary-language' => 'ru',
 

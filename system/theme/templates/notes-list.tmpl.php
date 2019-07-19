@@ -1,4 +1,4 @@
-<?php if (array_key_exists ('notes-list', $content)) { ?>
+<?php if (array_key_exists ('notes-list', $content) and count ($content['notes-list']) > 0) { ?>
 
 <div class="e2-note-list e2-text">
 <?php foreach ($content['notes-list'] as $note): ?>

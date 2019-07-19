@@ -23,7 +23,7 @@ Rose debug info
 <?php if (array_key_exists ('favourite-toggle-href', $note)) { ?>
 <span class="admin-links admin-icon"><a href="<?= $note['favourite-toggle-href'] ?>" class="nu e2-favourite-toggle <?= ($note['favourite?']? 'e2-toggle-on' : '') ?>">
 <span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a></span>
-<?php } ?><span class="admin-icon"><a href="<?= $note['edit-href'] ?>" class="nu <?php if (array_key_exists ('only', $content['notes'])) {?>e2-edit-link<?php } ?>"><span class="e2-svgi"><?= _SVG ('edit') ?><span class="e2-unsaved-led" style="display: none"></span></a></span></span></span></span><?php endif ?>
+<?php } ?><span class="admin-icon"><a href="<?= $note['edit-href'] ?>" class="nu <?php if (array_key_exists ('only', $content['notes'])) {?>e2-edit-link<?php } ?>"><span class="e2-svgi"><?= _SVG ('edit') ?><span class="e2-unsaved-led" style="display: none"></span></span></a></span></span><?php endif ?>
 
 
 <article>

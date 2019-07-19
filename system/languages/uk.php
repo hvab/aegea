@@ -25,7 +25,6 @@ function e2l_load_strings () {
   'gs--ask-hoster-how-to-create-db' => 'Якщо у вас немає бази даних, уточніть у хостера, як її створити',
   'er--double-check-db-params' => 'Перевірте реквізити бази ще раз',
   'gs--instantiated-version' => 'Інстанційована версія',
-  'pt--installer-loading' => 'Завантаження...',
   'gs--database' => 'База даних',
   'gs--password-for-blog' => 'Пароль для доступу до блогу',
   'gs--data-exists' => 'У цій базі вже є блог. Встановлювач просто підключиться до неї.',
@@ -58,7 +57,6 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Не вдалося змінити допис',
   'er--error-deleting-post-tag-info' => 'Не вдалося видалити дані про теги допису',
   'er--wrong-datetime-format' => 'Неправильний формат дати й часу. Має бути: «ДД.ММ.РРРР ГГ:ХХ:СС»',
-  'er--cannot-get-post-from-db' => 'Не вдалось отримати допис із бази',
   'er--unsupported-file' => 'Підтримуються лише зображення PNG, JPG, GIF, SVG і аудіофайли MP3',
   'er--cannot-create-thumbnail' => 'Не вдалося створити ескіз зображення',
   'er--cannot-upload' => 'Не вдалося завантажити файл',
@@ -85,7 +83,6 @@ function e2l_load_strings () {
   'gs--post-will-be-deleted' => 'Буде видалено допис «$[post]» і всі коментарі до нього.',
 
   // frontpage 
-  'er--cannot-show-latest-notes' => 'Не вдалося завантажити останні дописи',
   'nm--posts' => 'Дописи',
   'gs--next-posts' => 'наступні',
   'gs--prev-posts' => 'попередні',
@@ -112,7 +109,6 @@ function e2l_load_strings () {
   'gs--you-are-not-subscribed' => 'Схоже, ви не підписані на коментарі до цього допису',
   'gs--you-are-no-longer-subscribed' => 'Ви більше не підписані на коментарі до цього допису',
   'gs--unsubscription-didnt-work' => 'Чомусь не вдалося скасувати підписку',
-  'gs--comment-not-found' => 'Коментаря не знайдено',
   'gs--post-not-found' => 'Допису не знайдено',
   'gs--comment-too-long' => 'Задовгий коментар',
   'gs--comment-too-long-description' => 'Ваш коментар не збережено, оскільки він задовгий.',
@@ -208,6 +204,7 @@ function e2l_load_strings () {
   'em--follow-this-link' => 'Перейдіть за цим посиланням, щоб скинути пароль:',
 
   'pt--sessions' => 'Відкриті сесії',
+  'gs--sessions' => 'відкриті сесії',
   'gs--sessions-description' => 'Коли ви входите зі своїм паролем на кількох пристроях або в кількох браузерах, тут відображається список усіх цих сесій. Якщо якась із них здається вам підозрілою, завершіть усі сесії окрім поточної, а потім змініть свій пароль.',
   'gs--sessions-browser-or-device' => 'Браузер або пристрій',
   'gs--sessions-when' => 'Коли',
@@ -363,8 +360,9 @@ function e2l_load_strings () {
   'gs--page-not-found' => 'Сторінку не знайдено.',
   
   'er--cannot-find-db' => 'Не можу знайти базу даних',
+  'er--db-connect-timeout' => 'Не вдалося дочекатися відповіді сервера бази даних за $[timeout] с',
   'er--cannot-connect-to-db' => 'Не можу зʼєднатися з базою даних',
-  'er--error-in-query' => 'Помилка під час запиту',
+  'er--mysql-version-too-old' => 'Версія бази даних занадто стара ($[v1], потрібна $[v2]+)',
   'er--error-occurred' => 'Сталася помилка',
   'er--too-many-errors' => 'Забагато помилок',
   'gs--rss' => 'РСС',
@@ -373,6 +371,8 @@ function e2l_load_strings () {
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Виконано оновлення з версії $[from] до версії $[to]',
   'gs--good-blogs' => 'Хороші блоги та сайти',
+
+  'gs--range-separator' => '<span style="margin-left: .07em; letter-spacing: .07em">...</span>',
 
   '--secondary-language' => 'ru',
   

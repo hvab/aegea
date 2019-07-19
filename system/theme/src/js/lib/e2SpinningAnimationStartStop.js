@@ -4,7 +4,7 @@ function e2SpinningAnimationStartStop ($container, start) {
     thinkingAnimation.setAttribute('repeatCount', 'indefinite')
     thinkingAnimation.beginElement()
   } else {
-    thinkingAnimation.setAttribute('repeatCount', '1')
+    thinkingAnimation.setAttribute('repeatCount', '4')
   }
 }
 

@@ -23,8 +23,8 @@
 
       <input type="text" name="login" value="<?= $content['form-login']['login-name'] ?>" style="display: none" />
 
-      <?php if (array_key_exists ('sign-in-prompt', $content)) { ?>
-        <!-- <h1><?= $content['sign-in-prompt'] ?></h1> -->
+      <?php if (array_key_exists ('prompt', $content['sign-in'])) { ?>
+        <!-- <h1><?= $content['sign-in']['prompt'] ?></h1> -->
         <h2><?= _S ('gs--need-password') ?></h2>
       <?php } ?>
       <?php if ($content['sign-in']['necessary?']): ?>

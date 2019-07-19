@@ -17,8 +17,8 @@
       <?php } ?>
 
       <?php if ($content['class'] == 'settings'): ?>
-      <?php if (array_key_exists ('logout', $content['admin-hrefs'])): ?>
-      <span class="admin-icon"><a href="<?= $content['admin-hrefs']['logout'] ?>" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('exit') ?></span></a></span>
+      <?php if (array_key_exists ('sign-out-href', $content['admin'])): ?>
+      <span class="admin-icon"><a href="<?= $content['admin']['sign-out-href'] ?>" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('exit') ?></span></a></span>
       <?php endif ?>
       <?php endif ?>
 

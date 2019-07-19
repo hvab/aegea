@@ -3,7 +3,7 @@
 
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=<?= $content['meta']['output-charset'] ?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <style type="text/css">
 
@@ -131,6 +131,9 @@ if (document.getElementById ('id-' + n).style.display == 'none') {
  _rawtmpl_list ($content);
  
 ?>
+
+<p>'meta' — postpopulated</p>
+<p>'stat' — postpopulated</p>
 
 </body>
 

@@ -91,9 +91,9 @@
 <div class="form-control">
   <div class="form-label">
     <p><label><?= _S ('ff--theme') ?></label></p>
-    <?php if (array_key_exists ('theme-preview', $content['admin-hrefs'])) { ?>
+    <?php if (array_key_exists ('theme-preview-href', $content['admin'])) { ?>
     <p class="admin-links">
-      <a class="e2-template-preview-link" href="<?= @$content['admin-hrefs']['theme-preview'] ?>" target="_blank"><?= _S ('gs--theme-preview') ?> <span class="e2-svgi"><?= _SVG ('blank-window') ?></span></a>
+      <a class="e2-template-preview-link" href="<?= @$content['admin']['theme-preview-href'] ?>" target="_blank"><?= _S ('gs--theme-preview') ?> <span class="e2-svgi"><?= _SVG ('blank-window') ?></span></a>
     </p>
     <?php } ?>
   </div>
@@ -288,6 +288,7 @@
 <?php } ?>
 
 <p class="admin-links"><?= _S ('ff--administration') ?>&nbsp;
-<a href="<?= @$content['admin-hrefs']['password'] ?>"><?= _S ('gs--password') ?></a><?php if (array_key_exists ('database', $content['admin-hrefs'])) { ?>,&nbsp;
-<a href="<?= @$content['admin-hrefs']['database'] ?>"><?= _S ('gs--db-connection') ?></a><?php } ?><?php if (array_key_exists ('get-backup', $content['admin-hrefs'])) { ?>,&nbsp;
-<a href="<?= @$content['admin-hrefs']['get-backup'] ?>"><?= _S ('gs--get-backup') ?></a><?php } ?></p>
+<a href="<?= @$content['admin']['password-href'] ?>"><?= _S ('gs--password') ?></a><?php if (array_key_exists ('database-href', $content['admin'])) { ?>,&nbsp;
+<a href="<?= @$content['admin']['database-href'] ?>"><?= _S ('gs--db-connection') ?></a><?php } ?><?php if (array_key_exists ('sessions-href', $content['admin'])) { ?>,&nbsp;
+<a href="<?= @$content['admin']['sessions-href'] ?>"><?= _S ('gs--sessions') ?></a><?php } ?><?php if (array_key_exists ('get-backup-href', $content['admin'])) { ?>,&nbsp;
+<a href="<?= @$content['admin']['get-backup-href'] ?>"><?= _S ('gs--get-backup') ?></a><?php } ?></p>

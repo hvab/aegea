@@ -1,4 +1,5 @@
-<?php if (array_key_exists ('tags', $content) and $content['class'] == 'tags') { ?>
+<?php if (array_key_exists ('tags', $content)) { ?>
+<?php if ($content['class'] == 'tags') { ?>
 
 <div class="e2-tags">
 <?php foreach ($content['tags']['each'] as $tag): ?>
@@ -10,4 +11,5 @@
 <?php endforeach ?>
 </div>
 
+<?php } ?>
 <?php } ?>

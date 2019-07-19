@@ -25,6 +25,15 @@ select {
   border-radius: 4px;
 }
 
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+  &.e2-livecheckable { color: #000 }
+  &.e2-verified { color: #090 }
+  &.e2-wrong { color: var(--errorColor) }
+}
+
 textarea {
   resize: vertical;
 }

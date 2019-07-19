@@ -5,6 +5,7 @@
 function e2l_load_strings () {
 
   return array (
+
   // engine
   'e2--vname-aegea' => 'Aegea',
   'e2--release' => 'release',
@@ -25,7 +26,6 @@ function e2l_load_strings () {
   'gs--ask-hoster-how-to-create-db' => 'Ask your hosting provider how to create database, if necessary',
   'er--double-check-db-params' => 'Please double check database parameters',
   'gs--instantiated-version' => 'Instantiated version',
-  'pt--installer-loading' => 'Loading...',
   'gs--database' => 'Database',
   'gs--password-for-blog' => 'Password you’d like to use to access your blog',
   'gs--data-exists' => 'There is a blog in this database already. Installer will just connect to it.',
@@ -58,7 +58,6 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Error updating this post',
   'er--error-deleting-post-tag-info' => 'Error deleting this post’s tag information',
   'er--wrong-datetime-format' => 'Wrong date & time format. Must be “dd.mm.yyyy hh:mm:ss”',
-  'er--cannot-get-post-from-db' => 'Couldn’t get the post from the database',
   'er--unsupported-file' => 'Only PNG, JPG, GIF & SVG images and MP3 audio files are supported',
   'er--cannot-create-thumbnail' => 'Can’t create thumbnail',
   'er--cannot-upload' => 'Can’t upload file',
@@ -85,7 +84,6 @@ function e2l_load_strings () {
   'gs--post-will-be-deleted' => 'The post “$[post]” will be deleted with all comments.',
 
   // frontpage 
-  'er--cannot-show-latest-notes' => 'Cannot show latest posts',
   'nm--posts' => 'Posts',
   'gs--next-posts' => 'next',
   'gs--prev-posts' => 'previous',
@@ -112,7 +110,6 @@ function e2l_load_strings () {
   'gs--you-are-no-longer-subscribed' => 'You are no longer subscribed to comments of post',
   'gs--you-are-not-subscribed' => 'Looks like you aren’t subscribed to this post’s comments',
   'gs--unsubscription-didnt-work' => 'Couldn’t unsubscribe you for unknown reason',
-  'gs--comment-not-found' => 'Comment not found',
   'gs--post-not-found' => 'Post not found',
   'gs--comment-too-long' => 'Comment too long',
   'gs--comment-too-long-description' => 'You’ve submitted a very long comment, and it was not posted.',
@@ -208,6 +205,7 @@ function e2l_load_strings () {
   'em--follow-this-link' => 'Follow this link to reset your password:',
   
   'pt--sessions' => 'Open sessions',
+  'gs--sessions' => 'open sessions',
   'gs--sessions-description' => 'When you sign in using your password on multiple devices or with multiple browsers, this page shows list of all these sessions. If any of them seems suspicious, end all sessions but this, then change your password.',
   'gs--sessions-browser-or-device' => 'Browser or device',
   'gs--sessions-when' => 'When',
@@ -364,7 +362,7 @@ function e2l_load_strings () {
   
   'er--cannot-find-db' => 'Cannot find database',
   'er--cannot-connect-to-db' => 'Cannot connect to database',
-  'er--error-in-query' => 'Error in query',
+  'er--mysql-version-too-old' => 'MySQL version too old ($[v1], $[v2]+ needed)',
   'er--error-occurred' => 'Error occurred',
   'er--too-many-errors' => 'Too many errors',
   'gs--rss' => 'RSS',
@@ -373,6 +371,8 @@ function e2l_load_strings () {
   'gs--pgt' => 'Generation time',
   'gs--seconds-contraction' => 's',
   'gs--good-blogs' => 'Good blogs and sites',
+
+  'gs--range-separator' => '–',
 
   );
 

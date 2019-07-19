@@ -25,7 +25,6 @@ function e2l_load_strings () {
   'gs--ask-hoster-how-to-create-db' => 'Уточните у хостера, как создать базу, если её нет',
   'er--double-check-db-params' => 'Перепроверьте реквизиты базы',
   'gs--instantiated-version' => 'Инстанциирована версия',
-  'pt--installer-loading' => 'Загрузка...',
   'gs--database' => 'База данных',
   'gs--password-for-blog' => 'Пароль, который хотите использовать для доступа к блогу',
   'gs--data-exists' => 'В этой базе уже есть блог. Установщик просто подключится к ней.',
@@ -58,7 +57,6 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Ошибка при изменении заметки',
   'er--error-deleting-post-tag-info' => 'Ошибка при удалении данных о тегах заметки',
   'er--wrong-datetime-format' => 'Неправильный формат даты-времени. Должен быть: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',
-  'er--cannot-get-post-from-db' => 'Не удалось извлечь заметку из базы',
   'er--unsupported-file' => 'Поддерживаются только изображения PNG, JPG, GIF, SVG и аудиофайлы MP3',
   'er--cannot-create-thumbnail' => 'Не удалось создать уменьшенное изображение',
   'er--cannot-upload' => 'Не удалось загрузить файл',
@@ -85,7 +83,6 @@ function e2l_load_strings () {
   'gs--post-will-be-deleted' => 'Заметка «$[post]» будет удалена вместе со всеми комментариями.',
 
   // frontpage 
-  'er--cannot-show-latest-notes' => 'Невозможно отобразить последние заметки',
   'nm--posts' => 'Заметки',
   'gs--next-posts' => 'следующие',
   'gs--prev-posts' => 'предыдущие',
@@ -112,7 +109,6 @@ function e2l_load_strings () {
   'gs--you-are-not-subscribed' => 'Кажется, вы и так не подписаны на комментарии к этой заметке',
   'gs--you-are-no-longer-subscribed' => 'Вы больше не подписаны на комментарии к заметке',
   'gs--unsubscription-didnt-work' => 'Почему-то отписка не сработала',          
-  'gs--comment-not-found' => 'Комментарий не найден',
   'gs--post-not-found' => 'Заметка не найдена',
   'gs--comment-too-long' => 'Слишком длинный комментарий',
   'gs--comment-too-long-description' => 'Вы отправили слишком длинный комментарий, поэтому он не был сохранён.',
@@ -208,6 +204,7 @@ function e2l_load_strings () {
   'em--follow-this-link' => 'Перейдите по этой ссылке, чтобы сбросить пароль:',
 
   'pt--sessions' => 'Открытые сессии',
+  'gs--sessions' => 'открытые сессии',
   'gs--sessions-description' => 'Когда вы заходите под своим паролем на нескольких устройствах или с помощью нескольких браузеров, здесь показывается список всех таких сессий. Если какая-то из них вызывает подозрения, завершите все сессии кроме текущей, а потом смените пароль от блога.',
   'gs--sessions-browser-or-device' => 'Браузер или устройство',
   'gs--sessions-when' => 'Когда',
@@ -363,8 +360,9 @@ function e2l_load_strings () {
   'gs--page-not-found' => 'Страница не найдена.',
   
   'er--cannot-find-db' => 'Не могу найти базу данных',
+  'er--db-connect-timeout' => 'Не удалось дождаться ответа сервера базы данных за $[timeout] с',
   'er--cannot-connect-to-db' => 'Не могу соединиться с базой данных',
-  'er--error-in-query' => 'Ошибка при запросе',
+  'er--mysql-version-too-old' => 'Версия базы данных слишком старая ($[v1], нужна $[v2]+)',
   'er--error-occurred' => 'Произошла ошибка',
   'er--too-many-errors' => 'Слишком много ошибок',
   'gs--rss' => 'РСС',
@@ -373,6 +371,8 @@ function e2l_load_strings () {
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Выполнено обновление с версии $[from] до версии $[to]',
   'gs--good-blogs' => 'Хорошие блоги и сайты',
+
+  'gs--range-separator' => '<span style="margin-left: .07em; letter-spacing: .07em">...</span>',
 
   '--secondary-language' => 'en',
   

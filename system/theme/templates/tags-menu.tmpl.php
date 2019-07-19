@@ -1,7 +1,5 @@
 <?php if ($content['class'] == 'frontpage' or $content['class'] == 'tag' or $content['class'] == 'themepreview') { ?> 
 
-<?php if (array_key_exists ('tags', $content['hrefs'])) { ?> 
-
 <?php if (count ($content['tags']['menu-each'])) { ?> 
 
 <div class="e2-tags">
@@ -15,8 +13,6 @@
 <?php } ?>
 <?php endforeach ?>
 </div>
-
-<?php } ?>
 
 <?php } ?>
 

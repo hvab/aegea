@@ -2,7 +2,7 @@ import e2SpinningAnimationStartStop from './lib/e2SpinningAnimationStartStop'
 
 var dbCount = 0
 var bingo = false
-var initialGlassCheck = true
+var initialCheck = true
 var xhrCheckDBConfig, xhrListDatabases
 
 function e2UpdateSubmittability () {
@@ -24,8 +24,7 @@ function e2AllCompleted () {
   if (Boolean(dbCount) === ($('#db-database-list').css('display') === 'none')) {
     $('#db-database-list').add('#db-database').toggle()
   }
-  $('.e2-glass').fadeOut(333)
-  initialGlassCheck = false
+  initialCheck = false
 }
 
 function e2CheckDbConfig (me) {
@@ -33,10 +32,8 @@ function e2CheckDbConfig (me) {
 
   var completedCheckDBConfig, completedListDatabases
 
-  if (me) {
-    e2SpinningAnimationStartStop($('.e2-ajax-loading'), 1)
-    $('.e2-ajax-loading').fadeIn(333)
-  }
+  e2SpinningAnimationStartStop($('.e2-ajax-loading'), 1)
+  $('.e2-ajax-loading').css('opacity', 1)
 
   var ajaxData = {
     'db-server': $('#db-server').val(),
@@ -71,7 +68,7 @@ function e2CheckDbConfig (me) {
 
         if (msg === 'no-connect') {
         } else if (msg === 'server-responding') {
-          if (initialGlassCheck) $('#db-user').focus()
+          if (initialCheck) $('#db-user').focus()
           $('.db-server-ok').removeClass('e2-wrong').addClass('e2-verified')
         } else if (msg === 'server-lets-in') {
           $('.db-user-password-ok').removeClass('e2-wrong').addClass('e2-verified')
@@ -87,7 +84,7 @@ function e2CheckDbConfig (me) {
         } else if (msg === 'bingo') {
           $('#db-database-incomplete').slideUp(333)
           $('#db-database-exists').slideUp(333)
-          if (initialGlassCheck) $('#password').focus()
+          if (initialCheck) $('#password').focus()
           $('.db-everything-ok').removeClass('e2-wrong').addClass('e2-verified')
         }
 
@@ -136,7 +133,7 @@ function e2CheckDbConfig (me) {
             },
 
             error: function () {
-              if (initialGlassCheck) $('#db-database').focus()
+              if (initialCheck) $('#db-database').focus()
             },
 
             complete: function (xhr) {
@@ -154,12 +151,11 @@ function e2CheckDbConfig (me) {
       },
 
       error: function (msg) {
-        if (initialGlassCheck) {
+        if (initialCheck) {
           $('.input-editable').removeAttr('disabled')
           $('#db-server').add('#db-user').add('#db-password').add('#db-database').val('')
           $('#db-server').focus()
-          setTimeout(function () { $('.e2-glass').fadeOut(333) }, 333)
-          initialGlassCheck = false
+          initialCheck = false
         }
       },
 
@@ -168,9 +164,8 @@ function e2CheckDbConfig (me) {
         completedCheckDBConfig = true
         if (completedCheckDBConfig && completedListDatabases) e2AllCompleted()
         $('#e2-console').html(xhr.responseText)
-        // if (me) $ ('#' + (me.id) + '-checking').fadeOut (333)
         e2SpinningAnimationStartStop($('.e2-ajax-loading'), 0)
-        $('.e2-ajax-loading').fadeOut(333)
+        $('.e2-ajax-loading').css('opacity', 0)
       }
 
     })

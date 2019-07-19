@@ -7,12 +7,9 @@
 <?php _LIB ('pseudohover') ?>
 <?php _LIB ('smart-title') ?>
 
-
-<e2:head-data />
-
+<?php _T_DEFER ('head') ?>
 <?php _T ('init-script') ?>
-
-<e2:scripts-data />
+<?php _T_DEFER ('scripts') ?>
 
 <?= @$content['embed']['pre-head-end'] ?>
 

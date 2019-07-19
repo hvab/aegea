@@ -1,39 +1,17 @@
-<?php _JS ('form-install') ?>
-
 <div class="common">
 
-<div class="flag">
-
-<div class="header-content">
-<div class="title">
-<h1><?= _S ('e2--default-blog-title') ?></h1>
-</div>
-</div>
-
-
-</div>
-
+<div class="flag"></div>
 
 <div class="content">
 
-<?php if ($content['form-install']['installation-possible?']) { ?>
-
-<div class="e2-glass" style="display: none">
-<div class="e2-glass-text">
-  <h1><?= _S ('pt--installer-loading') ?></h1>
-</div>
-</div>
-
-<script>if ($) $ ('.e2-glass').show () </script>
-
-<?php } ?>
-
-
 <div class="e2-heading">        
+  <span class="admin-links-floating">
+    <span class="e2-ajax-loading" style="opacity: 0"><span class="e2-svgi e2-svgi-heading"><?= _SVG ('spin') ?></span></span>
+  </span>
   <h2>
-    <?php if (array_key_exists ('heading', $content)): ?>
+    <?php if (array_key_exists ('heading', $content)) { ?>
     <?= $content['heading'] ?>
-    <?php endif ?>
+    <?php } ?>
   </h2>
 </div>
 
@@ -42,6 +20,8 @@
 </div>
 
 <?php if ($content['form-install']['installation-possible?']) { ?>
+
+<?php _JS ('form-install') ?>
 
 <form
   id="form-install"
@@ -78,7 +58,6 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
   </div>
   <div class="form-element">
     <input type="text"
-      autofocus="autofocus"
       name="db-server"
       id="db-server"
       class="text input-editable e2-livecheckable db-server-ok db-user-password-ok db-database-ok db-everything-ok width-3"
@@ -159,7 +138,6 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
       <?= @$content['form-install']['submit-text'] ?>
     </button>
     <span class="e2-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
-    <span class="e2-ajax-loading e2-svgi" style="display: none"><?= _SVG ('spin') ?></span>
   </div>
 </div>
 
@@ -167,10 +145,9 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
 
 </div>
 
+</form>
 
 </div>
-
-</form>
 
 <?php } else { ?>
 

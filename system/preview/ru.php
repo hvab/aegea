@@ -1,9 +1,10 @@
 <?php
 
-$settings_href = '../settings';
-$self_href = 'javascript:return false;';
+  $settings_href = '../settings';
+  $self_href = 'javascript:return false;';
   // $self_href = $_current_url;
   
+  $return['class'] = 'themepreview';
   $return['title'] = 'Предпросмотр темы';
   $return['heading'] = 'Предпросмотр темы';
 
@@ -88,7 +89,6 @@ $self_href = 'javascript:return false;';
            'current?' => false,
          ),
       ),
-      // 'playlist?' => true
       'read-count' => 42,
       'comments-count' => 5,
       'commentable-now?' => true,
@@ -135,7 +135,6 @@ $self_href = 'javascript:return false;';
            'current?' => false,
          ),
       ),
-      // 'playlist?' => true
       'read-count' => 147,
       // 'comments-count' => 0,
       // 'commentable-now?' => true,
@@ -186,7 +185,6 @@ $self_href = 'javascript:return false;';
           'highlighted?' => true,
         ),
       ),
-      // 'playlist?' => true
       // 'comments-count' => 5,
       // 'commentable-now?' => true,
       // 'comments-count-text' => '5 comments',

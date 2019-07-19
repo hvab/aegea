@@ -1,4 +1,4 @@
-<?php if (array_key_exists ('message', $content)) { ?>
+<?php if (!empty ($content['message'])) { ?>
 
 <div class="e2-messages">
 
