@@ -1,4 +1,4 @@
-# aegea
+<h1 align="center"><img width="200" src="system/theme/src/images/aegea.svg" alt="Эгея"></h1>
 
 > Фанатский репозиторий Эгеи, поддерживаемый для удобства слежения за новыми релизами.
 
