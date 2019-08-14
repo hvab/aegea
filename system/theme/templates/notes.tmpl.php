@@ -19,11 +19,27 @@ Rose debug info
 
 
 <?php if (array_key_exists ('edit-href', $note)): ?>
-<span class="admin-links admin-links-floating admin-links-sticky">
-<?php if (array_key_exists ('favourite-toggle-href', $note)) { ?>
-<span class="admin-links admin-icon"><a href="<?= $note['favourite-toggle-href'] ?>" class="nu e2-favourite-toggle <?= ($note['favourite?']? 'e2-toggle-on' : '') ?>">
-<span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a></span>
-<?php } ?><span class="admin-icon"><a href="<?= $note['edit-href'] ?>" class="nu <?php if (array_key_exists ('only', $content['notes'])) {?>e2-edit-link<?php } ?>"><span class="e2-svgi"><?= _SVG ('edit') ?><span class="e2-unsaved-led" style="display: none"></span></span></a></span></span><?php endif ?>
+  <span class="admin-links admin-links-floating admin-links-sticky">
+    <?php if (array_key_exists ('favourite-toggle-href', $note)) { ?>
+      <span class="admin-links admin-icon">
+        <a href="<?= $note['favourite-toggle-href'] ?>" class="nu e2-admin-item <?= ($note['favourite?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-favourite">
+          <span class="e2-svgi">
+            <span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span>
+            <span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span>
+            <span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span>
+          </span>
+        </a>
+      </span>
+    <?php } ?>
+
+    <span class="admin-icon">
+      <a href="<?= $note['edit-href'] ?>" class="nu <?php if (array_key_exists ('only', $content['notes'])) {?>e2-edit-link<?php } ?>">
+        <span class="e2-svgi"><?= _SVG ('edit') ?><span class="e2-unsaved-led" style="display: none"></span></span>
+      </a>
+    </span>
+    
+  </span>
+<?php endif ?>
 
 
 <article>
@@ -64,7 +80,7 @@ Rose debug info
 
 <?php if (array_key_exists ('thumbs', $note) and (count ($note['thumbs']))) { ?>
 <a href="<?= $note['href'] ?>" class="nu">
-<?php foreach ($note['thumbs'] as $x) { ?><div class="e2-search-results-image"><?php if ($x['highlighted?']) { ?><mark><?php } ?><img src="<?= $x['href'] ?>" width="<?= $x['width'] ?>" height="<?= $x['height'] ?>" class="<?php if ($note['has-highlighted-thumbs?'] and !$x['highlighted?']) { ?>e2-search-results-image-dimmed<?php } ?>" /><?php if ($x['highlighted?']) { ?></mark><?php } ?></div><?php } ?>
+<?php foreach ($note['thumbs'] as $x) { ?><div class="e2-search-results-image"><?php if ($x['highlighted?']) { ?><mark><?php } ?><img src="<?= $x['href'] ?>" width="<?= $x['width'] ?>" height="<?= $x['height'] ?>" class="<?php if ($note['has-highlighted-thumbs?'] and !$x['highlighted?']) { ?>e2-search-results-image-dimmed<?php } ?>" alt="" /><?php if ($x['highlighted?']) { ?></mark><?php } ?></div><?php } ?>
 </a>
 <?php } ?>
 

@@ -20,7 +20,7 @@
   </div>
 
   <div class="form-element">
-    <button type="submit" id="submit-button" class="e2-delete-button">
+    <button type="submit" id="submit-button" class="e2-button e2-delete-button">
       <?= @$content['form-tag-delete']['submit-text'] ?>
     </button>
   </div>

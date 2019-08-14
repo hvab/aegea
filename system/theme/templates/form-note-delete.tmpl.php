@@ -25,7 +25,7 @@
     <p><?= @$content['form-note-delete']['caution-text'] ?></p>
   </div>
   <div class="form-element">
-    <button type="submit" id="submit-button" class="e2-delete-button">
+    <button type="submit" id="submit-button" class="e2-button e2-delete-button">
       <?= @$content['form-note-delete']['submit-text'] ?>
     </button>
   </div>

@@ -6,7 +6,12 @@
   border-radius: 50%;
 }
 
+.e2-user-picture-container a {
+  display: inline-block;
+  vertical-align: top;
+}
 .e2-user-picture-container img {
+  vertical-align: top;
   width: 40px;
   height: 40px;
   border-radius: 50%;

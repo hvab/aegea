@@ -84,6 +84,8 @@ $IsCompact: 'screen and (max-width: 1023px)';
 
   --columnSpacing: 15px;
 
+  --borderRadius: 4px;
+
   --logoTop: -20px;
   --logoSize: 40px;
   --blogTitleFontSize: 16px;
@@ -102,5 +104,6 @@ $IsCompact: 'screen and (max-width: 1023px)';
   --smallFontFamily: inherit;
 
   --time: .2s;
+  --timeLong: .33s;
 
 }

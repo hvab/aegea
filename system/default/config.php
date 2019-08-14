@@ -167,6 +167,9 @@ $_config['dev_dump_ctree'] = 0;
 // make ajax slower?
 $_config['dev_slow_ajax'] = 0;
   
+// break thing randomly?
+$_config['dev_chaos'] = 0;
+  
 // make ajax slower?
 $_config['dev_ignore_version_mismatch'] = 0;
   

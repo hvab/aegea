@@ -32,7 +32,7 @@ class E2GIPFacebook extends E2GIP {
     return $login_url;
   }
 
-  public static function get_profile_url($link) {
+  public static function get_profile_url($id, $link) {
       if(!empty($link)) return 'https://facebook.com/' . $link;
     return false;
   }

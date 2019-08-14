@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<?= $content['blog']['language'] ?>">
 
 <head>
 
@@ -15,7 +15,7 @@
 
 </head>
 
-<body <?php if (@$content['body-uploads-enabled?']) { ?>class="e2-external-drop-target e2-external-drop-target-body e2-external-drop-target-altable"<?php } ?>>
+<body>
 
 <?php _T_FOR ('form-install') ?>
 <?php _T_FOR ('form-login') ?>

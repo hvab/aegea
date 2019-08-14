@@ -1,27 +1,23 @@
 .form {
-  width: 100%;
+  padding: 0 0 24px;
+}
+.form-inner {
+
 }
 
-.form-part,
 .form-control,
 .form-subcontrol {
-  float: left;
-  width: 100%;
+  display: block;
 }
 
-.form:after {
-  content: ' ';
+.form-inner:after,
+.form-part:after {
+  content: '';
+  display: block;
   clear: both;
 }
 
-.form-part,
-.form-control,
-.form-subcontrol {
-  clear: left;
-}
-
 .form-label {
-  clear: left;
   float: left;
   width: 17.07%;
   padding: 0 20px 0 0;
@@ -42,6 +38,13 @@
   width: 82.93%;
 }
 
+.form-element-toggled {
+
+}
+.form-element-toggled_hidden {
+  display: none;
+}
+
 .form-control-sublabel {
   margin: 6px 0 8px;
   width: 82.93%;
@@ -49,9 +52,9 @@
   line-height: 20px;
 }
 
-.form-part { width: 100%; margin: 0 0 24px 0 }
+.form-part { padding: 0 0 24px 0 }
 
-.form-control { width: 100%; margin: 0 0 12px 0  }
+.form-control { padding: 0 0 12px 0  }
 
 .form-label p { margin: 0 0 8px }
 
@@ -63,9 +66,7 @@
 .form-control-big .input-label { margin-top: 16px }
 .form-control-big input[type="text"] { font-size: 24px }
 
-.form-subcontrol { width: 100%; margin: 0 0 8px 0 }
-.form-subcontrol-master { margin: 0 0 0 0 }
-.form-subcontrol-slave { margin: 0 0 0 16px }
+.form-subcontrol { padding: 0 0 8px 0 }
 
 .form-control .full-width { width: 100%; }
 .form-control .width-4 { width: 80%; }
@@ -134,7 +135,7 @@
   .form-element,
   .form-control-sublabel {
     width: 100%;
-    margin-left: 0px;
+    margin-left: 0;
   }
   
   .delete-box {

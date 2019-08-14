@@ -28,8 +28,9 @@ function e2l_load_strings () {
   'gs--instantiated-version' => 'Instantiated version',
   'gs--database' => 'Database',
   'gs--password-for-blog' => 'Password you’d like to use to access your blog',
-  'gs--data-exists' => 'There is a blog in this database already. Installer will just connect to it.',
-  'er--db-data-incomplete' => 'There is blog data in this database, but it’s incomplete. Probably it was used with a different version of Aegea. Install the version of Aegea which this data was created with, then update if necessary. For clean install, please provide a clean database',
+  'gs--data-exists' => 'There is a blog in this database already. Installer will just connect to it.',
+  'er--db-data-incomplete' => 'The data in this database is incomplete.',
+  'er--db-data-incomplete-install' => 'The data in this database is incomplete. Probably it was used with a different version of Aegea. Install the version of Aegea which this data was created with, then update if necessary. For clean install, please provide a clean database',
 
   // diags
   'et--fix-permissions-on-server' => 'Fix the permissions on server',
@@ -69,6 +70,7 @@ function e2l_load_strings () {
   'ff--alias' => 'Alias',
   'ff--change-time' => 'Change time',
   'ff--delete' => 'Delete',
+  'ff--edit' => 'Edit',
   'fb--withdraw' => 'Convert back into draft',
   'ff--will-be-published' => 'Will be published',
   'ff--is-published' => 'Published',
@@ -82,6 +84,12 @@ function e2l_load_strings () {
   
   'pt--post-deletion' => 'Post deletion',
   'gs--post-will-be-deleted' => 'The post “$[post]” will be deleted with all comments.',
+
+  // uploads
+  'gs--kb' => 'KB',
+  'mi--upload-file' => 'Upload file',
+  'mi--delete' => 'Delete',
+  'mi--insert' => 'Insert',
 
   // frontpage 
   'nm--posts' => 'Posts',
@@ -132,6 +140,10 @@ function e2l_load_strings () {
   'gs--comments-all-one-new' => 'new',
   'gs--comments-all-new' => 'new',
   'gs--comments-n-new' => '$[number.cardinal]',
+  'mi--reply' => 'Reply',
+  'mi--edit' => 'Edit',
+  'mi--highlight' => 'Highlight',
+  'mi--remove' => 'Remove',
 
   // tags
   'pt--tags' => 'Tags',
@@ -230,12 +242,13 @@ function e2l_load_strings () {
   'gs--theme-preview' => 'Preview',
   'ff--posts' => 'Posts',
   'ff--items-per-page-after' => 'per page',
+  'ff--show-view-counts' => 'Show view counts',
   'ff--show-sharing-buttons' => 'Show social sharing buttons',
   'ff--comments' => 'Comments',
-  'ff--comments-enable-by-default' => 'allow by default',
-  'ff--comments-require-social-id' => 'require identification with a social network',
-  'ff--only-for-recent-posts' => 'only for recent posts',
-  'ff--send-by-email' => 'send by email',
+  'ff--comments-enable-by-default' => 'Allow by default in new posts',
+  'ff--comments-require-social-id' => 'Require identification with a social network',
+  'ff--only-for-recent-posts' => 'Only for recent posts',
+  'ff--send-by-email' => 'Send by email',
   'ff--yandex-metrika' => 'Yandex.Metrika',
   'ff--google-analytics' => 'Google Analytics',
   'ff--administration' => 'Administration:',
@@ -373,6 +386,8 @@ function e2l_load_strings () {
   'gs--good-blogs' => 'Good blogs and sites',
 
   'gs--range-separator' => '–',
+  
+  'ab--menu-actions' => 'Actions',
 
   );
 

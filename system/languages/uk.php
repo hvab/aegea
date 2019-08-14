@@ -28,7 +28,8 @@ function e2l_load_strings () {
   'gs--database' => 'База даних',
   'gs--password-for-blog' => 'Пароль для доступу до блогу',
   'gs--data-exists' => 'У цій базі вже є блог. Встановлювач просто підключиться до неї.',
-  'er--db-data-incomplete' => 'У цій базі вже є блог, але його дані неповні. Можливо, вона використовувалась в іншій версії Егеї. Встановіть відповідну версію Егеї та оновіть, якщо потрібно. Для чистого встановлення потрібна чиста база.',
+  'er--db-data-incomplete' => 'Дані в цій базі — неповні.',
+  'er--db-data-incomplete-install' => 'Дані в цій базі — неповні. Можливо, вона використовувалась в іншій версії Егеї. Встановіть відповідну версію Егеї та оновіть, якщо потрібно. Для чистого встановлення потрібна чиста база.',
 
   // diags
   'et--fix-permissions-on-server' => 'Налаштуйте права на сервері',
@@ -68,6 +69,7 @@ function e2l_load_strings () {
   'ff--alias' => 'Посилання',
   'ff--change-time' => 'Змінити час',
   'ff--delete' => 'Видалити',
+  'ff--edit' => 'Редагувати',
   'fb--withdraw' => 'Повернути в чернетки',
   'ff--will-be-published' => 'Опублікується',
   'ff--is-published' => 'Опублікований',
@@ -81,6 +83,12 @@ function e2l_load_strings () {
   
   'pt--post-deletion' => 'Видалення допису',
   'gs--post-will-be-deleted' => 'Буде видалено допис «$[post]» і всі коментарі до нього.',
+
+  // uploads
+  'gs--kb' => 'КБ',
+  'mi--upload-file' => 'Завантажити файл',
+  'mi--delete' => 'Видалити',
+  'mi--insert' => 'Вставити',
 
   // frontpage 
   'nm--posts' => 'Дописи',
@@ -131,7 +139,11 @@ function e2l_load_strings () {
   'gs--comments-all-one-new' => 'новий',
   'gs--comments-all-new' => 'нові',
   'gs--comments-n-new' => '$[number.cardinal]',
-  
+  'mi--reply' => 'Відповівши',
+  'mi--edit' => 'Редагувати',
+  'mi--highlight' => 'Виділити',
+  'mi--remove' => 'Поприбирати',
+
   // tags
   'pt--tags' => 'Теги',
   'pt--posts-tagged' => 'Дописи з тегом',
@@ -229,12 +241,13 @@ function e2l_load_strings () {
   'gs--theme-preview' => 'Перегляд',
   'ff--posts' => 'Дописи',
   'ff--items-per-page-after' => 'на сторінку',
+  'ff--show-view-counts' => 'Показувати лічильники переглядів',
   'ff--show-sharing-buttons' => 'Показувати кнопки поширення в соцмережах',
   'ff--comments' => 'Коментарі',
-  'ff--comments-enable-by-default' => 'включати за замовчуванням',
-  'ff--comments-require-social-id' => 'дозволяти тільки при вході через соцмережу',
-  'ff--only-for-recent-posts' => 'тільки до нових дописів',
-  'ff--send-by-email' => 'надсилати ел. поштою',
+  'ff--comments-enable-by-default' => 'Дозволяти за замовчуванням в нових дописах',
+  'ff--comments-require-social-id' => 'Тільки при вході через соцмережу',
+  'ff--only-for-recent-posts' => 'Тільки до нових дописів',
+  'ff--send-by-email' => 'Надсилати ел. поштою',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',
   'ff--administration' => 'Адміністрування:',
@@ -360,7 +373,6 @@ function e2l_load_strings () {
   'gs--page-not-found' => 'Сторінку не знайдено.',
   
   'er--cannot-find-db' => 'Не можу знайти базу даних',
-  'er--db-connect-timeout' => 'Не вдалося дочекатися відповіді сервера бази даних за $[timeout] с',
   'er--cannot-connect-to-db' => 'Не можу зʼєднатися з базою даних',
   'er--mysql-version-too-old' => 'Версія бази даних занадто стара ($[v1], потрібна $[v2]+)',
   'er--error-occurred' => 'Сталася помилка',
@@ -373,6 +385,8 @@ function e2l_load_strings () {
   'gs--good-blogs' => 'Хороші блоги та сайти',
 
   'gs--range-separator' => '<span style="margin-left: .07em; letter-spacing: .07em">...</span>',
+
+  'ab--menu-actions' => 'Дії',
 
   '--secondary-language' => 'ru',
   

@@ -32,7 +32,7 @@ class E2GIPTwitter extends E2GIP {
     return $url;
   }
 
-  public static function get_profile_url($id) {
+  public static function get_profile_url($id, $link) {
     return 'https://twitter.com/' . $id;
   }
 

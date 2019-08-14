@@ -21,6 +21,27 @@
   margin: 0 4px;
 }
 
+.e2-admin-item {
+  position: relative;
+}
+.e2-admin-item-icon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  line-height: 0;
+}
+.e2-admin-item-text {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  text-indent: -100em;
+}
+
 @media #{$DoIconsHaveExtraMargin} {
   .admin-icon {
     margin: 0 12px;
@@ -29,7 +50,7 @@
 
 .e2-admin-menu-item-frame {
   border: var(--adminColor) 1px solid;
-  border-radius: 4px;
+  border-radius: var(--borderRadius);
 }
 
 .e2-admin-link + .e2-unsaved-led {

@@ -28,7 +28,8 @@ function e2l_load_strings () {
   'gs--database' => 'База звестак',
   'gs--password-for-blog' => 'Пароль, які хочаце выкарыстоўваць для доступу да блогу',
   'gs--data-exists' => 'У гэтай базе ўжо ёсць блог. Усталёўнік проста падключыцца да яе.',
-  'er--db-data-incomplete' => 'У гэтай базе ўжо ёсць частка звестак блогу, але яны няпоўныя. Магчыма, з ёй выкарыстоўвалася іншая версія Эгеі. Усталюйце Эгею той версіі, ад якой звесткі ў базе, а потым абнавіце, калі патрэбна. Для чыстага ўсталявання дайце чыстую базу.',
+  'er--db-data-incomplete' => 'Звесткі ў гэтай базе — няпоўныя.',
+  'er--db-data-incomplete-install' => 'Звесткі ў гэтай базе — няпоўныя. Магчыма, з ёй выкарыстоўвалася іншая версія Эгеі. Усталюйце Эгею той версіі, ад якой звесткі ў базе, а потым абнавіце, калі патрэбна. Для чыстага ўсталявання дайце чыстую базу.',
 
   // diags
   'et--fix-permissions-on-server' => 'Наладуйце правы на серверы',
@@ -68,6 +69,7 @@ function e2l_load_strings () {
   'ff--alias' => 'Спасылка',
   'ff--change-time' => 'Змяніць час',
   'ff--delete' => 'Выдаліць',
+  'ff--edit' => 'Рэдагаваць',
   'fb--withdraw' => 'Вярнуць у чарнавікі',
   'ff--will-be-published' => 'Апублікуецца',
   'ff--is-published' => 'Апублікавана',
@@ -81,6 +83,12 @@ function e2l_load_strings () {
 
   'pt--post-deletion' => 'Выдаленне нататкі',
   'gs--post-will-be-deleted' => 'Нататка «$[post]» будзе выдалена разам з усімі каментарамі.',
+
+  // uploads
+  'gs--kb' => 'КБ',
+  'mi--upload-file' => 'Загрузіць файл',
+  'mi--delete' => 'Выдаліць',
+  'mi--insert' => 'Уставіць',
 
   // frontpage
   'nm--posts' => 'Нататкі',
@@ -131,6 +139,10 @@ function e2l_load_strings () {
   'gs--comments-all-one-new' => 'новы',
   'gs--comments-all-new' => 'новыя',
   'gs--comments-n-new' => '$[number.cardinal]',
+  'mi--reply' => 'Адказаць',
+  'mi--edit' => 'Рэдагаваць',
+  'mi--highlight' => 'Выдзеліць',
+  'mi--remove' => 'Прыбраць',
 
   // tags
   'pt--tags' => 'Тэгі',
@@ -229,12 +241,13 @@ function e2l_load_strings () {
   'gs--theme-preview' => 'Прадпрагляд',
   'ff--posts' => 'Нататкі',
   'ff--items-per-page-after' => 'на старонцы',
+  'ff--show-view-counts' => 'Паказваць лічыльнікі праглядаў',
   'ff--show-sharing-buttons' => 'Паказваць кнопкі адсылання ў соцсеткі',
-  'ff--comments' => 'каментары',
-  'ff--comments-enable-by-default' => 'уключаць па змаўчанні',
-  'ff--comments-require-social-id' => 'дазваляць толькі пры ўваходзе праз сацсетку',
-  'ff--only-for-recent-posts' => 'толькі да новых нататак',
-  'ff--send-by-email' => 'дасылаць па пошце',
+  'ff--comments' => 'Каментары',
+  'ff--comments-enable-by-default' => 'Дазваляць па змаўчанні ў новых нататках',
+  'ff--comments-require-social-id' => 'Толькі пры ўваходзе праз сацсетку',
+  'ff--only-for-recent-posts' => 'Толькі да новых нататак',
+  'ff--send-by-email' => 'Дасылаць па пошце',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',
   'ff--administration' => 'Адміністраванне:',
@@ -360,7 +373,6 @@ function e2l_load_strings () {
   'gs--page-not-found' => 'Старонка не знойдзена.',
 
   'er--cannot-find-db' => 'Не магу знайсці базу звестак',
-  'er--db-connect-timeout' => 'Не атрымалася дачакацца адказу сервера базы звестак за $[timeout] с',
   'er--cannot-connect-to-db' => 'Не магу злучыцца з базай звестак',
   'er--mysql-version-too-old' => 'Версія базы звестак занадта старая ($[v1], патрэбна $[v2]+)',
   'er--error-occurred' => 'Адбылася памылка',
@@ -373,6 +385,8 @@ function e2l_load_strings () {
   'gs--good-blogs' => 'Добрыя блогі ды сайты',
 
   'gs--range-separator' => '<span style="margin-left: .07em; letter-spacing: .07em">...</span>',
+  
+  'ab--menu-actions' => 'Дзеянні',
 
   '--secondary-language' => 'ru',
 

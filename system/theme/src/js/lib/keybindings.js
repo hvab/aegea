@@ -1,4 +1,4 @@
-import detect from '../detect'
+import detect from './detect'
 
 const bindings = {}
 

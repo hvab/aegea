@@ -1,0 +1,4 @@
+
+<FilesMatch .*>
+Allow from all
+</FilesMatch>

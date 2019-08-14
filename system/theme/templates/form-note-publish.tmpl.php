@@ -46,7 +46,6 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
           data-goodyear-min-date="01-01-1970"
           data-goodyear-hour-picker="true"
           data-goodyear-minute-picker="true"
-          data-goodyear-minute-picker="true"
           data-goodyear-minutes-step="1"
           value="<?= @$content['form-note-publish']['stamp-formatted'] ?>"
         />
@@ -54,7 +53,7 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
       
       &nbsp;&nbsp;&nbsp;
 
-      <a href="#" class="e2-admin-link nu e2-schedule-contols-unrevealer e2-svgi "><?= _SVG ('close') ?></a>
+      <a href="#" class="e2-admin-link nu e2-schedule-controls-unrevealer e2-svgi "><?= _SVG ('close') ?></a>
 
     </div>
   </div>
@@ -62,8 +61,8 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
 </div>
 
 
-<div class="form-control e2-publish-now-contols">
-  <button type="submit" name="submit-button" value="publish" id="submit-button" class="e2-submit-button" <?php if (!@$content['form-note-publish']['can-publish?']) echo 'disabled'; ?>>
+<div class="form-control e2-publish-now-controls">
+  <button type="submit" name="submit-button" value="publish" id="submit-button" class="e2-button e2-submit-button" <?php if (!@$content['form-note-publish']['can-publish?']) echo 'disabled'; ?>>
     <?= @$content['form-note-publish']['submit-text'] ?>
   </button>
 
@@ -71,15 +70,15 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
 
   &nbsp;&nbsp;&nbsp;
 
-  <a href="#" class="e2-admin-link nu e2-schedule-contols-revealer e2-svgi e2-svgi-calendar"><?= _SVG ('calendar') ?></a>
+  <a href="#" class="e2-admin-link nu e2-schedule-controls-revealer e2-svgi e2-svgi-calendar"><?= _SVG ('calendar') ?></a>
 
   <?php } ?>
 
 </div>
 
 
-<div class="form-control e2-schedule-contols" style="display: none">
-  <button type="submit" disabled="disabled" name="submit-button" value="schedule" id="submit-schedule-button" class="e2-submit-button" <?php if (!@$content['form-note-publish']['can-publish?']) echo 'disabled'; ?>>
+<div class="form-control e2-schedule-controls" style="display: none">
+  <button type="submit" disabled="disabled" name="submit-button" value="schedule" id="submit-schedule-button" class="e2-button e2-submit-button" <?php if (!@$content['form-note-publish']['can-publish?']) echo 'disabled'; ?>>
     <?= @$content['form-note-publish']['submit-schedule-text'] ?>
   </button>
 

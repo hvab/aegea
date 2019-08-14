@@ -23,10 +23,6 @@
   margin: 0 0 20px;
 }
 
-.e2-comment-secondary-controls {
-  display: inline;
-}
-
 .e2-comment-userpic-area {
   float: left;
   width: 40px;
@@ -45,15 +41,20 @@
 .e2-comment-content-area {
   // outline: red 1px solid;
   float: left;
-  width: calc(100% - 48px - 180px);
+  width: calc(100% - 48px - 40px);
 }
 
 .e2-comment-control-area {
   // outline: blue 1px solid;
   float: right;
-  text-align: right;
-  width: 180px;
+  text-align: left;
+  width: 40px;
   min-height: 1px;
+}
+
+.e2-comment-control-area-actions {
+  width: 40px;
+  height: 40px;
 }
 
 .e2-comment-author {
@@ -89,40 +90,25 @@
   background: var(--markedTextBackground);
   border-radius: 2px;
 }
+.e2-comment-piece-marked + .e2-comment-date {
+  padding-left: 0.3em;
+}
+.e2-comment-piece-marked.e2-comment-author-removed {
+  background: initial;
+  border-radius: initial;
+}
 
 @media #{$AreCommentsVertical} {
   .e2-comment-content-area {
-    float: right;
-    width: calc(100% - 48px);
+    float: left;
+    width: calc(100% - 48px - 40px);
   }
   .e2-comment-control-area {
-    border-top: 1px var(--thinRuleColor) solid;
-    padding: 4px 0;
-    margin-left: 48px;
-    width: calc(100% - 48px);
-    clear: both;
-    float: none;
-    text-align: left;
+    width: 40px;
   }
   .e2-reply .e2-comment-content-area {
-    width: calc(100% - 96px);
+    width: calc(100% - 96px - 40px);
   }
-  .e2-reply .e2-comment-control-area {
-    margin-left: 96px;
-    width: calc(100% - 96px);
-  }
-}
-
-.e2-comment-actions-disabled,
-.e2-comment-actions-disabled * {
-  color: var(--disabledColor);
-  cursor: default;
-  pointer-events: none;
-}
-
-.e2-comment-actions-disabled #e2-progress {
-  // must override currentColor here
-  stroke: var(--foregroundColor);
 }
 
 .e2-spam, .e2-spam * {

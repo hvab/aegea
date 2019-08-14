@@ -1,0 +1,9 @@
+<svg version="1.1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" viewBox="0 0 16 16">
+<path stroke="none" d="M2,6H1V4c0-0.6,0.4-1,1-1h2v1H2V6z"/>
+<path stroke="none" d="M15,6h-1V4h-2V3h2c0.6,0,1,0.4,1,1V6z"/>
+<path stroke="none" d="M14,13h-2v-1h2v-2h1v2C15,12.6,14.6,13,14,13z"/>
+<path stroke="none" d="M4,13H2c-0.6,0-1-0.4-1-1v-2h1v2h2V13z"/>
+<polygon stroke="none" points="8.5,5.8 9.8,4.9 9.2,4.1 8,4.9 6.8,4.1 6.2,4.9 7.5,5.8 7.5,10.2 6.2,11.1 6.8,11.9 8,11.1 9.2,11.9 9.8,11.1 
+	8.5,10.2 "/>
+</svg>
