@@ -9,8 +9,8 @@
 .e2-popup-menu-button:hover,
 .e2-popup-menu-button:focus,
 .e2-popup-menu-button:focus:hover,
-.e2-popup-menu-button.hover,
-.e2-popup-menu-button:focus.hover {
+.e2-popup-menu-button:focus.hover,
+.e2-popup-menu-button.hover {
   border: 0;
   background: transparent;
   box-shadow: none;
@@ -50,6 +50,8 @@
 .e2-popup-menu-button:hover .e2-popup-menu-button-icon,
 .e2-popup-menu-button.hover .e2-popup-menu-button-icon,
 .e2-popup-menu-button:focus .e2-popup-menu-button-icon,
+.e2-popup-menu-button:focus:hover .e2-popup-menu-button-icon,
+.e2-popup-menu-button:focus.hover .e2-popup-menu-button-icon,
 .e2-popup-menu-button:active .e2-popup-menu-button-icon {
   color: var(--hoverColor);
   transition: none;
@@ -108,6 +110,8 @@
 .e2-popup-menu-widget-item_disabled:link,
 .e2-popup-menu-widget-item_disabled:active,
 .e2-popup-menu-widget-item_disabled:focus,
+.e2-popup-menu-widget-item_disabled:focus:hover,
+.e2-popup-menu-widget-item_disabled:focus.hover,
 .e2-popup-menu-widget-item_disabled:visited,
 .e2-popup-menu-widget-item_disabled:hover,
 .e2-popup-menu-widget-item_disabled.hover {
@@ -120,6 +124,8 @@
 .e2-popup-menu-widget-item_remove:link,
 .e2-popup-menu-widget-item_remove:active,
 .e2-popup-menu-widget-item_remove:focus,
+.e2-popup-menu-widget-item_remove:focus:hover,
+.e2-popup-menu-widget-item_remove:focus.hover,
 .e2-popup-menu-widget-item_remove:visited {
   color: var(--errorColor);
 }
@@ -131,6 +137,8 @@
 .e2-popup-menu-widget-item_info:link,
 .e2-popup-menu-widget-item_info:active,
 .e2-popup-menu-widget-item_info:focus,
+.e2-popup-menu-widget-item_info:focus:hover,
+.e2-popup-menu-widget-item_info:focus.hover,
 .e2-popup-menu-widget-item_info:visited,
 .e2-popup-menu-widget-item_info:hover,
 .e2-popup-menu-widget-item_info.hover {

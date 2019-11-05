@@ -3,13 +3,15 @@ import { isLocalStorageAvailable } from '../lib/local-storage'
 import { bindKeys } from '../lib/keybindings'
 
 import detect from '../lib/detect'
+import e2Ajax from './e2Ajax'
+import e2NiceError from './e2NiceError'
 
 function initFormNote () {
   var $formNote = $('#form-note')
 
   if (!$formNote.length) return
 
-  var $noteId = $formNote.find("#note-id")
+  var $noteId = $formNote.find('#note-id')
   var $submitButton = $formNote.find('#submit-button')
 
   var initNoteId = $noteId.val()
@@ -33,60 +35,62 @@ function initFormNote () {
     document.e2.localCopies.initLocalSaver()
   }
 
-  $.ajaxSetup({type: 'post', timeout: 10000})
-
   function e2AjaxSave (opts) {
     opts = opts || {}
 
-    $.ajax({
-      data: $formNote.serialize(),
+    e2Ajax({
       url: $formNote.find('#e2-note-livesave-action').attr('href'),
-      success: function (msg) {
-        if (opts.onAjaxSuccess) opts.onAjaxSuccess()
-        var ajaxresult
-
-        try {
-          ajaxresult = JSON.parse(msg)
-        } catch (e) {
-          if (opts.onError) opts.onError(e.message)
-          return
+      data: $formNote.serialize(),
+      success: function (response) {
+        if (typeof response['data'] === 'undefined' || typeof response['data']['status'] === 'undefined') {
+          e2NiceError({
+            message: 'er--js-server-error',
+            debug: {
+              message: 'Server response malformed',
+              data: {
+                response: response
+              }
+            }
+          })
+          return false
         }
 
-        if (ajaxresult['status'] === 'created') {
-          var newdraftid = ajaxresult['id']
+        if (typeof opts.onAjaxSuccess === 'function') {
+          opts.onAjaxSuccess()
+        }
+
+        if (response['data']['status'] === 'created') {
           if (window.history.replaceState) {
-            window.history.replaceState(null, '', ajaxresult['note-edit-url'])
+            window.history.replaceState(null, '', response['data']['note-edit-url'])
             $('.e2-admin-menu-new-selected').hide()
             $('.e2-admin-menu-new').show()
           }
-          $noteId.val(newdraftid)
+          $noteId.val(response['data']['id'])
 
           removeLocalCopy()
 
-          if (opts.onCreated) opts.onCreated(ajaxresult)
+          if (typeof opts.onCreated === 'function') {
+            opts.onCreated(response)
+          }
 
           initNoteId = null
-        } else if (ajaxresult['status'] === 'saved') {
-          $('#alias').val(ajaxresult['new-alias'])
+        } else if (response['data']['status'] === 'saved') {
+          $('#alias').val(response['data']['new-alias'])
           if (window.history.replaceState) {
-            window.history.replaceState(null, '', ajaxresult['note-edit-url'])
+            window.history.replaceState(null, '', response['data']['note-edit-url'])
           }
 
           removeLocalCopy()
 
-          if (opts.onSaved) opts.onSaved(ajaxresult)
+          if (typeof opts.onSaved === 'function') {
+            opts.onSaved(response)
+          }
 
           initNoteId = null
-        } else if (ajaxresult['status'] === 'error') {
-          if (opts.onError) opts.onError(ajaxresult['message'])
         }
       },
-      error: function (xhr) {
-        if (opts.onAjaxError) opts.onAjaxError(xhr.responseText)
-      },
-      complete: function (xhr) {
-        if (opts.onAjaxComplete) opts.onAjaxComplete()
-      }
+      error: opts.onAjaxError,
+      complete: opts.onAjaxComplete
     })
   }
 
@@ -115,8 +119,6 @@ function initFormNote () {
     e2SpinningAnimationStartStop($('#livesaving'), 0)
     $('#livesaving').hide()
     $('#livesave-button, #livesave-button + .e2-unsaved-led').show()
-    $('#livesave-error').removeClass('e2-save-error_hidden')
-    $('#livesave-error').attr('title', errmsg)
   }
 
   function e2LiveSave () {
@@ -138,12 +140,12 @@ function initFormNote () {
       generatedTitle = generatedTitle.substr(0, 1).toUpperCase() + generatedTitle.substr(1)
       $('#title').val(generatedTitle).change()
     }
-    $('#livesave-button, #livesave-button + .e2-unsaved-led, #livesave-error').hide()
+    $('#livesave-button, #livesave-button + .e2-unsaved-led').hide()
     $('#livesaving').fadeIn(333)
     e2SpinningAnimationStartStop($('#livesaving'), 1)
 
     e2AjaxSave({
-      onCreated: function () {
+      onCreated: function (response) {
         initPO = currentPO
         if ($('#e2-drafts') && $('#e2-drafts-item')) {
           $('#e2-drafts-item').fadeIn(333)
@@ -162,7 +164,7 @@ function initFormNote () {
           $('#e2-drafts-count').html($('#e2-drafts-count').html() * 1 + 1)
         }
       },
-      onSaved: function () {
+      onSaved: function (response) {
         initPO = currentPO
       },
       onError: e2LiveSaveError,
@@ -170,7 +172,9 @@ function initFormNote () {
         e2SpinningAnimationStartStop($('#livesaving'), 0)
         $('#livesaving').fadeOut(333)
       },
-      onAjaxError: e2LiveSaveError,
+      onAjaxError: function (jqXHR, textStatus) {
+        e2LiveSaveError(textStatus)
+      },
       onAjaxComplete: function () {
         liveSaving = false
 
@@ -186,7 +190,7 @@ function initFormNote () {
 
     liveSaving = true
     e2UpdateSubmittability()
-    $('#submit-keyboard-shortcut, #note-save-error').hide()
+    $('#submit-keyboard-shortcut').hide()
     e2SpinningAnimationStartStop($('#note-saving'), 1)
     $('#note-saving').show()
 
@@ -194,19 +198,21 @@ function initFormNote () {
       onCreated: goTo,
       onSaved: goTo,
       onError: handleError,
-      onAjaxError: handleError,
+      onAjaxError: function (jqXHR, textStatus) {
+        handleError(textStatus)
+      },
       onAjaxComplete: function () {
         liveSaving = false
         e2UpdateSubmittability()
       }
     })
 
-    function goTo (ajaxresult) {
+    function goTo (response) {
       initPO = currentPO
       e2SpinningAnimationStartStop($('#note-saving'), 0)
       $('#note-saving').hide()
       $('#note-saved').fadeIn(333)
-      window.location.href = ajaxresult['note-url']
+      window.location.href = response['data']['note-url']
     }
 
     function handleError (msg) {
@@ -214,8 +220,6 @@ function initFormNote () {
       e2SpinningAnimationStartStop($('#note-saving'), 0)
       $('#note-saving').hide()
       $('#submit-keyboard-shortcut').show()
-      $('#note-save-error').show()
-      $('#note-save-error').attr('title', msg)
     }
   })
 

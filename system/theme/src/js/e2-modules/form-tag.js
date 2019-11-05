@@ -3,9 +3,7 @@ function initFormTag () {
 
   if ($formTag.length) return
 
-  var $submitButton = $formTag.find("#submit-button")
-
-  $.ajaxSetup({type: 'post', timeout: 10000})
+  var $submitButton = $formTag.find('#submit-button')
 
   $('.required').bind('input blur cut copy paste keypress', updateSubmittability)
   updateSubmittability()

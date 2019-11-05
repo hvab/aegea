@@ -5,7 +5,7 @@ class E2GIPVk extends E2GIP {
 
   private function _get_instance() {
     
-    require_once 'system/library/vk-sdk/vendor/autoload.php';  
+    require_once 'system/library/vk-sdk/autoload.php';  
       
     $vk = new VK\OAuth\VKOAuth();
     return $vk;

@@ -17,7 +17,7 @@ class NeasdenGroup_fotorama implements NeasdenGroup {
     
     $this->neasden->require_link (@$this->neasden->config['library']. 'jquery/jquery.js');
     $this->neasden->require_link (@$this->neasden->config['library']. 'fotorama/fotorama.css');
-    $this->neasden->require_link (@$this->neasden->config['library']  .'fotorama/fotorama.js');
+    $this->neasden->require_link (@$this->neasden->config['library']. 'fotorama/fotorama.js');
     
     $result = '<div class="'. $myconf['css-class'] .'">'."\n";
     $p_opened = false;

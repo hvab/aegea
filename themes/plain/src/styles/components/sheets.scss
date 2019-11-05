@@ -44,7 +44,7 @@
 .e2-login-window {
   width: 360px;
   margin: 0 -180px;
-  label { font-size: 14px; } 
+  label { font-size: 14px; user-select: none; }
   label+label { margin-left: 10px } 
 }
 

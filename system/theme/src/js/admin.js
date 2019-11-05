@@ -1,5 +1,6 @@
 import { isLocalStorageAvailable } from './lib/local-storage'
 import initLocalCopies from './lib/local-copies'
+import e2Ajax from './e2-modules/e2Ajax'
 import e2ShowUploadProgressInArc from './e2-modules/e2ShowUploadProgressInArc'
 import e2SpinningAnimationStartStop from './e2-modules/e2SpinningAnimationStartStop'
 import initNotes from './e2-modules/notes'
@@ -10,6 +11,8 @@ import initFormPreferences from './e2-modules/form-preferences'
 import initFormTag from './e2-modules/form-tag'
 import e2UploadFile from './e2-modules/e2UploadFile'
 import initTextWithFileUpload from './e2-modules/text-with-file-upload'
+import e2NiceError from './e2-modules/e2NiceError'
+import e2CanUploadThisFile from './e2-modules/e2CanUploadThisFile'
 
 if (typeof $ !== 'undefined') {
   $(function () {
@@ -61,50 +64,133 @@ if (typeof $ !== 'undefined') {
         return false
       }
 
-      function dropUserPic (e) {
-        const $this = $(this)
-        const $pic = $this.find('img')
-        const dt = e.originalEvent.dataTransfer
-        if (!dt && !dt.files) return
+      function dropUserPic (event) {
+        var dt = event.originalEvent.dataTransfer
 
-        if (dt.files.length === 1) {
-          const file = dt.files[0]
-          const progressNode = $('.e2-user-picture-uploading circle.e2-progress')[0]
-          const uploadingClass = 'e2-user-picture-container-uploading'
+        var $dropZone = $('.e2-user-picture-container')
+        var uploadHref = $dropZone.filter('[data-href]').eq(0).data('href')
+
+        var uploadingModificator = 'e2-user-picture-container_uploading'
+
+        if (!dt || !dt.files) {
+          e2NiceError({
+            message: 'er--js-no-files-to-upload',
+            debug: {
+              data: {
+                event: event,
+                dataTransfer: dt
+              }
+            }
+          })
+          return false
+        }
+        if (dt.files.length > 1) {
+          e2NiceError({
+            message: 'er--js-can-upload-only-one-file',
+            debug: {
+              data: {
+                event: event,
+                files: dt.files
+              }
+            }
+          })
+          return false
+        }
+
+        var file = dt.files[0]
+
+        if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png$/i)) {
+          e2NiceError({
+            message: 'er--js-supported-only-png-jpg-gif',
+            debug: {
+              data: {
+                file: file
+              }
+            }
+          })
+          return false
+        }
+
+        $dropZone.each(function () {
+          var $this = $(this)
+          var $link = $this.find('a')
 
           e2SpinningAnimationStartStop($this, 1)
 
-          $this.addClass(uploadingClass)
+          $this.addClass(uploadingModificator)
+          $link.attr('data-href', $link.attr('href')).removeAttr('href')
+        })
 
-          e2UploadFile(
-            file,
-            $('.e2-userpic-upload-action').attr('href'),
-            function (e) {
-              if (e.lengthComputable) {
-                e2ShowUploadProgressInArc(progressNode, e.loaded / e.total)
-              }
-            },
-            function (response, textStatus, jqHXR) {
-              response = JSON.parse(response)
-              e2ShowUploadProgressInArc(progressNode, 0)
+        e2UploadFile({
+          file: file,
+          url: uploadHref,
+          progress: function (event) {
+            if (event.lengthComputable) {
+              $dropZone.each(function () {
+                var $this = $(this)
+                var $progress = $this.find('circle.e2-progress')
+
+                e2ShowUploadProgressInArc($progress[0], event.loaded / event.total)
+              })
+            }
+          },
+          success: function (response) {
+            $dropZone.each(function () {
+              var $this = $(this)
+              var $link = $this.find('a')
+              var $progress = $this.find('circle.e2-progress')
+
+              e2ShowUploadProgressInArc($progress[0], 0)
               e2SpinningAnimationStartStop($this, 0)
 
-              if (response['success']) {
-                const image = response['data']['new-image-src']
-                $pic.attr('src', image + '?' + encodeURIComponent(new Date()))
-                $pic.on('load', () => $this.removeClass(uploadingClass))
-                $('.e2-set-userpic-by-dragging').slideUp(333)
-              } else {
-                $this.removeClass(uploadingClass)
+              if (typeof response['data'] === 'undefined' || typeof response['data']['new-image-src'] === 'undefined') {
+                $this.removeClass(uploadingModificator)
+                $link.attr('href', $link.attr('data-href'))
               }
-            },
-            function (jqXHR, textStatus, errorThrown) {
-              e2ShowUploadProgressInArc(progressNode, 0)
-            }
-          )
-        }
+            })
 
-        return false
+            if (typeof response['data'] === 'undefined' || typeof response['data']['new-image-src'] === 'undefined') {
+              e2NiceError({
+                message: 'er--js-server-error',
+                debug: {
+                  message: 'Server responce malformed',
+                  data: {
+                    response: response
+                  }
+                }
+              })
+              return false
+            }
+
+            $dropZone.each(function () {
+              var $this = $(this)
+              var $link = $this.find('a')
+              var $pic = $this.find('img')
+
+              $pic.on('load', function () {
+                $this.removeClass(uploadingModificator)
+                $link.attr('href', $link.attr('data-href')).removeAttr('data-href')
+              }).attr('src', response['data']['new-image-src'] + '?' + Date.now())
+            })
+
+            $('.e2-set-userpic-by-dragging').slideUp(333, function () {
+              /*
+               TODO: показать ссылку «удалить аватарку»
+              */
+            })
+          },
+          error: function () {
+            $dropZone.each(function () {
+              var $this = $(this)
+              var $link = $this.find('a')
+              var $progress = $this.find('circle.e2-progress')
+
+              $this.removeClass(uploadingModificator)
+              $link.attr('href', $link.attr('data-href'))
+              e2ShowUploadProgressInArc($progress[0], 0)
+            })
+          }
+        })
       }
 
       /* Local copy indicators */
@@ -202,33 +288,54 @@ if (typeof $ !== 'undefined') {
       }
 
       var makeAjaxRequest = function ($link, functionWhenToggleOn, functionWhenToggleOff) {
+        $link.blur()
+
         if ($link.hasClass('e2-admin-item_disabled')) return true
         if ($link.hasClass('e2-popup-menu-widget-item_disabled')) return true
+
+        var beforeAjaxState = $link.hasClass('e2-admin-item_on') ? 'on' : 'off'
+        var isCoupleTrigger = typeof $link.data('e2-js-action') !== 'undefined' && $link.data('e2-js-action').indexOf('couple-trigger') >= 0
 
         $link.removeClass('e2-admin-item_on')
 
         toggleThinkingStatus($link, 1)
         toggleDisabledStatus($link, 1)
 
-        $.ajax({
-          type: 'post',
-          timeout: 10000,
+        e2Ajax({
           url: $link.attr('href'),
           data: 'result=ajaxresult',
           success: function (response) {
-            response = JSON.parse(response)
-            if (response['success']) {
-              if (response['data']['flag-now-on']) {
+            if (typeof response['data'] === 'undefined' || typeof response['data']['flag-now-on'] === 'undefined') {
+              e2NiceError({
+                message: 'er--js-server-error',
+                debug: {
+                  message: 'Server responce malformed',
+                  data: {
+                    response: response
+                  }
+                }
+              })
+              if (beforeAjaxState === 'on') {
                 $link.addClass('e2-admin-item_on')
-                functionWhenToggleOn(response['data']['new-href'], $link)
-              } else {
-                $link.removeClass('e2-admin-item_on')
-                functionWhenToggleOff(response['data']['new-href'], $link)
               }
+              return false
+            }
+
+            if (response['data']['flag-now-on']) {
+              $link.addClass('e2-admin-item_on')
+              functionWhenToggleOn($link, response['data']['new-href'])
+            } else {
+              $link.removeClass('e2-admin-item_on')
+              functionWhenToggleOff($link, response['data']['new-href'])
             }
           },
           error: function () {
-            window.location.href = $link.attr('href')
+            if (beforeAjaxState === 'on') {
+              $link.addClass('e2-admin-item_on')
+            }
+            if (isCoupleTrigger) {
+              $link.trigger('E2_ADMIN_COUPLE_CHANGE_ITEM')
+            }
           },
           complete: function () {
             toggleThinkingStatus($link, 0)
@@ -242,42 +349,41 @@ if (typeof $ !== 'undefined') {
           'toggle-favourite': function () {
             makeAjaxRequest(
               $link,
-              function (href, $link) {
-                $link.attr('href', href).parents('.e2-note').addClass('e2-note-favourite')
+              function ($link, newHref) {
+                $link.attr('href', newHref).parents('.e2-note').addClass('e2-note-favourite')
               },
-              function (href, $link) {
-                $link.attr('href', href).parents('.e2-note').removeClass('e2-note-favourite')
+              function ($link, newHref) {
+                $link.attr('href', newHref).parents('.e2-note').removeClass('e2-note-favourite')
               }
             )
           },
           'toggle-pinned': function () {
             makeAjaxRequest(
               $link,
-              function (href, $link) {
-                $link.attr('href', href)
+              function ($link, newHref) {
+                $link.attr('href', newHref)
               },
-              function (href, $link) {
-                $link.attr('href', href)
+              function ($link, newHref) {
+                $link.attr('href', newHref)
               }
             )
           },
           'toggle-important': function () {
             makeAjaxRequest(
               $link,
-              function (href, $link) {
-                $link.attr('href', href).parents('.e2-comment, .e2-comment-form-meta-area').find('.e2-comment-piece-markable').addClass('e2-comment-piece-marked')
+              function ($link, newHref) {
+                $link.attr('href', newHref).parents('.e2-comment, .e2-comment-form-meta-area').find('.e2-comment-piece-markable').addClass('e2-comment-piece-marked')
               },
-              function (href, $link) {
-                $link.attr('href', href).parents('.e2-comment, .e2-comment-form-meta-area').find('.e2-comment-piece-markable').removeClass('e2-comment-piece-marked')
+              function ($link, newHref) {
+                $link.attr('href', newHref).parents('.e2-comment, .e2-comment-form-meta-area').find('.e2-comment-piece-markable').removeClass('e2-comment-piece-marked')
               }
             )
           },
           'removed-href': function () {
             makeAjaxRequest(
               $link,
-              function (href, $link) {
-              },
-              function (href, $link) {
+              function ($link, newHref) {},
+              function ($link, newHref) {
                 var $comment = $link.parents('.e2-comment')
 
                 $comment.find('.e2-comment-author').addClass('e2-comment-author-removed')
@@ -294,7 +400,7 @@ if (typeof $ !== 'undefined') {
           'replaced-href': function () {
             makeAjaxRequest(
               $link,
-              function (href, $link) {
+              function ($link, newHref) {
                 var $comment = $link.parents('.e2-comment')
 
                 $comment.find('.e2-comment-content, .e2-comment-meta').slideDown(333)
@@ -306,8 +412,7 @@ if (typeof $ !== 'undefined') {
 
                 $link.trigger('E2_ADMIN_COUPLE_CHANGE_ITEM', {response: 'recovered'})
               },
-              function (href, $link) {
-              }
+              function ($link, newHref) {}
             )
           },
           'couple-trigger': function () {
@@ -341,15 +446,18 @@ if (typeof $ !== 'undefined') {
 
       var initAdminCouple = function ($couple) {
         if (!$couple.length) return
+
         var $coupleItems = $couple.find('.e2-admin-couple-item')
 
         $couple.find('[data-e2-js-action*="couple-trigger"]')
           .on('E2_ADMIN_COUPLE_CHANGE_ITEM', function (event, eventData) {
-            if (typeof eventData.response === 'undefined') return
-
             e2SpinningAnimationStartStop($couple.find('.e2-admin-couple-spinner'), 0)
-            $coupleItems.addClass(coupleItemHiddenModifier)
-            $couple.find('.e2-admin-couple-item_' + eventData.response).removeClass(coupleItemHiddenModifier)
+
+            if (typeof eventData === 'object' && typeof eventData.response === 'string') {
+              $coupleItems.addClass(coupleItemHiddenModifier)
+              $couple.find('.e2-admin-couple-item_' + eventData.response).removeClass(coupleItemHiddenModifier)
+            }
+
             $couple.removeClass(coupleThinkingModifier)
           })
           .on('E2_ADMIN_COUPLE_WILL_THINK', function () {

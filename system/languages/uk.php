@@ -59,6 +59,7 @@ function e2l_load_strings () {
   'er--error-deleting-post-tag-info' => 'Не вдалося видалити дані про теги допису',
   'er--wrong-datetime-format' => 'Неправильний формат дати й часу. Має бути: «ДД.ММ.РРРР ГГ:ХХ:СС»',
   'er--unsupported-file' => 'Підтримуються лише зображення PNG, JPG, GIF, SVG і аудіофайли MP3',
+  'er--unsupported-file-image' => 'Підтримуються лише зображення PNG, JPG і GIF',
   'er--cannot-create-thumbnail' => 'Не вдалося створити ескіз зображення',
   'er--cannot-upload' => 'Не вдалося завантажити файл',
   'ff--title' => 'Назва',

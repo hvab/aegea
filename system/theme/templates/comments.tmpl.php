@@ -30,14 +30,7 @@
               <?php } ?>
             </div>
 
-            <div class="e2-comment-content-area">
-              <span class="e2-comment-author e2-comment-piece-markable <?php if (@$comment['important?']) echo 'e2-comment-piece-marked' ?>">
-                <?php if ($comment['gip-used?']) { ?>
-                  <span class="e2-svgi e2-svgi-smaller"><?= _SVG ($comment['gip']) ?></span>
-                <?php } ?>
-                <span><?= @$comment['name'] ?></span>
-              </span>
-
+            <div class="e2-comment-content-area"><span class="e2-comment-author e2-comment-piece-markable <?php if (@$comment['important?']) echo 'e2-comment-piece-marked' ?>"><?php if ($comment['gip-used?']) { ?><span class="e2-svgi e2-svgi-smaller"><?= _SVG ($comment['gip']) ?></span><?php } ?><span><?= @$comment['name'] ?></span></span>
               <span class="e2-comment-date" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$comment['time'])?>">
                 <?= _AGO ($comment['time']) ?>
               </span>
@@ -137,9 +130,7 @@
               </div>
 
               <div class="e2-comment-content-area">
-                <span class="e2-comment-author e2-comment-piece-markable <?php if (@$comment['reply-important?']) echo 'e2-comment-piece-marked' ?>">
-                  <?= @$comment['author-name'] ?>
-                </span>
+                <span class="e2-comment-author e2-comment-piece-markable <?php if (@$comment['reply-important?']) echo 'e2-comment-piece-marked' ?>"><?= @$comment['author-name'] ?></span>
 
                 <?php if (array_key_exists ('reply-time', $comment)) { ?>
                   <span class="e2-comment-date" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$comment['reply-time'])?>">

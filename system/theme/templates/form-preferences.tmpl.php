@@ -35,14 +35,28 @@
             name="blog-title"
             value="<?= $content['form-preferences']['blog-title'] ?>"
           />
-          <?php if (!@$content['blog']['userpic-set?']) { ?>
-          <div class="form-control-sublabel e2-set-userpic-by-dragging">
-            <?= _S ('ff--set-userpic-by-dragging') ?>
-          </div>
-          <?php } ?>
         </div>
       </div>
       
+      <div class="form-control form-control-big">
+        <div class="form-label input-label"><label>Аватарка блога</label></div>
+        <div class="form-element">
+            <div class="logo-marginal">
+              <?php _T ('user-picture') ?>
+            </div>
+
+            <div class="logo">
+              <?php _T ('user-picture') ?>
+            </div>
+
+            <div class="form-control-sublabel e2-set-userpic-by-dragging">
+              <?php if (!@$content['blog']['userpic-set?']) { ?>
+                <span class="form-control-sublabel-inner"><?= _S ('ff--set-userpic-by-dragging') ?></span>
+              <?php } ?>
+            </div>
+        </div>
+      </div>
+
       <div class="form-control">
         <div class="form-label input-label"><label><?= _S ('ff--blog-description') ?></label></div>
         <div class="form-element">

@@ -111,7 +111,6 @@
             </span>
             <span id="livesave-button" class="e2-keyboard-shortcut e2-clickable-keyboard-shortcut e2-admin-link" style="display: none"><?= _SHORTCUT ('livesave')? _SHORTCUT ('livesave') : _S ('ff--save') ?></span>
             <span class="e2-unsaved-led" style="display: none"></span>
-            <span id="livesave-error" class="e2-save-error e2-save-error_hidden">!</span><br />
           </div>
     
         </div>
@@ -129,7 +128,7 @@
     
       <div class="form-subcontrol">
         <div class="form-element">
-          <? _T ('uploads') ?>
+          <?php _T ('uploads') ?>
         </div>
       </div>
      
@@ -216,7 +215,6 @@
         <button type="submit" id="submit-button" class="e2-button e2-submit-button" tabindex="10">
           <?= @$content['form-note']['submit-text'] ?>
         </button>
-        <span id="note-save-error" class="e2-save-error e2-save-error_hidden">!</span>
         <span class="e2-keyboard-shortcut" id="submit-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
         &nbsp;&nbsp;&nbsp;
         <span class="e2-svgi" id="note-saving" style="display: none"><?= _SVG ('spin') ?></span><span id="note-saved" class="e2-svgi" style="display: none"><?= _SVG ('tick') ?></span>

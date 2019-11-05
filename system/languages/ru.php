@@ -59,6 +59,7 @@ function e2l_load_strings () {
   'er--error-deleting-post-tag-info' => 'Ошибка при удалении данных о тегах заметки',
   'er--wrong-datetime-format' => 'Неправильный формат даты-времени. Должен быть: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',
   'er--unsupported-file' => 'Поддерживаются только изображения PNG, JPG, GIF, SVG и аудиофайлы MP3',
+  'er--unsupported-file-image' => 'Поддерживаются только изображения PNG, JPG и GIF',
   'er--cannot-create-thumbnail' => 'Не удалось создать уменьшенное изображение',
   'er--cannot-upload' => 'Не удалось загрузить файл',
   'ff--title' => 'Название',

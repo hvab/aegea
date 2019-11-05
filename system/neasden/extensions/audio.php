@@ -44,6 +44,7 @@ class NeasdenGroup_audio implements NeasdenGroup {
   
       if ($line['class'] == 'audio-play') {
         @list ($href, $alt) = explode (' ', trim ($line['class-data'][1]), 2); // usafe
+        $this->neasden->resource_detected ($href);
         if (!$alt) $alt = basename ($href);
       }
     

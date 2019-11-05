@@ -78,3 +78,6 @@
 
 
 </div>
+
+<?php _T ('niceerror'); ?>
+

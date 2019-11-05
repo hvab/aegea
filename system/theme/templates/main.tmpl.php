@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="<?= $content['blog']['language'] ?>">
+<html lang="<?= $content['language'] ?>">
 
 <head>
 
 <?php _LIB ('jquery') ?>
-<?php _LIB ('pseudohover') ?>
 <?php _LIB ('smart-title') ?>
 
 <?php _T_DEFER ('head') ?>

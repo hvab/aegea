@@ -76,7 +76,7 @@
     
       <div class="form-subcontrol">
         <div class="form-element">
-          <? _T ('uploads') ?>
+          <?php _T ('uploads') ?>
         </div>
       </div>
     

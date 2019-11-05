@@ -71,9 +71,6 @@ $_config['files_total_size_limit'] = 0;
 // scale images bigger than this; 0 to disable
 $_config['fit_uploaded_images'] = 2560; /* pixels */
 
-// whois service (URL to append IP address to)
-$_config['whois_service'] = 'https://www.nic.ru/whois/?ip=';
-
 // database table prefix for storing multiple blogs in one database
 $_config['db_table_prefix'] = 'e2Blog';
 
@@ -110,7 +107,7 @@ $_config['max_comment_length'] = 4096;
 $_config['comment_freshness_days'] = 14;
 
 // number of items in RSS feeds
-$_config['rss_items'] = 10;
+$_config['rss_items'] = 20;
 
 // Rose
 $_config['search_favourites_boost'] = 2;

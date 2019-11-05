@@ -81,9 +81,5 @@
       <span class="e2-svgi e2-svgi_40"><?= _SVG ('spin-progress') ?></span>
     </div>
   </div>
-
-  <p class="e2-upload-error" id="e2-upload-error-unsupported-file" style="clear: left; display: none"><?= _S ('er--unsupported-file') ?></p>
-  <p class="e2-upload-error" id="e2-upload-error-cannot-create-thumbnail" style="clear: left; display: none"><?= _S ('er--cannot-create-thumbnail') ?></p>
-  <p class="e2-upload-error" id="e2-upload-error-cannot-upload" style="clear: left; display: none"><?= _S ('er--cannot-upload') ?></p>
 <?php } ?>
 

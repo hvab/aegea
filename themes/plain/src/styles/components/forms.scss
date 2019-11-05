@@ -1,9 +1,6 @@
 .form {
   padding: 0 0 24px;
 }
-.form-inner {
-
-}
 
 .form-control,
 .form-subcontrol {
@@ -11,7 +8,8 @@
 }
 
 .form-inner:after,
-.form-part:after {
+.form-part:after,
+.form-control:after {
   content: '';
   display: block;
   clear: both;
@@ -23,6 +21,7 @@
   padding: 0 20px 0 0;
   line-height: 18px;
   margin-top: 2px;
+  word-wrap: break-word;
 }
 
 .form-label-sticky {
@@ -54,7 +53,7 @@
 
 .form-part { padding: 0 0 24px 0 }
 
-.form-control { padding: 0 0 12px 0  }
+.form-control { padding: 0 0 12px 0 }
 
 .form-label p { margin: 0 0 8px }
 
@@ -63,7 +62,7 @@
 
 .form-control .disabled { color: #999; }
 
-.form-control-big .input-label { margin-top: 16px }
+.form-control-big .input-label { margin-top: 14px }
 .form-control-big input[type="text"] { font-size: 24px }
 
 .form-subcontrol { padding: 0 0 8px 0 }
@@ -98,6 +97,15 @@
   background: #ec6040;
   padding: 20px 0 40px 0;
   color: #fff;
+}
+
+.form-control .logo-marginal,
+.form-control .logo {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  margin: 0;
 }
 
 @media #{$AreFormsVertical} {

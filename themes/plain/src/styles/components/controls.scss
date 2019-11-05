@@ -69,7 +69,6 @@ select > .e2-button {
   white-space: nowrap;
   text-align: center;
   text-decoration: none;
-  cursor: hand;
   cursor: pointer;
   border-radius: var(--borderRadius);
   color: #000;
@@ -187,10 +186,11 @@ select > .e2-button {
   border-bottom-style: dashed;
 }
 
-// adjust system colors to match the theme
-.e2-upload-error { color: var(--errorColor) }
-
 .e2-visual-login {
   display: inline-block;
   margin: 4px 0;
+
+  &_hidden {
+    visibility: hidden;
+  }
 }

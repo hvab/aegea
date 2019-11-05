@@ -5,6 +5,7 @@ import e2CanUploadThisFile from './e2CanUploadThisFile'
 import e2PastePic from './e2PastePic'
 import e2UploadFile from './e2UploadFile'
 import e2Delfiles from './e2Delfiles'
+import e2NiceError from './e2NiceError'
 
 function initTextWithFileUpload () {
   if (!$('#form-tag').length && !$('#form-note').length) return
@@ -49,7 +50,6 @@ function initTextWithFileUpload () {
       .data('file', imageFull)
       .css('width', '')
 
-    $newImage.addClass('e2-uploaded-image_active')
     $popupMenu.find('.e2-image-popup-menu-filename').text(imageFull).attr('title', imageFull)
 
     if (imageWidth && imageHeight) { // picture is available on server
@@ -62,6 +62,7 @@ function initTextWithFileUpload () {
 
       $popupMenu.find('.e2-image-popup-menu-filesize').text(imageFilesize)
     } else { // picture is not available on server
+      $newImage.addClass('e2-uploaded-image_broken')
       $innerGood.remove()
       $innerBadNoImage.attr('data-src', imageThumb)
 
@@ -81,78 +82,23 @@ function initTextWithFileUpload () {
     return $newImage
   }
 
-  function e2DoneUploadingThisFileWithResponse (file, response, isDroppedIntoText) {
-    response = JSON.parse(response)
-
-    if (response['success']) {
-      completedUploadSize += file.size
-
-      var $thumbToUpdate = $(
-        '#e2-uploaded-images img[src="' + response['thumb'] + '"], ' +
-        '#e2-uploaded-images img[src^="' + response['thumb'] + '?"], ' +
-        '#e2-uploaded-images .e2-uploaded-image-noimage[data-src="' + response['thumb'] + '"], ' +
-        '#e2-uploaded-images .e2-uploaded-image-noimage[data-src^="' + response['thumb'] + '?"]'
-      )
-      var $thumbToUpdateParent = $thumbToUpdate.parents('.e2-uploaded-image')
-
-      if (response['overwrite']) {
-        e2SpinningAnimationStartStop($uploadSpinner, 0)
-        $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
-        $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
-
-        if ($thumbToUpdate.length) {
-          $e2AddPasteableImage(
-            response['thumb'], response['new-name'], response['filesize'], response['width'], response['height']
-          ).insertAfter($thumbToUpdateParent)
-          $thumbToUpdateParent.remove()
-        }
-      } else {
-        if (isDroppedIntoText) e2PastePic(response['new-name'])
-
-        var alreadyListed = ($.inArray(response['new-name'], listedThumbnails) !== -1)
-
-        if (!alreadyListed) {
-          $e2AddPasteableImage(
-            response['thumb'], response['new-name'], response['filesize'], response['width'], response['height']
-          ).appendTo($uploadedImages).show(333, function () {
-            e2SpinningAnimationStartStop($uploadSpinner, 0)
-            $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
-            $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
-          })
-        } else {
-          e2SpinningAnimationStartStop($uploadSpinner, 0)
-          $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
-          $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
-
-          if ($thumbToUpdate.length) {
-            $e2AddPasteableImage(
-              response['thumb'], response['new-name'], response['filesize'], response['width'], response['height']
-            ).insertAfter($thumbToUpdateParent)
-            $thumbToUpdateParent.remove()
-          }
-        }
-      }
-    } else {
-      e2SpinningAnimationStartStop($uploadSpinner, 0)
-      $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
-      $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
-
-      if (response['error'] === 'could-not-create-thumbnail') {
-        $('#e2-upload-error-cannot-create-thumbnail').slideDown(333)
-      } else {
-        $('#e2-upload-error-cannot-upload').slideDown(333)
-      }
-    }
-
-    e2ClearUploadBuffer()
-  }
-
   function e2ClearUploadBuffer () {
     if (filesToUpload.length) {
       var progressNode = $uploadSpinner.find('circle.e2-progress')[0]
       var file = filesToUpload.shift()
-      var filename = file.name
       var url = $('#e2-file-upload-action').attr('href') + '?'
+
+      if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png|svg|mp3$/i)) {
+        e2NiceError({
+          message: 'er--unsupported-file',
+          debug: {
+            data: {
+              file: file
+            }
+          }
+        })
+        return false
+      }
 
       if (typeof $('#note-id').val() !== 'undefined') {
         url += 'entity=note&entity-id=' + $('#note-id').val()
@@ -165,37 +111,95 @@ function initTextWithFileUpload () {
         url += '&overwrite'
       }
 
-      $('.e2-upload-error').slideUp(333)
+      e2ShowUploadProgressInArc(progressNode, 0)
+      e2SpinningAnimationStartStop($uploadSpinner, 1)
 
-      var canUploadThisFile = e2CanUploadThisFile(filename)
+      $uploadSpinner.removeClass(uploadSpinnerHiddenModifier)
+      $uploadButtonWrapper.addClass(uploadButtonWrapperHiddenModifier)
 
-      if (canUploadThisFile) {
-        e2ShowUploadProgressInArc(progressNode, 0)
-        e2SpinningAnimationStartStop($uploadSpinner, 1)
-        $uploadSpinner.removeClass(uploadSpinnerHiddenModifier)
-        $uploadButtonWrapper.addClass(uploadButtonWrapperHiddenModifier)
-
-        e2UploadFile(
-          file,
-          url,
-          function (e) {
-            if (e.lengthComputable) {
-              var progressPercent = (completedUploadSize + e.loaded) / totalUploadSize
-              e2ShowUploadProgressInArc(progressNode, progressPercent)
-            }
-          },
-          function (data, textStatus, jqHXR) {
-            e2DoneUploadingThisFileWithResponse(file, data, file.e2DroppedIntoTextarea)
-            e2ShowUploadProgressInArc(progressNode, 0)
-          },
-          function (jqXHR, textStatus, errorThrown) {
-            e2DoneUploadingThisFileWithResponse(file, '{"success": false, "error": "' + textStatus + '"}', file.e2DroppedIntoTextarea)
-            e2ShowUploadProgressInArc(progressNode, 0)
+      e2UploadFile({
+        file: file,
+        url: url,
+        progress: function (event) {
+          if (event.lengthComputable) {
+            var progressPercent = (completedUploadSize + event.loaded) / totalUploadSize
+            e2ShowUploadProgressInArc(progressNode, progressPercent)
           }
-        )
-      } else {
-        $('#e2-upload-error-unsupported-file').slideDown(333)
-      }
+        },
+        success: function (response) {
+          completedUploadSize += file.size
+
+          var $thumbToUpdate = $(
+            '#e2-uploaded-images img[src="' + response['data']['thumb'] + '"], ' +
+            '#e2-uploaded-images img[src^="' + response['data']['thumb'] + '?"], ' +
+            '#e2-uploaded-images .e2-uploaded-image-noimage[data-src="' + response['data']['thumb'] + '"], ' +
+            '#e2-uploaded-images .e2-uploaded-image-noimage[data-src^="' + response['data']['thumb'] + '?"]'
+          )
+          var $thumbToUpdateParent = $thumbToUpdate.parents('.e2-uploaded-image')
+
+          if (response['data']['overwrite']) {
+            e2SpinningAnimationStartStop($uploadSpinner, 0)
+            $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
+            $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
+
+            if ($thumbToUpdate.length) {
+              $e2AddPasteableImage(
+                response['data']['thumb'],
+                response['data']['new-name'],
+                response['data']['filesize'],
+                response['data']['width'],
+                response['data']['height']
+              ).insertAfter($thumbToUpdateParent)
+              $thumbToUpdateParent.remove()
+            }
+          } else {
+            if (file.e2DroppedIntoTextarea) e2PastePic(response['data']['new-name'])
+
+            var alreadyListed = ($.inArray(response['data']['new-name'], listedThumbnails) !== -1)
+
+            if (!alreadyListed) {
+              $e2AddPasteableImage(
+                response['data']['thumb'],
+                response['data']['new-name'],
+                response['data']['filesize'],
+                response['data']['width'],
+                response['data']['height']
+              ).appendTo($uploadedImages).show(333, function () {
+                e2SpinningAnimationStartStop($uploadSpinner, 0)
+                $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
+                $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
+              })
+            } else {
+              e2SpinningAnimationStartStop($uploadSpinner, 0)
+              $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
+              $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
+
+              if ($thumbToUpdate.length) {
+                $e2AddPasteableImage(
+                  response['data']['thumb'],
+                  response['data']['new-name'],
+                  response['data']['filesize'],
+                  response['data']['width'],
+                  response['data']['height']
+                ).insertAfter($thumbToUpdateParent)
+                $thumbToUpdateParent.remove()
+              }
+            }
+          }
+
+          e2ClearUploadBuffer()
+        },
+        error: function () {
+          e2SpinningAnimationStartStop($uploadSpinner, 0)
+          $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
+          $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
+
+          e2ClearUploadBuffer()
+        },
+        complete: function() {
+          e2ShowUploadProgressInArc(progressNode, 0)
+        }
+      })
 
       return false
     } else {
@@ -284,25 +288,24 @@ function initTextWithFileUpload () {
 
       $picToDelete.addClass(picToDeleteDeletingModifier)
 
-      e2Delfiles(picToDeleteFile)
-        .done(function (msg) {
-          if (msg.substr(0, 6) === 'error|') {
-            $picToDelete.removeClass(picToDeleteDeletingModifier)
-          } else {
-            listedThumbnails.splice($.inArray(picToDeleteFile, listedThumbnails), 1)
-            if (transitionEvent) {
-              $picToDelete.off(transitionEvent + '.e2Delfiles').on(transitionEvent + '.e2Delfiles', function () {
-                $picToDelete.remove()
-              })
-              $picToDelete.addClass(picToDeleteDeletedModifier)
-            } else {
+      e2Delfiles({
+        file: picToDeleteFile,
+        success: function () {
+          listedThumbnails.splice($.inArray(picToDeleteFile, listedThumbnails), 1)
+
+          if (transitionEvent) {
+            $picToDelete.off(transitionEvent + '.e2Delfiles').on(transitionEvent + '.e2Delfiles', function () {
               $picToDelete.remove()
-            }
+            })
+            $picToDelete.addClass(picToDeleteDeletedModifier)
+          } else {
+            $picToDelete.remove()
           }
-        })
-        .fail(function () {
+        },
+        error: function () {
           $picToDelete.removeClass(picToDeleteDeletingModifier)
-        })
+        }
+      })
 
       return false
     })

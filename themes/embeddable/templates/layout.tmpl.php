@@ -41,3 +41,5 @@
 <?= $content['engine']['about'] # please do not remove ?>
 <?php _T_DEFER ('stat') ?>
 <?php _T ('login-element'); ?>
+
+<?php _T ('niceerror'); ?>

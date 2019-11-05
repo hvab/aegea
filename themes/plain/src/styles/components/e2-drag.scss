@@ -4,6 +4,10 @@
   max-width: 40px;
   max-height: 40px;
   border-radius: 50%;
+
+  &_uploading {
+    pointer-events: none;
+  }
 }
 
 .e2-user-picture-container a {
@@ -22,13 +26,14 @@
   visibility: hidden;
   position: absolute;
   font-size: 0; // fixes strange position bug
+  line-height: 0; // fixes strange position bug
   left: 12px;
   top: 12px;
   width: 16px;
   height: 16px;
 }
 
-.e2-user-picture-container-uploading .e2-user-picture-uploading {
+.e2-user-picture-container_uploading .e2-user-picture-uploading {
   visibility: visible;
 }
 
@@ -78,13 +83,13 @@
 
 .e2-external-drop-target-dragover > img,
 .e2-external-drop-target-dragover > a > img,
-.e2-user-picture-container-uploading > img,
-.e2-user-picture-container-uploading > a > img {
+.e2-user-picture-container_uploading > img,
+.e2-user-picture-container_uploading > a > img {
   transition: transform .25s ease-out;
   opacity: .4; 
 }
 
-.e2-user-picture-container-uploading > img,
-.e2-user-picture-container-uploading > a > img {
+.e2-user-picture-container_uploading > img,
+.e2-user-picture-container_uploading > a > img {
   transform: scale(0.001) rotate(90deg);
 }

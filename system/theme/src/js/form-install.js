@@ -1,4 +1,6 @@
 import e2SpinningAnimationStartStop from './e2-modules/e2SpinningAnimationStartStop'
+import e2Ajax from './e2-modules/e2Ajax'
+import e2NiceError from './e2-modules/e2NiceError'
 
 if (typeof $ !== 'undefined') {
   $(function () {
@@ -44,32 +46,32 @@ if (typeof $ !== 'undefined') {
     function e2CheckServerResponse () {
       $('.db-everything-ok').removeClass('e2-verified').addClass('e2-wrong')
 
-      if (!serverResponse['db-responding']) return
+      if (typeof serverResponse['data'] === 'undefined' || !serverResponse['data']['db-responding']) return false
 
       $('.db-server-ok').removeClass('e2-wrong').addClass('e2-verified')
       if (initialCheck) $dbUser.focus()
 
-      if (!serverResponse['db-connected']) return
+      if (!serverResponse['data']['db-connected']) return
 
       $('.db-user-password-ok, .db-database-ok').removeClass('e2-wrong').addClass('e2-verified')
 
-      $('#db-database-message-text').text(serverResponse['message'])
+      $('#db-database-message-text').text(serverResponse['data']['message'])
 
-      if (serverResponse['message']) {
+      if (serverResponse['data']['message']) {
         $('#db-database-message').slideDown(333)
       } else {
         $('#db-database-message').slideUp(333)
       }
 
-      if (!serverResponse['db-compatible']) return
-      if (!serverResponse['db-good']) return
+      if (!serverResponse['data']['db-compatible']) return
+      if (!serverResponse['data']['db-good']) return
 
       $('.db-everything-ok').removeClass('e2-wrong').addClass('e2-verified')
 
       if (initialCheck) $e2Password.focus()
 
-      // if (serverResponse['db-occupied']) {
-      //   if (serverResponse['db-migrateable']) {
+      // if (serverResponse['data']['db-occupied']) {
+      //   if (serverResponse['data']['db-migrateable']) {
       //     $('#db-database-exists').slideDown(333)
       //     $('#db-database-incomplete').slideUp(333)
       //     if (initialCheck) $e2Password.focus()
@@ -102,12 +104,6 @@ if (typeof $ !== 'undefined') {
         'db-database': $dbDatabase.val()
       }
 
-      $.ajaxSetup({
-        type: 'post',
-        timeout: 10000,
-        data: ajaxData
-      })
-
       $dbServer.data('e2OldValue', ajaxData['db-server'])
       $dbUser.data('e2OldValue', ajaxData['db-user'])
       $dbPassword.data('e2OldValue', ajaxData['db-password'])
@@ -120,26 +116,49 @@ if (typeof $ !== 'undefined') {
         if (xhrCheckDBConfig) xhrCheckDBConfig.abort()
         if (xhrListDatabases) xhrListDatabases.abort()
 
-        xhrCheckDBConfig = $.ajax({
+        xhrCheckDBConfig = e2Ajax({
           url: $formInstall.attr('data-action-database-config'),
-
+          data: ajaxData,
           success: function (response) {
-            serverResponse = JSON.parse(response)
+            if (typeof response['data'] === 'undefined') {
+              e2NiceError({
+                message: 'er--js-server-error',
+                debug: {
+                  message: 'Server response malformed',
+                  data: {
+                    response: response
+                  }
+                }
+              })
+              return false
+            }
+
+            serverResponse = response
 
             e2CheckServerResponse()
 
-            if (serverResponse['db-connected']) {
+            if (serverResponse['data']['db-connected']) {
               if (xhrCheckDBConfig) xhrCheckDBConfig.abort()
               if (xhrListDatabases) xhrListDatabases.abort()
-              xhrListDatabases = $.ajax({
+
+              xhrListDatabases = e2Ajax({
                 url: $formInstall.attr('data-action-databases-list'),
-
+                data: ajaxData,
                 success: function (response) {
-                  response = JSON.parse(response)
+                  if (typeof response['data'] === 'undefined' || typeof response['data']['databases-list'] === 'undefined') {
+                    e2NiceError({
+                      message: 'er--js-server-error',
+                      debug: {
+                        message: 'Server response malformed',
+                        data: {
+                          response: response
+                        }
+                      }
+                    })
+                    return false
+                  }
 
-                  if (response['status'] !== 'success') return
-
-                  var dbs = response['databases-list']
+                  var dbs = response['data']['databases-list']
                   var valBefore = $dbDatabase.val()
 
                   if ($dbDatabase.val() === '') {
@@ -154,6 +173,7 @@ if (typeof $ !== 'undefined') {
                   }
 
                   $dbDatabaseList.empty()
+
                   for (var k in dbs) {
                     ++dbCount
                     $dbDatabaseList
@@ -173,26 +193,22 @@ if (typeof $ !== 'undefined') {
                     e2CheckDbConfig()
                   }
                 },
-
                 error: function () {
                   if (initialCheck) $dbDatabase.focus()
                 },
-
                 complete: function () {
                   completedListDatabases = true
                   if (completedCheckDBConfig && completedListDatabases) e2AllCompleted()
                 }
-
               })
             } else {
               completedListDatabases = true
             }
 
-            bingo = serverResponse['db-good']
+            bingo = serverResponse['data']['db-good']
 
             e2UpdateSubmittability()
           },
-
           error: function () {
             if (initialCheck) {
               $('.input-editable').prop('disabled', false)
@@ -201,7 +217,6 @@ if (typeof $ !== 'undefined') {
               initialCheck = false
             }
           },
-
           complete: function () {
             $('.input-editable').prop('disabled', false)
             completedCheckDBConfig = true
@@ -209,7 +224,6 @@ if (typeof $ !== 'undefined') {
             e2SpinningAnimationStartStop($spinner, 0)
             $spinner.addClass(spinnerHiddenModifier)
           }
-
         })
       }, 333)
     }

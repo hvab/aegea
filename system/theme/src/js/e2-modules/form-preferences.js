@@ -31,7 +31,7 @@ function initFormPreferences () {
   })
 
   $('#email').bind('input change blur', function () {
-    if (!this.value) $('#email-notify').removeAttr('checked')
+    if (!this.value) $('#email-notify').prop('checked', false)
   })
 
   $('.e2-template-preview').click(function () {

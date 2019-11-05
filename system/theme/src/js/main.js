@@ -3,6 +3,8 @@ import cssVarsPolyfill from './lib/css-variables-polyfill'
 import viewCounter from './lib/view-counter'
 import swing from './lib/swing'
 import detect from './lib/detect'
+import e2Ajax from './e2-modules/e2Ajax'
+import e2NiceError from './e2-modules/e2NiceError'
 import e2SpinningAnimationStartStop from './e2-modules/e2SpinningAnimationStartStop'
 import textEditorInit from './lib/text-editor'
 import initFormComment from './e2-modules/form-comment'
@@ -15,70 +17,27 @@ if (typeof $ !== 'undefined') {
 
     // Second init obsolete functions
     function initObsoleteFunction () {
-      cssVarsPolyfill.run(initSearchField)
-
       const textField = document.getElementById('text')
-
       if (textField) textEditorInit(textField)
 
-      function initSearchField () {
-        const $searchField = $('.search-field')
+      // former pseudohover.js
+      var $pseudohoveredLinks = $()
+      $(document)
+        .on('mouseover', 'a[href]', function () {
+          var $this = $(this)
+          var h = $this.attr('href')
 
-        if ($searchField.length) {
-          const cssVariable = '--searchFieldMaxWidth'
-          const fieldWidth = cssVarsPolyfill.ratifiedVars
-            ? parseInt(cssVarsPolyfill.ratifiedVars[cssVariable], 10)
-            : parseInt(window.getComputedStyle($searchField.get(0)).getPropertyValue(cssVariable), 10)
-
-          updateSearchFieldStyles($searchField, fieldWidth)
-          window.addEventListener('resize', updateSearchFieldStyles.bind(null, $searchField, fieldWidth))
-        }
-      }
-
-      function updateSearchFieldStyles ($field, width) {
-        const fieldLeft = $field.get(0).getBoundingClientRect().left
-        let maxWidth
-
-        if ($field.hasClass('search-field-left-anchored')) {
-          maxWidth = $(window).width() - fieldLeft
-        } else {
-          maxWidth = fieldLeft
-        }
-
-        if (maxWidth < width) {
-          updateStyles('search-field__input', `.search-field { --searchFieldMaxWidth: ${maxWidth}px; }`)
-        } else {
-          updateStyles('search-field__input', `.search-field { --searchFieldMaxWidth: ${width}px; } .search-field__input { max-width: ${maxWidth}px; }`)
-        }
-
-        cssVarsPolyfill.run()
-      }
-
-      function updateStyles (id, styles) {
-        if (typeof styles === 'undefined') {
-          styles = id
-          id = null
-        }
-
-        const head = document.head || document.getElementsByTagName('head')[0]
-
-        if (id) {
-          let styleNode = document.getElementById(id)
-
-          if (!styleNode) {
-            styleNode = document.createElement('style')
-            styleNode.id = id
-            styleNode.innerHTML = styles
-            head.appendChild(styleNode)
-          } else {
-            styleNode.innerHTML = styles
+          if (h && h !== '#' && !h.match(/^javascript:/)) {
+            $pseudohoveredLinks = $('a[href="' + h + '"]').addClass('hover')
           }
-        } else {
-          const styleNode = document.createElement('style')
-          styleNode.innerHTML = styles
-          head.appendChild(styleNode)
-        }
-      }
+        })
+        .on('mouseout', 'a[href]', function (event) {
+          if (typeof event === 'object' && typeof event.currentTarget === 'object' && typeof event.relatedTarget === 'object' && $(event.currentTarget).find(event.relatedTarget).length > 0) {
+            return true
+          }
+          $pseudohoveredLinks.removeClass('hover')
+          $pseudohoveredLinks = $()
+        })
 
       // update a hrefs with link redirects
       $('a').each(function () {
@@ -93,41 +52,58 @@ if (typeof $ !== 'undefined') {
         }
       })
 
-      // login
+      // login popup
       if ($('#e2-login-sheet').length) {
-        var $formLogin = $('#form-login')
-        var $formLoginPassword = $formLogin.find('.e2-login-window-password')
+        var $loginButton = $('#e2-visual-login')
+        var $popupLogin = $('#e2-login-sheet')
+
+        var $formLogin = $popupLogin.find('#form-login')
+        var $formLoginPassword = $formLogin.find('#e2-password')
         var $formLoginPasswordChecking = $formLogin.find('.e2-login-window-password-checking')
         var mustSubmit = false
 
         $formLoginPassword.focus()
 
-        $formLogin.submit(function () {
+        $formLogin.on('submit', function (event) {
           if (mustSubmit) return true
+
+          event.preventDefault()
 
           $formLogin.find('.input-disableable').prop('disabled', true)
           $formLoginPassword.blur()
           e2SpinningAnimationStartStop($formLoginPasswordChecking, 1)
           $formLoginPasswordChecking.fadeIn(333)
 
-          $.ajax({
+          var ajaxRequest = e2Ajax({
             url: $('#e2-check-password-action').attr('href'),
-            type: 'post',
-            timeout: 10000,
             data: {
               password: $formLoginPassword.val()
             },
             success: function (response) {
-              response = JSON.parse(response)
-              $('.input-disableable').removeAttr('disabled')
+              $formLogin.find('.input-disableable').prop('disabled', false)
+
+              if (typeof response['data'] === 'undefined' || typeof response['data']['password-correct'] === 'undefined') {
+                e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
+                $formLoginPasswordChecking.fadeOut(333)
+                e2NiceError({
+                  message: 'er--js-server-error',
+                  debug: {
+                    message: 'Server response malformed',
+                    data: {
+                      response: response
+                    }
+                  }
+                })
+                return false
+              }
+
               if (response['data']['password-correct']) {
                 e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
                 $formLoginPasswordChecking.hide()
-                $('#password-correct').fadeIn(333)
-                mustSubmit = true
-                setTimeout(function () {
+                $('#password-correct').fadeIn(333, function () {
+                  mustSubmit = true
                   $formLogin.submit()
-                }, 333)
+                })
               } else {
                 e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
                 $formLoginPasswordChecking.fadeOut(333)
@@ -136,108 +112,191 @@ if (typeof $ !== 'undefined') {
               }
             },
             error: function () {
-              mustSubmit = true
-              $formLogin.submit()
+              $formLogin.find('.input-disableable').prop('disabled', false)
+              e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
+              $formLoginPasswordChecking.fadeOut(333)
+            },
+            abort: function () {
+              $formLogin.find('.input-disableable').prop('disabled', false)
+              e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
+              $formLoginPasswordChecking.fadeOut(333)
             }
           })
+
+          $formLogin.data('formLoginAjaxRequest', ajaxRequest)
+
           return false
         })
+
+        $popupLogin
+          .on('E2_SHOW_LOGIN_SHEET', function () {
+            $popupLogin.addClass('e2-show')
+
+            setTimeout(function () {
+              $formLoginPassword.focus()
+            }, 100)
+
+            $loginButton.addClass('e2-visual-login_hidden')
+          })
+          .on('E2_HIDE_LOGIN_SHEET', function () {
+            if (!$popupLogin.hasClass('e2-hideable')) {
+              return false
+            }
+
+            $formLoginPassword.blur()
+            $popupLogin.removeClass('e2-show')
+
+            if (typeof $formLogin.data('formLoginAjaxRequest') === 'object') {
+              $formLogin.data('formLoginAjaxRequest').abort()
+            }
+
+            $loginButton.removeClass('e2-visual-login_hidden')
+          })
+
+        // hide login window on click outside (on sheet)
+        $popupLogin.on('click', function (event) {
+          if (event.target === this) $('#e2-login-sheet').trigger('E2_HIDE_LOGIN_SHEET')
+        })
+
+        // show login popup
+        if ($loginButton.length) {
+          $(document).on('mousemove', function (event) {
+            var o = $loginButton.offset()
+            var x1 = o.left
+            var y1 = o.top
+            var x2 = event.pageX
+            var y2 = event.pageY
+            var l = Math.pow((Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)), 0.5)
+            l = Math.max(Math.min(l, 600), 100)
+            l = (l - 100) / 500
+            $loginButton.css('opacity', 0.25 + (1 - l) * 0.75)
+          })
+
+          $loginButton.on('click', function (event) {
+            event.preventDefault()
+            $popupLogin.trigger('E2_SHOW_LOGIN_SHEET')
+            return false
+          })
+        }
       }
 
-      // visual login
-      if ($('#e2-visual-login').length) {
-        $(document).mousemove(function (event) {
-          var o = $('#e2-visual-login').offset()
-          var x1 = o.left
-          var y1 = o.top
-          var x2 = event.pageX
-          var y2 = event.pageY
-          var l = Math.pow((Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)), 0.5)
-          l = Math.max(Math.min(l, 600), 100)
-          l = (l - 100) / 500
-          $('#e2-visual-login').css('opacity', 0.25 + (1 - l) * 0.75)
+      // subscribe popup
+      if ($('#e2-subscribe-sheet').length && $('#e2-note-subscribe-button').length) {
+        var $subscribeButton = $('#e2-note-subscribe-button')
+        var $popupSubscribe = $('#e2-subscribe-sheet')
+
+        $popupSubscribe.on('E2_SHOW_SUBSCRIBE_SHEET', function () {
+          $(this).addClass('e2-show')
+        }).on('E2_HIDE_SUBSCRIBE_SHEET', function () {
+          $(this).removeClass('e2-show')
+        }).on('click', function (event) {
+          if (event.target === this) $('#e2-subscribe-sheet').trigger('E2_HIDE_SUBSCRIBE_SHEET')
         })
-        $('#e2-visual-login').on('click', function () {
-          $('#e2-visual-login').css('visibility', 'hidden')
-          $('#e2-login-sheet').addClass('e2-show')
-          setTimeout(function () {
-            $('#e2-password').focus()
-          }, 100)
+
+        $subscribeButton.addClass('e2-note-subscribe-button-visible').on('click', function (event) {
+          event.preventDefault()
+          $('#e2-subscribe-sheet').trigger('E2_SHOW_SUBSCRIBE_SHEET')
           return false
-        })
-      }
-
-      // if there is subscribe sheet, show subscribe button
-      if ($('#e2-subscribe-sheet').length) {
-        $('#e2-note-subscribe-button').addClass('e2-note-subscribe-button-visible')
-      }
-
-      // show subscribe window on click on subscribe button
-      if ($('#e2-note-subscribe-button').length) {
-        $('#e2-note-subscribe-button').click(function () {
-          $('#e2-subscribe-sheet').addClass('e2-show')
-          return false
-        })
-      }
-
-      document.$e2HideLoginSheet = function () {
-        $('#e2-password').blur()
-        $('#e2-login-sheet').removeClass('e2-show')
-        $('#e2-visual-login').css('visibility', 'visible')
-      }
-
-      document.$e2HideSubscribeSheet = function () {
-        $('#e2-subscribe-sheet').removeClass('e2-show')
-      }
-
-      // hide login window on click outside (on sheet)
-      if ($('#e2-login-sheet').length) {
-        $('#e2-login-sheet').click(function (event) {
-          if ($('#e2-login-sheet').hasClass('e2-hideable')) {
-            if (event.target === this) document.$e2HideLoginSheet()
-          }
-        })
-      }
-
-      // hide subscribe window on click outside (on sheet)
-      if ($('#e2-subscribe-sheet').length) {
-        $('#e2-subscribe-sheet').on('click', function (event) {
-          if (event.target === this) document.$e2HideSubscribeSheet()
         })
       }
 
       // hide all sheets on esc
       $(document).on('keyup', function (event) {
         if ((event.keyCode === 27)) {
-          document.$e2HideSubscribeSheet()
-          if ($('#e2-login-sheet').hasClass('e2-hideable')) {
-            document.$e2HideLoginSheet()
-          }
+          $('#e2-subscribe-sheet').trigger('E2_HIDE_SUBSCRIBE_SHEET')
+          $('#e2-login-sheet').trigger('E2_HIDE_LOGIN_SHEET')
         }
       })
 
-      // don't search empty string
-      $('#e2-search').on('submit', function () {
-        if (/^ *$/.test($('#query').val())) return false
-      })
+      // search
+      if ($('#e2-search').length) {
+        var $searchForm = $('#e2-search')
 
-      // search focus
-      const $searchFieldInput = $('.search-field__input')
-      const $searchFieldIcon = $('.search-field__zoom-icon')
-      const $searchFieldTagsIcon = $('.search-field__tags-icon')
+        var initSearchField = function () {
+          const $searchField = $('.search-field')
 
-      $searchFieldInput
-        .on('focusin', function () {
-          $searchFieldInput.addClass('search-field__input_focused')
-          $searchFieldIcon.addClass('search-field__zoom-icon_focused')
+          function updateStyles (id, styles) {
+            if (typeof styles === 'undefined') {
+              styles = id
+              id = null
+            }
+
+            const head = document.head || document.getElementsByTagName('head')[0]
+
+            if (id) {
+              let styleNode = document.getElementById(id)
+
+              if (!styleNode) {
+                styleNode = document.createElement('style')
+                styleNode.id = id
+                styleNode.innerHTML = styles
+                head.appendChild(styleNode)
+              } else {
+                styleNode.innerHTML = styles
+              }
+            } else {
+              const styleNode = document.createElement('style')
+              styleNode.innerHTML = styles
+              head.appendChild(styleNode)
+            }
+          }
+
+          function updateSearchFieldStyles ($field, width) {
+            const fieldLeft = $field.get(0).getBoundingClientRect().left
+            let maxWidth
+
+            if ($field.hasClass('search-field-left-anchored')) {
+              maxWidth = $(window).width() - fieldLeft
+            } else {
+              maxWidth = fieldLeft
+            }
+
+            if (maxWidth < width) {
+              updateStyles('search-field__input', `.search-field { --searchFieldMaxWidth: ${maxWidth}px; }`)
+            } else {
+              updateStyles('search-field__input', `.search-field { --searchFieldMaxWidth: ${width}px; } .search-field__input { max-width: ${maxWidth}px; }`)
+            }
+
+            cssVarsPolyfill.run()
+          }
+
+          if ($searchField.length) {
+            const cssVariable = '--searchFieldMaxWidth'
+            const fieldWidth = cssVarsPolyfill.ratifiedVars
+              ? parseInt(cssVarsPolyfill.ratifiedVars[cssVariable], 10)
+              : parseInt(window.getComputedStyle($searchField.get(0)).getPropertyValue(cssVariable), 10)
+
+            updateSearchFieldStyles($searchField, fieldWidth)
+            $(window).on('resize', updateSearchFieldStyles.bind(null, $searchField, fieldWidth))
+          }
+        }
+        cssVarsPolyfill.run(initSearchField)
+
+        // don't search empty string
+        $searchForm.on('submit', function () {
+          if (/^ *$/.test($('#query').val())) return false
         })
-        .on('focusout', function (e) {
-          if ($(e.relatedTarget).hasClass('search-field__tags-icon') || ($searchFieldTagsIcon.length && $searchFieldTagsIcon.is(':active'))) return
 
-          $searchFieldIcon.removeClass('search-field__zoom-icon_focused')
-          $searchFieldInput.removeClass('search-field__input_focused')
+        // search focus
+        var $searchFieldInput = $searchForm.find('.search-field__input')
+        var $searchFieldIcon = $searchForm.find('.search-field__zoom-icon')
+        var $searchFieldTagsIcon = $searchForm.find('.search-field__tags-icon')
+
+        $searchFieldInput
+          .on('focusin', function () {
+            $searchFieldInput.addClass('search-field__input_focused')
+            $searchFieldIcon.addClass('search-field__zoom-icon_focused')
+          })
+          .on('focusout', function (e) {
+            if ($(e.relatedTarget).hasClass('search-field__tags-icon') || ($searchFieldTagsIcon.length && $searchFieldTagsIcon.is(':active'))) return
+
+            $searchFieldIcon.removeClass('search-field__zoom-icon_focused')
+            $searchFieldInput.removeClass('search-field__input_focused')
+          })
+        $searchFieldIcon.on('click', function () {
+          $searchFieldInput.focus()
         })
-      $searchFieldIcon.click(() => $searchFieldInput.focus())
+      }
 
       // ctrl+enter sends forms
       $(document).on('keydown keyup keypress', function (event) {
@@ -271,9 +330,10 @@ if (typeof $ !== 'undefined') {
 
       // ctrl-navigation
       function e2CtrlNavi (event) {
-        if (window.event) event = window.event
-        var target = (event.srcElement || event.target).tagName
-        if (/textarea|input/i.test(target)) return
+        var eventTargetTag = event.target.nodeName.toLowerCase()
+        if (eventTargetTag === 'input' || eventTargetTag === 'textarea' || eventTargetTag === 'select' || eventTargetTag === 'option' || eventTargetTag === 'button' || (typeof $(event.target).attr('contenteditable') !== 'undefined' && $(event.target).attr('contenteditable') !== 'false')) {
+          return
+        }
 
         if ((detect.mac && event.altKey && !event.shiftKey) || (!detect.mac && event.ctrlKey)) {
           var link = null
@@ -288,6 +348,7 @@ if (typeof $ !== 'undefined') {
           }
         }
       }
+      $(document).on('keyup', e2CtrlNavi)
 
       // autosize text fields
       function e2AutosizeTextFields () {
@@ -308,20 +369,24 @@ if (typeof $ !== 'undefined') {
           $(element).trigger('autosized')
         }
       }
-
       $('.e2-textarea-autosize').on('input change resize', e2AutosizeTextFields)
       e2AutosizeTextFields()
 
-      if (document.addEventListener) {
-        document.addEventListener('keyup', e2CtrlNavi, false)
-      } else if (document.attachEvent) {
-        document.attachEvent('onkeydown', e2CtrlNavi)
-      }
-
-      const $notes = $('.e2-note')
-
+      // notes
+      var $notes = $('.e2-note')
       if ($notes.length && isLocalStorageAvailable) {
         const endpointSuffix = $('#e2-note-read-href').attr('href')
+
+        var initViewCounter = function ({$note, endpointSuffix}) {
+          const $link = $note.find('h1 a')
+
+          const noteId = $note.attr('id').replace('e2-note-', '')
+          const endpointBody = $link.length ? $link.attr('href') : (window.location.origin + window.location.pathname)
+          const endpointUrl = endpointBody + endpointSuffix
+
+          viewCounter({noteId, endpointUrl})
+        }
+
         $notes.map((index, node) => {
           const $note = $(node)
           if ($note.find('.e2-published').length) {
@@ -329,18 +394,7 @@ if (typeof $ !== 'undefined') {
           }
         })
       }
-
-      function initViewCounter ({$note, endpointSuffix}) {
-        const $link = $note.find('h1 a')
-
-        const noteId = $note.attr('id').replace('e2-note-', '')
-        const endpointBody = $link.length ? $link.attr('href') : (window.location.origin + window.location.pathname)
-        const endpointUrl = endpointBody + endpointSuffix
-
-        viewCounter({noteId, endpointUrl})
-      }
     }
-
     initObsoleteFunction()
 
     // Third init popup menus

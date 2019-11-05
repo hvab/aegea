@@ -1,4 +1,16 @@
-function e2Delfiles (file) {
+import e2Ajax from './e2Ajax'
+
+/**
+ * Delete options.file to options.url
+ * @param {object}    options
+ * @param {string}    options.file
+ * @param {function}  [options.success]
+ * @param {function}  [options.error]
+ * @param {function}  [options.complete]
+ * @param {function}  [options.abort]
+ **/
+
+function e2Delfiles (options) {
   var url = $('#e2-file-remove-action').attr('href') + '?'
 
   if ($('#form-note')) {
@@ -9,12 +21,13 @@ function e2Delfiles (file) {
     return false
   }
 
-  return $.ajax({
-    type: 'POST',
-    data: {'file': file},
-    timeout: 60000,
+  return e2Ajax({
     url: url,
-    contentType: 'application/x-www-form-urlencoded'
+    data: {'file': options.file},
+    success: options.success,
+    error: options.error,
+    complete: options.complete,
+    abort: options.abort
   })
 }
 
