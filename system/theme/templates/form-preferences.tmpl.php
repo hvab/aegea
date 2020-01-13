@@ -17,12 +17,6 @@
     value="<?= @$content['form-preferences']['blog-author-default'] ?>"
   />
   
-  <input type="hidden"
-    id="template"
-    name="template"
-    value="<?= $content['form-preferences']['template-name'] ?>"
-  />
-  
   <div class="form">
     <div class="form-part">
       <div class="form-control form-control-big">
@@ -37,26 +31,51 @@
           />
         </div>
       </div>
-      
+
       <div class="form-control form-control-big">
-        <div class="form-label input-label"><label>Аватарка блога</label></div>
+        <div class="form-label input-label"><label><?= _S ('ff--blog-author-picture-and-name') ?></label></div>
         <div class="form-element">
-            <div class="logo-marginal">
-              <?php _T ('user-picture') ?>
+          <div class="e2-user-picture-container <?php if (!@$content['blog']['userpic-set?']) { ?>e2-user-picture-container_empty<?php } ?> e2-user-picture-container_large e2-external-drop-target" data-href="<?= $content['blog']['userpic-upload-action'] ?>">
+            <div class="e2-user-picture-inner">
+              <img
+                src="<?php if (@$content['blog']['userpic-set?']) { ?><?= $content['form-preferences']['userpic-href'] ?><?php } ?>"
+                title="<? _S ('gs--drag-userpic-here') ?>"
+                class="e2-user-picture-image"
+                alt=""
+              />
+              <div class="e2-user-picture-placeholder">
+                <?= _SVG ('userpic-placeholder') ?>
+              </div>
+              <span class="e2-user-picture-spinner">
+                <?= _SVG ('spin-progress') ?>
+              </span>
+              <label for="e2-user-picture-input" class="e2-user-picture-inputlabel">
+                <input type="file" id="e2-user-picture-input" class="e2-user-picture-input"/>
+              </label>
             </div>
-
-            <div class="logo">
-              <?php _T ('user-picture') ?>
-            </div>
-
-            <div class="form-control-sublabel e2-set-userpic-by-dragging">
-              <?php if (!@$content['blog']['userpic-set?']) { ?>
-                <span class="form-control-sublabel-inner"><?= _S ('ff--set-userpic-by-dragging') ?></span>
-              <?php } ?>
-            </div>
+            <button
+              type="button"
+              class="e2-button e2-button_transparent e2-user-picture-remove"
+              data-href="<?= $content['blog']['userpic-remove-action'] ?>"
+            >
+              <?= _S ('gs--remove-userpic') ?>
+              <span class="e2-svgi e2-svgi_30"><?= _SVG ('close') ?></span>
+            </button>
+          </div>
         </div>
       </div>
 
+      <div class="form-control">
+        <div class="form-element">
+          <input type="text"
+            class="text width-2"
+            id="blog-author"
+            name="blog-author"
+            value="<?= $content['form-preferences']['blog-author'] ?>"
+          />
+        </div>
+      </div>
+      
       <div class="form-control">
         <div class="form-label input-label"><label><?= _S ('ff--blog-description') ?></label></div>
         <div class="form-element">
@@ -69,18 +88,75 @@
         </div>
       </div>
       
-      <div class="form-control">
-        <div class="form-label input-label"><label><?= _S ('ff--blog-author') ?></label></div>
-        <div class="form-element">
-          <input type="text"
-            class="text width-2"
-            id="blog-author"
-            name="blog-author"
-            value="<?= $content['form-preferences']['blog-author'] ?>"
-          />
+    </div>
+  
+    <?php if (count (@$content['form-preferences']['templates']) > 1) { ?>
+      <div class="form-part">
+        <div class="form-control">
+          <div class="form-label">
+            <p><label><?= _S ('ff--theme') ?></label></p>
+            <?php if (array_key_exists ('theme-preview-href', $content['admin'])) { ?>
+            <p class="admin-links">
+              <a class="e2-template-preview-link" href="<?= @$content['admin']['theme-preview-href'] ?>" target="_blank">
+                <?= _S ('gs--theme-preview') ?> <span class="e2-svgi"><?= _SVG ('blank-window') ?></span>
+              </a>
+            </p>
+            <?php } ?>
+          </div>
+          <div class="form-element">
+            <div id="e2-template-selector" class="e2-template-selector">
+              <?php foreach ($content['form-preferences']['templates'] as $template) { ?>
+                <?php
+                  if ($template['current?']) {
+                    $template_current = $template;
+                  }
+                ?>
+                <label
+                  class="e2-template-preview <?php if ($template['current?']) {?>e2-template-preview_current<?php } ?>"
+                >
+                  <input
+                    class="e2-template-preview__input"
+                    type="radio"
+                    name="template"
+                    value="<?= $template['name'] ?>"
+                    <?php if ($template['current?']) {?>checked<?php } ?>
+                    data-preview-url="<?= $template['preview-url'] ?>"
+                    data-supports-dark-mode="<?php if ($template['supports-dark-mode?']) {?>true<?php } else { ?>false<?php } ?>"
+                  />
+                  <span class="e2-template-name">
+                    <span class="e2-pseudolink e2-admin-link"><?= $template['display-name'] ?></span>
+                  </span>
+                  <div class="e2-template-preview-image" style="background: <?= $template['colors']['background'] ?>">
+                    <div class="e2-template-preview-image-heading" style="color: <?= $template['colors']['headings'] ?>"></div>
+                    <div class="e2-template-preview-image-text" style="color: <?= $template['colors']['text'] ?>">
+                      <div class="e2-template-preview-image-text-line"></div>
+                      <div class="e2-template-preview-image-text-line"></div>
+                      <div class="e2-template-preview-image-text-line"></div>
+                      <div class="e2-template-preview-image-text-line"></div>
+                      <div class="e2-template-preview-image-text-line"></div>
+                    </div>
+                    <div class="e2-template-preview-image-link" style="color: <?= $template['colors']['link'] ?>"></div>
+                  </div>
+                </label>
+              <?php } ?>
+            </div>
+          </div>  
+        </div>
+        <div class="form-element" <?php if (!$template_current['supports-dark-mode?']) {?>style="display: none;"<?php } ?>>
+          <label class="checkbox">
+            <input
+              type="checkbox"
+              id="respond-to-dark-mode"
+              name="respond-to-dark-mode"
+              class="checkbox"
+              <?= @$content['form-preferences']['respond-to-dark-mode?']? ' checked="checked"' : ''?>
+            /> <?= _S ('ff--respond-to-dark-mode') ?>
+          </label>
         </div>
       </div>
-      
+    <?php } ?>
+    
+    <div class="form-part">
       <div class="form-control">
         <div class="form-label input-label"><label><?= _S ('ff--language') ?></label></div>
         <div class="form-element">
@@ -99,56 +175,7 @@
           </div>
         </div>
       </div>
-    </div>
-  
-    <?php if (count (@$content['form-preferences']['templates']) > 1) { ?>
-      <div class="form-part">
-        <div class="form-control">
-          <div class="form-label">
-            <p><label><?= _S ('ff--theme') ?></label></p>
-            <?php if (array_key_exists ('theme-preview-href', $content['admin'])) { ?>
-            <p class="admin-links">
-              <a class="e2-template-preview-link" href="<?= @$content['admin']['theme-preview-href'] ?>" target="_blank"><?= _S ('gs--theme-preview') ?> <span class="e2-svgi"><?= _SVG ('blank-window') ?></span></a>
-            </p>
-            <?php } ?>
-          </div>
-          <div class="form-element">
-            <noscript>
-              <div>
-                <i><?= _S ('ff--theme-selector-wants-js') ?></i>
-              </div>
-            </noscript>
-            
-            <div id="e2-template-selector" style="display: none">
-              <?php foreach ($content['form-preferences']['templates'] as $template) { ?>
-                <div
-                  class="e2-template-preview <?php if ($template['current?']) {?>e2-current-template-preview<?php } ?>"
-                  value="<?= $template['name'] ?>"
-                  data-preview-url="<?= $template['preview-url'] ?>"
-                >
-                  <div class="e2-template-preview-image" style="background: <?= $template['colors']['background'] ?>">
-                    <div class="e2-template-preview-image-heading" style="color: <?= $template['colors']['headings'] ?>"></div>
-                    <div class="e2-template-preview-image-text" style="color: <?= $template['colors']['text'] ?>">
-                      <div class="e2-template-preview-image-text-line"></div>
-                      <div class="e2-template-preview-image-text-line"></div>
-                      <div class="e2-template-preview-image-text-line"></div>
-                      <div class="e2-template-preview-image-text-line"></div>
-                      <div class="e2-template-preview-image-text-line"></div>
-                    </div>
-                    <div class="e2-template-preview-image-link" style="color: <?= $template['colors']['link'] ?>"></div>
-                  </div>
-                  <span class="e2-template-name">
-                    <a class="e2-pseudolink e2-admin-link" onclick="return false"><?= $template['display-name'] ?></a>
-                  </span>
-                </div>
-              <?php } ?>
-            </div>
-          </div>  
-        </div>
-      </div>
-    <?php } ?>
-    
-    <div class="form-part">
+
       <div class="form-control">
         <div class="form-label input-label"><label><?= _S ('ff--posts') ?></label></div>
         <div class="form-element">

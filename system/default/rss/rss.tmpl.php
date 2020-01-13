@@ -9,7 +9,17 @@
 <link><?= $content['home_page_url'] ?></link>
 <description><?= $content['_rss_description'] ?></description>
 <author><?= $content['author']['name'] ?></author>
+<language><?= $content['_rss_language'] ?></language>
 <generator><?= $content['_e2_ua_string'] ?></generator>
+
+<itunes:owner>
+<itunes:name><?= $content['author']['name'] ?></itunes:name>
+<itunes:email><?= $content['_itunes_email'] ?></itunes:email>
+</itunes:owner>
+<itunes:subtitle><?= $content['_rss_description'] ?></itunes:subtitle>
+<?= $content['_itunes_categories_xml'] ?>
+<itunes:image href="<?= $content['_itunes_image'] ?>" />
+<itunes:explicit><?= $content['_itunes_explicit'] ?></itunes:explicit>
 
 <?php foreach ($content['items'] as $item) { ?>
 <item>
@@ -24,7 +34,7 @@
 <?php } ?>
 <comments><?= $item['url'] ?></comments>
 <?php foreach ($item['_rss_enclosures'] as $enclosure) { ?>
-<enclosure url="<?= $enclosure['url'] ?>" type="<?= $enclosure['type'] ?>" />
+<enclosure url="<?= $enclosure['url'] ?>" type="<?= $enclosure['type'] ?>" length="<?= $enclosure['length'] ?>" />
 <?php } ?>
 <description>
 <?php if (array_key_exists ('author', $item)) { ?>

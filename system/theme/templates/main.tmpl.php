@@ -14,7 +14,11 @@
 
 </head>
 
-<body>
+<body
+  <?php if (@$content['template']['respond-to-dark-mode?']) { ?>
+    class="e2-responds-to-dark-mode"
+  <?php } ?>
+>
 
 <?php _T_FOR ('form-install') ?>
 <?php _T_FOR ('form-login') ?>

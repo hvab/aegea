@@ -109,6 +109,7 @@
 .admin-links a.hover {
   color: var(--hoverColor);
   border-color: var(--hoverUnderlineColor);
+  transition: none;
 }
 
 .e2-admin-link,
@@ -121,6 +122,7 @@
 .e2-admin-link.hover {
   color: var(--hoverColor);
   border-color: var(--hoverUnderlineColor);
+  transition: none;
 }
 
 a.admin-menu-comments-count {

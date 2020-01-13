@@ -16,5 +16,6 @@
   ),
 
   'meta_viewport' => 'width=device-width, initial-scale=1',
+  'supports_dark_mode' => true,
 
 ); ?>

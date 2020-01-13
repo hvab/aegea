@@ -30,12 +30,43 @@
   margin-top: 4px;
   border-radius: 50%;
   margin-right: 8px;
+  position: relative;
 }
 
-.e2-comment-userpic-area img {
+.e2-comment-userpic-area-inner {
   width: 100%;
   height: 100%;
+  position: relative;
+  overflow: hidden;
   border-radius: 50%;
+}
+
+.e2-comment-userpic-area-inner-link {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+}
+
+.e2-comment-userpic-area-inner__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.e2-comment-userpic-area-inner-placeholder {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.e2-comment-userpic-area-inner-placeholder svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--foregroundColor);
+  stroke: var(--foregroundColor);
 }
 
 .e2-comment-content-area {

@@ -84,7 +84,7 @@ function initTextWithFileUpload () {
 
   function e2ClearUploadBuffer () {
     if (filesToUpload.length) {
-      var progressNode = $uploadSpinner.find('circle.e2-progress')[0]
+      var $progress = $uploadSpinner.find('circle.e2-progress')
       var file = filesToUpload.shift()
       var url = $('#e2-file-upload-action').attr('href') + '?'
 
@@ -111,7 +111,6 @@ function initTextWithFileUpload () {
         url += '&overwrite'
       }
 
-      e2ShowUploadProgressInArc(progressNode, 0)
       e2SpinningAnimationStartStop($uploadSpinner, 1)
 
       $uploadSpinner.removeClass(uploadSpinnerHiddenModifier)
@@ -122,8 +121,7 @@ function initTextWithFileUpload () {
         url: url,
         progress: function (event) {
           if (event.lengthComputable) {
-            var progressPercent = (completedUploadSize + event.loaded) / totalUploadSize
-            e2ShowUploadProgressInArc(progressNode, progressPercent)
+            e2ShowUploadProgressInArc($progress, (completedUploadSize + event.loaded) / totalUploadSize)
           }
         },
         success: function (response) {
@@ -197,7 +195,7 @@ function initTextWithFileUpload () {
           e2ClearUploadBuffer()
         },
         complete: function() {
-          e2ShowUploadProgressInArc(progressNode, 0)
+          e2ShowUploadProgressInArc($progress, 0)
         }
       })
 

@@ -93,15 +93,13 @@
   left: 0;
   right: 0;
 }
-.e2-uploaded-image-popup-menu .e2-popup-menu-widget {
-  top: auto;
-  bottom: 100%;
-  right: auto;
-  left: 0;
-  margin: 0 0 3px;
+
+
+.e2-template-selector {
+  &_hidden {
+    display: block;
+  }
 }
-
-
 
 .e2-template-preview,
 .e2-draft-preview {
@@ -114,63 +112,91 @@
 
 
 .e2-template-preview {
-  min-height: 120px;
+  padding: 120px 0 0;
   text-align: left;
   margin-bottom: 12px;
+  position: relative;
 }
 
-.e2-template-preview .e2-template-preview-image {
+.e2-template-preview-link {
+  visibility: hidden;
+}
+.e2-template-preview-link_visible {
+  visibility: visible;
+}
+
+.e2-template-preview__input {
+  vertical-align: baseline;
+}
+.e2-template-selector_interactive .e2-template-preview__input {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.e2-template-preview-image {
   transition-property: (outline-color);
   transition-duration: var(--time);
   transition-timing-function: ease-out;
   outline: 1px var(--thinRuleColor) solid;
 }
 
-.e2-template-preview:hover,
-.e2-template-preview.hover {
+.e2-template-selector_interactive .e2-template-preview:hover,
+.e2-template-selector_interactive .e2-template-preview.hover {
   cursor: pointer;
-}
-
-.e2-template-preview:hover a,
-.e2-template-preview.hover a {
-  color: var(--hoverColor);
-  transition: none;
 }
 
 .e2-template-preview:hover .e2-template-preview-image,
 .e2-template-preview.hover .e2-template-preview-image {
   outline-color: var(--hoverColor);
+  transition: none;
 }
 
-.e2-current-template-preview:hover,
-.e2-current-template-preview.hover {
+.e2-template-preview:hover .e2-admin-link,
+.e2-template-preview.hover .e2-admin-link {
+  color: var(--hoverColor);
+  border-color: var(--hoverUnderlineColor);
+  transition: none;
+}
+
+.e2-template-selector_interactive .e2-template-preview_current:hover,
+.e2-template-selector_interactive .e2-template-preview_current.hover {
   cursor: default;
 }
 
-.e2-current-template-preview .e2-template-preview-image,
-.e2-current-template-preview .e2-template-preview-image,
-.e2-current-template-preview:hover .e2-template-preview-image,
-.e2-current-template-preview.hover .e2-template-preview-image {
+.e2-template-selector_interactive .e2-template-preview_current .e2-template-preview-image,
+.e2-template-selector_interactive .e2-template-preview_current .e2-template-preview-image,
+.e2-template-selector_interactive .e2-template-preview_current:hover .e2-template-preview-image,
+.e2-template-selector_interactive .e2-template-preview_current.hover .e2-template-preview-image,
+.e2-template-preview__input:checked + .e2-template-name + .e2-template-preview-image {
   outline-color: var(--foregroundColor);
 }
 
-.e2-current-template-preview .e2-template-name {
+.e2-template-selector_interactive .e2-template-preview_current .e2-template-name,
+.e2-template-preview__input:checked + .e2-template-name {
   color: var(--boldColor);
   font-weight: bold;
 }
 
-.e2-current-template-preview a,
-.e2-current-template-preview a.e2-pseudolink,
-.e2-current-template-preview:hover a,
-.e2-current-template-preview a:hover,
-.e2-current-template-preview.hover a,
-.e2-current-template-preview a.hover {
+.e2-template-selector_interactive .e2-template-preview_current .e2-pseudolink,
+.e2-template-selector_interactive .e2-template-preview_current:hover .e2-pseudolink,
+.e2-template-selector_interactive .e2-template-preview_current .e2-pseudolink:hover,
+.e2-template-selector_interactive .e2-template-preview_current.hover .e2-pseudolink,
+.e2-template-selector_interactive .e2-template-preview_current .e2-pseudolink.hover,
+.e2-template-preview__input:checked + .e2-template-name .e2-pseudolink,
+.e2-template-preview__input:checked + .e2-template-name .e2-pseudolink:hover {
   color: var(--boldColor);
   font-weight: bold;
   border-color: transparent;
   cursor: default;
   transition: none;
 }
+
+/*
+color: var(--hoverColor);
+border-color: var(--hoverUnderlineColor);
+ */
 
 
 

@@ -83,7 +83,7 @@
 
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root .e2-responds-to-dark-mode {
 
     --backgroundColor:             rgb(  32,  32,  32      );
     --backgroundTransparentColor: rgba(  32,  32,  32, .8  );
@@ -102,12 +102,11 @@
     --linkUnderlineColorVisited:  rgba( 160, 160, 160, .12 );
     --hoverColor:                  rgb( 240,  40,  32);
     --hoverUnderlineColor:        rgba( 240,  40,  32, .12 );
+    --tagColor:                      var(--foregroundColor);
+    --tagUnderlineColor:             var(--thinRuleColor);
 
     --markedTextBackground:           #443300;
     --markedImageBorderColor:         #886600;
-
-    --inputBackgroundColor:           #303030;
-    --inputTextColor:                var(--foregroundColor);
 
     --activeColor:                   var(--headingsColor);
     --errorColor:                  rgb( 240,  40,  32);

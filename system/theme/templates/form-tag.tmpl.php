@@ -55,6 +55,19 @@
     </div>
     
     <div class="form-control">
+      <div class="form-label input-label"><label><?= _S ('ff--tag-page-title') ?></label></div>
+      <div class="form-element">
+        <input type="text"
+          class="text required width-3"
+          id="page-title"
+          name="page-title"
+          placeholder="<?= @$content['form-tag']['page-title-placeholder'] ?>"
+          value="<?= @$content['form-tag']['page-title'] ?>"
+        />
+      </div>
+    </div>
+
+    <div class="form-control">
       <div class="form-subcontrol">
     
         <div class="form-label form-label-sticky input-label">

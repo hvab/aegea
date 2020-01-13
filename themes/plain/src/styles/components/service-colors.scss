@@ -18,11 +18,6 @@
   border-color: transparentize(#37a1d8, $thin);
 }
 
-.e2-service-color-gplus:link, .e2-service-color-gplus:visited { 
-  color: #dd4241;
-  border-color: transparentize(#dd4241, $thin);
-}
-
 .e2-service-color-linkedin:link, .e2-service-color-linkedin:visited { 
   color: #0077b5;
   border-color: transparentize(#0077b5, $thin);
@@ -66,8 +61,6 @@
 .e2-service-color-vk.hover,
 .e2-service-color-telegram:hover,
 .e2-service-color-telegram.hover,
-.e2-service-color-gplus:hover,
-.e2-service-color-gplus.hover,
 .e2-service-color-linkedin:hover,
 .e2-service-color-linkedin.hover,
 .e2-service-color-odnoklassniki:hover,

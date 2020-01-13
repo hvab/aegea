@@ -74,6 +74,9 @@ $_config['fit_uploaded_images'] = 2560; /* pixels */
 // database table prefix for storing multiple blogs in one database
 $_config['db_table_prefix'] = 'e2Blog';
 
+// database table subset for storing multiple blogs in one table set
+$_config['db_table_subset'] = 0;
+
 // by default, Aegea reindexes databases for search on switch
 $_config['retain_search_indexes_on_db_switch'] = false;
 
@@ -85,6 +88,19 @@ $_config['broadcast_on_indexing'] = true;
 
 // display as many as this number of drafts
 $_config['limit_drafts'] = 0; /* 0 for no limit */
+
+// automatically generate aliases for posts 
+$_config['autoreplace_for_aliases'] = [];
+
+
+// PODCASTING
+
+// xml to insert into RSS for itunes categories
+$_config['rss_itunes_categories_xml'] = '';
+
+// does podcast contain explicity content
+$_config['rss_itunes_explicit'] = 'no'; /* 'yes' or 'no' */
+
 
 
 

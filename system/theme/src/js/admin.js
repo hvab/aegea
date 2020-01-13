@@ -1,5 +1,6 @@
 import { isLocalStorageAvailable } from './lib/local-storage'
 import initLocalCopies from './lib/local-copies'
+import getTransitionEvent from './lib/getTransitionEvent'
 import e2Ajax from './e2-modules/e2Ajax'
 import e2ShowUploadProgressInArc from './e2-modules/e2ShowUploadProgressInArc'
 import e2SpinningAnimationStartStop from './e2-modules/e2SpinningAnimationStartStop'
@@ -29,168 +30,299 @@ if (typeof $ !== 'undefined') {
     /* Second init obsolete functions */
     function initObsoleteFunction () {
       /* Drops */
-      $('.e2-external-drop-target').on('dragover dragenter', dragEnter).on('dragleave drop', dragLeave)
-      $('.e2-user-picture-container').on('drop', dropUserPic)
+      function initDrops () {
+        $('.e2-external-drop-target').on('dragover dragenter', dragEnter).on('dragleave drop', dragLeave)
 
-      function dragEnter (e) {
-        const dt = e.originalEvent.dataTransfer
-        if (!dt) return
+        function dragEnter (event) {
+          var dt = event.originalEvent.dataTransfer
+          if (!dt) return
 
-        // FF
-        if (dt.types.contains && !dt.types.contains('Files')) return
+          // FF
+          if (dt.types.contains && !dt.types.contains('Files')) return
 
-        // Chrome
-        if (dt.types.indexOf && dt.types.indexOf('Files') === -1) return
-        if (dt.dropEffect) dt.dropEffect = 'copy'
+          // Chrome
+          if (dt.types.indexOf && dt.types.indexOf('Files') === -1) return
+          if (dt.dropEffect) dt.dropEffect = 'copy'
 
-        const $this = $(this)
-
-        $this.addClass('e2-external-drop-target-dragover')
-        if ($this.hasClass('e2-external-drop-target-altable') && e.altKey) {
-          $this.addClass('e2-external-drop-target-dragover-alt')
-        } else {
-          $this.removeClass('e2-external-drop-target-dragover-alt')
-        }
-
-        return false
-      }
-
-      function dragLeave () {
-        const $this = $(this)
-
-        $this.removeClass('e2-external-drop-target-dragover')
-        $this.removeClass('e2-external-drop-target-dragover-alt')
-
-        return false
-      }
-
-      function dropUserPic (event) {
-        var dt = event.originalEvent.dataTransfer
-
-        var $dropZone = $('.e2-user-picture-container')
-        var uploadHref = $dropZone.filter('[data-href]').eq(0).data('href')
-
-        var uploadingModificator = 'e2-user-picture-container_uploading'
-
-        if (!dt || !dt.files) {
-          e2NiceError({
-            message: 'er--js-no-files-to-upload',
-            debug: {
-              data: {
-                event: event,
-                dataTransfer: dt
-              }
-            }
-          })
-          return false
-        }
-        if (dt.files.length > 1) {
-          e2NiceError({
-            message: 'er--js-can-upload-only-one-file',
-            debug: {
-              data: {
-                event: event,
-                files: dt.files
-              }
-            }
-          })
-          return false
-        }
-
-        var file = dt.files[0]
-
-        if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png$/i)) {
-          e2NiceError({
-            message: 'er--js-supported-only-png-jpg-gif',
-            debug: {
-              data: {
-                file: file
-              }
-            }
-          })
-          return false
-        }
-
-        $dropZone.each(function () {
           var $this = $(this)
-          var $link = $this.find('a')
 
-          e2SpinningAnimationStartStop($this, 1)
+          $this.addClass('e2-external-drop-target-dragover')
+          if ($this.hasClass('e2-external-drop-target-altable') && event.altKey) {
+            $this.addClass('e2-external-drop-target-dragover-alt')
+          } else {
+            $this.removeClass('e2-external-drop-target-dragover-alt')
+          }
 
-          $this.addClass(uploadingModificator)
-          $link.attr('data-href', $link.attr('href')).removeAttr('href')
-        })
+          return false
+        }
 
-        e2UploadFile({
-          file: file,
-          url: uploadHref,
-          progress: function (event) {
-            if (event.lengthComputable) {
-              $dropZone.each(function () {
-                var $this = $(this)
-                var $progress = $this.find('circle.e2-progress')
+        function dragLeave () {
+          var $this = $(this)
 
-                e2ShowUploadProgressInArc($progress[0], event.loaded / event.total)
-              })
-            }
-          },
-          success: function (response) {
-            $dropZone.each(function () {
-              var $this = $(this)
-              var $link = $this.find('a')
-              var $progress = $this.find('circle.e2-progress')
+          $this.removeClass('e2-external-drop-target-dragover e2-external-drop-target-dragover-alt')
 
-              e2ShowUploadProgressInArc($progress[0], 0)
-              e2SpinningAnimationStartStop($this, 0)
+          return false
+        }
+      }
 
-              if (typeof response['data'] === 'undefined' || typeof response['data']['new-image-src'] === 'undefined') {
-                $this.removeClass(uploadingModificator)
-                $link.attr('href', $link.attr('data-href'))
+      function initUserPic () {
+        var transitionEvent = getTransitionEvent()
+
+        var $dropZones = $('.e2-user-picture-container')
+
+        var dropZoneEmptyModificator = 'e2-user-picture-container_empty'
+        var dropZoneUploadingModificator = 'e2-user-picture-container_uploading'
+        var dropZoneShowSpinnerModificator = 'e2-user-picture-container_showspinner'
+        var dropZoneDeletingModificator = 'e2-user-picture-container_deleting'
+        var dropZoneDeletedModificator = 'e2-user-picture-container_deleted'
+
+        var isUserpicLoaded = !$dropZones.eq(0).hasClass(dropZoneEmptyModificator)
+
+        $dropZones.on('drop', dropUserPic)
+        $dropZones.on('change', '.e2-user-picture-input', selectUserPic)
+        $dropZones.on('click', '.e2-user-picture-remove', removeUserPic)
+
+        function dropUserPic (event) {
+          var file
+          var dt = event.originalEvent.dataTransfer
+
+          if (!dt || !dt.files) {
+            e2NiceError({
+              message: 'er--js-no-files-to-upload',
+              debug: {
+                data: {
+                  event: event,
+                  dataTransfer: dt
+                }
               }
             })
+            return false
+          } else if (dt.files.length > 1) {
+            e2NiceError({
+              message: 'er--js-can-upload-only-one-file',
+              debug: {
+                data: {
+                  event: event,
+                  files: dt.files
+                }
+              }
+            })
+            return false
+          }
 
-            if (typeof response['data'] === 'undefined' || typeof response['data']['new-image-src'] === 'undefined') {
-              e2NiceError({
-                message: 'er--js-server-error',
-                debug: {
-                  message: 'Server responce malformed',
-                  data: {
-                    response: response
+          file = dt.files[0]
+
+          if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png$/i)) {
+            e2NiceError({
+              message: 'er--js-supported-only-png-jpg-gif',
+              debug: {
+                data: {
+                  file: file
+                }
+              }
+            })
+            return false
+          }
+
+          uploadUserPic($(this), file)
+        }
+
+        function selectUserPic (event) {
+          if (!event.target.files.length) {
+            return false
+          }
+
+          uploadUserPic($(event.delegateTarget), event.target.files[0])
+
+          return false
+        }
+
+        function uploadUserPic ($currentDropZone, file) {
+          var uploadHref = $currentDropZone.data('href')
+
+          isUserpicLoaded = !$currentDropZone.hasClass(dropZoneEmptyModificator)
+
+          $dropZones.each(function () {
+            var $dropZone = $(this)
+            var $link = $dropZone.find('.e2-user-picture-container-link')
+            var $transitionedElement = isUserpicLoaded ? $dropZone.find('.e2-user-picture-image') : $dropZone.find('.e2-user-picture-placeholder')
+            var $spinner = $dropZone.find('.e2-user-picture-spinner')
+
+            if ($dropZone[0] === $currentDropZone[0]) {
+              if (transitionEvent) {
+                $transitionedElement.off(transitionEvent + '.uploadUserPic').one(transitionEvent + '.uploadUserPic', function () {
+                  if ($dropZone.hasClass(dropZoneUploadingModificator)) {
+                    $dropZone.addClass(dropZoneShowSpinnerModificator)
+                    e2SpinningAnimationStartStop($spinner, 1)
+                  }
+                })
+                $dropZone.addClass(dropZoneUploadingModificator)
+              } else {
+                if ($dropZone.hasClass(dropZoneUploadingModificator)) {
+                  $dropZone.addClass(dropZoneShowSpinnerModificator)
+                  e2SpinningAnimationStartStop($spinner, 1)
+                }
+              }
+            } else {
+              $dropZone.addClass(dropZoneUploadingModificator)
+            }
+
+            $link.attr('data-href', $link.attr('href')).removeAttr('href')
+          })
+
+          e2UploadFile({
+            file: file,
+            url: uploadHref,
+            progress: function (event) {
+              if (event.lengthComputable) {
+                $dropZones.each(function () {
+                  var $dropZone = $(this)
+                  var $progress = $dropZone.find('circle.e2-progress')
+
+                  if ($dropZone[0] === $currentDropZone[0]) {
+                    e2ShowUploadProgressInArc($progress, event.loaded / event.total)
+                  }
+                })
+              }
+            },
+            success: function (response) {
+              $dropZones.each(function () {
+                var $dropZone = $(this)
+                var $link = $dropZone.find('.e2-user-picture-container-link')
+                var $spinner = $dropZone.find('.e2-user-picture-spinner')
+
+                if (typeof response['data'] === 'undefined' || typeof response['data']['new-image-src'] === 'undefined') {
+                  $dropZone.removeClass(dropZoneUploadingModificator)
+                  $link.attr('href', $link.attr('data-href')).removeAttr('data-href')
+
+                  if ($dropZone[0] === $currentDropZone[0]) {
+                    $dropZone.removeClass(dropZoneShowSpinnerModificator)
+                    e2SpinningAnimationStartStop($spinner, 0)
                   }
                 }
               })
-              return false
+
+              if (typeof response['data'] === 'undefined' || typeof response['data']['new-image-src'] === 'undefined') {
+                e2NiceError({
+                  message: 'er--js-server-error',
+                  debug: {
+                    message: 'Server responce malformed',
+                    data: {
+                      response: response
+                    }
+                  }
+                })
+                return false
+              }
+
+              isUserpicLoaded = true
+
+              var $imgToLoad
+              $dropZones.each(function () {
+                var $dropZone = $(this)
+                var $link = $dropZone.find('.e2-user-picture-container-link')
+                var $img = $dropZone.find('img')
+                var $spinner = $dropZone.find('.e2-user-picture-spinner')
+
+                if (typeof $imgToLoad === 'undefined') {
+                  $img.one('load', function () {
+                    $dropZone.removeClass(dropZoneEmptyModificator).removeClass(dropZoneUploadingModificator)
+                    $link.attr('href', $link.attr('data-href')).removeAttr('data-href')
+
+                    if ($dropZone[0] === $currentDropZone[0]) {
+                      $dropZone.removeClass(dropZoneShowSpinnerModificator)
+                      e2SpinningAnimationStartStop($spinner, 0)
+                    }
+                  })
+
+                  $img.attr('src', response['data']['new-image-src'] + '?' + Date.now())
+
+                  $imgToLoad = $img
+                } else {
+                  $imgToLoad.one('load', function () {
+                    $img.attr('src', $imgToLoad.attr('src'))
+
+                    $dropZone.removeClass(dropZoneEmptyModificator).removeClass(dropZoneUploadingModificator)
+                    $link.attr('href', $link.attr('data-href')).removeAttr('data-href')
+
+                    if ($dropZone[0] === $currentDropZone[0]) {
+                      $dropZone.removeClass(dropZoneShowSpinnerModificator)
+                      e2SpinningAnimationStartStop($spinner, 0)
+                    }
+                  })
+                }
+              })
+            },
+            error: function () {
+              $dropZones.each(function () {
+                var $dropZone = $(this)
+                var $link = $dropZone.find('.e2-user-picture-container-link')
+                var $spinner = $dropZone.find('.e2-user-picture-spinner')
+
+                $dropZone.removeClass(dropZoneUploadingModificator)
+                $link.attr('href', $link.attr('data-href')).removeAttr('data-href')
+
+                if ($dropZone[0] === $currentDropZone[0]) {
+                  $dropZone.removeClass(dropZoneShowSpinnerModificator)
+                  e2SpinningAnimationStartStop($spinner, 0)
+                }
+              })
+            }
+          })
+        }
+
+        function removeUserPic (event) {
+          var $currentDropZone = $(event.delegateTarget)
+          var href = $(event.currentTarget).attr('data-href')
+
+          $dropZones.each(function () {
+            var $dropZone = $(this)
+            var $link = $dropZone.find('.e2-user-picture-container-link')
+
+            if ($currentDropZone[0] === $dropZone[0]) {
+              $dropZone.addClass(dropZoneDeletingModificator)
             }
 
-            $dropZone.each(function () {
-              var $this = $(this)
-              var $link = $this.find('a')
-              var $pic = $this.find('img')
+            $link.attr('data-href', $link.attr('href')).removeAttr('href')
+          })
 
-              $pic.on('load', function () {
-                $this.removeClass(uploadingModificator)
+          e2Ajax({
+            url: href,
+            success: function () {
+              isUserpicLoaded = false
+
+              $dropZones.each(function () {
+                var $dropZone = $(this)
+                var $link = $dropZone.find('.e2-user-picture-container-link')
+                var $img = $dropZone.find('img')
+
+                function showDefaultState () {
+                  $dropZone.addClass(dropZoneEmptyModificator).removeClass(dropZoneDeletedModificator).removeClass(dropZoneDeletingModificator)
+                  $img.attr('src', '')
+                  $link.attr('href', $link.attr('data-href')).removeAttr('data-href')
+                }
+
+                if (transitionEvent) {
+                  $dropZone.off(transitionEvent + '.removeUserPic').one(transitionEvent + '.removeUserPic', function () {
+                    showDefaultState()
+                  })
+                  $dropZone.addClass(dropZoneDeletedModificator)
+                } else {
+                  showDefaultState()
+                }
+              })
+            },
+            error: function () {
+              $dropZones.each(function () {
+                var $dropZone = $(this)
+                var $link = $dropZone.find('.e2-user-picture-container-link')
+
+                $dropZone.removeClass(dropZoneDeletingModificator)
                 $link.attr('href', $link.attr('data-href')).removeAttr('data-href')
-              }).attr('src', response['data']['new-image-src'] + '?' + Date.now())
-            })
-
-            $('.e2-set-userpic-by-dragging').slideUp(333, function () {
-              /*
-               TODO: показать ссылку «удалить аватарку»
-              */
-            })
-          },
-          error: function () {
-            $dropZone.each(function () {
-              var $this = $(this)
-              var $link = $this.find('a')
-              var $progress = $this.find('circle.e2-progress')
-
-              $this.removeClass(uploadingModificator)
-              $link.attr('href', $link.attr('data-href'))
-              e2ShowUploadProgressInArc($progress[0], 0)
-            })
-          }
-        })
+              })
+            }
+          })
+        }
       }
 
       /* Local copy indicators */
@@ -262,6 +394,8 @@ if (typeof $ !== 'undefined') {
         }
       }
 
+      initDrops()
+      initUserPic()
       initLocalCopyIndicators()
     }
 

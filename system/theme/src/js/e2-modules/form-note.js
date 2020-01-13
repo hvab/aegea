@@ -115,7 +115,7 @@ function initFormNote () {
     }
   }
 
-  function e2LiveSaveError (errmsg) {
+  function e2LiveSaveError () {
     e2SpinningAnimationStartStop($('#livesaving'), 0)
     $('#livesaving').hide()
     $('#livesave-button, #livesave-button + .e2-unsaved-led').show()

@@ -35,7 +35,7 @@
   --activeColor:                   var(--linkColor);
   --errorColor:                     #b03000;
   --currentItemBackgroundColor:     #333;
-  --windowBackgroundColor:         var(--inputBackgroundColor);
+  --windowBackgroundColor:       rgb(  45,  44,  43      );
   /* --unsavedIndicatorColor */
 
   /* to match .likely */

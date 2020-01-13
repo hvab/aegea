@@ -77,6 +77,39 @@ select > .e2-button {
     color: #000;
   }
 
+  &:active, &:hover, &.hover {
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, .16);
+  }
+
+  &:hover, &.hover {
+    transition: none;
+  }
+
+  &:focus {
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
+  }
+
+  &:focus:hover, &:focus.hover {
+    box-shadow: inset 0 0 100px rgba(0,0,0,.16), inset 0 0 0 1px rgba(0,0,0,.2);
+  }
+
+  &_transparent {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 0;
+    text-align: left;
+
+    &:active, &:hover, &.hover, &:focus, &:focus:hover, &:focus.hover {
+      box-shadow: none;
+    }
+  }
+
 }
 
 .e2-submit-button,
@@ -112,29 +145,9 @@ select > .e2-button {
 .e2-button:disabled {
   // background: #e0e0e0;
   // background: linear-gradient(to bottom, #e8e8e8 0%, #d8d8d8 100%);
-  color: rgba(#000, .2);
+  color: rgba(0, 0, 0, .2);
   cursor: default;
   pointer-events: none;
-}
-
-.e2-button:active,
-.e2-button:hover,
-.e2-button.hover {
-  box-shadow: inset 0 0 100px rgba(#000,.16);
-}
-
-.e2-button:hover,
-.e2-button.hover {
-  transition: none;
-}
-
-.e2-button:focus {
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
-}
-
-.e2-button:focus:hover,
-.e2-button:focus.hover {
-  box-shadow: inset 0 0 100px rgba(#000,.16), inset 0 0 0 1px rgba(0,0,0,.2);
 }
 
 .e2-keyboard-shortcut {
@@ -184,6 +197,9 @@ select > .e2-button {
   text-decoration: none;
   border-bottom-width: 1px;
   border-bottom-style: dashed;
+  transition-property: color, border-color;
+  transition-duration: var(--time);
+  transition-timing-function: ease-out;
 }
 
 .e2-visual-login {

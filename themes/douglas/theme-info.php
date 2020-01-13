@@ -17,6 +17,7 @@
 
   'based_on' => 'plain',
   'meta_viewport' => 'width=device-width, initial-scale=1',
+  'supports_dark_mode' => false,
   'use_likely_light' => true,
 
 ); ?>

@@ -33,6 +33,7 @@
 
 <meta name="viewport" content="<?= $content['meta']['viewport'] ?>">
 
+<meta property="og:type" content="website" />
 <meta property="og:title" content="<?= $content['title'] ?>" />
 <meta property="og:url" content="<?= $content['meta']['current-href'] ?>" />
 
