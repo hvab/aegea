@@ -179,12 +179,13 @@
       <div class="form-control">
         <div class="form-label input-label"><label><?= _S ('ff--posts') ?></label></div>
         <div class="form-element">
-          <label><input type="text"
+          <label><input
+            type="number"
             class="text"
-            style="width: 2.33em"
+            style="width: 2.66em"
             id="notes-per-page"
             name="notes-per-page"
-            maxlength="3"
+            pattern="[0-9]*" min="3" max="100" maxlength="3" inputmode="numeric"
             value="<?= $content['form-preferences']['notes-per-page'] ?>"
             />
           <?= _S ('ff--items-per-page-after') ?>

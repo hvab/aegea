@@ -327,7 +327,7 @@ if (typeof $ !== 'undefined') {
 
       /* Local copy indicators */
       function initLocalCopyIndicators () {
-        if (!isLocalStorageAvailable) return
+        if (!isLocalStorageAvailable || !document.e2.localCopies) return
 
         const $draftsLink = $('#e2-drafts-item')
         const $draftsUnsavedLed = $draftsLink.find('.e2-unsaved-led')
@@ -398,7 +398,6 @@ if (typeof $ !== 'undefined') {
       initUserPic()
       initLocalCopyIndicators()
     }
-
     initObsoleteFunction()
 
     /* Third init admin items and couple items */
@@ -573,6 +572,7 @@ if (typeof $ !== 'undefined') {
         return onClick($(this))
       })
     }
+    initAllAdminItems()
 
     function initAllAdminCouples () {
       var coupleItemHiddenModifier = 'e2-admin-couple-item_hidden'
@@ -609,8 +609,6 @@ if (typeof $ !== 'undefined') {
         initAdminCouple(eventData.$couple)
       })
     }
-
-    initAllAdminItems()
     initAllAdminCouples()
   })
 }

@@ -1,36 +1,33 @@
 .e2-comments {
-  float: left;
-  width: 100%;
   word-wrap: break-word;
 }
 
-.e2-comment-and-reply,
-.e2-comment,
-.e2-comment-toggle {
-  width: 100%;
-  float: left;
-}
-
-.e2-comment-and-reply {
-  margin: 0;
+.e2-comments-toggle {
+  margin: 0 0 20px;
 }
 
 .e2-comment {
   margin: 0 0 20px;
-}
+  min-height: 44px;
+  position: relative;
 
-.e2-comment-toggle {
-  margin: 0 0 20px;
+  &.e2-reply {
+    margin-left: 48px;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
 }
 
 .e2-comment-userpic-area {
-  float: left;
+  position: absolute;
+  top: 4px;
+  left: 0;
   width: 40px;
   height: 40px;
-  margin-top: 4px;
-  border-radius: 50%;
-  margin-right: 8px;
-  position: relative;
 }
 
 .e2-comment-userpic-area-inner {
@@ -71,14 +68,14 @@
 
 .e2-comment-content-area {
   // outline: red 1px solid;
-  float: left;
-  width: calc(100% - 48px - 40px);
+  margin: 0 40px 0 48px;
 }
 
 .e2-comment-control-area {
   // outline: blue 1px solid;
-  float: right;
-  text-align: left;
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 40px;
   min-height: 1px;
 }
@@ -102,14 +99,6 @@
   color: var(--disabledColor);
 }
 
-.e2-reply .e2-comment-userpic-area {
-  margin-left: 48px;
-}
-
-.e2-reply .e2-comment-content-area {
-  width: calc(100% - 96px - 180px);
-}
-
 .e2-comment-date {
   margin: 0 0 6px 0;
   font-size: 12px;
@@ -127,19 +116,6 @@
 .e2-comment-piece-marked.e2-comment-author-removed {
   background: initial;
   border-radius: initial;
-}
-
-@media #{$AreCommentsVertical} {
-  .e2-comment-content-area {
-    float: left;
-    width: calc(100% - 48px - 40px);
-  }
-  .e2-comment-control-area {
-    width: 40px;
-  }
-  .e2-reply .e2-comment-content-area {
-    width: calc(100% - 96px - 40px);
-  }
 }
 
 .e2-spam, .e2-spam * {

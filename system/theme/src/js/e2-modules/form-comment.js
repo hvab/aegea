@@ -1,56 +1,8 @@
 import swing from '../lib/swing'
 
 function initFormComment () {
-  var mailMask = /^([a-z0-9_.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i
+  var mailMask = /^([a-z0-9_.-])+@[a-z0-9-]+\.([a-z]{2,11}\.)?[a-z]{2,11}$/i
   var $formComment = $('#form-comment')
-
-  if ($formComment.length) {
-    $('.required').bind('input blur cut copy paste keypress', updateSubmittability)
-    updateSubmittability()
-    $formComment.show()
-  }
-
-  $formComment.on('submit', function (e) {
-    var $gips = $formComment.find('.e2-gips')
-    const $name = $formComment.find('#name')
-    const $email = $formComment.find('#email')
-
-    const cookieName = $formComment.data('cookie')
-    const cookieValue = $formComment.data('cookie-value')
-
-    setNospamCookie(cookieName, cookieValue)
-
-    if (!$gips.length || !$gips.is(':visible') || !$gips.hasClass('required')) {
-      return true
-    } else if ($gips.hasClass('required') && $name.val() && mailMask.test($email.val())) {
-      return true
-    }
-
-    swing($gips[0])
-
-    return false
-  })
-
-  $('.e2-email-fields-revealer').on('click', function (e) {
-    e.preventDefault()
-
-    $('.e2-email-fields').show()
-    updateSubmittability()
-    $(this).hide()
-  })
-
-  $('.e2-gips a.e2-gip-link').on('click', function (e) {
-    e.preventDefault()
-    let href = $(this).attr('href')
-    let windowSizeAndPosition = getWindowSizeAndPosition()
-    const popupWidth = 600
-    const popupHeight = 600
-    let popupLeft = windowSizeAndPosition.left + (windowSizeAndPosition.width / 2) - (popupWidth / 2)
-    let popupTop = windowSizeAndPosition.top + (windowSizeAndPosition.height / 2) - (popupHeight / 2)
-    if (popupLeft < 0) popupLeft = 50
-    if (popupTop < 0) popupTop = 50
-    window.open(href, 'gips', 'left=' + popupLeft + ',top=' + popupTop + ',width=' + popupWidth + ',height=' + popupHeight + ',centerscreen')
-  })
 
   function getWindowSizeAndPosition () {
     let myWidth = 0
@@ -114,6 +66,52 @@ function initFormComment () {
     const d = new Date(new Date().getTime() + 60 * 24 * 60 * 60 * 1000)
     document.cookie = cookieName + '=' + cookieValue + ';path=/;expires=' + d.toUTCString()
   }
+
+  if ($formComment.length) {
+    $('.required').on('input blur cut copy paste keypress', updateSubmittability)
+    updateSubmittability()
+    $formComment.on('submit', function () {
+      var $gips = $formComment.find('.e2-gips')
+      const $name = $formComment.find('#name')
+      const $email = $formComment.find('#email')
+
+      const cookieName = $formComment.data('cookie')
+      const cookieValue = $formComment.data('cookie-value')
+
+      setNospamCookie(cookieName, cookieValue)
+
+      if (!$gips.length || !$gips.is(':visible') || !$gips.hasClass('required')) {
+        return true
+      } else if ($gips.hasClass('required') && $name.val() && mailMask.test($email.val())) {
+        return true
+      }
+
+      swing($gips[0])
+
+      return false
+    }).show()
+  }
+
+  $('.e2-email-fields-revealer').on('click', function (e) {
+    e.preventDefault()
+
+    $('.e2-email-fields').show()
+    updateSubmittability()
+    $(this).hide()
+  })
+
+  $('.e2-gips a.e2-gip-link').on('click', function (e) {
+    e.preventDefault()
+    let href = $(this).attr('href')
+    let windowSizeAndPosition = getWindowSizeAndPosition()
+    const popupWidth = 600
+    const popupHeight = 600
+    let popupLeft = windowSizeAndPosition.left + (windowSizeAndPosition.width / 2) - (popupWidth / 2)
+    let popupTop = windowSizeAndPosition.top + (windowSizeAndPosition.height / 2) - (popupHeight / 2)
+    if (popupLeft < 0) popupLeft = 50
+    if (popupTop < 0) popupTop = 50
+    window.open(href, 'gips', 'left=' + popupLeft + ',top=' + popupTop + ',width=' + popupWidth + ',height=' + popupHeight + ',centerscreen')
+  })
 
   window.oauthAuthorized = function (data) { // eslint-disable-line no-unused-vars
     $('.e2-hide-on-login').hide()

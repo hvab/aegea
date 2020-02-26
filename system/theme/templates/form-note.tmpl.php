@@ -1,3 +1,6 @@
+<?php _LIB ('jquery.mousewheel') ?>
+<?php _LIB ('jquery.actual') ?>
+<?php _LIB ('momentjs') ?>
 <?php _LIB ('goodyear') ?>
 <?php _LIB ('textarea-caret-position') ?>
 <?php _LIB ('chosen') ?>

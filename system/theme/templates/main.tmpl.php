@@ -4,7 +4,6 @@
 <head>
 
 <?php _LIB ('jquery') ?>
-<?php _LIB ('smart-title') ?>
 
 <?php _T_DEFER ('head') ?>
 <?php _T ('init-script') ?>

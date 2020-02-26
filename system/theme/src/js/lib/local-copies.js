@@ -1,7 +1,5 @@
 import { localStorage, isLocalStorageAvailable } from './local-storage'
 
-document.e2 = document.e2 || {}
-
 function initLocalCopies () {
   if (isLocalStorageAvailable) {
     document.e2.localCopies = {

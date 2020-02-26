@@ -31,9 +31,9 @@
   --inputTextColor:                 white;
 
   --imageBorderColor:             #333;
-  --disabledColor:                  var(--markedTextBackground);
+  --disabledColor:                #808894;
   --activeColor:                  #ffd000;
-  --errorColor:                   #b03000;
+  --errorColor:                   rgb( 255,  93,  87     );
   --currentItemBackgroundColor:   #333;
   --windowBackgroundColor:          var(--markedTextBackground);
   /* --unsavedIndicatorColor */

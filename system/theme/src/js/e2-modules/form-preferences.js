@@ -3,7 +3,7 @@ import textEditorInit from '../lib/text-editor'
 function initFormPreferences () {
   if (!$('#form-preferences').length) return
 
-  textEditorInit(document.getElementById('blog-description'))
+  $('#blog-description').each(textEditorInit)
 
   $('#blog-title').on('input blur cut copy paste keypress', function () {
     var $title = $('#e2-blog-title')
@@ -23,7 +23,7 @@ function initFormPreferences () {
     }
   })
 
-  $('#notes-per-page').on('change blur', function () {
+  $('#notes-per-page').on('change blur focusout', function () {
     var defaultValue = 10
     var minValue = 3
     var maxValue = 100

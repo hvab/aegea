@@ -1,3 +1,6 @@
+<?php _LIB ('jquery.mousewheel') ?>
+<?php _LIB ('jquery.actual') ?>
+<?php _LIB ('momentjs') ?>
 <?php _LIB ('goodyear') ?>
 <form
   id="form-note-publish"
@@ -32,10 +35,10 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
       <label><?= _S ('ff--post-time') ?></label>
     </div>
     <div class="form-element">
-      <div style="display: inline-block">
+      <div style="display: inline-block; padding-right: 24px;">
         <input type="text"
           tabindex="6"
-          class="text width-2 goodyear"
+          class="text width-5 goodyear"
           name="stamp"
           id="stamp"
           placeholder="<?= @$content['form-note-publish']['stamp-formatted'] ?>"
@@ -50,8 +53,6 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
           value="<?= @$content['form-note-publish']['stamp-formatted'] ?>"
         />
       </div>
-      
-      &nbsp;&nbsp;&nbsp;
 
       <a href="#" class="e2-admin-link nu e2-schedule-controls-unrevealer e2-svgi "><?= _SVG ('close') ?></a>
 

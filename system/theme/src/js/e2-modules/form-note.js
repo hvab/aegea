@@ -108,11 +108,7 @@ function initFormNote () {
       !liveSaving
     )
 
-    if (shouldBeEnabled) {
-      $submitButton.prop('disabled', false)
-    } else {
-      $submitButton.prop('disabled', true)
-    }
+    $submitButton.prop('disabled', !shouldBeEnabled)
   }
 
   function e2LiveSaveError () {
@@ -145,7 +141,7 @@ function initFormNote () {
     e2SpinningAnimationStartStop($('#livesaving'), 1)
 
     e2AjaxSave({
-      onCreated: function (response) {
+      onCreated: function () {
         initPO = currentPO
         if ($('#e2-drafts') && $('#e2-drafts-item')) {
           $('#e2-drafts-item').fadeIn(333)
@@ -164,7 +160,7 @@ function initFormNote () {
           $('#e2-drafts-count').html($('#e2-drafts-count').html() * 1 + 1)
         }
       },
-      onSaved: function (response) {
+      onSaved: function () {
         initPO = currentPO
       },
       onError: e2LiveSaveError,
@@ -215,7 +211,7 @@ function initFormNote () {
       window.location.href = response['data']['note-url']
     }
 
-    function handleError (msg) {
+    function handleError () {
       $formNote.trigger('ajaxError')
       e2SpinningAnimationStartStop($('#note-saving'), 0)
       $('#note-saving').hide()
@@ -223,7 +219,7 @@ function initFormNote () {
     }
   })
 
-  $('#title').bind('input', function () {
+  $('#title').on('input', function () {
     $('#alias').attr('placeholder', '')
   })
 
@@ -270,7 +266,9 @@ function initFormNote () {
   })
 
   $('#title').on('keydown', function (e) {
-    if (e.keyCode === 13) $('#text').focus()
+    if (e.which === 13) {
+      $('#text').focus()
+    }
   })
 
   $('#livesave-button').on('click', function () {
@@ -284,7 +282,7 @@ function initFormNote () {
     bindKeys('Ctrl+S', e2LiveSave, {prevent: true})
   }
 
-// if there is no autofocus on #text, let's move focus to #title
+  // if there is no autofocus on #text, let's move focus to #title
   if (!$('#text').is(':focus')) {
     $('#title')
       .attr('autofocus', true)
@@ -308,7 +306,7 @@ function initFormNote () {
     document.e2.localCopies.destroyLocalSaver()
   }
 
-// returns object with form fields values
+  // returns object with form fields values
   function getPageObject () {
     return {
       title: $('#title').val(),
@@ -319,7 +317,7 @@ function initFormNote () {
     }
   }
 
-// returns true if objects are equal; else false
+  // returns true if objects are equal; else false
   function comparePageObjects (prevPO, newPO) {
     // 'cause all values of POs are strings, we can use JSON comparison
     return JSON.stringify(prevPO) === JSON.stringify(newPO)

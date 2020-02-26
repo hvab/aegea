@@ -33,26 +33,41 @@ function e2Ajax (options) {
 
   jqXHR.done(function (response, textStatus, jqXHR) {
     if (typeof response === 'object') {
-      if (typeof response['success'] === 'boolean' && response['success'] === true) {
+      if (response['success'] === true) {
         if (typeof onSuccess === 'function') {
           onSuccess(response, textStatus, jqXHR)
         }
       } else {
-        if (typeof response['error'] === 'object' && typeof response['error']['message'] === 'string') {
-          e2NiceError({
-            message: response['error']['message'],
-            debug: {
-              data: {
-                requestData: options.data
+        if (typeof response['error'] === 'object') {
+          if (typeof response['error']['message'] === 'string') {
+            e2NiceError({
+              message: response['error']['message'],
+              debug: {
+                data: {
+                  requestData: options.data,
+                  response: response
+                }
               }
-            }
-          })
+            })
+          } else {
+            e2NiceError({
+              message: 'er--js-server-error',
+              debug: {
+                message: 'Server responce malformed: `response.error.message` is not available',
+                data: {
+                  requestData: options.data,
+                  response: response
+                }
+              }
+            })
+          }
         } else {
           e2NiceError({
             message: 'er--js-server-error',
             debug: {
-              message: 'Server responce malformed: the response.error object is not available',
+              message: 'Server responce malformed: `response.error` is not an object',
               data: {
+                requestData: options.data,
                 response: response
               }
             }
@@ -66,8 +81,9 @@ function e2Ajax (options) {
       e2NiceError({
         message: 'er--js-server-error',
         debug: {
-          message: 'Server responce malformed: the response object is not available',
+          message: 'Server responce malformed: `response` is not an object',
           data: {
+            requestData: options.data,
             response: response
           }
         }

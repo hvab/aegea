@@ -95,9 +95,9 @@ function initFormNoteLocalCopy () {
       document.execCommand('insertText', false, copy.title)
       $title.trigger('input')
 
-      $text.focus().select()
+      $text.addClass('e2-textarea-autosize_off').focus().select()
       document.execCommand('insertText', false, copy.text)
-      $text.trigger('input')
+      $text.removeClass('e2-textarea-autosize_off').trigger('input')
     } else {
       $title.val(copy.title).trigger('input')
       $text.val(copy.text).trigger('input')

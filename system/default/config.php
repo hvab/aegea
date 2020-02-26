@@ -132,8 +132,8 @@ $_config['search_favourites_boost'] = 2;
 
 // DEBUG AND DEVELOPMENT
 
-// write a log to user/log.txt? (it may get very large soon)
-$_config['write_log'] = false;
+// write a log to user/logs/main.log? (it may get very large soon)
+$_config['write_log'] = true;
 
 // if user/log.txt is not there, create it?
 $_config['write_log_create'] = false;

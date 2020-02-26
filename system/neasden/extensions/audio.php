@@ -9,7 +9,8 @@ class NeasdenGroup_audio implements NeasdenGroup {
 
     $neasden->define_line_class ('audio', '.*\.(mp3)(?: +(.+))?');
     $neasden->define_line_class ('audio-play', '(?:\[play\])(.*)');
-    $neasden->define_group ('audio', '(?:(-audio-)|(-audio-play-))');
+    $neasden->define_line_class ('audio-range-title', '(?:(.+) (.+)  (.+))');
+    $neasden->define_group ('audio', '(?:(-audio-)|(-audio-play-))(-audio-range-title-)*');
   }
 
   function detect_line ($line, $myconf) {
@@ -32,6 +33,8 @@ class NeasdenGroup_audio implements NeasdenGroup {
     $result = (
       '<div class="'. $css_class .'">'."\n"
     );
+
+    $ranges = [];
     
     foreach ($group as $line) {
     
@@ -61,9 +64,37 @@ class NeasdenGroup_audio implements NeasdenGroup {
         $result .= $player_html;
       
       }
+
+      if ($line['class'] == 'audio-range-title') {
+        $ranges[] = $line['class-data'];
+      }
       
     }
   
+    if (count ($ranges)) {
+      // $result = '<div class="'. $myconf['css-class'] .'">' ."\n";
+      // $result .= '<table cellpadding="0" cellspacing="0" border="0">' ."\n";
+      $result .= '<div class="e2-audio-ranges">'."\r\n";
+      $result .= '<table cellpadding="0" cellspacing="0" border="0">'."\r\n";
+      foreach ($ranges as $range) {
+        $item = [
+          'from' => $range[1],
+          'to' => $range[2],
+          'title' => $range[3],
+        ];
+        $result .= '<tr class="jouele-control e2-audio-ranges-item" data-type="seek" '."\r\n";
+        $result .= 'data-range="'. $item['from'] .'...'. $item['to'] .'">'."\r\n";
+        $result .= '<td>'. $item['from'] .'</td>'."\r\n";
+        $result .= '<td class="e2-audio-ranges-item-title">'. $item['title'] .'</td>'."\r\n";
+        $result .= '</tr>'."\r\n";
+      }
+      $result .= '</table>'."\r\n";
+      $result .= '</div>'."\r\n";
+      // $result .= '<pre>';
+      // $result .= print_r ($ranges, true);
+      // $result .= '</pre>';
+    }
+
     $result .= '</div>'."\n";
   
     return $result;

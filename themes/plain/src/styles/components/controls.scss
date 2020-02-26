@@ -1,4 +1,5 @@
 input[type="text"],
+input[type="number"],
 input[type="password"],
 textarea,
 select,
@@ -14,6 +15,7 @@ select,
 }
 
 input[type="text"],
+input[type="number"],
 input[type="password"],
 textarea,
 select {
@@ -25,12 +27,22 @@ select {
 }
 
 input[type="text"],
+input[type="number"],
 input[type="password"],
 textarea,
 select {
   &.e2-livecheckable { color: #000 }
   &.e2-verified { color: #090 }
   &.e2-wrong { color: var(--errorColor) }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 textarea {
@@ -46,6 +58,7 @@ input[type="checkbox"], input[type="radio"] {
 }
 
 input[type="text"]:focus,
+input[type="number"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus,

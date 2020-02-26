@@ -3,22 +3,25 @@ import cssVarsPolyfill from './lib/css-variables-polyfill'
 import viewCounter from './lib/view-counter'
 import swing from './lib/swing'
 import detect from './lib/detect'
+import textEditorInit from './lib/text-editor'
+import initSmartTitle from './e2-modules/smart-title'
 import e2Ajax from './e2-modules/e2Ajax'
 import e2NiceError from './e2-modules/e2NiceError'
 import e2SpinningAnimationStartStop from './e2-modules/e2SpinningAnimationStartStop'
-import textEditorInit from './lib/text-editor'
-import initFormComment from './e2-modules/form-comment'
 import initAllPopupMenus from './e2-modules/e2PopupMenu'
+import initFormComment from './e2-modules/form-comment'
+import e2AutosizeTextFields from './e2-modules/e2AutosizeTextFields'
 
 if (typeof $ !== 'undefined') {
   $(function () {
     // First init imports
     initFormComment()
+    initSmartTitle()
 
     // Second init obsolete functions
     function initObsoleteFunction () {
-      const textField = document.getElementById('text')
-      if (textField) textEditorInit(textField)
+      // init textEditor
+      $('#text').each(textEditorInit)
 
       // former pseudohover.js
       var $pseudohoveredLinks = $()
@@ -40,16 +43,11 @@ if (typeof $ !== 'undefined') {
         })
 
       // update a hrefs with link redirects
-      $('a').each(function () {
-        const redir = $(this).attr('linkredir')
+      $('a[linkredir]').each(function () {
+        var $this = $(this)
 
-        if (redir) {
-          const $this = $(this)
-
-          $this
-            .attr('href', redir + $this.attr('href'))
-            .attr('linkredir', '')
-        }
+        $this.attr('href', $this.attr('linkredir') + $this.attr('href'))
+        $this.removeAttr('linkredir')
       })
 
       // login popup
@@ -200,14 +198,6 @@ if (typeof $ !== 'undefined') {
         })
       }
 
-      // hide all sheets on esc
-      $(document).on('keyup', function (event) {
-        if ((event.keyCode === 27)) {
-          $('#e2-subscribe-sheet').trigger('E2_HIDE_SUBSCRIBE_SHEET')
-          $('#e2-login-sheet').trigger('E2_HIDE_LOGIN_SHEET')
-        }
-      })
-
       // search
       if ($('#e2-search').length) {
         var $searchForm = $('#e2-search')
@@ -300,7 +290,7 @@ if (typeof $ !== 'undefined') {
 
       // ctrl+enter sends forms
       $(document).on('keydown keyup keypress', function (event) {
-        if ((event.keyCode === 13) || (event.which === 13)) {
+        if (event.which === 13) {
           var target = event.target || event.srcElement
           if (target) {
             if (target.form) {
@@ -319,58 +309,52 @@ if (typeof $ !== 'undefined') {
         }
       })
 
-      // alt+e edits
+      // keyup functions
       $(document).on('keyup', function (event) {
-        if (((event.keyCode === 69) || (event.which === 69)) && event.altKey) {
-          if ($('.e2-edit-link').length > 0) {
-            window.location.href = $('.e2-edit-link').eq(0).attr('href')
+        // hide all sheets on esc
+        if (event.which === 27) {
+          $('#e2-subscribe-sheet').trigger('E2_HIDE_SUBSCRIBE_SHEET')
+          $('#e2-login-sheet').trigger('E2_HIDE_LOGIN_SHEET')
+        }
+
+        // alt+e edits
+        if (event.which === 69 && event.altKey) {
+          var $editLink = $('.e2-edit-link')
+          if ($editLink.length) {
+            window.location.href = $editLink.eq(0).attr('href')
+          }
+        }
+
+        // ctrl-navigation
+        var eventTargetTag = event.target.nodeName.toLowerCase()
+        if (eventTargetTag !== 'input' && eventTargetTag !== 'textarea' && eventTargetTag !== 'select' && eventTargetTag !== 'option' && eventTargetTag !== 'button' && (typeof $(event.target).attr('contenteditable') === 'undefined' || $(event.target).attr('contenteditable') === 'false')) {
+          if ((detect.mac && event.altKey && !event.shiftKey) || (!detect.mac && event.ctrlKey)) {
+            var href
+            switch (event.which) {
+              case 37:
+                href = $('#link-prev').attr('href')
+                break
+              case 39:
+                href = $('#link-next').attr('href')
+                break
+              case 38:
+                href = $('#link-later').attr('href')
+                break
+              case 40:
+                href = $('#link-earlier').attr('href')
+                break
+            }
+            if (href) {
+              window.location.href = href
+              if (window.event) window.event.returnValue = false
+              if (event.preventDefault) event.preventDefault()
+            }
           }
         }
       })
 
-      // ctrl-navigation
-      function e2CtrlNavi (event) {
-        var eventTargetTag = event.target.nodeName.toLowerCase()
-        if (eventTargetTag === 'input' || eventTargetTag === 'textarea' || eventTargetTag === 'select' || eventTargetTag === 'option' || eventTargetTag === 'button' || (typeof $(event.target).attr('contenteditable') !== 'undefined' && $(event.target).attr('contenteditable') !== 'false')) {
-          return
-        }
-
-        if ((detect.mac && event.altKey && !event.shiftKey) || (!detect.mac && event.ctrlKey)) {
-          var link = null
-          if (event.keyCode === 37) link = document.getElementById('link-prev')
-          if (event.keyCode === 39) link = document.getElementById('link-next')
-          if (event.keyCode === 38) link = document.getElementById('link-later')
-          if (event.keyCode === 40) link = document.getElementById('link-earlier')
-          if (link && link.href) {
-            window.location.href = link.href
-            if (window.event) window.event.returnValue = false
-            if (event.preventDefault) event.preventDefault()
-          }
-        }
-      }
-      $(document).on('keyup', e2CtrlNavi)
-
       // autosize text fields
-      function e2AutosizeTextFields () {
-        var element = $('.e2-textarea-autosize')[0]
-        // this should be expanded to support multiple elements
-        if (element) {
-          var myHeight = parseInt(element.style.height)
-          if (element.scrollHeight > myHeight) {
-            element.style.height = (element.scrollHeight) + 'px'
-          } else {
-            while (element.scrollHeight === myHeight) {
-              myHeight -= 50
-              element.style.height = (myHeight) + 'px'
-              element.style.height = (element.scrollHeight) + 'px'
-            }
-          }
-
-          $(element).trigger('autosized')
-        }
-      }
-      $('.e2-textarea-autosize').on('input change resize', e2AutosizeTextFields)
-      e2AutosizeTextFields()
+      $('.e2-textarea-autosize').each(e2AutosizeTextFields)
 
       // notes
       var $notes = $('.e2-note')

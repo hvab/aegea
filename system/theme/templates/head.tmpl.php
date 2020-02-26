@@ -6,6 +6,10 @@
 
 <link rel="shortcut icon" type="<?= $content['meta']['favicon-type'] ?>" href="<?= $content['meta']['favicon-href'] ?>" />
 
+<?php if (array_key_exists ('apple-touch-icon-href', $content['meta'])): ?>
+<link rel="apple-touch-icon" href="<?= $content['meta']['apple-touch-icon-href'] ?>">
+<?php endif ?>
+
 <?php foreach ($content['meta']['stylesheets'] as $stylesheet): ?>
 <link rel="stylesheet" type="text/css" href="<?= $stylesheet ?>" />
 <?php endforeach ?>

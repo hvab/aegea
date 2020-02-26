@@ -37,6 +37,13 @@
 
 <br />
 
+<form
+  action="<?= $content['form-note-delete']['withdraw-href'] ?>"
+  method="post"
+>
+
 <?php if (array_key_exists ('withdraw-href', $content['form-note-delete'])): ?>
-  <a href="<?= $content['form-note-delete']['withdraw-href'] ?>" class="e2-button"><?= _S ('fb--withdraw') ?></a>
+  <button type="submit" class="e2-button"><?= _S ('fb--withdraw') ?></button>
 <?php endif ?>
+
+</form>
