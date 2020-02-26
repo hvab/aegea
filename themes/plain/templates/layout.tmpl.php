@@ -41,7 +41,7 @@
       </span>
 
       <?php if ($content['class'] != 'found') { ?>
-        <?php _T_FOR ('search') ?>
+        <?php _T_FOR ('form-search') ?>
       <?php } ?> 
     </div>
 
@@ -58,6 +58,7 @@
 <?php _T ('theme-preview') ?>
 <?php _T ('message') ?>
 <?php _T ('welcome') ?>
+<?php _T ('unavailable') ?>
 <?php _T ('drafts') ?>
 <?php _T ('notes') ?>
 <?php _T ('notes-list') ?>
@@ -83,13 +84,9 @@
 
 <a class="e2-rss-button" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
 
-<?php # please do not remove: #?>
 <div class="engine">
-<?= $content['engine']['about'] ?>
-<?php if ($content['sign-in']['done?']) { ?>
-&nbsp;&nbsp;&nbsp;
-<span title="<?= _S ('gs--pgt') ?>"><?=$content['engine']['pgt']?> <?= _S ('gs--seconds-contraction') ?></span>
-<?php } ?>
+<?= $content['engine']['about'] # please do not remove ?>
+<?php _T_DEFER ('stat') ?>
 </div>
 
 <?php _T ('login-element'); ?>
@@ -101,3 +98,5 @@
 
 
 </div>
+
+<?php _T ('niceerror'); ?>

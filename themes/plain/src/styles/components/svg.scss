@@ -12,6 +12,19 @@ svg {
   vertical-align: middle;
   position: relative;
   top: -1px;
+  text-indent: 0;
+
+  &_30 {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+  }
+
+  &_40 {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+  }
 }
 
 .e2-svgi-calendar {
@@ -23,6 +36,12 @@ svg {
   width: 12px;
   height: 12px;
   top: -2px;
+}
+
+.e2-svgi-heading {
+  width: 36px;
+  height: 36px;
+  top: 4px;
 }
 
 .e2-svgi-double {

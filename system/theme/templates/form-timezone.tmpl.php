@@ -6,11 +6,11 @@
 <div class="form">
 
 <div class="form-control">
-  <p><?= _S ('gs--e2-stores-each-posts-timezone') ?></p>
+  <div class="width-3"><?= _S ('gs--e2-stores-each-posts-timezone') ?></div>
 </div>
 
 <div class="form-control">
-  <p><?= _S ('gs--e2-autodetects-timezone') ?></p>
+  <div class="width-3"><?= _S ('gs--e2-autodetects-timezone') ?></div>
 </div>
 
 <div class="form-control">
@@ -19,7 +19,8 @@
     <div>
       <?= $content['form-timezone']['timezone-selector'] ?>
     </div>
-    
+  </div>    
+  <div class="form-element">
     <div>
       <label class="checkbox">
       <input type="checkbox"
@@ -34,7 +35,7 @@
 
 <div class="form-control">
   <div class="form-element">
-    <button type="submit" id="submit-button" class="e2-submit-button">
+    <button type="submit" id="submit-button" class="e2-button e2-submit-button">
       <?= @$content['form-timezone']['submit-text'] ?>
     </button>
   </div>

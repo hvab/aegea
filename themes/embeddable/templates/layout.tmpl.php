@@ -6,7 +6,7 @@
 
 <div style="float: right">
 <?php if ($content['class'] != 'found') { ?>
-  <?php _T_FOR ('search') ?>
+  <?php _T_FOR ('form-search') ?>
 <?php } ?>
 </div>
 
@@ -38,11 +38,8 @@
 
 <a class="e2-rss-button" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
 
-<?php # please do not remove: #?>
-<?= $content['engine']['about'] ?>
-<?php if ($content['sign-in']['done?']) { ?>
-&nbsp;&nbsp;&nbsp;
-<span title="<?= _S ('gs--pgt') ?>"><?=$content['engine']['pgt']?> <?= _S ('gs--seconds-contraction') ?></span>
-<?php } ?>
-
+<?= $content['engine']['about'] # please do not remove ?>
+<?php _T_DEFER ('stat') ?>
 <?php _T ('login-element'); ?>
+
+<?php _T ('niceerror'); ?>

@@ -71,6 +71,7 @@ $IsCompact: 'screen and (max-width: 1023px)';
   /* --subscribeButtonHoverBackground: rgba(255,255,255,.48); */
   /* --subscribeButtonTextColor: #fff; */
 
+  --maxWidth: 1280px;
   --marginTop: 48px;
   --marginLeft: 9%;
   --marginRight: 9%;
@@ -83,6 +84,8 @@ $IsCompact: 'screen and (max-width: 1023px)';
   --displayLogoCompact: block;
 
   --columnSpacing: 15px;
+
+  --borderRadius: 4px;
 
   --logoTop: -20px;
   --logoSize: 40px;
@@ -102,5 +105,47 @@ $IsCompact: 'screen and (max-width: 1023px)';
   --smallFontFamily: inherit;
 
   --time: .2s;
+  --timeLong: .33s;
 
+}
+
+@media (prefers-color-scheme: dark) {
+  :root .e2-responds-to-dark-mode {
+
+    --backgroundColor:             rgb(  32,  32,  32      );
+    --backgroundTransparentColor: rgba(  32,  32,  32, .8  );
+    --sheetBackgroundColor:       rgba(  32,  32,  32, .8  );
+    
+    --foregroundColor:             rgb( 192, 192, 192      );
+    --thinRuleColor:              rgba( 192, 192, 192, .25 );
+    
+    --headingsColor:               rgb( 255, 255, 255      );
+    --headingsUnderlineColor:     rgba( 255, 255, 255, .5  );
+    --boldColor:                     var(--foregroundColor);
+    --boldUnderlineColor:            var(--thinRuleColor);
+    --linkColor:                   rgb(   0, 128, 212      );
+    --linkUnderlineColor:         rgba(   0, 128, 212, .25 );
+    // --linkColorVisited:            rgb(   0,  96, 160      );
+    // --linkUnderlineColorVisited:  rgba(   0,  96, 160, .25 );
+    --hoverColor:                  rgb( 240,  64,  32);
+    --hoverUnderlineColor:        rgba( 240,  64,  32, .25 );
+    
+    --adminColor:                  rgb(  76, 178, 110);
+    --adminUnderlineColor:        rgba(  76, 178, 110, .25 );
+
+    --markedTextBackground:           #443300;
+    --markedImageBorderColor:         #886600;
+
+    --inputBackgroundColor:           #404040;
+    --inputTextColor:                var(--foregroundColor);
+
+    --imageBorderColor:             #404040;
+    --disabledColor:               rgb(  96,  96,  96      );
+    --activeColor:                   var(--headingsColor);
+    --errorColor:                  rgb( 240,  64,  32);
+    --currentItemBackgroundColor:     #303030;
+    --windowBackgroundColor:          #303030;
+    /* --unsavedIndicatorColor */
+
+  }
 }

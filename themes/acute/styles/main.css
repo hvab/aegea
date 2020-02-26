@@ -81,6 +81,39 @@
 
 }
 
+
+@media (prefers-color-scheme: dark) {
+  :root .e2-responds-to-dark-mode {
+
+    --backgroundColor:             rgb(  32,  32,  32      );
+    --backgroundTransparentColor: rgba(  32,  32,  32, .8  );
+    --sheetBackgroundColor:       rgba(  32,  32,  32, .8  );
+    
+    --foregroundColor:             rgb( 144, 144, 144      );
+    --thinRuleColor:              rgba( 144, 144, 144, .12 );
+    
+    --headingsColor:               rgb( 255, 255, 255      );
+    --headingsUnderlineColor:     rgba( 255, 255, 255, .12 );
+    --boldColor:                   rgb( 255, 255, 255      );
+    --boldUnderlineColor:         rgba( 255, 255, 255, .5  );
+    --linkColor:                   rgb(   0, 128, 255      );
+    --linkUnderlineColor:         rgba(   0, 128, 212, .12 );
+    --linkColorVisited:            rgb( 160, 160, 160      );
+    --linkUnderlineColorVisited:  rgba( 160, 160, 160, .12 );
+    --hoverColor:                  rgb( 240,  40,  32);
+    --hoverUnderlineColor:        rgba( 240,  40,  32, .12 );
+    --tagColor:                      var(--foregroundColor);
+    --tagUnderlineColor:             var(--thinRuleColor);
+
+    --markedTextBackground:           #443300;
+    --markedImageBorderColor:         #886600;
+
+    --activeColor:                   var(--headingsColor);
+    --errorColor:                  rgb( 240,  40,  32);
+
+  }
+}
+
 .e2-text .lead,
 .e2-note-favourite .e2-text .lead {
   font-family: var(--mainFontFamily);

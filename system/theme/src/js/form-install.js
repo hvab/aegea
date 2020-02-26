@@ -1,204 +1,274 @@
-import e2SpinningAnimationStartStop from './lib/e2SpinningAnimationStartStop'
+import e2SpinningAnimationStartStop from './e2-modules/e2SpinningAnimationStartStop'
+import e2Ajax from './e2-modules/e2Ajax'
+import e2NiceError from './e2-modules/e2NiceError'
 
-var dbCount = 0
-var bingo = false
-var initialGlassCheck = true
-var xhrCheckDBConfig, xhrListDatabases
+if (typeof $ !== 'undefined') {
+  $(function () {
+    var e2TimeOut = null
+    var dbCount = 0
+    var bingo = false
+    var serverResponse = false
+    var initialCheck = true
+    var xhrCheckDBConfig, xhrListDatabases
 
-function e2UpdateSubmittability () {
-  var shouldBeDisabled = (
-    (!bingo) ||
-    /^ *$/.test($('#password').val())
-  )
+    var $spinner = $('.e2-ajax-loading')
+    var spinnerHiddenModifier = 'e2-ajax-loading_hidden'
 
-  if (shouldBeDisabled) {
-    $('#submit-button').attr('disabled', 'disabled')
-  } else {
-    $('#submit-button').removeAttr('disabled')
-  }
-}
+    var formElementToggledHiddenModifier = 'form-element-toggled_hidden'
 
-function e2AllCompleted () {
-  if (xhrCheckDBConfig) xhrCheckDBConfig.abort()
-  if (xhrListDatabases) xhrListDatabases.abort()
-  if (Boolean(dbCount) === ($('#db-database-list').css('display') === 'none')) {
-    $('#db-database-list').add('#db-database').toggle()
-  }
-  $('.e2-glass').fadeOut(333)
-  initialGlassCheck = false
-}
+    var $formInstall = $('#form-install')
+    var $submitButton = $formInstall.find('#submit-button')
+    var $dbServer = $formInstall.find('#db-server')
+    var $dbUser = $formInstall.find('#db-user')
+    var $dbPassword = $formInstall.find('#db-password')
+    var $dbDatabase = $formInstall.find('#db-database')
+    var $dbDatabaseParent = $dbDatabase.parents('.form-element-toggled')
+    var $dbDatabaseList = $formInstall.find('#db-database-list')
+    var $dbDatabaseListParent = $dbDatabaseList.parents('.form-element-toggled')
+    var $e2Password = $formInstall.find('#password')
 
-function e2CheckDbConfig (me) {
-  dbCount = 0
+    function e2UpdateSubmittability () {
+      $submitButton.prop('disabled',
+        (!bingo) ||
+        /^ *$/.test($e2Password.val())
+      )
+    }
 
-  var completedCheckDBConfig, completedListDatabases
+    function e2AllCompleted () {
+      if (xhrCheckDBConfig) xhrCheckDBConfig.abort()
+      if (xhrListDatabases) xhrListDatabases.abort()
+      if (Boolean(dbCount) === ($dbDatabaseListParent.hasClass(formElementToggledHiddenModifier))) {
+        $dbDatabaseListParent.add($dbDatabaseParent).toggleClass(formElementToggledHiddenModifier)
+      }
+      initialCheck = false
+    }
 
-  if (me) {
-    e2SpinningAnimationStartStop($('.e2-ajax-loading'), 1)
-    $('.e2-ajax-loading').fadeIn(333)
-  }
+    function e2CheckServerResponse () {
+      $('.db-everything-ok').removeClass('e2-verified').addClass('e2-wrong')
 
-  var ajaxData = {
-    'db-server': $('#db-server').val(),
-    'db-user': $('#db-user').val(),
-    'db-password': $('#db-password').val(),
-    'db-database': $('#db-database').val()
-  }
+      if (typeof serverResponse['data'] === 'undefined' || !serverResponse['data']['db-responding']) return false
 
-  $.ajaxSetup({
-    type: 'post',
-    timeout: 10000,
-    data: ajaxData
-  })
+      $('.db-server-ok').removeClass('e2-wrong').addClass('e2-verified')
+      if (initialCheck) $dbUser.focus()
 
-  $('#db-server').get(0).e2OldValue = $('#db-server').val()
-  $('#db-user').get(0).e2OldValue = $('#db-user').val()
-  $('#db-password').get(0).e2OldValue = $('#db-password').val()
-  $('#db-database').get(0).e2OldValue = $('#db-database').val()
+      if (!serverResponse['data']['db-connected']) return
 
-  clearTimeout(document.e2TimeOut)
+      $('.db-user-password-ok, .db-database-ok').removeClass('e2-wrong').addClass('e2-verified')
 
-  document.e2TimeOut = setTimeout(function () {
-    if (xhrCheckDBConfig) xhrCheckDBConfig.abort()
-    if (xhrListDatabases) xhrListDatabases.abort()
+      $('#db-database-message-text').text(serverResponse['data']['message'])
 
-    xhrCheckDBConfig = $.ajax({
-
-      url: $('#e2-check-db-config-action').attr('href'),
-
-      success: function (msg) {
-        $('.db-everything-ok').removeClass('e2-verified').addClass('e2-wrong')
-
-        if (msg === 'no-connect') {
-        } else if (msg === 'server-responding') {
-          if (initialGlassCheck) $('#db-user').focus()
-          $('.db-server-ok').removeClass('e2-wrong').addClass('e2-verified')
-        } else if (msg === 'server-lets-in') {
-          $('.db-user-password-ok').removeClass('e2-wrong').addClass('e2-verified')
-          $('.db-server-ok, db-user-password-ok').removeClass('e2-wrong').addClass('e2-verified')
-        } else if (msg === 'data-incomplete') {
-          $('#db-database-exists').slideUp(333)
-          $('#db-database-incomplete').slideDown(333)
-          $('.db-server-ok, db-user-password-ok').removeClass('e2-wrong').addClass('e2-verified')
-        } else if (msg === 'bingo-data-exists') {
-          $('#db-database-incomplete').slideUp(333)
-          $('#db-database-exists').slideDown(333)
-          $('.db-everything-ok').removeClass('e2-wrong').addClass('e2-verified')
-        } else if (msg === 'bingo') {
-          $('#db-database-incomplete').slideUp(333)
-          $('#db-database-exists').slideUp(333)
-          if (initialGlassCheck) $('#password').focus()
-          $('.db-everything-ok').removeClass('e2-wrong').addClass('e2-verified')
-        }
-
-        // if ((msg !== 'no-connect') && (msg !== 'server-responding')) {
-        if (msg !== 'no-connect') {
-          if (xhrCheckDBConfig) xhrCheckDBConfig.abort()
-          if (xhrListDatabases) xhrListDatabases.abort()
-          xhrListDatabases = $.ajax({
-
-            url: $('#e2-list-databases-action').attr('href'),
-
-            success: function (msg) {
-              if (msg) {
-                var dbs = msg.split('|')
-                var valBefore = $('#db-database').val()
-                if ($('#db-database').val() === '') {
-                  $('#db-database').val(dbs[0])
-                } else {
-                  for (var i in dbs) {
-                    if (dbs[i].match(RegExp('^' + $('#db-database').val() + ''))) {
-                      $('#db-database').val(dbs[i])
-                      break
-                    }
-                  }
-                }
-                $('#db-database-list').empty()
-                for (var k in dbs) {
-                  ++dbCount
-                  $('#db-database-list')
-                    .append(
-                      '<option id="db-database-option-' + dbs[k] + '">' +
-                      dbs[k] +
-                      '<' + '/option>'
-                    )
-                }
-
-                $('#db-database-list #db-database-option-' + $('#db-database').val())
-                  .attr('selected', 'selected')
-
-                $('#db-database').val($('#db-database-list option:selected').val())
-                $('#db-database-list').addClass('e2-verified')
-                if (valBefore !== $('#db-database').val()) {
-                  e2CheckDbConfig()
-                }
-              }
-            },
-
-            error: function () {
-              if (initialGlassCheck) $('#db-database').focus()
-            },
-
-            complete: function (xhr) {
-              completedListDatabases = true
-              if (completedCheckDBConfig && completedListDatabases) e2AllCompleted()
-            }
-
-          })
-        } else {
-          completedListDatabases = true
-        }
-
-        bingo = ((msg === 'bingo-data-exists') || (msg === 'bingo'))
-        e2UpdateSubmittability()
-      },
-
-      error: function (msg) {
-        if (initialGlassCheck) {
-          $('.input-editable').removeAttr('disabled')
-          $('#db-server').add('#db-user').add('#db-password').add('#db-database').val('')
-          $('#db-server').focus()
-          setTimeout(function () { $('.e2-glass').fadeOut(333) }, 333)
-          initialGlassCheck = false
-        }
-      },
-
-      complete: function (xhr) {
-        $('.input-editable').removeAttr('disabled')
-        completedCheckDBConfig = true
-        if (completedCheckDBConfig && completedListDatabases) e2AllCompleted()
-        $('#e2-console').html(xhr.responseText)
-        // if (me) $ ('#' + (me.id) + '-checking').fadeOut (333)
-        e2SpinningAnimationStartStop($('.e2-ajax-loading'), 0)
-        $('.e2-ajax-loading').fadeOut(333)
+      if (serverResponse['data']['message']) {
+        $('#db-database-message').slideDown(333)
+      } else {
+        $('#db-database-message').slideUp(333)
       }
 
-    })
-  }, 333)
+      if (!serverResponse['data']['db-compatible']) return
+      if (!serverResponse['data']['db-good']) return
+
+      $('.db-everything-ok').removeClass('e2-wrong').addClass('e2-verified')
+
+      if (initialCheck) $e2Password.focus()
+
+      // if (serverResponse['data']['db-occupied']) {
+      //   if (serverResponse['data']['db-migrateable']) {
+      //     $('#db-database-exists').slideDown(333)
+      //     $('#db-database-incomplete').slideUp(333)
+      //     if (initialCheck) $e2Password.focus()
+      //     $('.db-everything-ok').removeClass('e2-wrong').addClass('e2-verified')
+      //   } else {
+      //     $('#db-database-incomplete').slideDown(333)
+      //     $('#db-database-exists').slideUp(333)
+      //     $('.db-server-ok, .db-user-password-ok').removeClass('e2-wrong').addClass('e2-verified')
+      //   }
+      // } else {
+      //   $('#db-database-incomplete').slideUp(333)
+      //   $('#db-database-exists').slideUp(333)
+      //   if (initialCheck) $e2Password.focus()
+      //   $('.db-everything-ok').removeClass('e2-wrong').addClass('e2-verified')
+      // }
+    }
+
+    function e2CheckDbConfig () {
+      dbCount = 0
+
+      var completedCheckDBConfig, completedListDatabases
+
+      e2SpinningAnimationStartStop($spinner, 1)
+      $spinner.removeClass(spinnerHiddenModifier)
+
+      var ajaxData = {
+        'db-server': $dbServer.val(),
+        'db-user': $dbUser.val(),
+        'db-password': $dbPassword.val(),
+        'db-database': $dbDatabase.val()
+      }
+
+      $dbServer.data('e2OldValue', ajaxData['db-server'])
+      $dbUser.data('e2OldValue', ajaxData['db-user'])
+      $dbPassword.data('e2OldValue', ajaxData['db-password'])
+      $dbDatabase.data('e2OldValue', ajaxData['db-database'])
+      $dbDatabaseList.data('e2OldValue', ajaxData['db-database'])
+
+      if (e2TimeOut) clearTimeout(e2TimeOut)
+
+      e2TimeOut = setTimeout(function () {
+        if (xhrCheckDBConfig) xhrCheckDBConfig.abort()
+        if (xhrListDatabases) xhrListDatabases.abort()
+
+        xhrCheckDBConfig = e2Ajax({
+          url: $formInstall.attr('data-action-database-config'),
+          data: ajaxData,
+          success: function (response) {
+            if (typeof response['data'] === 'undefined') {
+              e2NiceError({
+                message: 'er--js-server-error',
+                debug: {
+                  message: 'Server response malformed',
+                  data: {
+                    response: response
+                  }
+                }
+              })
+              return false
+            }
+
+            serverResponse = response
+
+            e2CheckServerResponse()
+
+            if (serverResponse['data']['db-connected']) {
+              if (xhrCheckDBConfig) xhrCheckDBConfig.abort()
+              if (xhrListDatabases) xhrListDatabases.abort()
+
+              xhrListDatabases = e2Ajax({
+                url: $formInstall.attr('data-action-databases-list'),
+                data: ajaxData,
+                success: function (response) {
+                  if (typeof response['data'] === 'undefined' || typeof response['data']['databases-list'] === 'undefined') {
+                    e2NiceError({
+                      message: 'er--js-server-error',
+                      debug: {
+                        message: 'Server response malformed',
+                        data: {
+                          response: response
+                        }
+                      }
+                    })
+                    return false
+                  }
+
+                  var dbs = response['data']['databases-list']
+                  var valBefore = $dbDatabase.val()
+
+                  if ($dbDatabase.val() === '') {
+                    $dbDatabase.val(dbs[0])
+                  } else {
+                    for (var i in dbs) {
+                      if (dbs[i].match(RegExp('^' + $dbDatabase.val() + ''))) {
+                        $dbDatabase.val(dbs[i])
+                        break
+                      }
+                    }
+                  }
+
+                  $dbDatabaseList.empty()
+
+                  for (var k in dbs) {
+                    ++dbCount
+                    $dbDatabaseList
+                      .append(
+                        '<option id="db-database-option-' + dbs[k] + '">' +
+                        dbs[k] +
+                        '<' + '/option>'
+                      )
+                  }
+
+                  $dbDatabaseList.find('#db-database-option-' + $dbDatabase.val()).prop('selected', true)
+
+                  $dbDatabase.val($dbDatabaseList.find('option:selected').val())
+                  $dbDatabaseList.addClass('e2-verified')
+
+                  if (valBefore !== $dbDatabase.val()) {
+                    e2CheckDbConfig()
+                  }
+                },
+                error: function () {
+                  if (initialCheck) $dbDatabase.focus()
+                },
+                complete: function () {
+                  completedListDatabases = true
+                  if (completedCheckDBConfig && completedListDatabases) e2AllCompleted()
+                }
+              })
+            } else {
+              completedListDatabases = true
+            }
+
+            bingo = serverResponse['data']['db-good']
+
+            e2UpdateSubmittability()
+          },
+          error: function () {
+            if (initialCheck) {
+              $('.input-editable').prop('disabled', false)
+              $dbServer.add($dbUser).add($dbPassword).add($dbDatabase).val('')
+              $dbServer.focus()
+              initialCheck = false
+            }
+          },
+          complete: function () {
+            $('.input-editable').prop('disabled', false)
+            completedCheckDBConfig = true
+            if (completedCheckDBConfig && completedListDatabases) e2AllCompleted()
+            e2SpinningAnimationStartStop($spinner, 0)
+            $spinner.addClass(spinnerHiddenModifier)
+          }
+        })
+      }, 333)
+    }
+
+    function e2InitDatabaseListChange () {
+      $dbDatabaseList.on('change', function () {
+        $dbDatabase.val($dbDatabaseList.val())
+        e2CheckDbConfig()
+      })
+    }
+
+    function e2InitLivecheckableInputs () {
+      $('.e2-livecheckable')
+        .on('input', function () {
+          bingo = false
+          $('.db-everything-ok').removeClass('e2-verified').removeClass('e2-wrong')
+          e2UpdateSubmittability()
+        })
+        .on('blur', function () {
+          var $this = $(this)
+          var thisValue = $(this).val()
+
+          if (typeof $this.data('e2OldValue') !== 'undefined') {
+            if (thisValue === $this.data('e2OldValue')) {
+              e2CheckServerResponse()
+            } else {
+              $this.removeClass('e2-verified').removeClass('e2-wrong')
+              e2CheckDbConfig()
+            }
+          } else {
+            $this.removeClass('e2-verified').removeClass('e2-wrong')
+            e2CheckDbConfig()
+          }
+        })
+    }
+
+    function e2InitPasswordInputChange () {
+      $e2Password.on('input', e2UpdateSubmittability)
+    }
+
+    e2InitDatabaseListChange()
+    e2InitLivecheckableInputs()
+    e2InitPasswordInputChange()
+
+    $('.input-editable').prop('disabled', true)
+    e2CheckDbConfig()
+  })
 }
-
-$('.input-editable').attr('disabled', 'disabled')
-
-e2CheckDbConfig()
-
-$('.input-editable').bind('input', function () {})
-
-$('.e2-livecheckable').bind('input', function () {
-  bingo = false
-  $('.db-everything-ok').removeClass('e2-verified').removeClass('e2-wrong')
-  e2UpdateSubmittability()
-})
-
-$('.e2-livecheckable').bind('blur', function () {
-  if ((typeof this.e2OldValue === 'undefined') || ($(this).val() !== this.e2OldValue)) {
-    $(this).removeClass('e2-verified').removeClass('e2-wrong')
-    e2CheckDbConfig(this)
-  }
-})
-
-$('#db-database-list').bind('change', function () {
-  $('#db-database').val($('#db-database-list').val())
-  e2CheckDbConfig(this)
-})
-
-$('#password').bind('input', e2UpdateSubmittability)

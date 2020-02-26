@@ -20,7 +20,7 @@
 <p><?= $content['blog']['description'] ?></p>
 <?php } ?>
 
-<?php _T_FOR ('search') ?>
+<?php _T_FOR ('form-search') ?>
 <a class="e2-rss-button" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
 
 <?php _X ('header-post') ?>
@@ -69,11 +69,8 @@
 
 <?php _X ('footer-pre') ?>
 © <span id="e2-blog-author"><?= @$content['blog']['author'] ?></span>, <?=$content['blog']['years-range']?>
-<?=$content['engine']['about']?>
-<?php if ($content['sign-in']['done?']) { ?>
-&nbsp;&nbsp;&nbsp;
-<span title="<?= _S ('gs--pgt') ?>"><?=$content['engine']['pgt']?> <?= _S ('gs--seconds-contraction') ?></span>
-<?php } ?>
+<?= $content['engine']['about'] # please do not remove ?>
+<?php _T_DEFER ('stat') ?>
 
 <?php _X ('footer-post') ?>
 
@@ -81,3 +78,6 @@
 
 
 </div>
+
+<?php _T ('niceerror'); ?>
+

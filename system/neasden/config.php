@@ -61,7 +61,7 @@ return array (
   'html.basic' => false,
 
   'html.code.on' => true,
-  'html.code.wrap' => array ('<pre class="e2-text-code"><code>', '</code></pre>'),  
+  'html.code.wrap' => array ('<pre class="e2-text-code"><code class="%s">', '</code></pre>'),  
   'html.code.highlightjs' => true,
 
   'html.img.prefix' => $full_blog_url .'/'. PICTURES_FOLDER,

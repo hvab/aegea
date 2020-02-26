@@ -8,8 +8,8 @@
 
 // UI
 
-// years range separator for the copyright line
-$_config['years_range_separator'] = '&mdash;'; /* html */
+// years range separator for the copyright line, if different from default
+$_config['years_range_separator'] = ''; /* html */
 
 // period for the most commented (hot) posts
 $_config['hot_period'] = 'month'; /* 'day', 'week', 'month', 'year', 'ever' */
@@ -29,9 +29,6 @@ $_config['raw_template_data'] = false;
   
 // show raw template date with ?raw parameter
 $_config['raw_template_data_with_param'] = false;
-
-// when a template file is missing, treat it as if it were empty
-$_config['ignore_missing_template_files'] = true; /* bool */
 
 // default maximum image width
 $_config['max_image_width'] = 2560; /* pixels */
@@ -74,11 +71,11 @@ $_config['files_total_size_limit'] = 0;
 // scale images bigger than this; 0 to disable
 $_config['fit_uploaded_images'] = 2560; /* pixels */
 
-// whois service (URL to append IP address to)
-$_config['whois_service'] = 'https://www.nic.ru/whois/?ip=';
-
 // database table prefix for storing multiple blogs in one database
 $_config['db_table_prefix'] = 'e2Blog';
+
+// database table subset for storing multiple blogs in one table set
+$_config['db_table_subset'] = 0;
 
 // by default, Aegea reindexes databases for search on switch
 $_config['retain_search_indexes_on_db_switch'] = false;
@@ -88,6 +85,22 @@ $_config['broadcast_url'] = 'http://blogengine.ru/blogs/@notify';
 
 // broadcast all blog notes during indexing
 $_config['broadcast_on_indexing'] = true;
+
+// display as many as this number of drafts
+$_config['limit_drafts'] = 0; /* 0 for no limit */
+
+// automatically generate aliases for posts 
+$_config['autoreplace_for_aliases'] = [];
+
+
+// PODCASTING
+
+// xml to insert into RSS for itunes categories
+$_config['rss_itunes_categories_xml'] = '';
+
+// does podcast contain explicity content
+$_config['rss_itunes_explicit'] = 'no'; /* 'yes' or 'no' */
+
 
 
 
@@ -110,16 +123,16 @@ $_config['max_comment_length'] = 4096;
 $_config['comment_freshness_days'] = 14;
 
 // number of items in RSS feeds
-$_config['rss_items'] = 10;
+$_config['rss_items'] = 20;
 
 // Rose
 $_config['search_favourites_boost'] = 2;
 
 
 
-// DEBUG
+// DEBUG AND DEVELOPMENT
 
-// write a log to user/log.txt? (it may get very large soon)
+// write a log to user/logs/main.log? (it may get very large soon)
 $_config['write_log'] = true;
 
 // if user/log.txt is not there, create it?
@@ -131,20 +144,50 @@ $_config['write_log_reset'] = false;
 // keep log under this limit
 $_config['write_log_limit'] = 0; /* bytes */
 
+// create separate background search indexer log
+$_config['log_bsi'] = false;
+
+// create separate installer logs
+$_config['log_installs'] = true;
+
+// create separate update logs
+$_config['log_updates'] = true;
+
+// create separate update logs
+$_config['log_broadcast'] = false;
+
+// create separate errors logs
+$_config['log_errors'] = true;
+
+// display stats in pages footers?
+$_config['display_stat'] = 0; /* 0 - no; 1 - when logged in; 2 - always */
+
 // show call stack when displaying error?
 $_config['show_call_stack'] = 0; /* 0 - no; 1 - when logged in; 2 - always */
 
 // store backtrace in backtrace.psa?
-$_config['store_backtrace'] = false;
+$_config['store_backtrace'] = 0;
   
 // make ajax slower?
-$_config['debug_slow_ajax'] = false;
+$_config['dev_verbose'] = 0; /* 0 - no; 1 - when logged in; 2 - always */
   
-// write HTTP request log?
-$_config['request_logging'] = false;
-
+// serve all XML content as plain text
+$_config['dev_xml_as_text'] = 0;
+  
+// dump the CTree to a php file
+$_config['dev_dump_ctree'] = 0;
+  
+// make ajax slower?
+$_config['dev_slow_ajax'] = 0;
+  
+// break thing randomly?
+$_config['dev_chaos'] = 0;
+  
+// make ajax slower?
+$_config['dev_ignore_version_mismatch'] = 0;
+  
 // output rose debug info
-$_config['rose_debug_info'] = false;
+$_config['dev_rose_info'] = 0;
 
  
 

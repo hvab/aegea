@@ -1,89 +1,105 @@
-.e2-toggle-state-on,
-.e2-toggle-state-off,
-.e2-toggle-state-thinking {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  transform: scale(0.001) rotate(90deg);
-  transition: opacity var(--time) ease-out, transform var(--time) ease-out;
-}
-
-.e2-toggle-state-on,
-.e2-toggle-state-thinking,
-.e2-toggle-on .e2-toggle-state-off,
-.e2-toggle-thinking .e2-toggle-state-off {
-  opacity: 0;
-  transform: scale(0.001);
-}
-
-.e2-toggle-state-off,
-.e2-toggle-on .e2-toggle-state-on,
-.e2-toggle-thinking .e2-toggle-state-thinking {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.e2-toggle-state-thinking {
-  color: var(--foregroundColor);
-  cursor: default;
-}
-
-
-
-.e2-keywords-input-dropdown {
-  font-size: 11px;
-  top: 0;
-  position: relative;
-  top: -.33em;
-  padding: .2em .33em;
-  background: #fff;
-  border: 1px #ccc solid;
-}
-
-.e2-keywords-input-dropdown a {
-  white-space: nowrap;
+.e2-uploaded-images {
+  margin: 0 0 -1em;
+  line-height: 0;
 }
 .e2-uploaded-image {
-  margin-right: 1em;
-  margin-bottom: 1em;
-  outline: 1px #f0f0f0 solid;
-  transition-property: (outline-color);
-  transition-duration: var(--time);
-  transition-timing-function: ease-out;
-  /* */
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
   display: inline-block;
-  *display: inline;
-  *zoom: 1;
-  vertical-align: bottom;
-  /* */
+  vertical-align: top;
+  position: relative;
+  margin: 0 1em 1em 0;
+  opacity: 1;
+  outline: 1px var(--imageBorderColor) solid;
+  transition: outline-color var(--timeLong) ease-out, opacity var(--timeLong) ease-out;
+
+  &:hover,
+  &.hover {
+    outline-color: var(--hoverColor);
+    transition: none;
+  }
+
+  &_deleting,
+  &_deleting:hover,
+  &_deleting.hover {
+    outline: 1px transparent solid;
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+    transition-duration: var(--timeLong);
+    transition-timing-function: ease-out;
+    transition-property: outline-color, opacity, margin;
+  }
+
+  &_deleted {
+    opacity: 0;
+    margin: 0;
+  }
+
+  &-inner {
+    position: relative;
+
+    img {
+      display: block;
+    }
+  }
+
+  &-noimage {
+    display: inline-block;
+    vertical-align: top;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    overflow: hidden;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 142%;
+      border-top: 1px solid var(--imageBorderColor);
+    }
+    &:before {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: top left;
+    }
+    &:after {
+      right: 0;
+      transform: rotate(-45deg);
+      transform-origin: top right;
+    }
+  }
 }
-.e2-uploaded-image:hover,
-.e2-uploaded-image.hover {
-  outline-color: var(--hoverColor);
-  transition: none;
+.e2-uploaded-image_broken.e2-uploaded-image_deleting,
+.e2-uploaded-image_broken.e2-uploaded-image_deleting:hover,
+.e2-uploaded-image_broken.e2-uploaded-image_deleting.hover {
+  outline: 1px var(--imageBorderColor) solid;
 }
-.e2-uploaded-image-preview img {
-  display: block;
+.e2-uploaded-image_deleting .e2-uploaded-image-inner img,
+.e2-uploaded-image_deleting .e2-uploaded-image-noimage {
+  transition-duration: var(--timeLong);
+  transition-timing-function: ease-out;
+  transition-property: width, height;
 }
-.e2-uploaded-image-remover {
+.e2-uploaded-image_deleted .e2-uploaded-image-inner img,
+.e2-uploaded-image_deleted .e2-uploaded-image-noimage {
+  width: 0;
+  height: 0;
+}
+.e2-uploaded-image-popup-menu {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  margin: -8px;
-  right: 2px;
-  top: 2px;
-  line-height: 0;
-  z-index: 1004;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 
-
-
+.e2-template-selector {
+  &_hidden {
+    display: block;
+  }
+}
 
 .e2-template-preview,
 .e2-draft-preview {
@@ -96,64 +112,91 @@
 
 
 .e2-template-preview {
-  min-height: 120px;
+  padding: 120px 0 0;
   text-align: left;
   margin-bottom: 12px;
+  position: relative;
 }
 
-.e2-template-preview .e2-template-preview-image {
+.e2-template-preview-link {
+  visibility: hidden;
+}
+.e2-template-preview-link_visible {
+  visibility: visible;
+}
+
+.e2-template-preview__input {
+  vertical-align: baseline;
+}
+.e2-template-selector_interactive .e2-template-preview__input {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.e2-template-preview-image {
   transition-property: (outline-color);
   transition-duration: var(--time);
   transition-timing-function: ease-out;
   outline: 1px var(--thinRuleColor) solid;
 }
 
-.e2-template-preview:hover,
-.e2-template-preview.hover {
+.e2-template-selector_interactive .e2-template-preview:hover,
+.e2-template-selector_interactive .e2-template-preview.hover {
   cursor: pointer;
-  cursor: hand;
-}
-
-.e2-template-preview:hover a,
-.e2-template-preview.hover a {
-  color: var(--hoverColor);
-  transition: none;
 }
 
 .e2-template-preview:hover .e2-template-preview-image,
 .e2-template-preview.hover .e2-template-preview-image {
   outline-color: var(--hoverColor);
+  transition: none;
 }
 
-.e2-current-template-preview:hover,
-.e2-current-template-preview.hover {
+.e2-template-preview:hover .e2-admin-link,
+.e2-template-preview.hover .e2-admin-link {
+  color: var(--hoverColor);
+  border-color: var(--hoverUnderlineColor);
+  transition: none;
+}
+
+.e2-template-selector_interactive .e2-template-preview_current:hover,
+.e2-template-selector_interactive .e2-template-preview_current.hover {
   cursor: default;
 }
 
-.e2-current-template-preview .e2-template-preview-image,
-.e2-current-template-preview .e2-template-preview-image,
-.e2-current-template-preview:hover .e2-template-preview-image,
-.e2-current-template-preview.hover .e2-template-preview-image {
+.e2-template-selector_interactive .e2-template-preview_current .e2-template-preview-image,
+.e2-template-selector_interactive .e2-template-preview_current .e2-template-preview-image,
+.e2-template-selector_interactive .e2-template-preview_current:hover .e2-template-preview-image,
+.e2-template-selector_interactive .e2-template-preview_current.hover .e2-template-preview-image,
+.e2-template-preview__input:checked + .e2-template-name + .e2-template-preview-image {
   outline-color: var(--foregroundColor);
 }
 
-.e2-current-template-preview .e2-template-name {
+.e2-template-selector_interactive .e2-template-preview_current .e2-template-name,
+.e2-template-preview__input:checked + .e2-template-name {
   color: var(--boldColor);
   font-weight: bold;
 }
 
-.e2-current-template-preview a,
-.e2-current-template-preview a.e2-pseudolink,
-.e2-current-template-preview:hover a,
-.e2-current-template-preview a:hover,
-.e2-current-template-preview.hover a,
-.e2-current-template-preview a.hover {
+.e2-template-selector_interactive .e2-template-preview_current .e2-pseudolink,
+.e2-template-selector_interactive .e2-template-preview_current:hover .e2-pseudolink,
+.e2-template-selector_interactive .e2-template-preview_current .e2-pseudolink:hover,
+.e2-template-selector_interactive .e2-template-preview_current.hover .e2-pseudolink,
+.e2-template-selector_interactive .e2-template-preview_current .e2-pseudolink.hover,
+.e2-template-preview__input:checked + .e2-template-name .e2-pseudolink,
+.e2-template-preview__input:checked + .e2-template-name .e2-pseudolink:hover {
   color: var(--boldColor);
   font-weight: bold;
   border-color: transparent;
   cursor: default;
   transition: none;
 }
+
+/*
+color: var(--hoverColor);
+border-color: var(--hoverUnderlineColor);
+ */
 
 
 
@@ -231,20 +274,61 @@
   margin-bottom: 35px;
 }
 
-.e2-save-error {
-  padding: 0 .33em;
-  color: var(--errorColor);
-  font-weight: bold;
-}
+.e2-upload-controls {
+  margin: 12px 0 0;
+  position: relative;
 
-.e2-uploading {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-}
+  &_hidden {
+    display: none;
+  }
 
-.e2-upload-error {
-  color: var(--errorColor);
+  &-attach {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: -12px 0 0 -12px;
+    position: relative;
+    cursor: pointer;
+
+    &_hidden {
+      display: none;
+    }
+
+    &-icon {
+      display: block;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+
+    &-label {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    &-input {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+}
+.e2-upload-controls-uploading {
+  width: 40px;
+  height: 40px;
+  margin: -12px 0 0 -12px;
+  position: relative;
+
+  &_hidden {
+    display: none;
+  }
 }
 
 

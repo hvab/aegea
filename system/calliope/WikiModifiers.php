@@ -90,7 +90,7 @@
           $img = $this->settings['localImgDir'].$found[2].$this->settings['localImgPostfix'];
         } else {
           #ILYABIRMAN:
-          if (@$found[2]{0} == '/') $found[2] = 'http://'.$_SERVER['HTTP_HOST'].$found[2];
+          if (@$found[2][0] == '/') $found[2] = 'http://'.$_SERVER['HTTP_HOST'].$found[2];
           #/ILYABIRMAN:
           $img = $found[2]; 
         }
@@ -150,7 +150,7 @@
 
         if ($this->isOuterURL($found[2]))  {
           #ILYABIRMAN:
-          if (@$found[2]{0} == '/') $found[2] = 'http://'.$_SERVER['HTTP_HOST'].$found[2];
+          if (@$found[2][0] == '/') $found[2] = 'http://'.$_SERVER['HTTP_HOST'].$found[2];
           #/ILYABIRMAN:
 
           #ILYABIRMAN:

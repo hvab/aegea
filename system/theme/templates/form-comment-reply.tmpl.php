@@ -41,8 +41,16 @@
 <div class="form-control e2-comment-form-meta-area">
   <span class="e2-comment-piece-markable <?php if (@$comment['reply-important?']) echo 'e2-comment-piece-marked' ?>"><?= $content['blog']['author'] ?> •</span>
 
-  <span class="e2-comment-actions admin-links">
-    <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?><a href="<?= $comment['reply-important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['reply-important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a><?php endif ?>
+  <span class="admin-links">
+    <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?>
+      <a href="<?= $comment['reply-important-toggle-href'] ?>" class="nu e2-admin-item <?= ($comment['reply-important?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-important">
+        <span class="e2-svgi">
+          <span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span>
+          <span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span>
+          <span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span>
+        </span>
+      </a>
+    <?php endif ?>
   </span>
 </div>
 
@@ -60,7 +68,7 @@
 
 
 <div class="form-control">
-  <button type="submit" id="submit-button" class="e2-submit-button">
+  <button type="submit" id="submit-button" class="e2-button e2-submit-button">
     <?= @$content['form-comment-reply']['submit-text'] ?>
   </button>
   <span class="e2-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>

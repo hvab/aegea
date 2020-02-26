@@ -1,7 +1,7 @@
 .e2-message {
   font-size: var(--noteTextFontSize);
   line-height: var(--noteTextLineHeight);
-  border-radius: 4px;
+  border-radius: var(--borderRadius);
   padding: 12px;
   margin-bottom: 24px;
   background: #f0d040;
@@ -22,4 +22,9 @@
   background: #e05030;
   color: #fff;
   h2, p { color: #fff }
+}
+
+.e2-message pre {
+  font-size: 16px;
+  line-height: 16px;
 }

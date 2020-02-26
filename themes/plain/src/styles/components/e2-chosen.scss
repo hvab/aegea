@@ -1,7 +1,7 @@
 .chzn-container {
   background: var(--inputBackgroundColor);
   color: var(--inputTextColor);
-  border-radius: 4px;
+  border-radius: var(--borderRadius);
 }
 
 .chzn-container * {
@@ -69,7 +69,7 @@
 }
 
 .chzn-container-multi .chzn-choices {
-  border-radius: 4px;
+  border-radius: var(--borderRadius);
   border: none;
   // border: 1px var(--c_border solid;
   background: transparent;

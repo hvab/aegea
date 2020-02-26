@@ -25,7 +25,7 @@
     <p><?= @$content['form-note-delete']['caution-text'] ?></p>
   </div>
   <div class="form-element">
-    <button type="submit" id="submit-button" class="e2-delete-button">
+    <button type="submit" id="submit-button" class="e2-button e2-delete-button">
       <?= @$content['form-note-delete']['submit-text'] ?>
     </button>
   </div>
@@ -37,6 +37,13 @@
 
 <br />
 
+<form
+  action="<?= $content['form-note-delete']['withdraw-href'] ?>"
+  method="post"
+>
+
 <?php if (array_key_exists ('withdraw-href', $content['form-note-delete'])): ?>
-  <a href="<?= $content['form-note-delete']['withdraw-href'] ?>" class="e2-button"><?= _S ('fb--withdraw') ?></a>
+  <button type="submit" class="e2-button"><?= _S ('fb--withdraw') ?></button>
 <?php endif ?>
+
+</form>

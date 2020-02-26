@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="<?= $content['language'] ?>">
 
 <head>
 
 <?php _LIB ('jquery') ?>
-<?php _LIB ('pseudohover') ?>
-<?php _LIB ('smart-title') ?>
 
-
-<e2:head-data />
-
+<?php _T_DEFER ('head') ?>
 <?php _T ('init-script') ?>
-
-<e2:scripts-data />
+<?php _T_DEFER ('scripts') ?>
 
 <?= @$content['embed']['pre-head-end'] ?>
 
 </head>
 
-<body <?php if (@$content['body-uploads-enabled?']) { ?>class="e2-external-drop-target e2-external-drop-target-body e2-external-drop-target-altable"<?php } ?>>
+<body
+  <?php if (@$content['template']['respond-to-dark-mode?']) { ?>
+    class="e2-responds-to-dark-mode"
+  <?php } ?>
+>
 
 <?php _T_FOR ('form-install') ?>
 <?php _T_FOR ('form-login') ?>

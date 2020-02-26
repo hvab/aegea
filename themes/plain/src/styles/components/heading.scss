@@ -1,17 +1,21 @@
 .e2-heading {
   margin-bottom: 40px;
-}
 
-.e2-heading h2 {
-  margin: 0;
-  font-weight: bold;
-  font-size: 36px;
-  line-height: 42px;
-  color: var(--headingsColor);
-}
+  h2 {
+    margin: 0;
+    font-weight: bold;
+    font-size: var(--pageHeadingFontSize);
+    line-height: var(--pageHeadingLineHeight);
+    color: var(--headingsColor);
+  }
 
-.e2-heading input {
-  font-size: 15px;
+  input {
+    font-size: 15px;
+  }
+
+  .admin-links-floating {
+    margin-top: calc((var(--pageHeadingLineHeight) - 24) / 2);
+  }
 }
 
 .e2-heading-super {

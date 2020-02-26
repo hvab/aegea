@@ -171,7 +171,7 @@
 
          } else {
            #ILYABIRMAN:
-           if (@$found[1]{0} == '/') $found[1] = 'http://'.$_SERVER['HTTP_HOST'].$found[1];
+           if (@$found[1][0] == '/') $found[1] = 'http://'.$_SERVER['HTTP_HOST'].$found[1];
            #/ILYABIRMAN:
            $img = $found[1];
          }
@@ -210,7 +210,7 @@
              $img = $this->settings['localImgDir'].$found[2].$this->settings['localImgPostfix'];
            else {
              #ILYABIRMAN:
-             if (@$found[2]{0} == '/') $found[2] = 'http://'.$_SERVER['HTTP_HOST'].$found[2];
+             if (@$found[2][0] == '/') $found[2] = 'http://'.$_SERVER['HTTP_HOST'].$found[2];
              #/ILYABIRMAN:
              $img = $found[2];
            }
@@ -338,7 +338,7 @@
 #                 print_r ($found);  #         die;  
       if ($this->settings['mode'] != WF_SIMPLE_MODE)
       {
-        if ( in_array($found[3]{0}, array('<','&')) ) 
+        if ( in_array($found[3][0], array('<','&')) ) 
           $tag = $this->implodeArray(array_splice($found, 3));
         else
           $tag = '<'.$found[3].'>'.$found[4].'</'.$found[3].'>';

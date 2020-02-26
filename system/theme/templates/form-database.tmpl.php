@@ -62,7 +62,7 @@
 
 <div class="form-control">
   <div class="form-element">
-    <button type="submit" id="submit-button" class="e2-submit-button">
+    <button type="submit" id="submit-button" class="e2-button e2-submit-button">
       <?= @$content['form-database']['submit-text'] ?>
     </button>
   </div>

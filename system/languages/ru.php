@@ -25,11 +25,11 @@ function e2l_load_strings () {
   'gs--ask-hoster-how-to-create-db' => 'Уточните у хостера, как создать базу, если её нет',
   'er--double-check-db-params' => 'Перепроверьте реквизиты базы',
   'gs--instantiated-version' => 'Инстанциирована версия',
-  'pt--installer-loading' => 'Загрузка...',
   'gs--database' => 'База данных',
   'gs--password-for-blog' => 'Пароль, который хотите использовать для доступа к блогу',
   'gs--data-exists' => 'В этой базе уже есть блог. Установщик просто подключится к ней.',
-  'er--db-data-incomplete' => 'В этой базе уже есть часть данных блога, но они неполные. Возможно, с ней использовалась другая версия Эгеи. Установите Эгею той версии, от которой данные в базе, а потом обновите, если нужно. Для чистой установки предоставьте чистую базу.',
+  'er--db-data-incomplete' => 'Данные в этой базе — неполные.',
+  'er--db-data-incomplete-install' => 'Данные в этой базе — неполные. Возможно, с ней использовалась другая версия Эгеи. Установите Эгею той версии, от которой данные в базе, а потом обновите, если нужно. Для чистой установки предоставьте чистую базу.',
 
   // diags
   'et--fix-permissions-on-server' => 'Настройте права на сервере',
@@ -58,8 +58,8 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Ошибка при изменении заметки',
   'er--error-deleting-post-tag-info' => 'Ошибка при удалении данных о тегах заметки',
   'er--wrong-datetime-format' => 'Неправильный формат даты-времени. Должен быть: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',
-  'er--cannot-get-post-from-db' => 'Не удалось извлечь заметку из базы',
   'er--unsupported-file' => 'Поддерживаются только изображения PNG, JPG, GIF, SVG и аудиофайлы MP3',
+  'er--unsupported-file-image' => 'Поддерживаются только изображения PNG, JPG и GIF',
   'er--cannot-create-thumbnail' => 'Не удалось создать уменьшенное изображение',
   'er--cannot-upload' => 'Не удалось загрузить файл',
   'ff--title' => 'Название',
@@ -70,6 +70,7 @@ function e2l_load_strings () {
   'ff--alias' => 'Ссылка',
   'ff--change-time' => 'Изменить время',
   'ff--delete' => 'Удалить',
+  'ff--edit' => 'Редактировать',
   'fb--withdraw' => 'Вернуть в черновики',
   'ff--will-be-published' => 'Опубликуется',
   'ff--is-published' => 'Опубликована',
@@ -84,8 +85,13 @@ function e2l_load_strings () {
   'pt--post-deletion' => 'Удаление заметки',
   'gs--post-will-be-deleted' => 'Заметка «$[post]» будет удалена вместе со всеми комментариями.',
 
+  // uploads
+  'gs--kb' => 'КБ',
+  'mi--upload-file' => 'Загрузить файл',
+  'mi--delete' => 'Удалить',
+  'mi--insert' => 'Вставить',
+
   // frontpage 
-  'er--cannot-show-latest-notes' => 'Невозможно отобразить последние заметки',
   'nm--posts' => 'Заметки',
   'gs--next-posts' => 'следующие',
   'gs--prev-posts' => 'предыдущие',
@@ -112,7 +118,6 @@ function e2l_load_strings () {
   'gs--you-are-not-subscribed' => 'Кажется, вы и так не подписаны на комментарии к этой заметке',
   'gs--you-are-no-longer-subscribed' => 'Вы больше не подписаны на комментарии к заметке',
   'gs--unsubscription-didnt-work' => 'Почему-то отписка не сработала',          
-  'gs--comment-not-found' => 'Комментарий не найден',
   'gs--post-not-found' => 'Заметка не найдена',
   'gs--comment-too-long' => 'Слишком длинный комментарий',
   'gs--comment-too-long-description' => 'Вы отправили слишком длинный комментарий, поэтому он не был сохранён.',
@@ -135,6 +140,10 @@ function e2l_load_strings () {
   'gs--comments-all-one-new' => 'новый',
   'gs--comments-all-new' => 'новые',
   'gs--comments-n-new' => '$[number.cardinal]',
+  'mi--reply' => 'Ответить',
+  'mi--edit' => 'Редактировать',
+  'mi--highlight' => 'Выделить',
+  'mi--remove' => 'Убрать',
   
   // tags
   'pt--tags' => 'Теги',
@@ -147,8 +156,9 @@ function e2l_load_strings () {
   'gs--no-tags' => 'Тегов нет.',
   'gs--no-posts-without-tags' => 'Заметок без тегов нет.',
   'er--cannot-rename-tag' => 'Такое имя или вид в адресной строке уже используются другим тегом',
-  'ff--tag-name' => 'Название',
+  'ff--tag-name' => 'Тег',
   'ff--tag-urlname' => 'В адресной строке',
+  'ff--tag-page-title' => 'Заголовок страницы',
   'ff--tag-description' => 'Описание',
   'gs--tag-will-be-deleted-notes-remain' => 'Тег «$[tag]» будет удалён из заметок, но сами заметки останутся.',
   'gs--see-also-tag' => 'См. также тег',
@@ -208,6 +218,7 @@ function e2l_load_strings () {
   'em--follow-this-link' => 'Перейдите по этой ссылке, чтобы сбросить пароль:',
 
   'pt--sessions' => 'Открытые сессии',
+  'gs--sessions' => 'открытые сессии',
   'gs--sessions-description' => 'Когда вы заходите под своим паролем на нескольких устройствах или с помощью нескольких браузеров, здесь показывается список всех таких сессий. Если какая-то из них вызывает подозрения, завершите все сессии кроме текущей, а потом смените пароль от блога.',
   'gs--sessions-browser-or-device' => 'Браузер или устройство',
   'gs--sessions-when' => 'Когда',
@@ -228,16 +239,17 @@ function e2l_load_strings () {
   'ff--language' => 'Язык',
   'ff--theme' => 'Тема',
   'ff--theme-how-to' => 'Как создать свою тему?',
-  'ff--theme-selector-wants-js' => 'Для выбора темы оформления, включите в браузере поддержку скриптов (JavaScript).',
   'gs--theme-preview' => 'Предпросмотр',
   'ff--posts' => 'Заметки',
+  'ff--respond-to-dark-mode' => 'Поддерживать Тёмный режим',
   'ff--items-per-page-after' => 'на странице',
-  'ff--show-sharing-buttons' => 'Показывать кнопки отправки в соцсети',
+  'ff--show-view-counts' => 'Показывать счётчики просмотров',
+  'ff--show-sharing-buttons' => 'Показывать социокнопки',
   'ff--comments' => 'Комментарии',
-  'ff--comments-enable-by-default' => 'включать по умолчанию',
-  'ff--comments-require-social-id' => 'разрешать только при входе через соцсеть',
-  'ff--only-for-recent-posts' => 'только к свежим заметкам',
-  'ff--send-by-email' => 'присылать по почте',
+  'ff--comments-enable-by-default' => 'Разрешать по умолчанию в новых заметках',
+  'ff--comments-require-social-id' => 'Только при входе через соцсеть',
+  'ff--only-for-recent-posts' => 'Только к свежим заметкам',
+  'ff--send-by-email' => 'Присылать по почте',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',
   'ff--administration' => 'Администрирование:',
@@ -248,9 +260,9 @@ function e2l_load_strings () {
   'gs--used-all' => 'Занято всё место: $[total] МБ',
 
   'ff--blog-title' => 'Название блога',
-  'ff--set-userpic-by-dragging' => 'Перетащите на место пунктирного кружка фотографию с рабочего стола',
+  'gs--remove-userpic' => 'Удалить фотографию',
   'ff--blog-description' => 'Коротко о блоге',
-  'ff--blog-author' => 'Автор',
+  'ff--blog-author-picture-and-name' => 'Фото и имя автора',
 
   'pt--database' => 'База данных',
   'ff--db-host' => 'Сервер',
@@ -344,7 +356,6 @@ function e2l_load_strings () {
   'sn--twitter-verb' => 'Твитнуть',
   'sn--facebook-verb' => 'Поделиться',
   'sn--linkedin-verb' => 'Поделиться',
-  'sn--gplus-verb' => 'Плюсануть',
   'sn--vkontakte-verb' => 'Поделиться',
   'sn--telegram-verb' => 'Отправить',
   'sn--whatsapp-verb' => 'Отправить',
@@ -364,7 +375,7 @@ function e2l_load_strings () {
   
   'er--cannot-find-db' => 'Не могу найти базу данных',
   'er--cannot-connect-to-db' => 'Не могу соединиться с базой данных',
-  'er--error-in-query' => 'Ошибка при запросе',
+  'er--mysql-version-too-old' => 'Версия базы данных слишком старая ($[v1], нужна $[v2]+)',
   'er--error-occurred' => 'Произошла ошибка',
   'er--too-many-errors' => 'Слишком много ошибок',
   'gs--rss' => 'РСС',
@@ -373,6 +384,10 @@ function e2l_load_strings () {
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Выполнено обновление с версии $[from] до версии $[to]',
   'gs--good-blogs' => 'Хорошие блоги и сайты',
+
+  'gs--range-separator' => '<span style="margin-left: .07em; letter-spacing: .07em">...</span>',
+  
+  'ab--menu-actions' => 'Действия',
 
   '--secondary-language' => 'en',
   

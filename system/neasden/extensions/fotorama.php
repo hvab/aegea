@@ -15,8 +15,9 @@ class NeasdenGroup_fotorama implements NeasdenGroup {
 
   function render ($group, $myconf) {
     
-    $this->neasden->require_link (SYSTEM_LIBRARY_FOLDER .'fotorama/fotorama.css');
-    $this->neasden->require_link (SYSTEM_LIBRARY_FOLDER .'fotorama/fotorama.js');
+    $this->neasden->require_link (@$this->neasden->config['library']. 'jquery/jquery.js');
+    $this->neasden->require_link (@$this->neasden->config['library']. 'fotorama/fotorama.css');
+    $this->neasden->require_link (@$this->neasden->config['library']. 'fotorama/fotorama.js');
     
     $result = '<div class="'. $myconf['css-class'] .'">'."\n";
     $p_opened = false;
@@ -48,6 +49,9 @@ class NeasdenGroup_fotorama implements NeasdenGroup {
           $width = $myconf['max-width'];
         }
     
+        $ratio = 0;
+        if ($height) $ratio = $width / $height;
+
         $image_html = (
           '<img src="'. $myconf['src-prefix'] . $filebasename .'" '.
           'width="'. $width .'" height="'. $height.'" '.
@@ -59,7 +63,7 @@ class NeasdenGroup_fotorama implements NeasdenGroup {
           $result .= (
             '<div class="fotorama" '.
               'data-width="'. $width .'" '.
-              'data-ratio="'. ($width / $height) .'"'.
+              'data-ratio="'. $ratio .'"'.
             '>'."\n"
           );
           $div_opened = true;
