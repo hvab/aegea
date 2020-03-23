@@ -113,7 +113,9 @@
 }
 
 .e2-admin-link,
-.e2-admin-link:visited {
+.e2-pseudolink.e2-admin-link,
+.e2-admin-link:visited,
+.e2-pseudolink.e2-admin-link:visited {
   color: var(--adminColor);
   border-color: var(--adminUnderlineColor);
 }

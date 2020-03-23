@@ -95,7 +95,8 @@ class NeasdenGroup_audio implements NeasdenGroup {
           'title' => $range[3],
         ];
         $result .= '<tr class="jouele-control e2-audio-ranges-item" data-type="seek" '."\r\n";
-        $result .= 'data-range="'. $item['from'] .'...'. $item['to'] .'">'."\r\n";
+        $result .= 'data-range="'. $item['from'] .'...'. $item['to'] .'" '."\r\n";
+        $result .= 'data-href="'. $href .'">'."\r\n";
         $result .= '<td style="width: 1px; white-space: nowrap"><span>'. $item['from'] .'</span></td>'."\r\n";
         $result .= '<td class="e2-audio-ranges-item-title"><span>'. $item['title'] .'</span></td>'."\r\n";
         $result .= '</tr>'."\r\n";

@@ -8,7 +8,7 @@
   --thinRuleColor:               rgb( 255,  93,  87     );
 
   --headingsColor:               rgb( 255,  93,  87     );
-  --headingsUnderlineColor:     rgba( 255,  93,  87, .25 );
+  --headingsUnderlineColor:     rgba( 255,  93,  87, .25);
   --boldColor:                     var(--foregroundColor);
   --boldUnderlineColor:            var(--thinRuleColor);
   --linkColor:                   rgb( 112, 160, 176      );

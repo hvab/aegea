@@ -213,9 +213,9 @@ select > .e2-button {
 
 .e2-pseudolink {
   text-decoration: none;
-  border-bottom-width: 1px;
-  border-bottom-style: dashed;
-  border-bottom-color: var(--thinRuleColor);
+  border-width: 0 0 1px 0;
+  border-style: dashed;
+  border-color: var(--thinRuleColor);
   transition-property: color, border-color;
   transition-duration: var(--time);
   transition-timing-function: ease-out;
