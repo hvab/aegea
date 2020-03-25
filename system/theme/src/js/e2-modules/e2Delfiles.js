@@ -13,9 +13,9 @@ import e2Ajax from './e2Ajax'
 function e2Delfiles (options) {
   var url = $('#e2-file-remove-action').attr('href') + '?'
 
-  if ($('#form-note')) {
+  if ($('#form-note').length) {
     url += 'entity=note&entity-id=' + $('#note-id').val()
-  } else if ($('#form-tag')) {
+  } else if ($('#form-tag').length) {
     url += 'entity=tag&entity-id=' + $('#tag-id').val()
   } else {
     return false

@@ -70,11 +70,11 @@ Rose debug info
 
 <?php // TEXT // ?>
 
+<?php if (array_key_exists ('text', $note) and $note['text'] != '') { ?>
 <div class="e2-note-text e2-text <?= $note['published?']? 'e2-published' : 'e2-draft' ?>">
-<?=@$note['text']?>
+<?= $note['text'] ?>
 </div>
-
-</article>
+<?php } ?>
 
 <?php // THUMBS // ?>
 
@@ -83,6 +83,8 @@ Rose debug info
 <?php foreach ($note['thumbs'] as $x) { ?><div class="e2-search-results-image"><?php if ($x['highlighted?']) { ?><mark><?php } ?><img src="<?= $x['href'] ?>" width="<?= $x['width'] ?>" height="<?= $x['height'] ?>" class="<?php if ($note['has-highlighted-thumbs?'] and !$x['highlighted?']) { ?>e2-search-results-image-dimmed<?php } ?>" alt="" /><?php if ($x['highlighted?']) { ?></mark><?php } ?></div><?php } ?>
 </a>
 <?php } ?>
+
+</article>
 
 <?php // LIKES // ?>
 
