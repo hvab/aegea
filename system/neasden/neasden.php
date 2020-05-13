@@ -1,6 +1,6 @@
 <?php
 
-// Neasden v2.71
+// Neasden v2.73
 
 interface NeasdenGroup {
   function render ($group, $myconf);
@@ -124,14 +124,18 @@ class Neasden {
     
   
   function resource_detected ($resource) {
-    $this->resources_detected[] = $resource;
+    if (!in_array ($resource, $this->resources_detected)) {
+      $this->resources_detected[] = $resource;
+    }
   }
   
   
   function require_link ($link) {
-    $this->links_required[] = $link;
+    if (!in_array ($link, $this->links_required)) {
+      $this->links_required[] = $link;
+    }
   }
-  
+    
   
   function special_sequence ($index) {
     return self::RX_SPECIAL_CHAR . str_pad ($index, self::RX_SPECIAL_SEQUENCE_LENGTH, '0', STR_PAD_LEFT) . self::RX_SPECIAL_CHAR; // usafe
@@ -468,8 +472,8 @@ class Neasden {
   
     // unions and prepositions
     if (1) {
-      //die ($text);
       if ($nobreak_fw = $this->language_data['with-next']) {
+        $nobreak_fw = str_replace ('$', '\$', $nobreak_fw);
         $text = preg_replace ( // usafe
           "/".
           "(?<!\pL|\-)".    // not-a—Unicode-letter-or-dash lookbehind
@@ -483,6 +487,7 @@ class Neasden {
       }
   
       if ($nobreak_bw = $this->language_data['with-prev']) {
+        $nobreak_bw = str_replace ('$', '\$', $nobreak_bw);
         $text = preg_replace ( // usafe
           "/".
           " ".             // a space

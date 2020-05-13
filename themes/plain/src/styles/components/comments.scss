@@ -110,9 +110,6 @@
   background: var(--markedTextBackground);
   border-radius: 2px;
 }
-.e2-comment-piece-marked + .e2-comment-date {
-  padding-left: 0.3em;
-}
 .e2-comment-piece-marked.e2-comment-author-removed {
   background: initial;
   border-radius: initial;
