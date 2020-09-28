@@ -5,6 +5,7 @@
 function e2l_load_strings () {
 
   return array (
+
   // engine
   'e2--vname-aegea' => 'Эгея',
   'e2--release' => 'рэліз',
@@ -58,14 +59,13 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Памылка пры змяненні нататкі',
   'er--error-deleting-post-tag-info' => 'Памылка пры выдаленні дадзеных аб тэгах нататкі',
   'er--wrong-datetime-format' => 'Няправільны фармат даты-часу. Павінен быць: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',
-  'er--unsupported-file' => 'Падтрымлiваюцца толькi выявы PNG, JPG, GIF, SVG i аудыёфайлы MP3',
-  'er--unsupported-file-image' => 'Падтрымлiваюцца толькi выявы PNG, JPG i GIF',
   'er--cannot-create-thumbnail' => 'Не атрымалася стварыць паменшаную выяву',
   'er--cannot-upload' => 'Не атрымалася запампаваць файл',
   'ff--title' => 'Назва',
   'ff--text' => 'Тэкст',
   'ff--saving' => 'Захаванне...',
   'ff--save' => 'Захаваць',
+  'ff--summary' => 'Кароткае апісанне',
   'ff--tags' => 'Тэгі',
   'ff--alias' => 'Спасылка',
   'ff--change-time' => 'Змяніць час',
@@ -77,6 +77,10 @@ function e2l_load_strings () {
   'ff--at-address' => 'па адрасу',
   'gs--no-notes' => 'Нататак няма.',
   'gs--will-be-published' => 'Апублікуецца',
+
+  // see NiceError.php!
+  'er--supported-only-png-jpg-gif' => 'Падтрымлiваюцца толькi выявы png, jpg i gif',
+  'er--unsupported-file' => 'Падтрымлiваюцца толькi выявы png, jpg, gif i svg, відэа mp4 і mov i аудыёфайлы mp3',
 
   'ff--gmt-offset' => 'Розніца з Грынвічам',
   'ff--with-dst' => '+1 летам',
@@ -100,7 +104,6 @@ function e2l_load_strings () {
   // drafts
   'ln--drafts' => 'Чарнавікі',
   'pt--drafts' => 'Чарнавікі',
-  'wd--draft' => 'чарнавік',
   'pt--draft-deletion' => 'Выдаленне чарнавіка',
   'pt--edit-draft' => 'Рэдагаванне чарнавіка',
   'gs--no-drafts' => 'Чарнавікоў няма.',
@@ -147,6 +150,7 @@ function e2l_load_strings () {
 
   // tags
   'pt--tags' => 'Тэгі',
+  'pt--tag' => 'Тэг',
   'pt--posts-tagged' => 'Нататкі з тэгам',
   'tt--edit-tag' => 'Рэдагаваць параметры і апісанне тэга',
   'gs--tagged' => 'з тэгам',
@@ -159,9 +163,9 @@ function e2l_load_strings () {
   'ff--tag-name' => 'Тэг',
   'ff--tag-urlname' => 'У адрасным радку',
   'ff--tag-page-title' => 'Загаловак старонкі',
-  'ff--tag-description' => 'Апісанне',
+  'ff--tag-introductory-text' => 'Уступны тэкст',
   'gs--tag-will-be-deleted-notes-remain' => 'Тэг «$[tag]» будзе выдалены з нататак, але самыя нататкі застануцца.',
-  'gs--see-also-tag' => 'Гл. таксама тэг',
+  'gs--see-also' => 'Гл. таксама',
   'gs--tags-important' => 'важныя',
   'gs--tags-all' => 'усе',
   'gs--tags' => 'Тэгі',
@@ -174,6 +178,7 @@ function e2l_load_strings () {
   'pt--favourites' => 'Абранае',
   'nm--favourites' => 'Абранае',
   'gs--no-favourites' => 'Абранага няма.',
+  'nm--read-next' => 'Далей',
 
   // generic posts pages
   'nm--pages' => 'Старонкі',
@@ -218,7 +223,6 @@ function e2l_load_strings () {
   'em--follow-this-link' => 'Перайдзіце па гэтай спасылцы, каб скінуць пароль:',
 
   'pt--sessions' => 'Адкрытыя сесіі',
-  'gs--sessions' => 'адкрытыя сесіі',
   'gs--sessions-description' => 'Калі вы заходзіце пад сваім паролем на некалькіх прыладах ці з дапамогай некалькіх браўзераў, тут адлюстроўваецца спіс усіх такіх сесій. Калі нейкая з іх выклікае падазрэнні, завяршыце ўсе сесіі акрамя бягучай, а потым змяніце пароль ад блогу.',
   'gs--sessions-browser-or-device' => 'Браўзер ці прылада',
   'gs--sessions-when' => 'Калі',
@@ -252,16 +256,21 @@ function e2l_load_strings () {
   'ff--send-by-email' => 'Дасылаць па пошце',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',
-  'ff--administration' => 'Адміністраванне:',
-  'gs--password' => 'пароль',
-  'gs--db-connection' => 'злучэнне з базай',
-  'gs--get-backup' => 'спампаваць апошні бэкапу',
+  'gs--password' => 'Пароль',
+  'gs--db-connection' => 'Злучэнне з базай',
+  'gs--get-backup' => 'Спампаваць апошні бэкапу',
+  'gs--not-paid' => 'Егея не аплачана',
+  'gs--paid-until' => 'Егея аплачана да',
+  'gs--paid-period-ended' => 'Аплачаны перыяд скончыўся',
+  'bt--learn-about-payment' => 'Даведацца аб аплаце',
   'gs--used' => 'Занята $[used] з $[total] МБ ($[percent]%)',
   'gs--used-all' => 'Занята ўсе месца: $[total] МБ',
 
   'ff--blog-title' => 'Назва блогу',
+  'ff--subtitle' => 'Падзагаловак',
   'gs--remove-userpic' => 'Выдаліць фатаграфію',
-  'ff--blog-description' => 'Коратка пра блог',
+  'ff--blog-description' => 'Апісанне блога',
+  'gs--search-engines-social-networks-aggregators' => 'Для пошукавых сістэм, сацсетак і агрэгатараў',
   'ff--blog-author-picture-and-name' => 'Фота і імя аўтара',
 
   'pt--database' => 'База звестак',
@@ -290,8 +299,8 @@ function e2l_load_strings () {
   'fb--save-changes' => 'Захаваць змяненні',
   'fb--save-and-preview' => 'Захаваць і паглядзець',
   'fb--publish' => 'Апублікаваць',
-  'fb--publish-draft' => 'Апублікаваць нататку',
-  'fb--schedule-note' => 'Запланаваць нататку',
+  'fb--publish-note' => 'Апублікаваць нататку',
+  'fb--publish-note-at-this-time' => 'Апублікаваць нататку ў гэты час',
   'fb--select' => 'Выбраць',
   'fb--apply' => 'Дапасаваць',
   'fb--delete' => 'Выдаліць',
@@ -301,7 +310,7 @@ function e2l_load_strings () {
 
   // time
   'pt--default-timezone' => 'Часавы паяс па змаўчанні',
-  'gs--e2-stores-each-posts-timezone' => 'Е2 захоўвае часавы паяс асобна для кожнай нататкі.',
+  'gs--e2-stores-each-posts-timezone' => 'Эгея захоўвае часавы паяс асобна для кожнай нататкі.',
   'gs--e2-autodetects-timezone' => 'Пры публікацыі часавы паяс звычайна вызначаецца аўтаматычна. А ў выпадку няўдачы выкарыстоўваецца абраны тут гадзінны паяс.',
 
   'tt--from-the-future' => 'З будучыні',
@@ -397,7 +406,7 @@ function e2l_load_strings () {
 
 
 
-function e2lstr_monthname ($number, $modifier = '') {
+function e2lstr_monthname ($number, $modifier) {
   if ($modifier == 'genitive') {
     $tmp = array (
       'снежня', 'студзеня', 'лютага', 'сакавіка', 'красавіка', 'травеня', 'чэрвеня',
@@ -427,7 +436,7 @@ function e2lstr_periodname ($period) {
 }
 
 
-function e2lstr_cardinal ($number, $modifier = '', $string_id) {
+function e2lstr_cardinal ($number, $modifier, $string_id) {
 
   $what = $number;
   if ($string_id == 'pt--n-posts') $what = $number .' натат(ка,кі,ак)';

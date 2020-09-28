@@ -18,7 +18,7 @@ function initSmartTitle () {
       $('.e2-smart-title').each (function () {
         if ($(this).position().top > y + window.innerHeight) return false
         title = $(this).text()
-        currentNoteId = $(this).closest('.e2-note').attr('id').replace('e2-note-', '')
+        currentNoteId = $(this).closest('.e2-note').data('note-id').toString()
         if ($(this).position().top > y) return false
       })
     }
@@ -30,7 +30,7 @@ function initSmartTitle () {
     $(window).on ('scroll resize', e2UpdateWindowTitleFromScrollPosition)
     e2UpdateWindowTitleFromScrollPosition()
   } else if ($('.e2-smart-title:not(input)').length === 1) {
-    document.e2.currentNoteId = $('.e2-smart-title:not(input)').closest('.e2-note').attr('id').replace('e2-note-', '')
+    document.e2.currentNoteId = $('.e2-smart-title:not(input)').closest('.e2-note').data('note-id').toString()
   }
 }
 

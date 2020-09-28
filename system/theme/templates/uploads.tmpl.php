@@ -43,10 +43,10 @@
 <div id="e2-uploaded-images" class="e2-uploaded-images">
   <?php foreach ($content['uploads']['each'] as $image) { ?>
     <div class="e2-uploaded-image">
-      <?php if ($image['width'] and $image['height']) { ?>
+      <?php if ($image['is-available?']) { ?>
         <div class="e2-uploaded-image-inner e2-uploaded-image-inner_good">
             <img
-              src="<?= $image['href'] ?>"
+              src="<?= $image['src'] ?>"
               alt="<?= $image['original-filename'] ?>"
               width="<?= $image['width'] ?>"
               height="<?= $image['height'] ?>"
@@ -56,7 +56,7 @@
         </div>
       <?php } else { ?>
         <div class="e2-uploaded-image-inner e2-uploaded-image-inner_bad">
-          <span class="e2-uploaded-image-noimage" data-src="<?= $image['href'] ?>" data-filename="<?= $image['original-filename'] ?>"></span>
+          <span class="e2-uploaded-image-noimage" data-src="<?= $image['src'] ?>" data-filename="<?= $image['original-filename'] ?>"></span>
         </div>
       <?php } ?>
     </div>

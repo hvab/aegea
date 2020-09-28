@@ -1,5 +1,3 @@
-<div class="e2-heading">
-  
 <span class="e2-search">
 
 <form
@@ -21,10 +19,18 @@
 
 </span>
 
-<?php if (array_key_exists ('search-related-tag', $content)) { ?> 
+<?php if (array_key_exists ('search-related-tags', $content)) { ?> 
 <div class="e2-heading-see-also">
-  <?= _S ('gs--see-also-tag') ?> <a href="<?=$content['search-related-tag']['href']?>" class="e2-tag"><?=$content['search-related-tag']['name']?></a>
+<?php
+$tags = array ();
+foreach ($content['search-related-tags'] as $tag) {
+  if ($tag['current?']) {
+    $tags[] = '<mark class="e2-tag">'. $tag['name'] .'</mark>';
+  } else {
+    $tags[] = '<a href="'. $tag['href'] .'" class="e2-tag">'. $tag['name'] .'</a>';
+  }
+}
+?>
+  <span class="e2-heading-see-also-title"><?= _S ('gs--see-also') ?>:</span><?= implode (' &nbsp; ', $tags) ?>
 </div>
 <?php } ?>
-
-</div>

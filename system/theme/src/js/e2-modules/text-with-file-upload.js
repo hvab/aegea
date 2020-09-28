@@ -88,7 +88,7 @@ function initTextWithFileUpload () {
       var file = filesToUpload.shift()
       var url = $('#e2-file-upload-action').attr('href') + '?'
 
-      if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png|svg|mp3$/i)) {
+      if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png|svg|mp3|mp4|mov$/i)) {
         e2NiceError({
           message: 'er--unsupported-file',
           debug: {
@@ -245,6 +245,27 @@ function initTextWithFileUpload () {
     return false
   }
 
+  function e2LoadImagesFromPaste (e) {
+    const files = ((e.clipboardData || e.originalEvent.clipboardData).files || []);
+    
+    if (!files.length) return;
+
+    filesToUpload.length = 0
+    
+    for (let i = 0; i < files.length; i++) {
+      // set e2DroppedIntoTextarea to true to “emulate” dropping 
+      // for auto pasting filename into the text field
+      files[i].e2DroppedIntoTextarea = true;
+      filesToUpload.push(files[i]);
+      completedUploadSize = 0
+      totalUploadSize += files[i].size
+    }
+
+    e2ClearUploadBuffer()
+
+    return false
+  }
+
   function e2ChangeImagesToPasteableImages () {
     var imagesArray = []
 
@@ -320,7 +341,9 @@ function initTextWithFileUpload () {
   $uploadControls.removeClass(uploadControlsHiddenModifier)
   $uploadButton.on('change', e2LoadImagesFromInput)
 
-  $('.e2-external-drop-target-body, .e2-external-drop-target-textarea').on('drop', e2LoadImagesFromDrop)
+  $('.e2-external-drop-target-body, .e2-external-drop-target-textarea')
+    .on('drop', e2LoadImagesFromDrop)
+    .on('paste', e2LoadImagesFromPaste)
 }
 
 export default initTextWithFileUpload

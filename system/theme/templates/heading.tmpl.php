@@ -1,6 +1,8 @@
 <?php if ($content['class'] == 'found') { ?>
 
-  <?php _T ('search-heading') ?>
+  <div class="e2-heading">
+    <?php _T ('search-heading') ?>
+  </div>
   
 <?php } elseif (array_key_exists ('heading', $content)) { ?>
   
@@ -18,26 +20,109 @@
 
       <?php if ($content['class'] == 'settings'): ?>
       <?php if (array_key_exists ('sign-out-href', $content['admin'])): ?>
-      <span class="admin-icon"><a href="<?= $content['admin']['sign-out-href'] ?>" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('exit') ?></span></a></span>
+
+      <span class="admin-icon">
+        <div class="e2-popup-menu" style="position: relative; top: -8px; left: -12px; width: 16px; height: 16px; display: inline-block;">
+          <button type="button" class="e2-popup-menu-button">
+            <span class="e2-popup-menu-button-icon"><span class="e2-svgi"><?= _SVG ('chevron-down') ?></span></span>
+            <span class="e2-popup-menu-button-text"><?= _S ('ab--menu-actions') ?></span>
+          </button>
+
+          <div class="e2-popup-menu-widget">
+
+            <?php if (array_key_exists ('password-href', $content['admin'])) { ?>
+              <a href="<?= $content['admin']['password-href'] ?>" class="nu e2-popup-menu-widget-item">
+                <span class="e2-popup-menu-widget-item-text"><?= _S ('gs--password') ?></span>
+              </a> 
+            <?php } ?>
+
+            <?php if (array_key_exists ('sessions-href', $content['admin'])) { ?>
+              <a href="<?= $content['admin']['sessions-href'] ?>" class="nu e2-popup-menu-widget-item">
+                <span class="e2-popup-menu-widget-item-text"><?= _S ('pt--sessions') ?></span>
+              </a> 
+            <?php } ?>
+
+            <?php if (array_key_exists ('database-href', $content['admin'])) { ?>
+              <a href="<?= $content['admin']['database-href'] ?>" class="nu e2-popup-menu-widget-item">
+                <span class="e2-popup-menu-widget-item-text"><?= _S ('gs--db-connection') ?></span>
+              </a> 
+            <?php } ?>
+
+            <?php if (array_key_exists ('get-backup-href', $content['admin'])) { ?>
+              <hr class="e2-popup-menu-widget-separator">
+
+              <a href="<?= $content['admin']['get-backup-href'] ?>" class="nu e2-popup-menu-widget-item">
+                <span class="e2-popup-menu-widget-item-text"><?= _S ('gs--get-backup') ?></span>
+              </a> 
+            <?php } ?>
+
+            <hr class="e2-popup-menu-widget-separator">
+
+            <a href="<?= $content['admin']['sign-out-href'] ?>" class="nu e2-popup-menu-widget-item">
+              <span class="e2-popup-menu-widget-item-icon">
+                <span class="e2-svgi"><?= _SVG ('exit') ?></span>
+              </span>
+              <span class="e2-popup-menu-widget-item-text"><?= _S ('fb--sign-out') ?></span>
+            </a> 
+
+          </div>
+
+        </div>
+      </span>
+
       <?php endif ?>
       <?php endif ?>
 
     </span>
-
-    <?php if (array_key_exists ('superheading', $content)): ?>
-    <div class="e2-heading-super"><?= $content['superheading'] ?></div>
-    <?php endif ?>
     
     <h2><?= $content['heading'] ?></h2>
-  
-    <?php if (array_key_exists ('description', $content['tag'])): ?>
-    <div class="e2-heading-description e2-text">
-      <?= $content['tag']['description'] ?>
-    </div>
-    <?php endif ?>
 
     <?php _T_FOR ('year-months') ?>
     <?php _T_FOR ('month-days') ?>
+
+    <?php if (array_key_exists ('tag', $content) and $content['pages']['this'] == 1) { ?>
+    
+      <?php if (array_key_exists ('popular', $content['tag'])) { ?>
+      <?php if (array_key_exists ('each', $content['tag']['popular'])) { ?> 
+
+      <?php $content['_']['_notes_gallery'] = $content['tag']['popular']; ?>
+
+      <div class="e2-section-heading">
+        <?=$content['tag']['popular']['title']?>
+      </div>
+
+      <?php _T ('notes-gallery') ?>
+
+      <?php } ?>
+      <?php } ?>
+
+      <?php if ((string) $content['tag']['description'] !== ''): ?>
+      <div class="e2-heading-description e2-text">
+        <?= $content['tag']['description'] ?>
+      </div>
+      <?php endif ?>
+
+      <!-- <div class="e2-note-meta">
+      <?= $content['tag']['notes-count-text'] ?>: <a href="">*с первой</a> · <a href="">с последней</a>
+      </div> -->
+
+      <?php if (array_key_exists ('related', $content['tag']) and count ($content['tag']['related'])): ?>
+      <div class="e2-heading-see-also">
+      <?php
+      $tags = array ();
+      foreach ($content['tag']['related'] as $tag) {
+        if ($tag['current?']) {
+          $tags[] = '<mark class="e2-tag">'. $tag['name'] .'</mark>';
+        } else {
+          $tags[] = '<a href="'. $tag['href'] .'" class="e2-tag">'. $tag['name'] .'</a>';
+        }
+      }
+      ?>
+      <span class="e2-heading-see-also-title"><?= $content['tag']['notes-count-text'] ?>   <?= _S ('gs--see-also') ?>:</span><?= implode (' &nbsp; ', $tags) ?>
+      </div>
+      <?php endif ?>
+
+    <?php } ?>
 
   </div>
 

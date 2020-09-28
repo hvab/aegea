@@ -55,21 +55,6 @@
   padding-right: 4px !important;
 }
 
-.e2-search-results-image {
-  display: inline-block;
-  margin-right: 1em;
-  margin-bottom: 1em;
-  vertical-align: top;
-}
-
-.e2-search-results-image img {
-  display: block;
-}
-
-.e2-search-results-image-dimmed {
-  opacity: .4;
-}
-
 .e2-search-tags {
   color: var(--disabledColor);
   margin-left: 12px;
@@ -94,6 +79,7 @@
 
   .e2-search form {
     display: inline-block;
+    margin: 0 0 8px 0; // as e2-heading h2
   }
 
   .e2-search-input .e2-search-input-input {

@@ -5,6 +5,7 @@
 function e2l_load_strings () {
 
   return array (
+
   // engine
   'e2--vname-aegea' => 'Эгея',
   'e2--release' => 'релиз',
@@ -57,15 +58,14 @@ function e2l_load_strings () {
   'er--post-must-have-title-and-text' => 'У заметки должны быть название и текст',
   'er--error-updating-post' => 'Ошибка при изменении заметки',
   'er--error-deleting-post-tag-info' => 'Ошибка при удалении данных о тегах заметки',
-  'er--wrong-datetime-format' => 'Неправильный формат даты-времени. Должен быть: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',
-  'er--unsupported-file' => 'Поддерживаются только изображения PNG, JPG, GIF, SVG и аудиофайлы MP3',
-  'er--unsupported-file-image' => 'Поддерживаются только изображения PNG, JPG и GIF',
+  'er--wrong-datetime-format' => 'Неправильный формат даты-времени. Должен быть: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',  
   'er--cannot-create-thumbnail' => 'Не удалось создать уменьшенное изображение',
   'er--cannot-upload' => 'Не удалось загрузить файл',
   'ff--title' => 'Название',
   'ff--text' => 'Текст',
   'ff--saving' => 'Сохранение...',
   'ff--save' => 'Сохранить',
+  'ff--summary' => 'Краткое описание',
   'ff--tags' => 'Теги',
   'ff--alias' => 'Ссылка',
   'ff--change-time' => 'Изменить время',
@@ -77,6 +77,10 @@ function e2l_load_strings () {
   'ff--at-address' => 'по адресу',
   'gs--no-notes' => 'Заметок нет.',
   'gs--will-be-published' => 'Опубликуется',
+
+  // see NiceError.php!
+  'er--supported-only-png-jpg-gif' => 'Поддерживаются только изображения png, jpg и gif',
+  'er--unsupported-file' => 'Поддерживаются только изображения png, jpg, gif и svg, видео mp4 и mov и аудиофайлы mp3',
 
   'ff--gmt-offset' => 'Разница с Гринвичем',
   'ff--with-dst' => '+1 летом',
@@ -100,14 +104,13 @@ function e2l_load_strings () {
   // drafts
   'ln--drafts' => 'Черновики',
   'pt--drafts' => 'Черновики',
-  'wd--draft' => 'черновик',
   'pt--draft-deletion' => 'Удаление черновика',
   'pt--edit-draft' => 'Правка черновика',
   'gs--no-drafts' => 'Черновиков нет.',
   'gs--not-published' => 'Не опубликовано',
   'gs--secret-link' => 'Секретная ссылка',
   'gs--draft-will-be-deleted' => 'Черновик «$[draft]» будет удалён.',
-
+  
   // comments
   'pt--new-comment' => 'Новый комментарий',
   'pt--edit-comment' => 'Правка комментария',
@@ -147,6 +150,7 @@ function e2l_load_strings () {
   
   // tags
   'pt--tags' => 'Теги',
+  'pt--tag' => 'Тег',
   'pt--posts-tagged' => 'Заметки с тегом',
   'tt--edit-tag' => 'Править параметры и описание тега',
   'gs--tagged' => 'с тегом',
@@ -158,10 +162,10 @@ function e2l_load_strings () {
   'er--cannot-rename-tag' => 'Такое имя или вид в адресной строке уже используются другим тегом',
   'ff--tag-name' => 'Тег',
   'ff--tag-urlname' => 'В адресной строке',
-  'ff--tag-page-title' => 'Заголовок страницы',
-  'ff--tag-description' => 'Описание',
+  'ff--tag-page-title' => 'Название страницы',
+  'ff--tag-introductory-text' => 'Вступительный текст',
   'gs--tag-will-be-deleted-notes-remain' => 'Тег «$[tag]» будет удалён из заметок, но сами заметки останутся.',
-  'gs--see-also-tag' => 'См. также тег',
+  'gs--see-also' => 'См. также',
   'gs--tags-important' => 'важные',
   'gs--tags-all' => 'все',
   'gs--tags' => 'Теги',
@@ -174,6 +178,7 @@ function e2l_load_strings () {
   'pt--favourites' => 'Избранное',
   'nm--favourites' => 'Избранное',
   'gs--no-favourites' => 'Избранного нет.',
+  'nm--read-next' => 'Дальше',
   
   // generic posts pages
   'nm--pages' => 'Страницы',
@@ -218,7 +223,6 @@ function e2l_load_strings () {
   'em--follow-this-link' => 'Перейдите по этой ссылке, чтобы сбросить пароль:',
 
   'pt--sessions' => 'Открытые сессии',
-  'gs--sessions' => 'открытые сессии',
   'gs--sessions-description' => 'Когда вы заходите под своим паролем на нескольких устройствах или с помощью нескольких браузеров, здесь показывается список всех таких сессий. Если какая-то из них вызывает подозрения, завершите все сессии кроме текущей, а потом смените пароль от блога.',
   'gs--sessions-browser-or-device' => 'Браузер или устройство',
   'gs--sessions-when' => 'Когда',
@@ -250,18 +254,23 @@ function e2l_load_strings () {
   'ff--comments-require-social-id' => 'Только при входе через соцсеть',
   'ff--only-for-recent-posts' => 'Только к свежим заметкам',
   'ff--send-by-email' => 'Присылать по почте',
-  'ff--yandex-metrika' => 'Яндекс.Метрика',
+  'ff--yandex-metrika' => 'Яндекс.​Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',
-  'ff--administration' => 'Администрирование:',
-  'gs--password' => 'пароль',
-  'gs--db-connection' => 'соединение с базой',
-  'gs--get-backup' => 'скачать последний бекап',
+  'gs--password' => 'Пароль',
+  'gs--db-connection' => 'Соединение с базой',
+  'gs--get-backup' => 'Скачать последний бекап',
+  'gs--not-paid' => 'Эгея не оплачена',
+  'gs--paid-until' => 'Эгея оплачена до',
+  'gs--paid-period-ended' => 'Оплаченный период закончился',
+  'bt--learn-about-payment' => 'Узнать об оплате',
   'gs--used' => 'Занято $[used] из $[total] МБ ($[percent]%)',
   'gs--used-all' => 'Занято всё место: $[total] МБ',
 
   'ff--blog-title' => 'Название блога',
+  'ff--subtitle' => 'Подзаголовок',
   'gs--remove-userpic' => 'Удалить фотографию',
-  'ff--blog-description' => 'Коротко о блоге',
+  'ff--blog-description' => 'Описание блога',
+  'gs--search-engines-social-networks-aggregators' => 'Для поисковых систем, соцсетей и агрегаторов',
   'ff--blog-author-picture-and-name' => 'Фото и имя автора',
 
   'pt--database' => 'База данных',
@@ -290,8 +299,8 @@ function e2l_load_strings () {
   'fb--save-changes' => 'Сохранить изменения',
   'fb--save-and-preview' => 'Сохранить и посмотреть',
   'fb--publish' => 'Опубликовать',
-  'fb--publish-draft' => 'Опубликовать заметку',
-  'fb--schedule-note' => 'Запланировать заметку',
+  'fb--publish-note' => 'Опубликовать заметку',
+  'fb--publish-note-at-this-time' => 'Опубликовать заметку в это время',
   'fb--select' => 'Выбрать',
   'fb--apply' => 'Применить',
   'fb--delete' => 'Удалить',
@@ -301,7 +310,7 @@ function e2l_load_strings () {
   
   // time
   'pt--default-timezone' => 'Часовой пояс по умолчанию',
-  'gs--e2-stores-each-posts-timezone' => 'Е2 хранит часовой пояс отдельно для каждой заметки.',
+  'gs--e2-stores-each-posts-timezone' => 'Эгея хранит часовой пояс отдельно для каждой заметки.',
   'gs--e2-autodetects-timezone' => 'При публикации часовой пояс обычно определяется автоматически. А в случае неудачи используется выбранный здесь часовой пояс.',
 
   'tt--from-the-future' => 'Из будущего',
@@ -397,7 +406,7 @@ function e2l_load_strings () {
 
 
 
-function e2lstr_monthname ($number, $modifier = '') {
+function e2lstr_monthname ($number, $modifier) {
   if ($modifier == 'genitive') {
     $tmp = array (
       'декабря', 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
@@ -427,7 +436,7 @@ function e2lstr_periodname ($period) {
 }
 
 
-function e2lstr_cardinal ($number, $modifier = '', $string_id) {
+function e2lstr_cardinal ($number, $modifier, $string_id) {
 
   $what = $number;
   if ($string_id == 'pt--n-posts') $what = $number .' замет(ка,ки,ок)';

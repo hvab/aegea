@@ -1,4 +1,5 @@
 function initFormNotePublish () {
+
   if (!$('#form-note-publish').length) return
 
   $('.e2-schedule-controls-revealer').on('click', function () {

@@ -101,9 +101,9 @@
 
 .e2-comment-date {
   margin: 0 0 6px 0;
-  font-size: 12px;
-  line-height: 16px;
   font-family: var(--smallFontFamily);
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
 }
 
 .e2-comment-piece-marked {

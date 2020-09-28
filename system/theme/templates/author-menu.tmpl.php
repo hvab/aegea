@@ -21,13 +21,11 @@ if (
 
   <?php # NEW # ?>
   <?php if (array_key_exists ('new-note-href', $content['admin'])) { ?>
-  <?#= $content['admin']['new-note-href'] ?>
 
   <?php if (_AT ($content['admin']['new-note-href'])) { ?>
   <span class="admin-icon e2-admin-menu-new-selected" title="<?= _S ('ln--new-post') ?>"><span class="e2-svgi"><?= _SVG ('new') ?></span></span>
 
   <span class="admin-icon e2-admin-menu-new" style="display: none" title="<?= _S ('ln--new-post') ?>"><a href="<?= $content['admin']['new-note-href'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('new') ?></span></a></span>
-
 
   <?php } else { ?>
 

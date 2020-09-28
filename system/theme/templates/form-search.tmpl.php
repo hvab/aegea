@@ -6,7 +6,7 @@
   accept-charset="utf-8"
 >
   <label class="search-field__label">
-    <input class="search-field__input" type="text" name="query" id="query" value="<?= @$content['form-search']['query'] ?>" />
+    <input class="search-field__input" type="search" inputmode="search" name="query" id="query" value="<?= @$content['form-search']['query'] ?>" />
     
     <span class="search-field__zoom-icon"><?= _SVG ('loupe') ?></span>
     

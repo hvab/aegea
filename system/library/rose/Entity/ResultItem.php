@@ -1,19 +1,27 @@
 <?php
 /**
- * @copyright 2016-2017 Roman Parpalak
+ * @copyright 2016-2020 Roman Parpalak
  * @license   MIT
  */
 
 namespace S2\Rose\Entity;
 
-use S2\Rose\Exception\RuntimeException;
+use S2\Rose\Exception\InvalidArgumentException;
+use S2\Rose\Stemmer\IrregularWordsStemmerInterface;
 use S2\Rose\Stemmer\StemmerInterface;
 
-/**
- * Class ResultItem
- */
 class ResultItem
 {
+    /**
+     * @var string
+     */
+    protected $id;
+
+    /**
+     * @var int|null
+     */
+    protected $instanceId;
+
     /**
      * @var string
      */
@@ -25,7 +33,7 @@ class ResultItem
     protected $description = '';
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $date;
 
@@ -55,8 +63,8 @@ class ResultItem
     protected $foundWords = [];
 
     /**
-     * ResultItem constructor.
-     *
+     * @param string    $id Id in external system
+     * @param int|null  $instanceId
      * @param string    $title
      * @param string    $description
      * @param \DateTime $date
@@ -64,12 +72,16 @@ class ResultItem
      * @param string    $highlightTemplate
      */
     public function __construct(
+        $id,
+        $instanceId,
         $title,
         $description,
         \DateTime $date = null,
         $url,
         $highlightTemplate
     ) {
+        $this->id                = $id;
+        $this->instanceId        = $instanceId;
         $this->title             = $title;
         $this->description       = $description;
         $this->date              = $date;
@@ -99,6 +111,22 @@ class ResultItem
         $this->relevance = $relevance;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getInstanceId()
+    {
+        return $this->instanceId;
     }
 
     /**
@@ -182,20 +210,23 @@ class ResultItem
         $template = $this->highlightTemplate;
 
         if (strpos($template, '%s') === false) {
-            throw new RuntimeException('Highlight template must contain "%s" substring for sprintf() function.');
+            throw new InvalidArgumentException('Highlight template must contain "%s" substring for sprintf() function.');
         }
 
-        $joinedStems = implode('|', $this->foundWords);
+        $joinedStems = $this->foundWords;
+        if ($stemmer instanceof IrregularWordsStemmerInterface) {
+            $joinedStems = array_merge($joinedStems, $stemmer->irregularWordsFromStems($this->foundWords));
+        }
+        $joinedStems = implode('|', $joinedStems);
         $joinedStems = str_replace('е', '[её]', $joinedStems);
 
         $replacedLine = preg_replace_callback(
             '#(?<=[^\\p{L}]|^)(' . $joinedStems . ')\\p{L}*#Ssui',
             function ($matches) use ($template, $stemmer) {
                 $word        = $matches[0];
-                $stem        = str_replace('ё', 'е', mb_strtolower($matches[1]));
                 $stemmedWord = $stemmer->stemWord($word);
 
-                if ($stem != $stemmedWord) {
+                if (!in_array($stemmedWord, $this->foundWords, true)) {
                     return $word;
                 }
 

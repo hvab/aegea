@@ -1,14 +1,13 @@
 <?php
 /**
- * @copyright 2016 Roman Parpalak
+ * @copyright 2016-2020 Roman Parpalak
  * @license   MIT
  */
 
 namespace S2\Rose\Entity;
 
-/**
- * Class Query
- */
+use S2\Rose\Helper\StringHelper;
+
 class Query
 {
     /**
@@ -17,7 +16,12 @@ class Query
     protected $value;
 
     /**
-     * @var int
+     * @var int|null
+     */
+    protected $instanceId;
+
+    /**
+     * @var int|null
      */
     protected $limit;
 
@@ -27,8 +31,6 @@ class Query
     protected $offset = 0;
 
     /**
-     * Query constructor.
-     *
      * @param string $value
      */
     public function __construct($value)
@@ -37,7 +39,7 @@ class Query
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getLimit()
     {
@@ -47,7 +49,7 @@ class Query
     /**
      * @param int $limit
      *
-     * @return $this
+     * @return self
      */
     public function setLimit($limit)
     {
@@ -67,7 +69,7 @@ class Query
     /**
      * @param int $offset
      *
-     * @return $this
+     * @return self
      */
     public function setOffset($offset)
     {
@@ -82,6 +84,26 @@ class Query
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getInstanceId()
+    {
+        return $this->instanceId;
+    }
+
+    /**
+     * @param int|null $instanceId
+     *
+     * @return self
+     */
+    public function setInstanceId($instanceId)
+    {
+        $this->instanceId = $instanceId;
+
+        return $this;
     }
 
     /**
@@ -134,10 +156,10 @@ class Query
             }
         }
 
-        $words = array_filter($words, 'strlen');
+        $words = StringHelper::removeLongWords($words);
 
         // Fix keys
-        $words = array_values($words);
+        // $words = array_values($words); // <- moved to helper
 
         return $words;
     }

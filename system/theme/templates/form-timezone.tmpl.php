@@ -17,7 +17,10 @@
   <div class="form-label input-label"><label><?= _S ('ff--gmt-offset') ?></label></div>
   <div class="form-element">
     <div>
-      <?= $content['form-timezone']['timezone-selector'] ?>
+      <div class="e2-select-wrapper width-2">
+        <?= $content['form-timezone']['timezone-selector'] ?>
+        <span class="e2-select-icon"><span class="e2-svgi"><?= _SVG ('chevron-down') ?></span></span>
+      </div>
     </div>
   </div>    
   <div class="form-element">

@@ -65,11 +65,11 @@
   --blogTitleFontSize: 28px;
   --blogTitleLineHeight: 32px;
   --pageHeadingFontSize: 36px;
-  --pageHeadingLineHeight: 42px;
-  --noteTitleFontSize: 28px;
-  --noteTitleLineHeight: 32px;
-  --noteTitleFavouriteFontSize: 40px;
-  --noteTitleFavouriteLineHeight: 48px;
+  --pageHeadingLineHeight: 40px;
+  --noteTitleFontSize: 36px;
+  --noteTitleLineHeight: 40px;
+  --noteTitleFavouriteFontSize: 36px;
+  --noteTitleFavouriteLineHeight: 40px;
   --noteTextFontSize: 20px;
   --noteTextLineHeight: 28px;
 

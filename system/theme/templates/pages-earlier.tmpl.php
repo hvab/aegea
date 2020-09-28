@@ -1,5 +1,3 @@
-<?php // mui ?>
-
 <?php if ($content['pages']['earlier-href'] and $content['pages']['earlier-title']): ?>
 
 <div class="e2-pages">

@@ -2,7 +2,7 @@
   margin-bottom: 40px;
 
   h2 {
-    margin: 0;
+    margin: 0 0 8px 0;
     font-weight: bold;
     font-size: var(--pageHeadingFontSize);
     line-height: var(--pageHeadingLineHeight);
@@ -18,25 +18,28 @@
   }
 }
 
-.e2-heading-super {
-  font-size: 14px;
-  line-height: 20px;
-  margin: 0;
+.e2-heading-see-also {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  line-height: 16px;
+  font-family: var(--smallFontFamily);
 }
 
-.e2-heading-see-also {
-  margin-top: 10px;
+.e2-heading-see-also-title {
+  margin-right: .67em;
 }
 
 .e2-heading-description {
-  margin: 40px 0 40px;
+  font-size: var(--noteTextFontSize);
+  line-height: var(--noteTextLineHeight);
+  margin: 0 0 16px 0;
 }
 
 .e2-year-months,
 .e2-month-days {
   font-family: var(--smallFontFamily);
-  font-size: 12px;
-  line-height: 24px;
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
   margin: 12px -4px 0;
 }
 

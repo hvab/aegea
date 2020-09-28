@@ -11,10 +11,10 @@
   --headingsUnderlineColor:     rgba( 255, 255, 255, .25 );
   --boldColor:                     var(--headingsColor);
   --boldUnderlineColor:            var(--headingsUnderlineColor);
-  --linkColor:                   rgb( 240, 106,  33      );
-  --linkUnderlineColor:         rgba( 240, 106,  33, .25 );
-  --linkColorVisited:           rgba( 240, 106,  33, .5  );
-  --linkUnderlineColorVisited:  rgba( 240, 106,  33, .12 );
+  --linkColor:                   rgb( 240, 106,  32      );
+  --linkUnderlineColor:         rgba( 240, 106,  32, .25 );
+  --linkColorVisited:            rgb( 160,  80,  32      );
+  --linkUnderlineColorVisited:  rgba( 160,  80,  32, .12 );
   --hoverColor:                  rgb( 238, 218,  35      );
   --hoverUnderlineColor:        rgba( 238, 218,  35, .25 );
   /* --tagColor */
@@ -65,11 +65,11 @@
   --blogTitleFontSize: 40px;
   --blogTitleLineHeight: 48px;
   --pageHeadingFontSize: 36px;
-  --pageHeadingLineHeight: 42px;
-  --noteTitleFontSize: 28px;
-  --noteTitleLineHeight: 32px;
-  --noteTitleFavouriteFontSize: 40px;
-  --noteTitleFavouriteLineHeight: 48px;
+  --pageHeadingLineHeight: 40px;
+  --noteTitleFontSize: 36px;
+  --noteTitleLineHeight: 40px;
+  --noteTitleFavouriteFontSize: 36px;
+  --noteTitleFavouriteLineHeight: 40px;
   --noteTextFontSize: 20px;
   --noteTextLineHeight: 28px;
 

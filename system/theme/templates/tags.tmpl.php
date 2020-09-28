@@ -3,6 +3,7 @@
 
 <div class="e2-tags">
 <?php foreach ($content['tags']['each'] as $tag): ?>
+<?php if (!$tag['visible?']) continue; ?>
 <a
   href="<?=@$tag['href']?>"
   class="e2-tag"

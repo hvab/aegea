@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 
+<!-- <?= $content['exception-message'] ?> -->
+
 <head>
 <title><?= $content['title'] ?></title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>

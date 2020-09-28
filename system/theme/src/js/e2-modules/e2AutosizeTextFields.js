@@ -14,7 +14,7 @@ function e2SetSizeTextField () {
     return
   }
 
-  var myHeight = parseInt(element.style.height)
+  var myHeight = parseInt(element.clientHeight)
   var lastHeight
 
   if (element.scrollHeight > myHeight) {

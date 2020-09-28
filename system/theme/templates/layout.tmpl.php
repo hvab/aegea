@@ -17,7 +17,7 @@
 </h1>
 
 <?php if ($content['frontpage?']) {?>
-<p><?= $content['blog']['description'] ?></p>
+<p><?= $content['blog']['subtitle'] ?></p>
 <?php } ?>
 
 <?php _T_FOR ('form-search') ?>
@@ -46,7 +46,6 @@
 
 <?php _T ('welcome') ?>
 <?php _T ('notes') ?>
-<?php _T ('drafts') ?>
 <?php _T ('notes-list') ?>
 <?php _T ('tags') ?>
 <?php _T ('nothing') ?>

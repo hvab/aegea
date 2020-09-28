@@ -14,14 +14,13 @@
 
 
 <?php if ($content['class'] == 'frontpage') { ?>
-<div id="e2-blog-description"><?= $content['blog']['description'] ?></div>
+<div id="e2-blog-description"><?= $content['blog']['subtitle'] ?></div>
 <?php } ?>
 
 <?php _T ('heading') ?>
 <?php _T ('theme-preview') ?>
 <?php _T ('message') ?>
 <?php _T ('welcome') ?>
-<?php _T ('drafts') ?>
 <?php _T ('notes') ?>
 <?php _T ('notes-list') ?>
 <?php _T ('tags') ?>

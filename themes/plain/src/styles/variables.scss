@@ -9,8 +9,11 @@ $hoverColor: #b03000;
 $engineTextColor: #a0a0a0;
 $adminColor: #009030;
 
+$ArePagesMultiline: 'screen and (max-width: 375px)';
+
 $AreCommentsVertical: 'screen and (max-width: 735px)';
 $ArePopularVertical: 'screen and (max-width: 735px)';
+$AreRelatedVertical: 'screen and (max-width: 735px)';
 $AreFormsVertical: 'screen and (max-width: 735px)';
 $IsSearchHeadingFullWidth: 'screen and (max-width: 735px)';
 $AreWindowsFullWidth: 'screen and (max-width: 735px)';
@@ -85,20 +88,26 @@ $IsCompact: 'screen and (max-width: 1023px)';
 
   --columnSpacing: 15px;
 
-  --borderRadius: 4px;
+  --borderRadius: 6px;
 
   --logoTop: -20px;
   --logoSize: 40px;
   --blogTitleFontSize: 16px;
   --blogTitleLineHeight: 24px;
+  --subHeadingFontSize: 26px;
+  --subHeadingLineHeight: 32px;
   --pageHeadingFontSize: 36px;
-  --pageHeadingLineHeight: 42px;
-  --noteTitleFontSize: 20px;
-  --noteTitleLineHeight: 26px;
+  --pageHeadingLineHeight: 40px;
+  --noteTitleFontSize: 36px;
+  --noteTitleLineHeight: 40px;
   --noteTitleFavouriteFontSize: 36px;
   --noteTitleFavouriteLineHeight: 40px;
   --noteTextFontSize: 16px;
   --noteTextLineHeight: 24px;
+  --smallFontSize: 12px;
+  --smallLineHeight: 16px;
+  --bigButtonFontSize: 20px;
+  --bigButtonLineHeight: 28px;
 
   --mainFontFamily: system-ui, -apple-system, BlinkMacSystemFont, "SF UI Text", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   --noteMainFontFamily: inherit;
@@ -120,18 +129,20 @@ $IsCompact: 'screen and (max-width: 1023px)';
     --thinRuleColor:              rgba( 192, 192, 192, .25 );
     
     --headingsColor:               rgb( 255, 255, 255      );
-    --headingsUnderlineColor:     rgba( 255, 255, 255, .5  );
+    --headingsUnderlineColor:     rgba( 255, 255, 255, .25 );
     --boldColor:                     var(--foregroundColor);
     --boldUnderlineColor:            var(--thinRuleColor);
     --linkColor:                   rgb(   0, 128, 212      );
     --linkUnderlineColor:         rgba(   0, 128, 212, .25 );
-    // --linkColorVisited:            rgb(   0,  96, 160      );
-    // --linkUnderlineColorVisited:  rgba(   0,  96, 160, .25 );
+    --linkColorVisited:            rgb(  64,  96, 144      );
+    --linkUnderlineColorVisited:  rgba(  64,  96, 144, .25 );
     --hoverColor:                  rgb( 240,  64,  32);
     --hoverUnderlineColor:        rgba( 240,  64,  32, .25 );
     
     --adminColor:                  rgb(  76, 178, 110);
     --adminUnderlineColor:        rgba(  76, 178, 110, .25 );
+    --engineTextColor:             rgb( 128, 128, 128      );
+    --engineTextUnderlineColor:   rgba( 128, 128, 128, .25 );
 
     --markedTextBackground:           #443300;
     --markedImageBorderColor:         #886600;
@@ -145,7 +156,6 @@ $IsCompact: 'screen and (max-width: 1023px)';
     --errorColor:                  rgb( 240,  64,  32);
     --currentItemBackgroundColor:     #303030;
     --windowBackgroundColor:          #303030;
-    /* --unsavedIndicatorColor */
 
   }
 }

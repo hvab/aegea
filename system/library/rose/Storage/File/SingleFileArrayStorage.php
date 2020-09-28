@@ -1,18 +1,16 @@
 <?php
 /**
- * @copyright 2016-2017 Roman Parpalak
+ * @copyright 2016-2020 Roman Parpalak
  * @license   MIT
  */
 
 namespace S2\Rose\Storage\File;
 
-use S2\Rose\Helper\Helper;
+use S2\Rose\Entity\ExternalId;
+use S2\Rose\Helper\ProfileHelper;
 use S2\Rose\Storage\ArrayFulltextStorage;
 use S2\Rose\Storage\ArrayStorage;
 
-/**
- * Class SingleFileArrayStorage
- */
 class SingleFileArrayStorage extends ArrayStorage
 {
     /**
@@ -54,7 +52,7 @@ class SingleFileArrayStorage extends ArrayStorage
         $data = file_get_contents($this->filename);
 
         if ($isDebug) {
-            $return[] = Helper::getProfilePoint('Reading index file', -$start_time + ($start_time = microtime(true)));
+            $return[] = ProfileHelper::getProfilePoint('Reading index file', -$start_time + ($start_time = microtime(true)));
         }
 
         $end     = strpos($data, "\n");
@@ -84,16 +82,16 @@ class SingleFileArrayStorage extends ArrayStorage
 
         $end       = strpos($data, "\n");
         $my_data   = substr($data, 8, $end);
-        $data      = substr($data, $end + 1);
+        // $data      = substr($data, $end + 1);
         $this->toc = unserialize($my_data) ?: [];
 
         if ($isDebug) {
-            $return[] = Helper::getProfilePoint('Unserializing index', -$start_time + ($start_time = microtime(true)));
+            $return[] = ProfileHelper::getProfilePoint('Unserializing index', -$start_time + ($start_time = microtime(true)));
         }
 
         $this->externalIdMap = [];
-        foreach ($this->toc as $externalId => $entry) {
-            $this->externalIdMap[$entry->getInternalId()] = $externalId;
+        foreach ($this->toc as $serializedExtId => $entry) {
+            $this->externalIdMap[$entry->getInternalId()] = ExternalId::fromString($serializedExtId);
         }
 
         return $return;

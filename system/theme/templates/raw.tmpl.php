@@ -7,7 +7,7 @@
 
 <style type="text/css">
 
-*           { font-family: "Consolas", "Courier New", monospace; line-height: 1.2em }
+*           { font-family: "Menlo", "Consolas", "Courier New", monospace; line-height: 1.33em }
 body        { background: #fff; font-size: 80% }
 blockquote  { margin: 0 .67em 0 3.33em }
 p           { margin: .5em 0 }

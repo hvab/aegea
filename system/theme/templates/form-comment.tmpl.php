@@ -33,12 +33,6 @@
 
 <input
   type="hidden"
-  name="from"
-  value="<?= @$content['form-comment']['.from'] ?>"
-/>
-
-<input
-  type="hidden"
   name="already-subscribed"
   value="<?= @$content['form-comment']['.already-subscribed?'] ?>"
 />
@@ -63,10 +57,9 @@
 
 <div class="form-control">
   <textarea name="text"
-    class="required width-4 e2-textarea-autosize"
+    class="required width-4 height-8 e2-textarea-autosize"
     id="text"
     tabindex="3"
-    style="height: 16.7em; min-height: 16.7em; overflow-x: hidden; overflow-y: visible"
   ><?=$content['form-comment']['text']?></textarea>
 </div>
 
@@ -210,6 +203,8 @@
     </div>
   </div>
 
+  <?php if ($content['form-comment']['emailing-possible?']) { ?>
+
   <?php if ($content['form-comment']['show-subscribe?']) { ?>
   <div class="form-element">
     <label class="checkbox">
@@ -229,6 +224,8 @@
     <p><?= $content['form-comment']['subscription-status'] ?></p>
   </div>
   <?php } ?>
+
+  <?php } ?> 
 </div>
 
 </div>

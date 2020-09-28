@@ -1,3 +1,10 @@
+<div class="e2-note-publish-preview">
+<?php $content['_']['_note'] = $content['notes']['only']; ?>
+<?php $content['_']['_note']['_pubpreview'] = true; ?>
+<?php _T ('note-snippet') ?>
+</div>
+
+
 <?php _LIB ('jquery.mousewheel') ?>
 <?php _LIB ('jquery.actual') ?>
 <?php _LIB ('momentjs') ?>
@@ -90,9 +97,3 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
 </div>
 
 </form>
-
-<?php if (array_key_exists ('only', $content['notes'])) { ?>
-<?php if (array_key_exists ('preview-href', $content['notes']['only'])) { ?>
-<p class="admin-links"><a href="<?= $content['notes']['only']['preview-href'] ?>"><?= _S ('gs--secret-link') ?></a></p>
-<?php } ?>
-<?php } ?>
