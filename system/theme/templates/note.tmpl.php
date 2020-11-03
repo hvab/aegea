@@ -200,13 +200,16 @@
 <?php } ?> &nbsp;
 <?php endif ?>
 
-<?php if (array_key_exists ('preview-href', $note)) { ?>
+<?php if (!empty ($note['preview-href'])) { ?>
 <span class="admin-links"><a href="<?= $note['preview-href'] ?>"><?= _S ('gs--secret-link') ?></a></span> &nbsp;
 <?php } ?>
 
 <?php if ($note['read-count']) { ?><span class="e2-read-counter"><span class="e2-svgi"><?= _SVG ('read') ?></span> <?= $note['read-count'] ?></span> &nbsp;<?php } ?>
 
-<span title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?>"><?= _AGO ($note['time']) ?></span> &nbsp;
+<?php if (!empty ($note['time'])) { ?>
+<span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $note['time'])?>"><?= _AGO ($note['time']) ?></span> &nbsp;
+<?php } ?>
+
 <?php
 $tags = array ();
 foreach ($note['tags'] as $tag) {
@@ -233,18 +236,30 @@ echo implode (' &nbsp; ', $tags)
 </div>
 
 
+<?php if (array_key_exists ('only', $content['notes'])) { ?>
+<?php if (!empty ($note['show-href'])): ?>
+<form action="<?= $note['show-href'] ?>" method="post"><button type="submit" class="e2-button"><?= _S ('fb--show') ?></button></form>
+<?php endif ?>
+<?php } ?>
+
+
+
 <?php $content['_']['_notes_gallery'] = $note['related']; ?>
 
 <?php if ($content['class'] == 'note') { ?>
 
+<section>
 <div class="e2-section-heading"><?= $note['related']['title']?></div>
 <?php _T ('notes-gallery') ?>
+</section>
 
 <?php } elseif ($content['class'] == 'frontpage') { ?>
 
+<section>
 <div class="e2-note-splitter">
 <?php _T ('notes-gallery') ?>
 </div>
+</section>
 
 <?php } ?>
 

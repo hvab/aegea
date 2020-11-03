@@ -71,6 +71,8 @@ function e2l_load_strings () {
   'ff--change-time' => 'Змяніць час',
   'ff--delete' => 'Выдаліць',
   'ff--edit' => 'Рэдагаваць',
+  'fb--hide' => 'Схаваць',
+  'fb--show' => 'Зрабіць бачнай',
   'fb--withdraw' => 'Вярнуць у чарнавікі',
   'ff--will-be-published' => 'Апублікуецца',
   'ff--is-published' => 'Апублікавана',

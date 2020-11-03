@@ -41,8 +41,9 @@ class NeasdenGroup_onlinevideo implements NeasdenGroup {
         if ($line['class'] == 'youtube') {
           // enablejsapi=1 is required to be able to manipulate this video through YouTube Iframe API:
           // https://developers.google.com/youtube/iframe_api_reference#Example_Video_Player_Constructors
-          $src = 'https://www.youtube.com/embed/'. $id . '?enablejsapi=1';
+          $src = 'https://www.youtube.com/embed/'. $id .'';
           $this->neasden->resource_detected ($src);
+          $src .= '?enablejsapi=1';
           // check resources.php for www.youtube.com, this is important
         }
 

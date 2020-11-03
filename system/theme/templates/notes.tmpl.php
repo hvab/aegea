@@ -19,7 +19,7 @@ Rose debug info
 
 <?php if ($content['class'] === 'drafts') {?>
 <?php _T ('note-preview') ?>
-<?php } elseif (in_array ($content['class'], ['found', 'tag', 'day'])) { ?>
+<?php } elseif (in_array ($content['class'], ['found', 'tag', 'day', 'popular', 'most-commented'])) { ?>
 <?php _T ('note-snippet') ?>
 <?php } elseif ($note['scheduled?'] and $content['class'] !== 'note') { ?>
 <?php _T ('note-snippet') ?>

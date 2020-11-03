@@ -80,6 +80,28 @@
       <?php } ?>
     </div>
 
+    <?php if (!empty ($content['form-underhood']['form-action-database-migrate'])) { ?>
+    <div class="form-control">
+      <div class="form-label"><label>Model</label></div>
+      <div class="form-element">
+        <form action="<?= @$content['form-underhood']['form-action-database-migrate'] ?>" method="post">
+          <input type="submit" class="e2-button" value="Ensure" />
+        </form>
+      </div>
+    </div>
+    <?php } ?>
+
+    <?php if (!empty ($content['form-underhood']['form-action-license-verify'])) { ?>
+    <div class="form-control">
+      <div class="form-label"><label>License</label></div>
+      <div class="form-element">
+        <form action="<?= @$content['form-underhood']['form-action-license-verify'] ?>" method="post">
+          <input type="submit" class="e2-button" value="Verify" />
+        </form>
+      </div>
+    </div>
+    <?php } ?>
+
     <div class="form-control">
       <div class="form-label"><label>Backup</label></div>
       <?php if (!empty ($content['form-underhood']['backup-last'])) { ?>
@@ -125,17 +147,6 @@
         </form>
       </div>
     </div> -->
-
-    <?php if (!empty ($content['form-underhood']['form-action-database-migrate'])) { ?>
-    <div class="form-control">
-      <div class="form-label"><label>Database structure</label></div>
-      <div class="form-element">
-        <form action="<?= @$content['form-underhood']['form-action-database-migrate'] ?>" method="post">
-          <input type="submit" class="e2-button" value="Ensure" />
-        </form>
-      </div>
-    </div>
-    <?php } ?>
 
   </div>
 </div>

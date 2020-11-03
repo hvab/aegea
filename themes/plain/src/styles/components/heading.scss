@@ -18,15 +18,18 @@
   }
 }
 
-.e2-heading-see-also {
-  margin: 0 0 6px 0;
-  font-size: 12px;
-  line-height: 16px;
+.e2-heading-meta {
+  margin: 0 0 40px 0;
+  width: 100%;
+  border: none;
   font-family: var(--smallFontFamily);
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
 }
 
-.e2-heading-see-also-title {
-  margin-right: .67em;
+.e2-heading-gallery+.e2-heading-meta {
+  border-top: 1px var(--thinRuleColor) solid;
+  padding: 8px 0;
 }
 
 .e2-heading-description {

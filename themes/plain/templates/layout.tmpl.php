@@ -37,7 +37,7 @@
     </div>
 
     <div class="spotlight">
-      <?php _T_DEFER ('stat') ?>
+      <?php #_T_DEFER ('stat') ?>
 
       <span class="admin-links-floating">
         <?php _T ('author-menu') ?>

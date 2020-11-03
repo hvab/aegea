@@ -19,18 +19,23 @@
 
 </span>
 
-<?php if (array_key_exists ('search-related-tags', $content)) { ?> 
-<div class="e2-heading-see-also">
 <?php
-$tags = array ();
-foreach ($content['search-related-tags'] as $tag) {
-  if ($tag['current?']) {
-    $tags[] = '<mark class="e2-tag">'. $tag['name'] .'</mark>';
-  } else {
-    $tags[] = '<a href="'. $tag['href'] .'" class="e2-tag">'. $tag['name'] .'</a>';
+$tags = [];
+if (array_key_exists ('search-related-tags', $content)) {
+  foreach ($content['search-related-tags'] as $tag) {
+    if ($tag['current?']) {
+      $tags[] = '<mark class="e2-tag">'. $tag['name'] .'</mark>';
+    } else {
+      $tags[] = '<a href="'. $tag['href'] .'" class="e2-tag">'. $tag['name'] .'</a>';
+    }
   }
 }
+$tags = implode (' &nbsp; ', $tags);
+if ((string) $tags !== '') {
+  $tags = _S ('gs--see-also') .':  '. $tags;
+}
 ?>
-  <span class="e2-heading-see-also-title"><?= _S ('gs--see-also') ?>:</span><?= implode (' &nbsp; ', $tags) ?>
-</div>
+
+<?php if ((string) $tags !== '') { ?> 
+<div class="e2-heading-meta"><?= $tags ?></div>
 <?php } ?>

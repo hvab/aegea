@@ -61,7 +61,7 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
         />
       </div>
 
-      <a href="#" class="e2-admin-link nu e2-schedule-controls-unrevealer e2-svgi "><?= _SVG ('close') ?></a>
+      <a href="#" class="e2-admin-link nu e2-schedule-controls-unrevealer e2-svgi"><?= _SVG ('close') ?></a>
 
     </div>
   </div>
@@ -89,9 +89,7 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
   <button type="submit" disabled="disabled" name="submit-button" value="schedule" id="submit-schedule-button" class="e2-button e2-submit-button" <?php if (!@$content['form-note-publish']['can-publish?']) echo 'disabled'; ?>>
     <?= @$content['form-note-publish']['submit-schedule-text'] ?>
   </button>
-
 </div>
-
 
 
 </div>

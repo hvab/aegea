@@ -59,7 +59,9 @@
 <?php endif ?>
 
 
+<?php if (empty ($note['_pubpreview'])): ?>
 <?php if ($note['scheduled?']) { ?><div class="e2-draft-label"><?= _S ('gs--will-be-published') ?> <?=_DT ('j {month-g} Y, H:i', @$note['time'])?></div><?php } ?>
+<?php endif ?>
 
 <?php // TITLE // ?>
 <h1>
@@ -95,6 +97,10 @@
 <?php } ?> &nbsp;
 <?php endif ?>
 <?php endif ?>
+
+<?php if (!empty ($note['preview-href'])) { ?>
+<span class="admin-links"><a href="<?= $note['preview-href'] ?>"><?= _S ('gs--secret-link') ?></a></span> &nbsp;
+<?php } ?>
 
 <?php if ($note['read-count']) { ?><span class="e2-read-counter"><span class="e2-svgi"><?= _SVG ('read') ?></span> <?= $note['read-count'] ?></span> &nbsp;<?php } ?>
 

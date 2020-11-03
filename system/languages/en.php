@@ -71,6 +71,8 @@ function e2l_load_strings () {
   'ff--change-time' => 'Change time',
   'ff--delete' => 'Delete',
   'ff--edit' => 'Edit',
+  'fb--hide' => 'Hide',
+  'fb--show' => 'Make visible',
   'fb--withdraw' => 'Convert back into draft',
   'ff--will-be-published' => 'Will be published',
   'ff--is-published' => 'Published',

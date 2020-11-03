@@ -162,11 +162,7 @@
 }
 
 @media #{$AreFormControlsFullWidth} {
-  .e2-smart-title {
-    width: 100% !important;
-  }
-
-  #blog-title, .width-2, .width-3, .width-4 {
+  .width-2, .width-3, .width-4 {
     width: 100% !important;
   }
 }

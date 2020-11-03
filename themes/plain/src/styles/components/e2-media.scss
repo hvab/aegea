@@ -20,6 +20,11 @@
   cursor: pointer;
 }
 
+.e2-media-sections-item a,
+.e2-media-sections-item a.nu u {
+  background: var(--backgroundColor);
+}
+
 .e2-media-seek.is-interactive,
 .e2-media-seek.jouele-is-interactive,
 .e2-media-sections-item.is-interactive span,

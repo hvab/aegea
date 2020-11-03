@@ -71,6 +71,8 @@ function e2l_load_strings () {
   'ff--change-time' => 'Changer l’heure',
   'ff--delete' => 'Supprimer',
   'ff--edit' => 'Modifier',
+  'fb--hide' => 'Cacher',
+  'fb--show' => 'Rendre visible',
   'fb--withdraw' => 'Reconvertir en brouillon',
   'ff--will-be-published' => 'Sera publié',
   'ff--is-published' => 'Publié',

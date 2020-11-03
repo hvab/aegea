@@ -103,7 +103,15 @@
           return acc;
         }
 
-        if (!isToAttrValid(seekTo)) {
+        if (typeof seekTo !== 'string') {
+          // console.log('Dropped', href, 'because', seekTo, 'is not string');
+          return acc;
+        }
+
+        const seconds = timeStringToSeconds(seekTo);
+        
+        // is nan?
+        if (seconds !== seconds) {
           // console.log('Dropped', href, 'because', seekTo, 'is not valid seek');
           return acc;
         }
@@ -115,8 +123,6 @@
           // console.log('Dropped', href, 'because controlled video was not found');
           return acc;
         }
-
-        const seconds = timeStringToSeconds(seekTo);
 
         const videoDataIndex = acc.findIndex(x => x.videoNode === videoNode);
         if (videoDataIndex > -1) {
@@ -180,10 +186,6 @@
   function getVimeoIdFromUrl(url) {
     const match = url.match(/^https?:\/\/(www\.)?vimeo\.com\/(\d*)/);
     return (match && match[2].length > 0) ? match[2] : null;
-  }
-
-  function isToAttrValid(attr) {
-    return typeof attr === 'string' && /^\d+?:[0-5]\d$/.test(attr);
   }
 
   function timeStringToSeconds(str) {

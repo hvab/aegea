@@ -27,7 +27,7 @@
 }
 
 .e2-notes-gallery-item {
-  padding-bottom: 24px;
+  margin-bottom: 24px;
 }
 .e2-notes-gallery-image {
   display: block;
@@ -132,7 +132,7 @@
   font-family: var(--smallFontFamily);
 }
 
-@media #{$ArePopularVertical} {
+@media #{$AreGalleriesVertical} {
   .e2-notes-gallery {
     display: block;
   }

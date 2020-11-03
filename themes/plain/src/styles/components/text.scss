@@ -1,7 +1,6 @@
 /* text */
 .e2-text {
-  word-break: break-word;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .e2-text h2,
@@ -118,15 +117,15 @@
   transition: none;
 }
 
-.e2-text-super-wrapper {
-  position: sticky;
-  top: 0;
-}
+// .e2-text-super-wrapper {
+//   position: sticky;
+//   top: 0;
+// }
 
-.e2-text-super-wrapper>.jouele {
-  margin-top: -5px;
-  bottom: -5px;
-}
+// .e2-text-super-wrapper>.jouele {
+//   margin-top: -5px;
+//   bottom: -5px;
+// }
 
 .e2-jouele-wrapper {
   background: var(--backgroundColor);

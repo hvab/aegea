@@ -87,7 +87,7 @@ $_config['retain_search_indexes_on_db_switch'] = false;
 $_config['broadcast_url'] = 'http://blogengine.ru/blogs/@notify';
 
 // broadcast all blog notes during indexing
-$_config['broadcast_on_indexing'] = true;
+$_config['broadcast_on_indexing'] = false;
 
 // display as many as this number of drafts per page
 $_config['drafts_per_page'] = 100; /* 0 for no limit */
@@ -113,10 +113,6 @@ $_config['backup_tail'] = true;
 
 // how often to rebuild backup from scratch and erase tail file
 $_config['backup_rebase_interval'] = SECONDS_IN_A_WEEK;
-
-// clean up older low read counts to save space
-$_config['sift_read_counts_on_backup'] = true;
-
 
 
 

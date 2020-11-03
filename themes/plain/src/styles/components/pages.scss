@@ -3,16 +3,19 @@
 }
 
 .e2-pages-prev-next {
-  padding: 8px 0;
   width: 100%;
   border: none;
-  border-top: 1px var(--thinRuleColor) solid;
   display: grid;
   grid-gap: 24px 20px;
   grid-template-columns: 1fr 1fr;
   font-family: var(--smallFontFamily);
   font-size: var(--smallFontSize);
   line-height: var(--smallLineHeight);
+}
+
+.e2-pages-prev-next {
+  border-top: 1px var(--thinRuleColor) solid;
+  padding: 8px 0;
 }
 
 .e2-pages-prev-next a,

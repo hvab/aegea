@@ -48,12 +48,12 @@
       <p>A table follows this paragraph. This paragraph has just a filler text. The theory of empathy is free. The rhythm has an elegant factographic chthonic myth. Artistic mediation is a catharsis. The liturgical drama has psychological parallelism.</p>      
       <div class="e2-text-table">
         <table cellpadding="0" cellspacing="0" border="0">
-        <tr><th>City</th><th>Time zone</th><th>Code</th><th>From Greenwich</th></tr>
+        <tr><th>City</th><th>Time zone</th><th>Code</th><th>From Greenwich</th></tr>
         <tr><td>Chelyabinsk</td><td>Yekaterinburg Time</td><td>YEKT</td><td>+5 h.</td></tr>
         <tr><td>Moscow</td><td>Moscow Time</td><td>MSK</td><td>+3 h.</td></tr>
         <tr><td>London</td><td>Greenwich Mean Time</td><td>GMT</td><td></td></tr>
-        <tr><td>New York</td><td>Eastern Time</td><td>ET</td><td>−5 h.</td></tr>
-        <tr><td>San Francisco</td><td>Pacific Time</td><td>PT</td><td>−8 h.</td></tr>
+        <tr><td>New York</td><td>Eastern Time</td><td>ET</td><td>−5 h.</td></tr>
+        <tr><td>San Francisco</td><td>Pacific Time</td><td>PT</td><td>−8 h.</td></tr>
         </table>
       </div>
       <p>Some text may be separated with a horisontal rule:</p>
@@ -371,71 +371,71 @@
     ),
   );
 
-  $return['popular'] = array (
-    'title' => 'Popular',
-    'each' => array (
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'These links appear under posts on their pages',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'A popular post',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Another post that everyone talks about',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Lorem ipsum dolor',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Short',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'These links appear under posts on their pages',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'A popular post',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Another post that everyone talks about',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Lorem ipsum dolor',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Short',
-        'current?' => false,
-      ),
-    ),
-  );
+  // $return['popular'] = array (
+  //   'title' => 'Popular',
+  //   'each' => array (
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'These links appear under posts on their pages',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'A popular post',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Another post that everyone talks about',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Lorem ipsum dolor',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Short',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'These links appear under posts on their pages',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'A popular post',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Another post that everyone talks about',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Lorem ipsum dolor',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Short',
+  //       'current?' => false,
+  //     ),
+  //   ),
+  // );
   
   return $return;
 

@@ -80,7 +80,7 @@ class NeasdenGroup_video implements NeasdenGroup {
           // '<img src="'. $myconf['src-prefix'] . $filebasename .'" '.
           // 'width="'. $width .'" height="'. $height.'" '.
           // 'alt="'. htmlspecialchars ($alt) .'" />'. "\n"
-          '<video src="'. $myconf['src-prefix'] . $filebasename .'" '.
+          '<video src="'. $myconf['src-prefix'] . $filebasename .'#t=0.001" '.
           'width="'. $width .'" height="'. $height.'" '.
           'controls '.
           'alt="'. htmlspecialchars ($alt) .'" />'. "\n"

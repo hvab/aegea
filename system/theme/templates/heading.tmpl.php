@@ -87,38 +87,40 @@
 
       <?php $content['_']['_notes_gallery'] = $content['tag']['popular']; ?>
 
-      <div class="e2-section-heading">
-        <?=$content['tag']['popular']['title']?>
-      </div>
-
-      <?php _T ('notes-gallery') ?>
+      <section class="e2-heading-gallery">
+        <div class="e2-section-heading"><?=$content['tag']['popular']['title']?></div>
+        <?php _T ('notes-gallery') ?>
+      </section>
 
       <?php } ?>
       <?php } ?>
-
-      <?php if ((string) $content['tag']['description'] !== ''): ?>
-      <div class="e2-heading-description e2-text">
-        <?= $content['tag']['description'] ?>
-      </div>
-      <?php endif ?>
 
       <!-- <div class="e2-note-meta">
       <?= $content['tag']['notes-count-text'] ?>: <a href="">*с первой</a> · <a href="">с последней</a>
       </div> -->
 
-      <?php if (array_key_exists ('related', $content['tag']) and count ($content['tag']['related'])): ?>
-      <div class="e2-heading-see-also">
       <?php
-      $tags = array ();
-      foreach ($content['tag']['related'] as $tag) {
-        if ($tag['current?']) {
-          $tags[] = '<mark class="e2-tag">'. $tag['name'] .'</mark>';
-        } else {
-          $tags[] = '<a href="'. $tag['href'] .'" class="e2-tag">'. $tag['name'] .'</a>';
+      $tags = [];
+      if (array_key_exists ('related', $content['tag']) and count ($content['tag']['related'])) {
+        foreach ($content['tag']['related'] as $tag) {
+          if ($tag['current?']) {
+            $tags[] = '<mark class="e2-tag">'. $tag['name'] .'</mark>';
+          } else {
+            $tags[] = '<a href="'. $tag['href'] .'" class="e2-tag">'. $tag['name'] .'</a>';
+          }
         }
       }
+      $tags = implode (' &nbsp; ', $tags);
+      if ((string) $tags !== '') {
+        $tags = '   '. _S ('gs--see-also') .':  '. $tags;
+      }
       ?>
-      <span class="e2-heading-see-also-title"><?= $content['tag']['notes-count-text'] ?>   <?= _S ('gs--see-also') ?>:</span><?= implode (' &nbsp; ', $tags) ?>
+
+      <div class="e2-heading-meta"><?= $content['tag']['notes-count-text'] ?><?= $tags ?></div>
+
+      <?php if ((string) $content['tag']['description'] !== ''): ?>
+      <div class="e2-heading-description e2-text">
+        <?= $content['tag']['description'] ?>
       </div>
       <?php endif ?>
 
