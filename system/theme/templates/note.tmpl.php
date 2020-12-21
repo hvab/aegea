@@ -123,8 +123,8 @@
 </div>
 <?php } ?>
 
-<?php if ($note['draft?']) { ?><div class="e2-draft-label"><?= _S ('gs--not-published') ?></div><?php } ?>
-<?php if ($note['scheduled?']) { ?><div class="e2-draft-label"><?= _S ('gs--will-be-published') ?> <?=_DT ('j {month-g} Y, H:i', @$note['time'])?></div><?php } ?>
+<?php if ($note['draft?']) { ?><div class="e2-nonpublic-label"><?= _S ('gs--not-published') ?></div><?php } ?>
+<?php if ($note['scheduled?']) { ?><div class="e2-nonpublic-label"><?= _S ('gs--will-be-published') ?> <?=_DT ('j {month-g} Y, H:i', @$note['time'])?></div><?php } ?>
 
 <?php // TITLE // ?>
 <h1 class="e2-smart-title">
@@ -190,7 +190,6 @@
 
 <?php // LIST OF KEYWORDS // ?>
 
-<?php if (array_key_exists ('tags', $note)): ?>
 <div class="e2-note-meta">
 <?php if ($note['comments-link?']): ?>
 <?php if ($note['comments-count']) { ?><a href="<?= $note['href'] ?>#comments" class="nu"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <u><?= $note['comments-count-text'] ?></u></a><?php if ($note['new-comments-count'] == 1 and $note['comments-count'] == 1) { ?>, <?= _S ('gs--comments-all-one-new') ?><?php } elseif ($note['new-comments-count'] == $note['comments-count']) { ?>, <?= _S ('gs--comments-all-new') ?><?php } elseif ($note['new-comments-count']) { ?> · <span class="admin-links"><a href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a></span>
@@ -204,7 +203,7 @@
 <span class="admin-links"><a href="<?= $note['preview-href'] ?>"><?= _S ('gs--secret-link') ?></a></span> &nbsp;
 <?php } ?>
 
-<?php if ($note['read-count']) { ?><span class="e2-read-counter"><span class="e2-svgi"><?= _SVG ('read') ?></span> <?= $note['read-count'] ?></span> &nbsp;<?php } ?>
+<?php if (_READS ($note)) { ?><span><span class="e2-svgi"><?= _SVG ('read') ?></span> <?= _READS ($note) ?></span> &nbsp;<?php } ?>
 
 <?php if (!empty ($note['time'])) { ?>
 <span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $note['time'])?>"><?= _AGO ($note['time']) ?></span> &nbsp;
@@ -230,7 +229,6 @@ echo implode (' &nbsp; ', $tags)
 
 ?>
 </div>
-<?php endif; ?>
 
 
 </div>
@@ -246,7 +244,7 @@ echo implode (' &nbsp; ', $tags)
 
 <?php $content['_']['_notes_gallery'] = $note['related']; ?>
 
-<?php if ($content['class'] == 'note') { ?>
+<?php if (!empty ($note['related']) and $content['class'] == 'note') { ?>
 
 <section>
 <div class="e2-section-heading"><?= $note['related']['title']?></div>

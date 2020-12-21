@@ -51,7 +51,11 @@ function e2CheckServerResponse () {
 
   if (!serverResponse['data']['db-connected']) return
 
-  $('.db-user-password-ok, .db-database-ok').removeClass('e2-wrong').addClass('e2-verified')
+  $('.db-user-password-ok').removeClass('e2-wrong').addClass('e2-verified')
+
+  if (!serverResponse['data']['db-found']) return
+
+  $('.db-database-ok').removeClass('e2-wrong').addClass('e2-verified')
 
   $('#db-database-message-text').text(serverResponse['data']['message'])
 
@@ -171,6 +175,8 @@ function e2CheckDbConfig () {
               }
 
               $dbDatabaseList.empty()
+
+              if (!dbs.length) return
 
               for (var k in dbs) {
                 ++dbCount

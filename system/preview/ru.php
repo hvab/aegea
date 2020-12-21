@@ -69,7 +69,7 @@
         <li>а это — короткий элемент.</li>
       </ul>
       ',
-      // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
+      // 'summary' => '',
       // 'format-info' => array 2
       // 'time' => e2 time 8 May 2017, 20:46, GMT+05:00
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
@@ -110,9 +110,7 @@
       'text' => '
       <p>Это ещё один пример, чтобы вы настроили расстояние между заметками в ленте. Ещё это заметка без звезды, в отличие от предыдущей. Заголовок этой заметки не является ссылкой — как будто мы уже на её странице. Ещё один из тегов снизу подсвечен — как будто мы на его странице.</p>
       ',
-      // <div class="e2-text-block-loud">Так оформляется важная цитата, вывод или правило</div>
-      // <div class="e2-text-block-foot">А ещё у этой заметки есть сноска.</div>
-      // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
+      // 'summary' => '',
       // 'format-info' => array 2
       // 'time' => e2 time 8 May 2017, 20:46, GMT+05:00
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
@@ -155,10 +153,11 @@
     array (
       'id' => 3,
       'title' => 'Пример заметки в результатах <mark>поиска</mark>',
-      'text' => '
+      'text' => '',
+      'snippet-text' => '
       <p>Так выглядит заметка в результатах <mark>поиска</mark>. Текст запроса <mark>подсвечивается</mark>, а все картинки из заметки показываются ниже. Некоторые из них тоже могут быть <mark>подсвечены</mark>. Тег <tt>mark</tt> используется для всей <mark>подсветки</mark>, включая тег в предыдущей заметке.</p>
       ',
-      // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
+      // 'summary' => '',
       // 'format-info' => array 2
       // 'time' => e2 time 8 May 2017, 20:46, GMT+05:00
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
@@ -169,29 +168,30 @@
       'hidden?' => false,
       'commentable?' => false,
       'favourite?' => false,
-      'thumbs' => array (
-        array (
-          // 'original-filename' => 'topics.png',
-          'href' => 'system/theme/images/sample-thumb-1@2x.jpg',
+      'read-count' => 31,
+      'thumbs' => [
+        [
+          'is-available?' => true,
+          'src' => 'system/theme/images/sample-thumb-1@2x.jpg',
           'width' => 100,
           'height' => 79,
           'highlighted?' => false,
-        ),
-        array (
-          // 'original-filename' => 'topics.png',
-          'href' => 'system/theme/images/sample-thumb-2@2x.jpg',
+        ],
+        [
+          'is-available?' => true,
+          'src' => 'system/theme/images/sample-thumb-2@2x.jpg',
           'width' => 100,
           'height' => 67,
           'highlighted?' => false,
-        ),
-        array (
-          // 'original-filename' => 'topics.png',
-          'href' => 'system/theme/images/sample-thumb-3@2x.jpg',
+        ],
+        [
+          'is-available?' => true,
+          'src' => 'system/theme/images/sample-thumb-3@2x.jpg',
           'width' => 100,
           'height' => 44,
           'highlighted?' => true,
-        ),
-      ),
+        ],
+      ],
       // 'comments-count' => 5,
       // 'comments-count-text' => '5 comments',
       'href' => $self_href,

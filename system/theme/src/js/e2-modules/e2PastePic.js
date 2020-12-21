@@ -2,7 +2,6 @@ function e2PastePic (pic) {
   // if (alt = $ ('#title').val ()) alt = ' ' + alt
   var alt = ''
   var text = ''
-  if ($('#formatter-id').val() === 'calliope') text = '((' + pic + alt + '))'
   if ($('#formatter-id').val() === 'neasden') text = pic + alt
   if (!text) return
   var field = document.getElementById('text')

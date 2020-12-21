@@ -50,7 +50,7 @@
             class="text required width-2"
             id="urlname"
             name="urlname"
-            value="<?= @$content['form-tag']['urlname'] ?>"
+            value="<?= @$content['form-tag']['alias'] ?>"
           />
         </div>
       </div>

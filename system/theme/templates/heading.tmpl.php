@@ -74,7 +74,10 @@
       <?php endif ?>
 
     </span>
-    
+
+    <?php if (array_key_exists ('tag', $content)) { ?>
+    <?php if (!$content['tag']['visible?']) { ?> <div class="e2-nonpublic-label"><?= _S ('gs--not-published') ?></div><?php } ?>
+    <?php } ?>
     <h2><?= $content['heading'] ?></h2>
 
     <?php _T_FOR ('year-months') ?>
@@ -103,10 +106,11 @@
       $tags = [];
       if (array_key_exists ('related', $content['tag']) and count ($content['tag']['related'])) {
         foreach ($content['tag']['related'] as $tag) {
+          $classname = 'e2-tag '. ($tag['visible?']? '' : ' e2-hidden');
           if ($tag['current?']) {
-            $tags[] = '<mark class="e2-tag">'. $tag['name'] .'</mark>';
+            $tags[] = '<mark class="'. $classname .'">'. $tag['name'] .'</mark>';
           } else {
-            $tags[] = '<a href="'. $tag['href'] .'" class="e2-tag">'. $tag['name'] .'</a>';
+            $tags[] = '<a href="'. $tag['href'] .'" class="'. $classname .'">'. $tag['name'] .'</a>';
           }
         }
       }

@@ -23,7 +23,6 @@
 
 .e2-notes-gallery-area-hrule {
   border-bottom: 1px var(--thinRuleColor) solid;
-  // margin-bottom: 12px;
 }
 
 .e2-notes-gallery-item {
@@ -93,7 +92,8 @@
   padding-right: 20px;
 }
 .e2-notes-gallery-item-title {
-  margin: 0 0 4px 0;
+  color: var(--headingsColor); // for text-overflow: ellipsis dots color
+  margin: 0 0 6px 0;
 }
 .e2-notes-gallery-item-title-large {
   font-weight: bold;
@@ -103,10 +103,11 @@
 .e2-notes-gallery-item-title-jumbo {
   font-weight: normal;
   font-size: 82px;
-  line-height: 82px;
-  margin: -8px 0 12px 0;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
+  line-height: 78px;
+  margin: -8px 0 4px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-bottom: 12px;
 }
 .e2-notes-gallery-item-title a {
   padding-top: .4em;
@@ -122,6 +123,9 @@
   border-color: var(--hoverUnderlineColor);
 }
 
+.e2-notes-gallery-item-title+.e2-notes-gallery-item-summary {
+  margin: -2px 0 6px 0;
+}
 .e2-notes-gallery-item-summary {
   margin: 0 0 6px 0;
 }
@@ -136,17 +140,8 @@
   .e2-notes-gallery {
     display: block;
   }
-  // .e2-notes-gallery-item-sided {
-    // display: block;
-  // }
-  // .e2-notes-gallery-item-sided-r  .e2-notes-gallery-image,
-  // .e2-notes-gallery-area-vrule .e2-notes-gallery-item-sided-r .e2-notes-gallery-image {
-  //   padding-left: 0;
-  //   padding-right: 0;
-  // }
   .e2-notes-gallery-item {
-    // display: block;
-    padding-bottom: 18px;
+    margin-bottom: 18px;
   }
   .e2-notes-gallery-area {
     height: auto;
@@ -157,9 +152,7 @@
     font-weight: normal;
     font-size: 52px;
     line-height: 52px;
-    margin: -8px 0 12px 0;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+    padding-bottom: 8px;
   }
 
   .e2-notes-gallery-area-vrule {
@@ -169,6 +162,22 @@
   .e2-notes-gallery-area-vrule .e2-notes-gallery-item-sided-r .e2-notes-gallery-image {
     padding-left: 20px;
     padding-right: 0;
+  }
+
+  .e2-notes-gallery-image {
+    max-width: 90px;
+  }
+
+  .e2-notes-gallery-text {
+    max-width: 75%;
+  }
+
+  .e2-notes-gallery-item-with-large-title .e2-notes-gallery-image {
+    max-width: 270px;
+  }
+
+  .e2-notes-gallery-item-with-large-title .e2-notes-gallery-text {
+    max-width: initial;
   }
 
 }

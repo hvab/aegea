@@ -20,6 +20,8 @@
   cursor: pointer;
 }
 
+.e2-media-seek a,
+.e2-media-seek a.nu u,
 .e2-media-sections-item a,
 .e2-media-sections-item a.nu u {
   background: var(--backgroundColor);
@@ -38,23 +40,19 @@
   transition-timing-function: ease-out;
 }
 
-.e2-media-seek.is-interactive:hover,
-.e2-media-seek.is-interactive.hover,
+.e2-media-seek.is-interactive.isolatedHover,
+.e2-media-sections-item.is-interactive.isolatedHover,
 .e2-media-seek.jouele-is-interactive:hover,
 .e2-media-seek.jouele-is-interactive.hover,
-.e2-media-sections-item.is-interactive:hover,
-.e2-media-sections-item.is-interactive.hover,
 .e2-media-sections-item.jouele-is-interactive:hover,
 .e2-media-sections-item.jouele-is-interactive.hover {
   color: var(--hoverColor);
 }
 
-.e2-media-seek.is-interactive:hover,
-.e2-media-seek.is-interactive.hover,
+.e2-media-seek.is-interactive.isolatedHover,
+.e2-media-sections-item.is-interactive.isolatedHover span,
 .e2-media-seek.jouele-is-interactive:hover,
 .e2-media-seek.jouele-is-interactive.hover,
-.e2-media-sections-item.is-interactive:hover span,
-.e2-media-sections-item.is-interactive.hover span,
 .e2-media-sections-item.jouele-is-interactive:hover span,
 .e2-media-sections-item.jouele-is-interactive.hover span {
   border-bottom-color: var(--hoverUnderlineColor);

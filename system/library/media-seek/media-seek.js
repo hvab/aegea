@@ -31,11 +31,9 @@
           events: {
             onReady: (event) => {
               controls.forEach(({ controlNode, seconds }) => {
-                $(controlNode)
-                  .addClass('is-interactive')
-                  .on('click', () => {
-                    event.target.seekTo(seconds, true);
-                  });
+                initControlNode(controlNode, () => {
+                  event.target.seekTo(seconds, true);
+                });
               });
             },
           }
@@ -52,21 +50,19 @@
         const player = new Vimeo.Player(videoNode);
         player.on('loaded', () => {
           controls.forEach(({ controlNode, seconds }) => {
-            $(controlNode)
-              .addClass('is-interactive')
-              .on('click', () => {
-                player.setCurrentTime(seconds);
-                player.play().catch(e => {
-                  if (e.name === 'NotAllowedError') {
-                    // some browsers do not allow to play video if user haven't
-                    // interacted with them yet. we just ignore it. c'est la vie.
-                    return;
-                  }
+            initControlNode(controlNode, () => {
+              player.setCurrentTime(seconds);
+              player.play().catch(e => {
+                if (e.name === 'NotAllowedError') {
+                  // some browsers do not allow to play video if user haven't
+                  // interacted with them yet. we just ignore it. c'est la vie.
+                  return;
+                }
 
-                  // otherwise throw the error because it's weird
-                  throw e;
-                });
+                // otherwise print the error because it's weird
+                console.error(e);
               });
+            });
           });
         });
       });
@@ -79,15 +75,29 @@
     videos.forEach(({ controls, videoNode }) => {
       videoNode.addEventListener('loadeddata', () => {
         controls.forEach(({ controlNode, seconds }) => {
-          $(controlNode)
-            .addClass('is-interactive')
-            .on('click', () => {
-              videoNode.currentTime = seconds;
-              videoNode.play();
-            });
+          initControlNode(controlNode, () => {
+            videoNode.currentTime = seconds;
+            videoNode.play();
+          });
         });
       });
     });
+  }
+
+  function initControlNode(node, onClick) {
+    return $(node)
+      .addClass('is-interactive')
+      .on('mouseover', e => {
+        if ($(e.target).closest('a').length) return;
+        $(node).addClass('isolatedHover');
+      })
+      .on('mouseout', e => {
+        $(node).removeClass('isolatedHover');
+      })
+      .on('click', e => {
+        if ($(e.target).closest('a').length) return;
+        onClick();
+      });
   }
 
   function getControlledVideos() {
@@ -109,7 +119,7 @@
         }
 
         const seconds = timeStringToSeconds(seekTo);
-        
+
         // is nan?
         if (seconds !== seconds) {
           // console.log('Dropped', href, 'because', seekTo, 'is not valid seek');

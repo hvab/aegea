@@ -69,7 +69,7 @@
         <li>This is a short element.</li>
       </ul>
       ',
-      // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
+      // 'summary' => '',
       // 'format-info' => array 2
       // 'time' => e2 time 8 May 2017, 20:46, GMT+05:00
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
@@ -109,9 +109,7 @@
       'text' => '
       <p>This is a second example to help you adjust the distance between the posts in a feed. This post is also not starred unlike the previous one. The title is not a link here — as if we were on the posts’ page. It also has a highlighed tag — as if we were on that tag’s page.</p>
       ',
-      // <div class="e2-text-block-loud">Here’s what an important quote, conclusion, or rule looks like</div>
-      // <div class="e2-text-block-foot">Also it has a footnote.</div>
-      // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
+      // 'summary' => '',
       // 'format-info' => array 2
       // 'time' => e2 time 8 May 2017, 20:46, GMT+05:00
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
@@ -153,10 +151,11 @@
     array (
       'id' => 3,
       'title' => 'A sample post in the <mark>search</mark> results',
-      'text' => '
+      'text' => '',
+      'snippet-text' => '
       <p>This is what a post looks like in the <mark>search</mark> results page. The query text would be <mark>highlighted</mark>, and all the images from the post would be previewed below. Some of them may also be <mark>highlighted</mark>. The <tt>mark</tt> tag is used for all <mark>highlighting</mark>, including the tag in the post above.</p>
       ',
-      // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
+      // 'summary' => '',
       // 'format-info' => array 2
       // 'time' => e2 time 8 May 2017, 20:46, GMT+05:00
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
@@ -166,29 +165,30 @@
       'public?' => true,
       'hidden?' => false,
       'favourite?' => false,
-      'thumbs' => array (
-        array (
-          // 'original-filename' => 'topics.png',
-          'href' => 'system/theme/images/sample-thumb-1@2x.jpg',
+      'read-count' => 31,
+      'thumbs' => [
+        [
+          'is-available?' => true,
+          'src' => 'system/theme/images/sample-thumb-1@2x.jpg',
           'width' => 100,
           'height' => 79,
           'highlighted?' => false,
-        ),
-        array (
-          // 'original-filename' => 'topics.png',
-          'href' => 'system/theme/images/sample-thumb-2@2x.jpg',
+        ],
+        [
+          'is-available?' => true,
+          'src' => 'system/theme/images/sample-thumb-2@2x.jpg',
           'width' => 100,
           'height' => 67,
           'highlighted?' => false,
-        ),
-        array (
-          // 'original-filename' => 'topics.png',
-          'href' => 'system/theme/images/sample-thumb-3@2x.jpg',
+        ],
+        [
+          'is-available?' => true,
+          'src' => 'system/theme/images/sample-thumb-3@2x.jpg',
           'width' => 100,
           'height' => 44,
           'highlighted?' => true,
-        ),
-      ),
+        ],
+      ],
       // 'comments-count' => 5,
       // 'comments-count-text' => '5 comments',
       'href' => $self_href,

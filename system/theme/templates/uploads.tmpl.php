@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<div id="e2-uploaded-images" class="e2-uploaded-images">
+<div class="e2-uploaded-images">
   <?php foreach ($content['uploads']['each'] as $image) { ?>
     <div class="e2-uploaded-image">
       <?php if ($image['is-available?']) { ?>
@@ -65,7 +65,7 @@
 
 
 <?php if (@$content['uploads']['enabled?']) { ?>
-  <div class="e2-upload-controls e2-upload-controls_hidden">
+  <div class="e2-upload-controls e2-upload-controls_hidden" data-e2-filename-prefix="<?= $content['uploads']['default-name']?>">
     <div class="e2-admin-link e2-upload-controls-attach">
       <span class="e2-admin-item e2-upload-controls-attach-icon">
         <span class="e2-admin-item-icon">

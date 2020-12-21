@@ -34,6 +34,7 @@
   --disabledColor:                #808894;
   --activeColor:                  #ffd000;
   --errorColor:                   rgb( 255,  93,  87     );
+  --verifiedColor:                rgb(   93, 192, 87     );
   --currentItemBackgroundColor:   #333;
   --windowBackgroundColor:          var(--markedTextBackground);
   /* --unsavedIndicatorColor */

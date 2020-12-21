@@ -355,17 +355,22 @@
 
       <?php if (@$content['form-preferences']['show-payment-info?']) { ?>
         <div class="e2-text">
+          <p>
+
           <?php if (@$content['form-preferences']['paid-period']) { ?>
-          <p>✓ <?= _S ('gs--paid-until') ?> <?=_DT ('j {month-g} Y', $content['form-preferences']['paid-until'])?></p>
+          ✓ <?= _S ('gs--paid-until') ?> <?=_DT ('j {month-g} Y', $content['form-preferences']['paid-until'])?>
           <?php } elseif (@$content['form-preferences']['paid-period-ended']) { ?>
-          <p><span class="e2-error"><?= _S ('gs--paid-period-ended') ?> <?=_DT ('j {month-g} Y', $content['form-preferences']['paid-until'])?></span>
+          <span class="e2-error"><?= _S ('gs--paid-period-ended') ?> <?=_DT ('j {month-g} Y', $content['form-preferences']['paid-until'])?></span>
+          <?php } else { ?>
+          <span class="e2-error"><?= _S ('gs--not-paid') ?></span>
+          <?php } ?>
+
+          <?php if (!@$content['form-preferences']['paid-period']) { ?>
           <?php if ((string) $content['form-preferences']['pay-href'] !== '') { ?>
             · <a href="<?=$content['form-preferences']['pay-href']?>"><?= _S ('bt--learn-about-payment') ?></a>
           <?php } ?>
-          </p>
-          <?php } else { ?>
-          <p class="e2-error"><?= _S ('gs--not-paid') ?></p>
           <?php } ?>
+          </p>
         </div>
       <?php } ?>
 

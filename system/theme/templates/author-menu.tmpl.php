@@ -14,7 +14,7 @@ if (
   <?php # COMMENTS # ?>
   <?php if (array_key_exists ('new-comments-href', $content['admin'])) { ?>
   <span class="admin-icon admin-menu-comments">
-    <a class="nu admin-menu-comments-count" href="<?= @$content['admin']['new-comments-href'] ?>"><?= (int) $content['admin']['new-comments-count'] ?></a>
+    <a class="nu admin-menu-comments-count" href="<?= @$content['admin']['new-comments-href'] ?>#new"><?= (int) $content['admin']['new-comments-count'] ?></a>
   </span>
   <?php } ?>
 

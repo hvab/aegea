@@ -26,26 +26,24 @@ if (array_key_exists ('pages', $content) and !empty ($content['pages'])) {
 		$next_link = '<span class="unavailable">'. strip_tags ($content['pages']['next-title']) .'</span>';
 		$rarr = '<span class="e2-page-unavailable">→</span>';
 		$need_pager = true;
-	} else {
-		// $next_link = '<a href="'. $content['pages']['next-href'] .'">'. _S ('nm--favourites') .'</a>';
-		// $rarr = ' →';
-		// $need_pager = true;
 	}
 
 	if (@$content['pages']['timeline?']) {
 		$need_pager = false;
 	}
 
+	if ($shortcut = _SHORTCUT ('navigation')) $shortcut .= ' ';
+
   if ($need_pager and $prev_link) {
 		$prev_html = (
-			'<div class="e2-pages-prev"><span class="e2-keyboard-shortcut">'. _SHORTCUT ('navigation') .' '. $larr .'</span>'.
+			'<div class="e2-pages-prev"><span class="e2-keyboard-shortcut">'. $shortcut . $larr .'</span>'.
 			  $prev_link .'</div>'
 		);
 	}
 
   if ($need_pager and $next_link) {
 		$next_html = (
-			'<div class="e2-pages-next"><span class="e2-keyboard-shortcut">'. _SHORTCUT ('navigation') .' '. $rarr .'</span>'.
+			'<div class="e2-pages-next"><span class="e2-keyboard-shortcut">'. $shortcut . $rarr .'</span>'.
 			  $next_link .'</div>'
 		);
 	}

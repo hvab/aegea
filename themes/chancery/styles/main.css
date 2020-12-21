@@ -33,7 +33,8 @@
   /* --imageBorderColor */
   /* --disabledColor */
   --activeColor: #1283ce;
-  /* --errorColor */
+  --errorColor:                  rgb( 240,  64,  32);
+  --verifiedColor:               rgb(   64, 192, 32);
   /* --currentItemBackgroundColor */
   /* --windowBackgroundColor */
   /* --unsavedIndicatorColor */

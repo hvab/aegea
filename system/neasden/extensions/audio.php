@@ -69,12 +69,12 @@ class NeasdenGroup_audio implements NeasdenGroup {
           'class="jouele" '.
           'data-space-control="true" '.
           $jouele_data_length_attr.
-          'href="'. $href .'" '.
-        '>'. $alt .'</a></div>'."\n";
+          'href="'. $href .'"'.
+        '>'. $alt .'</a></div>';
         
         $player_html = $this->neasden->isolate ($player_html);
 
-        $result .= $player_html;
+        $result .= $player_html ."\n";;
       
       }
 
@@ -86,23 +86,41 @@ class NeasdenGroup_audio implements NeasdenGroup {
   
     // code duplication with onlinevideo.php, video.php :-(
     if (count ($ranges)) {
-      $result .= '<div class="e2-media-sections">'."\r\n";
-      $result .= '<table cellpadding="0" cellspacing="0" border="0">'."\r\n";
-      foreach ($ranges as $range) {
-        $item = [
-          'from' => $range[1],
-          'to' => $range[2],
-          'title' => $range[3],
-        ];
-        $result .= '<tr class="jouele-control e2-media-sections-item" data-type="seek" '."\r\n";
-        $result .= 'data-range="'. $item['from'] .'...'. $item['to'] .'" '."\r\n";
-        $result .= 'data-href="'. $href .'">'."\r\n";
-        $result .= '<td style="width: 1px; white-space: nowrap"><span>'. $item['from'] .'</span></td>'."\r\n";
-        $result .= '<td class="e2-media-sections-item-title"><span>'. $item['title'] .'</span></td>'."\r\n";
-        $result .= '</tr>'."\r\n";
+
+      if ($this->neasden->config['html.basic']) {
+        
+        $result .= '<p>'."\n";
+        foreach ($ranges as $range) {
+          $item = [
+            'from' => $range[1],
+            'title' => $range[3],
+          ];
+          $result .= $item['from'] .' '. $item['title'] .'<br />'."\n";
+        }
+        $result .= '</p>'."\n";
+
+      } else {  
+
+        $result .= '<div class="e2-media-sections">'."\n";
+        $result .= '<table cellpadding="0" cellspacing="0" border="0">'."\n";
+        foreach ($ranges as $range) {
+          $item = [
+            'from' => $range[1],
+            'to' => $range[2],
+            'title' => $range[3],
+          ];
+          $result .= '<tr class="jouele-control e2-media-sections-item" data-type="seek" '."\n";
+          $result .= 'data-range="'. $item['from'] .'...'. $item['to'] .'" '."\n";
+          $result .= 'data-href="'. $href .'">'."\n";
+          $result .= '<td style="width: 1px; white-space: nowrap"><span>'. $item['from'] .'</span></td>'."\n";
+          $result .= '<td class="e2-media-sections-item-title"><span>'. $item['title'] .'</span></td>'."\n";
+          $result .= '</tr>'."\n";
+        }
+        $result .= '</table>'."\n";
+        $result .= '</div>'."\n";
+
       }
-      $result .= '</table>'."\r\n";
-      $result .= '</div>'."\r\n";
+
     }
 
     $result .= '</div>'."\n";

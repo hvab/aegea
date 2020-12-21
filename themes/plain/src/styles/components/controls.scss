@@ -34,8 +34,8 @@ input[type="password"],
 input[type="search"],
 textarea,
 select {
-  &.e2-livecheckable { color: #000 }
-  &.e2-verified { color: #090 }
+  &.e2-livecheckable { color: var(--inputTextColor) }
+  &.e2-verified { color: var(--verifiedColor) }
   &.e2-wrong { color: var(--errorColor) }
 }
 

@@ -33,7 +33,8 @@
   --imageBorderColor:               #333;
   --disabledColor:               rgb(  87,  86,  85      );
   --activeColor:                   var(--linkColor);
-  --errorColor:                     #b03000;
+  --errorColor:                  rgb( 255, 112,  96);
+  --verifiedColor:               rgb(  96, 240,  32);
   --currentItemBackgroundColor:     #333;
   --windowBackgroundColor:       rgb(  45,  44,  43      );
   /* --unsavedIndicatorColor */

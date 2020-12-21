@@ -57,6 +57,10 @@ if (@$areas['grid-rows'] == 3) $e2_notes_gallery_additional_class = 'e2-notes-ga
       $item_image_style_maybe = '';
     }
 
+    if ($item['has-large-title?'] or $item['has-jumbo-title?']) {
+      $item_class_maybe .= ' e2-notes-gallery-item-with-large-title';
+    }
+
     if ($areas['debugging?']) {
       echo '<div class="e2-error" style="font-size: 9pt"><b>item #'. $item['index'] .':</b> '. $item['debug-descriptor'] .' — '. $item['debug-selectedness'] .'</div>';
     }
@@ -89,7 +93,15 @@ if (@$areas['grid-rows'] == 3) $e2_notes_gallery_additional_class = 'e2-notes-ga
       <div class="e2-notes-gallery-item-summary"><?= $note['snippet-text'] ?></div>
       <?php } ?>
 
-      <div class="e2-notes-gallery-item-meta"><?php if ($note['read-count']) { ?><span class="e2-read-counter"><span class="e2-svgi"><?= _SVG ('read') ?></span> <?= $note['read-count'] ?></span> &nbsp; <?php } ?><?php if ($note['comments-count']) { ?><span class="e2-read-counter"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= $note['comments-count'] ?></span> &nbsp; <?php } ?><span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $note['time'])?>"><?= _AGO ($note['time']) ?></span></div>
+      <div class="e2-notes-gallery-item-meta">
+        
+        <?php if ($note['comments-count']) { ?><span><span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= $note['comments-count'] ?></span> &nbsp; <?php } ?>
+        
+        <?php if (_READS ($note)) { ?><span><span class="e2-svgi"><?= _SVG ('read') ?></span> <?= _READS ($note) ?></span> &nbsp;<?php } ?>
+        
+        <span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $note['time'])?>"><?= _AGO ($note['time']) ?></span>
+
+      </div>
 
     </div>
   </div>
