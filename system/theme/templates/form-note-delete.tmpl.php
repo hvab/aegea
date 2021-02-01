@@ -35,15 +35,30 @@
 
 </form>
 
-<br />
 
-<form
-  action="<?= $content['form-note-delete']['withdraw-href'] ?>"
-  method="post"
->
 
-<?php if (array_key_exists ('withdraw-href', $content['form-note-delete'])): ?>
-  <button type="submit" class="e2-button"><?= _S ('fb--withdraw') ?></button>
-<?php endif ?>
+<?php if (array_key_exists ('hide-href', $content['form-note-delete']) or array_key_exists ('withdraw-href', $content['form-note-delete'])) { ?>
 
-</form>
+<div class="form">
+
+<?php if (array_key_exists ('hide-href', $content['form-note-delete'])) { ?>
+<div class="form-control">
+  <div class="form-element">
+    <form action="<?= $content['form-note-delete']['hide-href'] ?>" method="post"><button type="submit" class="e2-button"><?= _S ('fb--hide') ?></button></form>
+  </div>
+</div>
+<?php } ?>
+
+
+
+<?php if (array_key_exists ('withdraw-href', $content['form-note-delete'])) { ?>
+<div class="form-control">
+  <div class="form-element">
+    <form action="<?= $content['form-note-delete']['withdraw-href'] ?>" method="post"><button type="submit" class="e2-button"><?= _S ('fb--withdraw') ?></button></form>
+  </div>
+</div>
+<?php } ?>
+
+</div>
+
+<?php } ?>

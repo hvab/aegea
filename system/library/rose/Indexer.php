@@ -2,22 +2,23 @@
 /**
  * Creates search index
  *
- * @copyright 2010-2019 Roman Parpalak
+ * @copyright 2010-2020 Roman Parpalak
  * @license   MIT
  */
 
 namespace S2\Rose;
 
+use S2\Rose\Entity\ExternalId;
 use S2\Rose\Entity\Indexable;
 use S2\Rose\Exception\RuntimeException;
 use S2\Rose\Exception\UnknownException;
+use S2\Rose\Helper\StringHelper;
 use S2\Rose\Stemmer\StemmerInterface;
+use S2\Rose\Storage\Exception\EmptyIndexException;
+use S2\Rose\Storage\StorageEraseInterface;
 use S2\Rose\Storage\StorageWriteInterface;
 use S2\Rose\Storage\TransactionalStorageInterface;
 
-/**
- * Class Indexer
- */
 class Indexer
 {
     /**
@@ -31,15 +32,16 @@ class Indexer
     protected $stemmer;
 
     /**
-     * Indexer constructor.
-     *
+     * @var bool
+     */
+    private $autoErase = false;
+
+    /**
      * @param StorageWriteInterface $storage
      * @param StemmerInterface      $stemmer
      */
-    public function __construct(
-        StorageWriteInterface $storage,
-        StemmerInterface $stemmer
-    ) {
+    public function __construct(StorageWriteInterface $storage, StemmerInterface $stemmer)
+    {
         $this->storage = $storage;
         $this->stemmer = $stemmer;
     }
@@ -55,7 +57,7 @@ class Indexer
     public static function strFromHtml($content, $allowedSymbols = '')
     {
         // Prevents word concatenation like this: "something.</p><p>Something else"
-        $content = str_replace( '<', ' <', $content);
+        $content = str_replace('<', ' <', $content);
         $content = strip_tags($content);
 
         $content = mb_strtolower($content);
@@ -79,15 +81,18 @@ class Indexer
      */
     protected static function arrayFromStr($contents)
     {
-        return preg_split('#[\\-.,]*?[ ]+#S', $contents);
+        $words = preg_split('#[\\-.,]*?[ ]+#S', $contents);
+        $words = StringHelper::removeLongWords($words);
+
+        return $words;
     }
 
     /**
-     * @param string $word
-     * @param int    $externalId
-     * @param int    $type
+     * @param string     $word
+     * @param ExternalId $externalId
+     * @param int        $type
      */
-    protected function addKeywordToIndex($word, $externalId, $type)
+    protected function addKeywordToIndex($word, ExternalId $externalId, $type)
     {
         if ($word === '') {
             return;
@@ -103,12 +108,12 @@ class Indexer
     }
 
     /**
-     * @param string $externalId
-     * @param string $title
-     * @param string $content
-     * @param string $keywords
+     * @param ExternalId $externalId
+     * @param string     $title
+     * @param string     $content
+     * @param string     $keywords
      */
-    protected function addToIndex($externalId, $title, $content, $keywords)
+    protected function addToIndex(ExternalId $externalId, $title, $content, $keywords)
     {
         // Processing title
         foreach (self::arrayFromStr($title) as $titleWord) {
@@ -152,10 +157,12 @@ class Indexer
     }
 
     /**
-     * @param string $externalId
+     * @param string   $id
+     * @param int|null $instanceId
      */
-    public function removeById($externalId)
+    public function removeById($id, $instanceId)
     {
+        $externalId = new ExternalId($id, $instanceId);
         $this->storage->removeFromIndex($externalId);
         $this->storage->removeFromToc($externalId);
     }
@@ -163,20 +170,48 @@ class Indexer
     /**
      * @param Indexable $indexable
      *
-     * @throws \S2\Rose\Exception\RuntimeException
-     * @throws \S2\Rose\Exception\UnknownException
+     * @throws RuntimeException
+     * @throws UnknownException
      */
     public function index(Indexable $indexable)
     {
         try {
-            if ($this->storage instanceof TransactionalStorageInterface) {
-                $this->storage->startTransaction();
+            $this->doIndex($indexable);
+        } catch (EmptyIndexException $e) {
+            if (!$this->autoErase || !$this->storage instanceof StorageEraseInterface) {
+                throw $e;
             }
 
-            $externalId  = $indexable->getId();
+            $this->storage->erase();
+            $this->doIndex($indexable);
+        }
+    }
+
+    /**
+     * @param bool $autoErase
+     */
+    public function setAutoErase($autoErase)
+    {
+        $this->autoErase = $autoErase;
+    }
+
+    /**
+     * @param Indexable $indexable
+     *
+     * @throws RuntimeException
+     * @throws UnknownException
+     */
+    protected function doIndex(Indexable $indexable)
+    {
+        if ($this->storage instanceof TransactionalStorageInterface) {
+            $this->storage->startTransaction();
+        }
+
+        try {
+            $externalId  = $indexable->getExternalId();
             $oldTocEntry = $this->storage->getTocByExternalId($externalId);
 
-            $this->storage->addItemToToc($indexable->toTocEntry(), $externalId);
+            $this->storage->addEntryToToc($indexable->toTocEntry(), $externalId);
 
             if (!$oldTocEntry || $oldTocEntry->getHash() !== $indexable->calcHash()) {
                 $this->storage->removeFromIndex($externalId);

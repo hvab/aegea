@@ -32,6 +32,17 @@
         </div>
       </div>
 
+      <div class="form-control">
+        <div class="form-label input-label"><label><?= _S ('ff--subtitle') ?></label></div>
+        <div class="form-element">
+          <textarea
+            class="width-4 height-2 e2-textarea-autosize"
+            id="blog-subtitle"
+            name="blog-subtitle"
+          ><?= @$content['form-preferences']['blog-subtitle'] ?></textarea>
+        </div>
+      </div>
+      
       <div class="form-control form-control-big">
         <div class="form-label input-label"><label><?= _S ('ff--blog-author-picture-and-name') ?></label></div>
         <div class="form-element">
@@ -73,18 +84,6 @@
             name="blog-author"
             value="<?= $content['form-preferences']['blog-author'] ?>"
           />
-        </div>
-      </div>
-      
-      <div class="form-control">
-        <div class="form-label input-label"><label><?= _S ('ff--blog-description') ?></label></div>
-        <div class="form-element">
-          <textarea
-            class="width-4 e2-textarea-autosize"
-            style="height: 6.66em; min-height: 6.66em; overflow-x: hidden; overflow-y: visible"
-            id="blog-description"
-            name="blog-description"
-          ><?= @$content['form-preferences']['blog-description'] ?></textarea>
         </div>
       </div>
       
@@ -257,7 +256,8 @@
           </label><br />
       
         </div>
-      
+
+        <?php if ($content['form-preferences']['emailing-possible?']) { ?>
         <div class="form-element">
       
           <label class="checkbox">
@@ -271,8 +271,11 @@
           </label><br />
       
         </div>
+        <?php } ?>
       
       </div>
+
+      <?php if ($content['form-preferences']['emailing-possible?']) { ?>
       <div class="form-control">
         <div class="form-label input-label"><label><?= _S ('ff--email') ?></label></div>
         <div class="form-element">
@@ -284,6 +287,22 @@
           />
         </div>
       </div>
+      <?php } ?>
+
+      <div class="form-control">
+        <div class="form-label input-label"><label><?= _S ('ff--blog-description') ?></label></div>
+        <div class="form-element">
+          <textarea
+            class="width-4 height-2 e2-textarea-autosize"
+            id="blog-meta-description"
+            name="blog-meta-description"
+          ><?= @$content['form-preferences']['blog-meta-description'] ?></textarea>
+          <div class="form-control-sublabel">
+            <?= _S ('gs--search-engines-social-networks-aggregators') ?>
+          </div>
+        </div>
+      </div>
+
     </div>
     
     <?php if (@$content['form-preferences']['includes-yandex-metrika?']) { ?>
@@ -294,8 +313,7 @@
           </div>
           <div class="form-element">
             <textarea
-              class="width-4 e2-textarea-autosize"
-              style="height: 6.66em; min-height: 6.66em; overflow-x: hidden; overflow-y: visible"
+              class="width-4 height-4 e2-textarea-autosize"
               id="yandex-metrika"
               name="yandex-metrika"
             ><?= $content['form-preferences']['yandex-metrika'] ?></textarea>
@@ -307,8 +325,7 @@
           </div>
           <div class="form-element">
             <textarea
-              class="width-4 e2-textarea-autosize"
-              style="height: 6.66em; min-height: 6.66em; overflow-x: hidden; overflow-y: visible"
+              class="width-4 height-4 e2-textarea-autosize"
               id="google-analytics"
               name="google-analytics"
             ><?= $content['form-preferences']['google-analytics'] ?></textarea>
@@ -328,16 +345,43 @@
   </div>
 </form>
 
-<?php if (@$content['form-preferences']['space-usage']) { ?>
-  <div class="e2-text">
-    <p><?= $content['form-preferences']['space-usage'] ?></p>
-  </div>
-<?php } ?>
+<?php if (@$content['form-preferences']['space-usage'] or @$content['form-preferences']['show-payment-info?']) { ?>
 
-<p class="admin-links">
-<?= _S ('ff--administration') ?>&nbsp;
-<a href="<?= @$content['admin']['password-href'] ?>"><?= _S ('gs--password') ?></a><?php if (array_key_exists ('database-href', $content['admin'])) { ?>,&nbsp;
-<a href="<?= @$content['admin']['database-href'] ?>"><?= _S ('gs--db-connection') ?></a><?php } ?><?php if (array_key_exists ('sessions-href', $content['admin'])) { ?>,&nbsp;
-<a href="<?= @$content['admin']['sessions-href'] ?>"><?= _S ('gs--sessions') ?></a><?php } ?><?php if (array_key_exists ('get-backup-href', $content['admin'])) { ?>,&nbsp;
-<a href="<?= @$content['admin']['get-backup-href'] ?>"><?= _S ('gs--get-backup') ?></a><?php } ?>
-</p>
+<hr />
+
+<div class="form">
+  <div class="form-control">
+    <div class="form-element">
+
+      <?php if (@$content['form-preferences']['show-payment-info?']) { ?>
+        <div class="e2-text">
+          <p>
+
+          <?php if (@$content['form-preferences']['paid-period']) { ?>
+          ✓ <?= _S ('gs--paid-until') ?> <?=_DT ('j {month-g} Y', $content['form-preferences']['paid-until'])?>
+          <?php } elseif (@$content['form-preferences']['paid-period-ended']) { ?>
+          <span class="e2-error"><?= _S ('gs--paid-period-ended') ?> <?=_DT ('j {month-g} Y', $content['form-preferences']['paid-until'])?></span>
+          <?php } else { ?>
+          <span class="e2-error"><?= _S ('gs--not-paid') ?></span>
+          <?php } ?>
+
+          <?php if (!@$content['form-preferences']['paid-period']) { ?>
+          <?php if ((string) $content['form-preferences']['pay-href'] !== '') { ?>
+            · <a href="<?=$content['form-preferences']['pay-href']?>"><?= _S ('bt--learn-about-payment') ?></a>
+          <?php } ?>
+          <?php } ?>
+          </p>
+        </div>
+      <?php } ?>
+
+      <?php if (@$content['form-preferences']['space-usage']) { ?>
+        <div class="e2-text">
+          <p><?= $content['form-preferences']['space-usage'] ?></p>
+        </div>
+      <?php } ?>
+
+    </div>
+  </div>
+</div>
+
+<?php } ?>

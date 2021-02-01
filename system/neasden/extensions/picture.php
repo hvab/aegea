@@ -78,7 +78,7 @@ class NeasdenGroup_picture implements NeasdenGroup {
           // wrap into upyachka fix
           $image_html = (
             '<div style="width: '. $width .'px; max-width: 100%">'.
-            '<div class="e2-text-picture-imgwrapper" style="'.
+            '<div class="e2-text-proportional-wrapper" style="'.
             'padding-bottom: '. @round ($ratio * 100, 2).'%'.
             '">'.
             $image_html.

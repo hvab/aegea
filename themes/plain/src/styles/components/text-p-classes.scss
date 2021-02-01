@@ -25,7 +25,8 @@
 .e2-text .foot {
   margin: 0 0 10px;
   font-family: var(--smallFontFamily);
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
+  max-width: 720px;
 }
 

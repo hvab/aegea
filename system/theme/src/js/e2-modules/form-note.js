@@ -20,7 +20,8 @@ function initFormNote () {
   var edited = false
   var changed = false
   var liveSaving = false
-  var stampMask = /^ *(\d{1,2})\.(\d{1,2})\.(\d{2}|\d{4}) +(\d{1,2}):(\d{1,2}):(\d{1,2}) *$/
+  // v3666
+  // var stampMask = /^ *(\d{1,2})\.(\d{1,2})\.(\d{2}|\d{4}) +(\d{1,2}):(\d{1,2}):(\d{1,2}) *$/
 
   // refresh page if it loads from back-forward cache
   // more: https://developer.mozilla.org/en-US/docs/Working_with_BFCache
@@ -97,9 +98,9 @@ function initFormNote () {
   function e2UpdateSubmittability () {
     var stampOk = true
 
-    if ($('#stamp').val()) {
-      stampMask.test($('#stamp').val())
-    }
+    // v3666
+    // stampOk = !$('#stamp.goodyear-hidden-text').hasClass('goodyear-hidden-text-error')
+    stampOk = true
 
     var shouldBeEnabled = (
       !/^ *$/.test($('#title').val()) &&
@@ -225,12 +226,15 @@ function initFormNote () {
 
   var changesEventsList = 'change input keyup keydown keypress mouseup mousedown cut copy paste blur'
   var changesListener = function () {
-    if ($('#stamp').val()) {
-      $('#stamp').toggleClass(
-        'input-error',
-        ($('#stamp').val().match(stampMask) === null)
-      )
-    }
+
+    // v3666
+    // if ($('#stamp').val()) {
+    //   $('#stamp').toggleClass(
+    //     'input-error',
+    //     ($('#stamp').val().match(stampMask) === null)
+    //   )
+    // }
+
     e2UpdateSubmittability()
 
     var newPO = getPageObject()

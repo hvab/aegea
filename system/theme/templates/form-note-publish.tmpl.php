@@ -1,3 +1,10 @@
+<div class="e2-note-publish-preview">
+<?php $content['_']['_note'] = $content['notes']['only']; ?>
+<?php $content['_']['_note']['_pubpreview'] = true; ?>
+<?php _T ('note-snippet') ?>
+</div>
+
+
 <?php _LIB ('jquery.mousewheel') ?>
 <?php _LIB ('jquery.actual') ?>
 <?php _LIB ('momentjs') ?>
@@ -54,7 +61,7 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
         />
       </div>
 
-      <a href="#" class="e2-admin-link nu e2-schedule-controls-unrevealer e2-svgi "><?= _SVG ('close') ?></a>
+      <a href="#" class="e2-admin-link nu e2-schedule-controls-unrevealer e2-svgi"><?= _SVG ('close') ?></a>
 
     </div>
   </div>
@@ -82,17 +89,9 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
   <button type="submit" disabled="disabled" name="submit-button" value="schedule" id="submit-schedule-button" class="e2-button e2-submit-button" <?php if (!@$content['form-note-publish']['can-publish?']) echo 'disabled'; ?>>
     <?= @$content['form-note-publish']['submit-schedule-text'] ?>
   </button>
-
 </div>
-
 
 
 </div>
 
 </form>
-
-<?php if (array_key_exists ('only', $content['notes'])) { ?>
-<?php if (array_key_exists ('preview-href', $content['notes']['only'])) { ?>
-<p class="admin-links"><a href="<?= $content['notes']['only']['preview-href'] ?>"><?= _S ('gs--secret-link') ?></a></p>
-<?php } ?>
-<?php } ?>

@@ -58,26 +58,31 @@ function e2l_load_strings () {
   'er--post-must-have-title-and-text' => 'A post must have a title and a text',
   'er--error-updating-post' => 'Error updating this post',
   'er--error-deleting-post-tag-info' => 'Error deleting this post’s tag information',
-  'er--wrong-datetime-format' => 'Wrong date & time format. Must be “dd.mm.yyyy hh:mm:ss”',
-  'er--unsupported-file' => 'Only PNG, JPG, GIF, & SVG images and MP3 audio files are supported',
-  'er--unsupported-file-image' => 'Only PNG, JPG & GIF images are supported',
+  'er--wrong-datetime-format' => 'Wrong date & time format. Must be “dd.mm.yyyy hh:mm:ss”',  
   'er--cannot-create-thumbnail' => 'Can’t create thumbnail',
   'er--cannot-upload' => 'Can’t upload file',
   'ff--title' => 'Title',
   'ff--text' => 'Text',
   'ff--saving' => 'Saving...',
   'ff--save' => 'Save',
+  'ff--summary' => 'Summary',
   'ff--tags' => 'Tags',
   'ff--alias' => 'Alias',
   'ff--change-time' => 'Change time',
   'ff--delete' => 'Delete',
   'ff--edit' => 'Edit',
+  'fb--hide' => 'Hide',
+  'fb--show' => 'Make visible',
   'fb--withdraw' => 'Convert back into draft',
   'ff--will-be-published' => 'Will be published',
   'ff--is-published' => 'Published',
   'ff--at-address' => 'at address',
   'gs--no-notes' => 'There are no posts.',
   'gs--will-be-published' => 'Will be published',
+
+  // see NiceError.php!
+  'er--supported-only-png-jpg-gif' => 'Only png, jpg, & gif images are supported',
+  'er--unsupported-file' => 'Only png, jpg, gif, & svg images, mp4 & mov videos, and mp3 audio files are supported',
 
   'ff--gmt-offset' => 'GMT offset',
   'ff--with-dst' => '+1 in summer',
@@ -101,7 +106,6 @@ function e2l_load_strings () {
   // drafts
   'ln--drafts' => 'Drafts',
   'pt--drafts' => 'Drafts',
-  'wd--draft' => 'draft',
   'pt--draft-deletion' => 'Draft deletion',
   'pt--edit-draft' => 'Edit draft',
   'gs--no-drafts' => 'There are no drafts.',
@@ -148,6 +152,7 @@ function e2l_load_strings () {
 
   // tags
   'pt--tags' => 'Tags',
+  'pt--tag' => 'Tag',
   'pt--posts-tagged' => 'Posts tagged',
   'tt--edit-tag' => 'Edit tag parameters and description',
   'gs--tagged' => 'tagged',
@@ -160,9 +165,9 @@ function e2l_load_strings () {
   'ff--tag-name' => 'Tag',
   'ff--tag-urlname' => 'Name in URL',
   'ff--tag-page-title' => 'Page title',
-  'ff--tag-description' => 'Description',
+  'ff--tag-introductory-text' => 'Introductory text',
   'gs--tag-will-be-deleted-notes-remain' => 'The tag “$[tag]” will be deleted from posts, but the posts will remain.',
-  'gs--see-also-tag' => 'See also tag',
+  'gs--see-also' => 'See also',
   'gs--tags-important' => 'important',
   'gs--tags-all' => 'all',
   'gs--tags' => 'Tags',
@@ -175,6 +180,7 @@ function e2l_load_strings () {
   'pt--favourites' => 'Selected',
   'nm--favourites' => 'Selected',
   'gs--no-favourites' => 'There are no selected posts.',
+  'nm--read-next' => 'Next',
   
   // generic posts pages
   'nm--pages' => 'Pages',
@@ -219,8 +225,7 @@ function e2l_load_strings () {
   'em--follow-this-link' => 'Follow this link to reset your password:',
   
   'pt--sessions' => 'Open sessions',
-  'gs--sessions' => 'open sessions',
-  'gs--sessions-description' => 'When you sign in using your password on multiple devices or with multiple browsers, this page shows list of all these sessions. If any of them seems suspicious, end all sessions but this, then change your password.',
+  'gs--sessions-description' => 'When you sign in using your password on multiple devices or with multiple browsers, this page shows a list of all such sessions. If any of them seem suspicious, end all sessions but this, then change your password.',
   'gs--sessions-browser-or-device' => 'Browser or device',
   'gs--sessions-when' => 'When',
   'gs--sessions-from-where' => 'From where',
@@ -253,16 +258,21 @@ function e2l_load_strings () {
   'ff--send-by-email' => 'Send by email',
   'ff--yandex-metrika' => 'Yandex.Metrika',
   'ff--google-analytics' => 'Google Analytics',
-  'ff--administration' => 'Administration:',
-  'gs--password' => 'password',
-  'gs--db-connection' => 'database connection',
-  'gs--get-backup' => 'get latest backup',
+  'gs--password' => 'Password',
+  'gs--db-connection' => 'Database connection',
+  'gs--get-backup' => 'Get latest backup',
+  'gs--not-paid' => 'Aegea not paid for',
+  'gs--paid-until' => 'Aegea is paid until',
+  'gs--paid-period-ended' => 'Paid period ended',
+  'bt--learn-about-payment' => 'Learn about payment',
   'gs--used' => 'Used $[used] out of $[total] MB ($[percent]%)',
   'gs--used-all' => 'All space is used: $[total] MB',
   
   'ff--blog-title' => 'Blog title',
+  'ff--subtitle' => 'Subtitle',
   'gs--remove-userpic' => 'Remove photo',
-  'ff--blog-description' => 'Short description',
+  'ff--blog-description' => 'Blog description',
+  'gs--search-engines-social-networks-aggregators' => 'For search engines, social networks, and aggregators',
   'ff--blog-author-picture-and-name' => 'Author’s picture and name',
 
   'pt--database' => 'Database',
@@ -291,18 +301,18 @@ function e2l_load_strings () {
   'fb--save-changes' => 'Save changes',
   'fb--save-and-preview' => 'Save and preview',
   'fb--publish' => 'Publish',
-  'fb--publish-draft' => 'Publish the post',
-  'fb--schedule-note' => 'Schedule the post',
+  'fb--publish-note' => 'Publish the post',
+  'fb--publish-note-at-this-time' => 'Publish the post at this time',
   'fb--select' => 'Select',
   'fb--apply' => 'Apply',
   'fb--delete' => 'Delete',
   'fb--sign-in' => 'Sign in',
   'fb--sign-out' => 'Sign out',
-  'fb--send-link-by-email' => 'Send the link at this address',
+  'fb--send-link-by-email' => 'Send the link to this address',
   
   // time
   'pt--default-timezone' => 'Default timezone',
-  'gs--e2-stores-each-posts-timezone' => 'Е2 stores timezone of each post separately.',
+  'gs--e2-stores-each-posts-timezone' => 'Aegea stores timezone of each post separately.',
   'gs--e2-autodetects-timezone' => 'When publishing a post, the timezone will usually be detected automatically. In case of failure the timezone selected here will be used.',
 
   'tt--from-the-future' => 'From the future',
@@ -396,7 +406,7 @@ function e2l_load_strings () {
 
 
 
-function e2lstr_monthname ($number, $modifier = '') {
+function e2lstr_monthname ($number, $modifier) {
   if ($modifier == 'short') {
     $tmp = array (
       'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -430,8 +440,8 @@ function e2lstr_ordinal ($number) {
 
 
 
-function e2lstr_cardinal ($number, $modifier = '', $string_id) {
-  $s = !($number % 10 == 1 and $number % 100 != 11);
+function e2lstr_cardinal ($number, $modifier, $string_id) {
+  $s = ($number > 1);
 
   $result = $number;
   if ($string_id == 'pt--n-posts') $result = $number .' post'. ($s?'s':'');
@@ -444,7 +454,7 @@ function e2lstr_cardinal ($number, $modifier = '', $string_id) {
   if ($string_id == 'tt--minutes-short') $result = $number .' min';
   if ($string_id == 'tt--hours-short') $result = $number .' h';
   if ($string_id == 'tt--days-short') $result = $number .' d';
-  if ($string_id == 'tt--months-short') $result = $number .' mon';
+  if ($string_id == 'tt--months-short') $result = $number .' mo';
   if ($string_id == 'tt--years-short') $result = $number .' y';
 
   return $result;

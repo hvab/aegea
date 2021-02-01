@@ -29,7 +29,7 @@ return array (
       'typography.markup' => true,
       'typography.autohref' => true,
       'banned-groups' => array (
-        'picture', 'fotorama', 'audio', 'youtube', 'vimeo'
+        'picture', 'video', 'fotorama', 'audio', 'youtube', 'vimeo'
       ),
     ),
     'simple' => array (
@@ -38,7 +38,7 @@ return array (
       'typography.markup' => true,
       'typography.autohref' => true,
       'banned-groups' => array (
-        'picture', 'fotorama', 'audio', 'youtube', 'vimeo'
+        'picture', 'video', 'fotorama', 'audio', 'youtube', 'vimeo'
       ),
     ),
     'kavychki' => array (
@@ -78,6 +78,12 @@ return array (
       'src-prefix' => $full_blog_url .'/'. PICTURES_FOLDER,
       'folder' => MEDIA_ROOT_FOLDER . PICTURES_FOLDER,
       'css-class' => 'e2-text-picture', 
+      'max-width' => $_template['max_image_width'],
+    ),
+    'video' => array (
+      'src-prefix' => $full_blog_url .'/'. VIDEO_FOLDER,
+      'folder' => MEDIA_ROOT_FOLDER . VIDEO_FOLDER,
+      'css-class' => 'e2-text-video', 
       'max-width' => $_template['max_image_width'],
     ),
     'fotorama' => array (

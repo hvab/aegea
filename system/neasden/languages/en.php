@@ -13,7 +13,9 @@ return array (
   'replacements' => array (
 
     'e.g.'  => 'e. g.',
-    'e. g.' => 'e. g.',
+    'e. g.' => 'e. g.',
+    'E.g.'  => 'E. g.',
+    'E. g.' => 'E. g.',
 
     "'" => '’',
     '"' => '”',
@@ -21,9 +23,9 @@ return array (
   ),
 
   'with-next' =>
-  '(a|an|as|and|\&|at|but|by|for|in|no|not|of|on|or|per|the|to|$|€|£)',
+  '(a|an|as|and|\&|at|but|by|for|in|no|not|of|or|per|the|to|\$|€|£)',
 
-  'with-prev' => '(₽|$|€|£)',
+  'with-prev' => '(₽|\$|€|£)',
   
 );
 

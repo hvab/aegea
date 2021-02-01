@@ -1,4 +1,5 @@
 function initFormNotePublish () {
+
   if (!$('#form-note-publish').length) return
 
   $('.e2-schedule-controls-revealer').on('click', function () {
@@ -9,19 +10,22 @@ function initFormNotePublish () {
       $('.e2-schedule-controls button').prop('disabled', false)
     })
 
-    var today = new Date()
-    var day = today.getDate()
-    if (day < 10) day = '0' + day
-    var month = today.getMonth() + 1
-    if (month < 10) month = '0' + month
-    var year = today.getFullYear()
-    var hours = today.getHours()
-    var minutes = today.getMinutes()
-    hours += 1
-    if (minutes === 59) hours += 1
-    if (hours < 10) hours = '0' + hours
-    $('#stamp').val(day + '.' + month + '.' + year + ' ' + hours + ':00:00')
-    $('#stamp').trigger('change')
+    if ($('#stamp').val() === '') {
+      var today = new Date()
+      var day = today.getDate()
+      if (day < 10) day = '0' + day
+      var month = today.getMonth() + 1
+      if (month < 10) month = '0' + month
+      var year = today.getFullYear()
+      var hours = today.getHours()
+      var minutes = today.getMinutes()
+      hours += 1
+      if (minutes === 59) hours += 1
+      if (hours < 10) hours = '0' + hours
+      $('#stamp').val(day + '.' + month + '.' + year + ' ' + hours + ':00:00')
+      $('#stamp').trigger('change')
+    }
+
     return false
   })
 

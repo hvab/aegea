@@ -45,7 +45,7 @@
 }
 
 .form-control-sublabel {
-  margin: 6px 0 8px;
+  margin: 4px 0 8px;
   width: 82.93%;
   font-size: 14px;
   line-height: 20px;
@@ -58,7 +58,6 @@
 .form-label p { margin: 0 0 8px }
 
 .form-control .input-label { margin-top: 8px }
-.form-control .input-error { background: #ffece0 }
 
 .form-control .disabled { color: #999; }
 
@@ -72,6 +71,11 @@
 .form-control .width-3 { width: 60%; }
 .form-control .width-2 { width: 40%; }
 .form-control .width-1 { width: 20%; }
+
+.form-control .height-2 { height: 60px; min-height: 60px }
+.form-control .height-4 { height: 108px; min-height: 108px }
+.form-control .height-8 { height: 204px; min-height: 204px }
+.form-control .height-16 { height: 396px; min-height: 396px }
 
 .form-control .icon {
   position: relative;
@@ -87,8 +91,8 @@
 
 .form-label-saveinfo {
   font-family: var(--smallFontFamily);
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
   margin: 4px 0 0;
 }
 
@@ -158,11 +162,7 @@
 }
 
 @media #{$AreFormControlsFullWidth} {
-  .e2-smart-title {
-    width: 100% !important;
-  }
-
-  #blog-title, .width-2, .width-3, .width-4 {
+  .width-2, .width-3, .width-4 {
     width: 100% !important;
   }
 }

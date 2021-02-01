@@ -5,6 +5,7 @@
 function e2l_load_strings () {
 
   return array (
+
   // engine
   'e2--vname-aegea' => 'Егея',
   'e2--release' => 'реліз',
@@ -58,25 +59,30 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Не вдалося змінити допис',
   'er--error-deleting-post-tag-info' => 'Не вдалося видалити дані про теги допису',
   'er--wrong-datetime-format' => 'Неправильний формат дати й часу. Має бути: «ДД.ММ.РРРР ГГ:ХХ:СС»',
-  'er--unsupported-file' => 'Підтримуються лише зображення PNG, JPG, GIF, SVG і аудіофайли MP3',
-  'er--unsupported-file-image' => 'Підтримуються лише зображення PNG, JPG і GIF',
   'er--cannot-create-thumbnail' => 'Не вдалося створити ескіз зображення',
   'er--cannot-upload' => 'Не вдалося завантажити файл',
   'ff--title' => 'Назва',
   'ff--text' => 'Текст',
   'ff--saving' => 'Збереження...',
   'ff--save' => 'Зберегти',
+  'ff--summary' => 'Короткий опис',
   'ff--tags' => 'Теги',
   'ff--alias' => 'Посилання',
   'ff--change-time' => 'Змінити час',
   'ff--delete' => 'Видалити',
   'ff--edit' => 'Редагувати',
+  'fb--hide' => 'Приховати',
+  'fb--show' => 'Зробити видимої',
   'fb--withdraw' => 'Повернути в чернетки',
   'ff--will-be-published' => 'Опублікується',
   'ff--is-published' => 'Опублікований',
   'ff--at-address' => 'за адресою',
   'gs--no-notes' => 'Дописів немає.',
   'gs--will-be-published' => 'Опубліковуватиметься',
+
+  // see NiceError.php!
+  'er--supported-only-png-jpg-gif' => 'Підтримуються лише зображення png, jpg і gif',
+  'er--unsupported-file' => 'Підтримуються лише зображення png, jpg, gif і svg, відео mp4 і mov і аудіофайли mp3',
 
   'ff--gmt-offset' => 'Різниця з Гринвічем',
   'ff--with-dst' => '+1 влітку',
@@ -100,7 +106,6 @@ function e2l_load_strings () {
   // drafts
   'ln--drafts' => 'Чернетки',
   'pt--drafts' => 'Чернетки',
-  'wd--draft' => 'чернетка',
   'pt--draft-deletion' => 'Видалення чернетки',
   'pt--edit-draft' => 'Редагування чернетки',
   'gs--no-drafts' => 'Чернеток немає.',
@@ -147,6 +152,7 @@ function e2l_load_strings () {
 
   // tags
   'pt--tags' => 'Теги',
+  'pt--tag' => 'Тег',
   'pt--posts-tagged' => 'Дописи з тегом',
   'tt--edit-tag' => 'Редагувати параметри й опис тегу',
   'gs--tagged' => 'з тегом',
@@ -159,9 +165,9 @@ function e2l_load_strings () {
   'ff--tag-name' => 'Тег',
   'ff--tag-urlname' => 'В адресному рядку',
   'ff--tag-page-title' => 'Заголовок сторінки',
-  'ff--tag-description' => 'Опис',
+  'ff--tag-introductory-text' => 'Вступний текст',
   'gs--tag-will-be-deleted-notes-remain' => 'Тег «$[tag]» буде вилучено із дописів, але самі дописи залишаться.',
-  'gs--see-also-tag' => 'Див. також тег',
+  'gs--see-also' => 'Див. також',
   'gs--tags-important' => 'важливі',
   'gs--tags-all' => 'усі',
   'gs--tags' => 'Теги',
@@ -174,6 +180,7 @@ function e2l_load_strings () {
   'pt--favourites' => 'Обране',
   'nm--favourites' => 'Обране',
   'gs--no-favourites' => 'Нічого не обрано.',
+  'nm--read-next' => 'Далі',
   
   // generic posts pages
   'nm--pages' => 'Сторінки',
@@ -214,11 +221,10 @@ function e2l_load_strings () {
   'er--cannot-reset-password' => 'Неможливо скинути пароль: у Налаштуванні не вказана пошта. Зв’яжіться з адміністрацією.',
   'er--cannot-send-link-email-empty' => 'Неможливо надіслати посилання на скидання пароля: адреса не вказана',
   'gs--i-forgot' => 'Я забув',
-  'em--password-reset-subject' => 'Скидання пароля в Эгее',
+  'em--password-reset-subject' => 'Скидання пароля в Егее',
   'em--follow-this-link' => 'Перейдіть за цим посиланням, щоб скинути пароль:',
 
   'pt--sessions' => 'Відкриті сесії',
-  'gs--sessions' => 'відкриті сесії',
   'gs--sessions-description' => 'Коли ви входите зі своїм паролем на кількох пристроях або в кількох браузерах, тут відображається список усіх цих сесій. Якщо якась із них здається вам підозрілою, завершіть усі сесії окрім поточної, а потім змініть свій пароль.',
   'gs--sessions-browser-or-device' => 'Браузер або пристрій',
   'gs--sessions-when' => 'Коли',
@@ -252,16 +258,21 @@ function e2l_load_strings () {
   'ff--send-by-email' => 'Надсилати ел. поштою',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',
-  'ff--administration' => 'Адміністрування:',
-  'gs--password' => 'пароль',
-  'gs--db-connection' => 'з’єднання з базою',
-  'gs--get-backup' => 'завантажити останній бекап',
+  'gs--password' => 'Пароль',
+  'gs--db-connection' => 'З’єднання з базою',
+  'gs--get-backup' => 'Завантажити останній бекап',
+  'gs--not-paid' => 'Егея не оплачена',
+  'gs--paid-until' => 'Егея оплачена до',
+  'gs--paid-period-ended' => 'Оплачений період закінчився',
+  'bt--learn-about-payment' => 'Дізнатися про оплату',
   'gs--used' => 'Зайнято $[used] з $[total] МБ ($[percent]%)',
   'gs--used-all' => 'Зайнято все місце: $[total] МБ',
 
   'ff--blog-title' => 'Назва блогу',
+  'ff--subtitle' => 'Підзаголовок',
   'gs--remove-userpic' => 'Видалити фотографію',
-  'ff--blog-description' => 'Коротко про блог',
+  'ff--blog-description' => 'Опис блогу',
+  'gs--search-engines-social-networks-aggregators' => 'Для пошукових систем, соцмереж і агрегаторів',
   'ff--blog-author-picture-and-name' => 'Фото та ім’я автора',
 
   'pt--database' => 'База даних',
@@ -290,8 +301,8 @@ function e2l_load_strings () {
   'fb--save-changes' => 'Зберегти зміни',
   'fb--save-and-preview' => 'Зберегти та переглянути',
   'fb--publish' => 'Опублікувати',
-  'fb--publish-draft' => 'Опублікувати допис',
-  'fb--schedule-note' => 'Запланувати допис',
+  'fb--publish-note' => 'Опублікувати допис',
+  'fb--publish-note-at-this-time' => 'Опублікувати допис в цей час',
   'fb--select' => 'Обрати',
   'fb--apply' => 'Застосувати',
   'fb--delete' => 'Видалити',
@@ -301,7 +312,7 @@ function e2l_load_strings () {
   
   // time
   'pt--default-timezone' => 'Часовий пояс за замовчуванням',
-  'gs--e2-stores-each-posts-timezone' => 'Е2 зберігає часовий пояс окремо для кожного допису.',
+  'gs--e2-stores-each-posts-timezone' => 'Егея зберігає часовий пояс окремо для кожного допису.',
   'gs--e2-autodetects-timezone' => 'Під час публікації часовий пояс має визначитись автоматично, але якщо не вдасться, буде використано пояс за замовчуванням.',
 
   'tt--from-the-future' => 'Із майбутнього',
@@ -397,7 +408,7 @@ function e2l_load_strings () {
 
 
 
-function e2lstr_monthname ($number, $modifier = '') {
+function e2lstr_monthname ($number, $modifier) {
   if ($modifier == 'genitive') {
     $tmp = array (
       'грудня', 'січня', 'лютого', 'березня', 'квітня', 'травня', 'червня',
@@ -427,7 +438,7 @@ function e2lstr_periodname ($period) {
 }
 
 
-function e2lstr_cardinal ($number, $modifier = '', $string_id) {
+function e2lstr_cardinal ($number, $modifier, $string_id) {
 
   $what = $number;
   if ($string_id == 'pt--n-posts') $what = $number .' допи(с,си,сів)';

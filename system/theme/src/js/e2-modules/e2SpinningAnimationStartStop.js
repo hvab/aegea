@@ -9,8 +9,10 @@ function e2SpinningAnimationStartStop ($container, start) {
   }
 
   if (start) {
-    $thinkingAnimation[0].setAttribute('repeatCount', 'indefinite')
-    $thinkingAnimation[0].beginElement()
+    if (($thinkingAnimation[0].getAttribute('repeatCount') !== 'indefinite')) {
+      $thinkingAnimation[0].setAttribute('repeatCount', 'indefinite')
+      $thinkingAnimation[0].beginElement()
+    }
   } else {
     $thinkingAnimation[0].setAttribute('repeatCount', '1')
   }

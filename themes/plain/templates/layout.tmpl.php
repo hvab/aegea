@@ -30,13 +30,16 @@
         </div>
 
         <?php if ($content['class'] == 'frontpage') { ?>
-          <div id="e2-blog-description"><?= $content['blog']['description'] ?></div>
+          <div id="e2-blog-description"><?= $content['blog']['subtitle'] ?></div>
         <?php } ?>
+
       </div>
     </div>
 
     <div class="spotlight">
-      <span class="admin-links admin-links-floating">
+      <?php #_T_DEFER ('stat') ?>
+
+      <span class="admin-links-floating">
         <?php _T ('author-menu') ?>
       </span>
 
@@ -59,7 +62,6 @@
 <?php _T ('message') ?>
 <?php _T ('welcome') ?>
 <?php _T ('unavailable') ?>
-<?php _T ('drafts') ?>
 <?php _T ('notes') ?>
 <?php _T ('notes-list') ?>
 <?php _T ('tags') ?>

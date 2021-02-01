@@ -9,10 +9,10 @@ function initNotes () {
 
   function checkCopies ($notes) {
     for (let i = 0; i < $notes.length; i++) {
-      const id = $notes[i].id.replace('e2-note-', '')
+      const id = $notes.eq(i).data('note-id').toString()
 
       if (document.e2.localCopies.doesCopyExist(id)) {
-        $(`#e2-note-${id} .e2-unsaved-led`).show()
+        $(`.e2-note[data-note-id="${id}"] .e2-unsaved-led`).show()
       }
     }
   }

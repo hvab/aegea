@@ -10,3 +10,10 @@ a.nu u {
   border-color: inherit;
 }
 
+a:visited.nu {
+  // this rule is here because border-color: inherit; will not 
+  // actually inherit :visited color due to privacy limitations
+  // so we can’t use visited color for .nu links
+  color: var(--linkColor);
+  border-color: var(--linkUnderlineColor);
+}

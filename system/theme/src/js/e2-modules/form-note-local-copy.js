@@ -14,6 +14,7 @@ function initFormNoteLocalCopy () {
   const $tags = $('#tags')
   const $alias = $('#alias')
   const $stamp = $('#stamp')
+  const $summary = $('#summary')
   const $uploadedImages = $('#e2-uploaded-images')
   const draftTimestamp = +$('#note-timestamp').val() * 1000 // because php returns timestamp in secs, but we need ms
   const serverTime = +$('#server-time').val() * 1000
@@ -146,6 +147,8 @@ function initFormNoteLocalCopy () {
 
     // and only then we change value of the select
     $tags.val(copy.tags).trigger('input')
+    
+    $summary.val(copy.summary)
 
     $uploadedImages
       .empty()
@@ -155,8 +158,8 @@ function initFormNoteLocalCopy () {
       }, ''))
 
     if ((copy.alias && $alias.val() !== copy.alias) || $stamp.val() !== copy.stamp) {
-      $alias.val(copy.alias)
-      $stamp.val(copy.stamp)
+      $alias.val(copy.alias).trigger('change')
+      $stamp.val(copy.stamp).trigger('change')
 
       $('.e2-note-time-and-url').slideToggle()
     }
@@ -216,6 +219,7 @@ function initFormNoteLocalCopy () {
       // so we shouldn't save alias if it's a form of a new note
       alias: initNoteId === 'new' ? false : $alias.val(),
       stamp: $stamp.val(),
+      summary: $summary.val(),
       timestamp: (new Date()).getTime(),
       link: window.location.pathname,
       isPublished: $isNotePublished.val(),

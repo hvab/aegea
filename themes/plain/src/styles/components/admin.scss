@@ -6,7 +6,7 @@
   display: inline-block;
   vertical-align: top;
   position: relative;
-  margin: 0 1em 1em 0;
+  margin: 0 4px 4px 0;
   opacity: 1;
   outline: 1px var(--imageBorderColor) solid;
   transition: outline-color var(--timeLong) ease-out, opacity var(--timeLong) ease-out;
@@ -206,8 +206,8 @@ border-color: var(--hoverUnderlineColor);
   min-height: 160px;
   margin-bottom: 1.4em;
   font-family: var(--smallFontFamily);
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
 }
 .e2-draft-preview-box {
   position: relative;
@@ -339,3 +339,6 @@ border-color: var(--hoverUnderlineColor);
 
 // hidden notes and comments
 .e2-hidden { opacity: .4 }
+
+// license ended
+.e2-error { color: var(--errorColor); }

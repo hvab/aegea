@@ -35,7 +35,7 @@ $tagsInInputOffset: ($inputFocusPadding - $iconWidth) / 2;
 
   &, &:focus, &_focused {
     transition-property: (padding-left, padding-right, transform) !important;
-    transition-duration: var(--time) !important;
+    transition-duration: .33s !important;
     transition-timing-function: ease-out !important;
     outline: none;
   }
@@ -50,7 +50,7 @@ $tagsInInputOffset: ($inputFocusPadding - $iconWidth) / 2;
 
     + .search-field__zoom-icon {
       transition-property: left, transform;
-      transition-duration: var(--time);
+      transition-duration: .33s;
       transition-timing-function: ease-out;
     }
 
@@ -95,7 +95,7 @@ $tagsInInputOffset: ($inputFocusPadding - $iconWidth) / 2;
   opacity: 0;
   color: var(--linkColor);
   transition-property: (opacity, transform);
-  transition-duration: var(--time);
+  transition-duration: .33s;
   transition-timing-function: ease-out;
   pointer-events: none;
 

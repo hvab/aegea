@@ -57,6 +57,11 @@ sup { bottom: 0.5em; }
 
 sub { top: 0.5em; }
 
+hr {
+  border: none;
+  border-top: 1px var(--thinRuleColor) solid;
+}
+
 mark {
   display: inline;
   background: var(--markedTextBackground);
@@ -75,7 +80,7 @@ table {
   empty-cells: show;
   border-spacing: 0;
   border-collapse: collapse;  
-  font-feature-settings: 'tnum'; 
+  // font-feature-settings: 'tnum'; 
 }
 
 table, thead, tbody, tr, th, td {

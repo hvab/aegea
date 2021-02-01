@@ -14,20 +14,18 @@ if (
   <?php # COMMENTS # ?>
   <?php if (array_key_exists ('new-comments-href', $content['admin'])) { ?>
   <span class="admin-icon admin-menu-comments">
-    <a class="nu admin-menu-comments-count" href="<?= @$content['admin']['new-comments-href'] ?>"><?= (int) $content['admin']['new-comments-count'] ?></a>
+    <a class="nu admin-menu-comments-count" href="<?= @$content['admin']['new-comments-href'] ?>#new"><?= (int) $content['admin']['new-comments-count'] ?></a>
   </span>
   <?php } ?>
 
 
   <?php # NEW # ?>
   <?php if (array_key_exists ('new-note-href', $content['admin'])) { ?>
-  <?#= $content['admin']['new-note-href'] ?>
 
   <?php if (_AT ($content['admin']['new-note-href'])) { ?>
   <span class="admin-icon e2-admin-menu-new-selected" title="<?= _S ('ln--new-post') ?>"><span class="e2-svgi"><?= _SVG ('new') ?></span></span>
 
   <span class="admin-icon e2-admin-menu-new" style="display: none" title="<?= _S ('ln--new-post') ?>"><a href="<?= $content['admin']['new-note-href'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('new') ?></span></a></span>
-
 
   <?php } else { ?>
 

@@ -18,7 +18,7 @@
   // ';
 
   $return['theme-preview']['no-themes'] = '
-  <p>Use this page to preview and adjust your theme.</p>
+  <p>Use this page to preview and adjust your theme.</p>
   ';
 
   // $return['theme-preview']['themes-before'] = '
@@ -26,33 +26,34 @@
   // ';
 
   $return['theme-preview']['themes-after'] = '
-  <p>Select the new theme from the list to apply it.</p>
-  <p>Use this page to preview and adjust your theme. It is made out of elements of the blog, starting with posts. Don’t forget to check on mobile phones</p>
+  <p>Select the new theme from the list to apply it.</p>
+  <p>Use this page to preview and adjust your theme. It is made out of elements of the blog, starting with posts. Don’t forget to check on mobile phones</p>
   ';
 
   $return['notes'] = array (
     array (
-      'title' => 'A sample post',
+      'id' => 1,
+      'title' => 'A sample post',
       'text' => '
       <p>This is what a post looks like. This post is starred — in the built-in theme its title is big, but you may do something else.</p>
       <p>This paragraph has just a filler text. The theory of empathy is free. The rhythm has an elegant factographic chthonic myth. Artistic mediation is a catharsis. The liturgical drama has psychological parallelism.</p>
       <h2>Subheadings, text formatting and images</h2>
-      <p>Your post may have subheadings as above, <a href="'. $self_href .'">hyperlinks</a href=""> and use text formatting, like <i>italics</i>, <b>bold</b>, or <tt>monospace</tt>.</p>
+      <p>Your post may have subheadings as above, <a href="'. $self_href .'">hyperlinks</a> and use text formatting, like <i>italics</i>, <b>bold</b>, or <tt>monospace</tt>.</p>
       <p>An image with a caption:</p>
       <div class="e2-text-picture">
-      <div style="width: 800px; max-width: 100%"><div class="e2-text-picture-imgwrapper" style="padding-bottom: 44.375%"><img src="system/theme/images/sample-image.jpg" width="800" height="355" alt="">
+      <div style="width: 800px; max-width: 100%"><div class="e2-text-proportional-wrapper" style="padding-bottom: 44.375%"><img src="system/theme/images/sample-image.jpg" width="800" height="355" alt="">
       </div></div>
       <div class="e2-text-caption">La creazione di Adamo. Michelangelo Buonarroti, c. 1511</div>
       </div>
       <p>A table follows this paragraph. This paragraph has just a filler text. The theory of empathy is free. The rhythm has an elegant factographic chthonic myth. Artistic mediation is a catharsis. The liturgical drama has psychological parallelism.</p>      
       <div class="e2-text-table">
         <table cellpadding="0" cellspacing="0" border="0">
-        <tr><th>City</th><th>Time zone</th><th>Code</th><th>From Greenwich</th></tr>
+        <tr><th>City</th><th>Time zone</th><th>Code</th><th>From Greenwich</th></tr>
         <tr><td>Chelyabinsk</td><td>Yekaterinburg Time</td><td>YEKT</td><td>+5 h.</td></tr>
         <tr><td>Moscow</td><td>Moscow Time</td><td>MSK</td><td>+3 h.</td></tr>
         <tr><td>London</td><td>Greenwich Mean Time</td><td>GMT</td><td></td></tr>
-        <tr><td>New York</td><td>Eastern Time</td><td>ET</td><td>−5 h.</td></tr>
-        <tr><td>San Francisco</td><td>Pacific Time</td><td>PT</td><td>−8 h.</td></tr>
+        <tr><td>New York</td><td>Eastern Time</td><td>ET</td><td>−5 h.</td></tr>
+        <tr><td>San Francisco</td><td>Pacific Time</td><td>PT</td><td>−8 h.</td></tr>
         </table>
       </div>
       <p>Some text may be separated with a horisontal rule:</p>
@@ -68,15 +69,16 @@
         <li>This is a short element.</li>
       </ul>
       ',
-      // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
+      // 'summary' => '',
       // 'format-info' => array 2
       // 'time' => e2 time 8 May 2017, 20:46, GMT+05:00
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
       // 'last-ip' => NULL,
-      'published?' => true,
-      'commentable?' => false,
+      'draft?' => false,
+      'scheduled?' => false,
+      'public?' => true,
+      'hidden?' => false,
       'favourite?' => true,
-      'visible?' => true,
       'tags' => array (
          array (
            'name' => 'a tag',
@@ -91,7 +93,6 @@
       ),
       'read-count' => 42,
       'comments-count' => 0,
-      // 'commentable-now?' => true,
       // 'comments-count-text' => '1 comment',
       'href' => $self_href,
       // 'href-original' => 'http://e2/all/muzlo/',
@@ -103,21 +104,21 @@
       // 'og-images' => array (),
     ),
     array (
+      'id' => 2,
       'title' => 'Another sample post',
       'text' => '
       <p>This is a second example to help you adjust the distance between the posts in a feed. This post is also not starred unlike the previous one. The title is not a link here — as if we were on the posts’ page. It also has a highlighed tag — as if we were on that tag’s page.</p>
       ',
-      // <div class="e2-text-block-loud">Here’s what an important quote, conclusion, or rule looks like</div>
-      // <div class="e2-text-block-foot">Also it has a footnote.</div>
-      // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
+      // 'summary' => '',
       // 'format-info' => array 2
       // 'time' => e2 time 8 May 2017, 20:46, GMT+05:00
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
       // 'last-ip' => NULL,
-      'published?' => true,
-      'commentable?' => true,
+      'draft?' => false,
+      'scheduled?' => false,
+      'public?' => true,
+      'hidden?' => false,
       'favourite?' => false,
-      'visible?' => true,
       'tags' => array (
          array (
            'name' => 'first tag',
@@ -137,7 +138,6 @@
       ),
       'read-count' => 147,
       'comments-count' => 5,
-      'commentable-now?' => true,
       'comments-count-text' => '5 comments',
       // 'href' => $self_href,
       // 'href-original' => 'http://e2/all/muzlo/',
@@ -149,44 +149,47 @@
       // 'og-images' => array (),
     ),
     array (
+      'id' => 3,
       'title' => 'A sample post in the <mark>search</mark> results',
-      'text' => '
+      'text' => '',
+      'snippet-text' => '
       <p>This is what a post looks like in the <mark>search</mark> results page. The query text would be <mark>highlighted</mark>, and all the images from the post would be previewed below. Some of them may also be <mark>highlighted</mark>. The <tt>mark</tt> tag is used for all <mark>highlighting</mark>, including the tag in the post above.</p>
       ',
-      // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
+      // 'summary' => '',
       // 'format-info' => array 2
       // 'time' => e2 time 8 May 2017, 20:46, GMT+05:00
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
       // 'last-ip' => NULL,
-      'published?' => true,
-      'commentable?' => false,
+      'draft?' => false,
+      'scheduled?' => false,
+      'public?' => true,
+      'hidden?' => false,
       'favourite?' => false,
-      'visible?' => true,
-      'thumbs' => array (
-        array (
-          // 'original-filename' => 'topics.png',
-          'href' => 'system/theme/images/sample-thumb-1@2x.jpg',
+      'read-count' => 31,
+      'thumbs' => [
+        [
+          'is-available?' => true,
+          'src' => 'system/theme/images/sample-thumb-1@2x.jpg',
           'width' => 100,
           'height' => 79,
           'highlighted?' => false,
-        ),
-        array (
-          // 'original-filename' => 'topics.png',
-          'href' => 'system/theme/images/sample-thumb-2@2x.jpg',
+        ],
+        [
+          'is-available?' => true,
+          'src' => 'system/theme/images/sample-thumb-2@2x.jpg',
           'width' => 100,
           'height' => 67,
           'highlighted?' => false,
-        ),
-        array (
-          // 'original-filename' => 'topics.png',
-          'href' => 'system/theme/images/sample-thumb-3@2x.jpg',
+        ],
+        [
+          'is-available?' => true,
+          'src' => 'system/theme/images/sample-thumb-3@2x.jpg',
           'width' => 100,
           'height' => 44,
           'highlighted?' => true,
-        ),
-      ),
+        ],
+      ],
       // 'comments-count' => 5,
-      // 'commentable-now?' => true,
       // 'comments-count-text' => '5 comments',
       'href' => $self_href,
       // 'href-original' => 'http://e2/all/muzlo/',
@@ -197,16 +200,6 @@
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
       // 'og-images' => array (),
     ),
-    // 'only' => array (
-    //   'title' => 'A post with comments',
-    //   'text' => '<p>Finally, here’s a post with comments. It’s title is not a link as we are on its own page.</p>',
-    //   'published?' => true,
-    //   'commentable?' => true,
-    //   'favourite?' => false,
-    //   'visible?' => true,
-    //   'comments-count' => 5,
-    //   'comments-count-text' => '5 comments',
-    // ),
   );
 
   $return['pages'] = array (
@@ -228,6 +221,7 @@
       array (
         'gip-used?' => true,
         'gip' => 'facebook',
+        'userpic-set?' => true,
         'userpic-href' => 'system/theme/images/sample-face-1.jpg',
         'important?' => false,
         'name' => 'John Smith',
@@ -255,6 +249,7 @@
       array (
         'gip-used?' => true,
         'gip' => 'twitter',
+        'userpic-set?' => true,
         'userpic-href' => 'system/theme/images/sample-face-2.jpg',
         'important?' => false,
         'name' => 'Sabrina Irmgard Krankenschwarzdrossel',
@@ -274,7 +269,7 @@
     'count-text' => '2 comments',
     // 'new-count' => 0,
     // 'new-count-text' => '0 new',
-    'commentable-now?' => true,
+    'display-form?' => true,
   );
 
   $return['form-comment'] = array (
@@ -376,71 +371,71 @@
     ),
   );
 
-  $return['popular'] = array (
-    'title' => 'Popular',
-    'each' => array (
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'These links appear under posts on their pages',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'A popular post',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Another post that everyone talks about',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Lorem ipsum dolor',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Short',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'These links appear under posts on their pages',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'A popular post',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Another post that everyone talks about',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Lorem ipsum dolor',
-        'current?' => false,
-      ),
-      array (
-        'href' => $self_href,
-        // 'time' = array 2,
-        'title' => 'Short',
-        'current?' => false,
-      ),
-    ),
-  );
+  // $return['popular'] = array (
+  //   'title' => 'Popular',
+  //   'each' => array (
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'These links appear under posts on their pages',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'A popular post',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Another post that everyone talks about',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Lorem ipsum dolor',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Short',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'These links appear under posts on their pages',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'A popular post',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Another post that everyone talks about',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Lorem ipsum dolor',
+  //       'current?' => false,
+  //     ),
+  //     array (
+  //       'href' => $self_href,
+  //       // 'time' = array 2,
+  //       'title' => 'Short',
+  //       'current?' => false,
+  //     ),
+  //   ),
+  // );
   
   return $return;
 

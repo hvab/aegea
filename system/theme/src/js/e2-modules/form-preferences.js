@@ -3,8 +3,6 @@ import textEditorInit from '../lib/text-editor'
 function initFormPreferences () {
   if (!$('#form-preferences').length) return
 
-  $('#blog-description').each(textEditorInit)
-
   $('#blog-title').on('input blur cut copy paste keypress', function () {
     var $title = $('#e2-blog-title')
     var titleDefault = $('#e2-blog-title-default').val()

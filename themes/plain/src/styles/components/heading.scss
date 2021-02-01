@@ -2,7 +2,7 @@
   margin-bottom: 40px;
 
   h2 {
-    margin: 0;
+    margin: 0 0 8px 0;
     font-weight: bold;
     font-size: var(--pageHeadingFontSize);
     line-height: var(--pageHeadingLineHeight);
@@ -18,25 +18,31 @@
   }
 }
 
-.e2-heading-super {
-  font-size: 14px;
-  line-height: 20px;
-  margin: 0;
+.e2-heading-meta {
+  margin: 0 0 40px 0;
+  width: 100%;
+  border: none;
+  font-family: var(--smallFontFamily);
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
 }
 
-.e2-heading-see-also {
-  margin-top: 10px;
+.e2-heading-gallery+.e2-heading-meta {
+  border-top: 1px var(--thinRuleColor) solid;
+  padding: 8px 0;
 }
 
 .e2-heading-description {
-  margin: 40px 0 40px;
+  font-size: var(--noteTextFontSize);
+  line-height: var(--noteTextLineHeight);
+  margin: 0 0 16px 0;
 }
 
 .e2-year-months,
 .e2-month-days {
   font-family: var(--smallFontFamily);
-  font-size: 12px;
-  line-height: 24px;
+  font-size: var(--smallFontSize);
+  line-height: var(--smallLineHeight);
   margin: 12px -4px 0;
 }
 

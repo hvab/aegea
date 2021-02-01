@@ -11,8 +11,9 @@ class NeasdenGroup_audio implements NeasdenGroup {
 
     $neasden->define_line_class ('audio', '.*\.(mp3)(?: +(.+))?');
     $neasden->define_line_class ('audio-play', '(?:\[play\])(.*)');
-    $neasden->define_line_class ('audio-range-title', '(?:(.+) (.+)  (.+))');
-    $neasden->define_group ('audio', '(?:(-audio-)|(-audio-play-))(-audio-range-title-)*');
+    $timecode_regex = '((?:\d+\:)?\d{1,2}\:\d{2})';
+    $neasden->define_line_class ('timed-media-section', '(?:'. $timecode_regex .' +)(?:'. $timecode_regex .' +)?(.+)');
+    $neasden->define_group ('audio', '(?:(-audio-)|(-audio-play-))(-timed-media-section-)*');
   }
 
   function detect_line ($line, $myconf) {
@@ -64,48 +65,62 @@ class NeasdenGroup_audio implements NeasdenGroup {
     
       if ($line['class'] == 'audio' or $line['class'] == 'audio-play') {
   
-        $player_html = '<a '.
+        $player_html = '<div class="e2-text-super-wrapper e2-jouele-wrapper"><a '.
           'class="jouele" '.
           'data-space-control="true" '.
           $jouele_data_length_attr.
-          'href="'. $href .'" '.
-        '>'. $alt .'</a>'."\n";
+          'href="'. $href .'"'.
+        '>'. $alt .'</a></div>';
         
         $player_html = $this->neasden->isolate ($player_html);
 
-        $result .= $player_html;
+        $result .= $player_html ."\n";;
       
       }
 
-      if ($line['class'] == 'audio-range-title') {
+      if ($line['class'] == 'timed-media-section') {
         $ranges[] = $line['class-data'];
       }
       
     }
   
+    // code duplication with onlinevideo.php, video.php :-(
     if (count ($ranges)) {
-      // $result = '<div class="'. $myconf['css-class'] .'">' ."\n";
-      // $result .= '<table cellpadding="0" cellspacing="0" border="0">' ."\n";
-      $result .= '<div class="e2-audio-ranges">'."\r\n";
-      $result .= '<table cellpadding="0" cellspacing="0" border="0">'."\r\n";
-      foreach ($ranges as $range) {
-        $item = [
-          'from' => $range[1],
-          'to' => $range[2],
-          'title' => $range[3],
-        ];
-        $result .= '<tr class="jouele-control e2-audio-ranges-item" data-type="seek" '."\r\n";
-        $result .= 'data-range="'. $item['from'] .'...'. $item['to'] .'" '."\r\n";
-        $result .= 'data-href="'. $href .'">'."\r\n";
-        $result .= '<td style="width: 1px; white-space: nowrap"><span>'. $item['from'] .'</span></td>'."\r\n";
-        $result .= '<td class="e2-audio-ranges-item-title"><span>'. $item['title'] .'</span></td>'."\r\n";
-        $result .= '</tr>'."\r\n";
+
+      if ($this->neasden->config['html.basic']) {
+        
+        $result .= '<p>'."\n";
+        foreach ($ranges as $range) {
+          $item = [
+            'from' => $range[1],
+            'title' => $range[3],
+          ];
+          $result .= $item['from'] .' '. $item['title'] .'<br />'."\n";
+        }
+        $result .= '</p>'."\n";
+
+      } else {  
+
+        $result .= '<div class="e2-media-sections">'."\n";
+        $result .= '<table cellpadding="0" cellspacing="0" border="0">'."\n";
+        foreach ($ranges as $range) {
+          $item = [
+            'from' => $range[1],
+            'to' => $range[2],
+            'title' => $range[3],
+          ];
+          $result .= '<tr class="jouele-control e2-media-sections-item" data-type="seek" '."\n";
+          $result .= 'data-range="'. $item['from'] .'...'. $item['to'] .'" '."\n";
+          $result .= 'data-href="'. $href .'">'."\n";
+          $result .= '<td style="width: 1px; white-space: nowrap"><span>'. $item['from'] .'</span></td>'."\n";
+          $result .= '<td class="e2-media-sections-item-title"><span>'. $item['title'] .'</span></td>'."\n";
+          $result .= '</tr>'."\n";
+        }
+        $result .= '</table>'."\n";
+        $result .= '</div>'."\n";
+
       }
-      $result .= '</table>'."\r\n";
-      $result .= '</div>'."\r\n";
-      // $result .= '<pre>';
-      // $result .= print_r ($ranges, true);
-      // $result .= '</pre>';
+
     }
 
     $result .= '</div>'."\n";

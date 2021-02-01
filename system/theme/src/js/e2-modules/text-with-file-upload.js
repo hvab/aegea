@@ -24,7 +24,7 @@ function initTextWithFileUpload () {
   var completedUploadSize = 0
   var totalUploadSize = 0
 
-  var $uploadedImages = $('#e2-uploaded-images')
+  var $uploadedImages = $('.e2-uploaded-images')
   var $uploadedImagesInstances = $uploadedImages.find('.e2-uploaded-image')
 
   var $uploadControls = $('.e2-upload-controls')
@@ -88,7 +88,7 @@ function initTextWithFileUpload () {
       var file = filesToUpload.shift()
       var url = $('#e2-file-upload-action').attr('href') + '?'
 
-      if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png|svg|mp3$/i)) {
+      if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png|svg|mp3|mp4|mov$/i)) {
         e2NiceError({
           message: 'er--unsupported-file',
           debug: {
@@ -136,9 +136,11 @@ function initTextWithFileUpload () {
           var $thumbToUpdateParent = $thumbToUpdate.parents('.e2-uploaded-image')
 
           if (response['data']['overwrite']) {
-            e2SpinningAnimationStartStop($uploadSpinner, 0)
-            $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
-            $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
+            if (!filesToUpload.length) {
+              e2SpinningAnimationStartStop($uploadSpinner, 0)
+              $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
+              $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
+            }
 
             if ($thumbToUpdate.length) {
               $e2AddPasteableImage(
@@ -163,15 +165,18 @@ function initTextWithFileUpload () {
                 response['data']['width'],
                 response['data']['height']
               ).appendTo($uploadedImages).show(333, function () {
+                if (!filesToUpload.length) {
+                  e2SpinningAnimationStartStop($uploadSpinner, 0)
+                  $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
+                  $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
+                }
+              })
+            } else {
+              if (!filesToUpload.length) {
                 e2SpinningAnimationStartStop($uploadSpinner, 0)
                 $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
                 $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
-              })
-            } else {
-              e2SpinningAnimationStartStop($uploadSpinner, 0)
-              $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
-              $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
-
+              }
               if ($thumbToUpdate.length) {
                 $e2AddPasteableImage(
                   response['data']['thumb'],
@@ -188,9 +193,11 @@ function initTextWithFileUpload () {
           e2ClearUploadBuffer()
         },
         error: function () {
-          e2SpinningAnimationStartStop($uploadSpinner, 0)
-          $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
-          $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
+          if (!filesToUpload.length) {
+            e2SpinningAnimationStartStop($uploadSpinner, 0)
+            $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
+            $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
+          }
 
           e2ClearUploadBuffer()
         },
@@ -220,7 +227,7 @@ function initTextWithFileUpload () {
       dt.files[i].e2AltKeyPressed = e.altKey
       dt.files[i].e2DroppedIntoTextarea = e2DroppedIntoTextarea
       filesToUpload.push(dt.files[i])
-      completedUploadSize = 0
+      // completedUploadSize = 0
       totalUploadSize += dt.files[i].size
     }
 
@@ -236,8 +243,62 @@ function initTextWithFileUpload () {
 
     for (var i = 0; i < e.target.files.length; i++) {
       filesToUpload.push(e.target.files[i])
-      completedUploadSize = 0
+      // completedUploadSize = 0
       totalUploadSize += e.target.files[i].size
+    }
+
+    e2ClearUploadBuffer()
+
+    return false
+  }
+
+  function e2MakeImageFilename (now) {
+    var month = now.getMonth()
+    month = month < 10 ? '0'+month : month;
+    var day = now.getDate()
+    day = day < 10 ? '0'+day : day;
+    var hours = now.getHours()
+    hours = hours < 10 ? '0'+hours : hours;
+    var minutes = now.getMinutes()
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var seconds = now.getSeconds()
+    seconds = seconds < 10 ? '0'+seconds : seconds;
+    return (
+      'image-' + now.getFullYear() + month + day +
+      '-' + hours + minutes + seconds +
+      '.png'
+    )
+  }
+
+  function e2LoadImagesFromPaste (e) {
+    const files = ((e.clipboardData || e.originalEvent.clipboardData).files || []);
+    
+    if (!files.length) return;
+
+    filesToUpload.length = 0
+    
+    for (let i = 0; i < files.length; i++) {
+      var e2File = files[i]
+      var now = new Date()
+
+      if ((e2File.lastModified === now.getTime()) && (e2File.name === 'image.png')) {
+        // must be an image pasted directly from clipboard, not a file with a name
+        // e2File = new File ([files[i]], e2MakeImageFilename (now), {
+        e2File = new File ([files[i]], $uploadControls.data('e2FilenamePrefix') + '.png', {
+          lastModified: files[i].lastModified,
+          size: files[i].size,
+          type: files[i].type,
+          webkitRelativePath: files[i].webkitRelativePath,
+        })
+      }
+
+      // set e2DroppedIntoTextarea to true to “emulate” dropping 
+      // for auto pasting filename into the text field
+      e2File.e2DroppedIntoTextarea = true
+
+      filesToUpload.push(e2File)
+      // completedUploadSize = 0
+      totalUploadSize += e2File.size
     }
 
     e2ClearUploadBuffer()
@@ -320,7 +381,9 @@ function initTextWithFileUpload () {
   $uploadControls.removeClass(uploadControlsHiddenModifier)
   $uploadButton.on('change', e2LoadImagesFromInput)
 
-  $('.e2-external-drop-target-body, .e2-external-drop-target-textarea').on('drop', e2LoadImagesFromDrop)
+  $('.e2-external-drop-target-body, .e2-external-drop-target-textarea')
+    .on('drop', e2LoadImagesFromDrop)
+    .on('paste', e2LoadImagesFromPaste)
 }
 
 export default initTextWithFileUpload

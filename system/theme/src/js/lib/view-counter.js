@@ -27,6 +27,7 @@ function viewCounter ({ noteId, endpointUrl }) {
   function sendReadStatus (cb, retryTimeout = 2) {
     const xhr = new XMLHttpRequest()
 
+
     xhr.open('GET', endpointUrl)
 
     xhr.onreadystatechange = () => {
