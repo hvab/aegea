@@ -7,7 +7,7 @@
 <?php if (array_key_exists ('comments', $content)) { ?>
   <?php if ($content['class'] != 'comment-edit') { ?>
     <?php if (array_key_exists ('each', $content['comments'])) { ?>
-      <div class="e2-comments">
+      <div class="e2-comments <?= $content['notes']['only']['hidden?']? 'e2-comments-hidden' : '' ?>">
         <?php if (!array_key_exists ('only', $content['comments']['each'])) { ?>
           <?php _T ('comments-heading'); ?>
         <?php } ?>

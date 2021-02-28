@@ -224,3 +224,16 @@
   opacity: .4;
 }
 
+.e2-note-visibility-toggle {
+  margin: 0 0 20px;
+}
+
+.e2-note-hidden h1,
+.e2-note-hidden article,
+.e2-note-hidden .e2-note-snippet-text {
+  color: var(--disabledColor);
+}
+
+.e2-note-list .e2-note-hidden {
+  opacity: .2;
+}

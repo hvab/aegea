@@ -123,3 +123,35 @@
 
   }
 }
+
+.e2-text .lead {
+  color: var(--tagColor);
+  color: #8e33f5;
+  font-weight: bold;
+}
+
+.e2-text .loud {
+  background-color: #d9ff00;
+  color: #000;
+  font-family: var(--mainFontFamily);
+  font-weight: bold;
+  font-size: 54px;
+  line-height: 56px;
+  max-width: 720px;  
+  padding: .4em 0 .8em;
+  border: none;
+  border-radius: 0.4em;
+  box-shadow: -0.4em 0 0 #d9ff00, 0.4em 0 0 #d9ff00;
+  margin: 20px 0 40px;
+}
+
+.e2-text .foot {
+  color: #fff;
+  font-weight: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+  .e2-text .loud {
+    color: var(--backgroundColor);
+  }
+}

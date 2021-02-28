@@ -78,7 +78,7 @@ function initObsoleteFunction () {
         success: function (response) {
           $formLogin.find('.input-disableable').prop('disabled', false)
 
-          if (typeof response['data'] === 'undefined' || typeof response['data']['password-correct'] === 'undefined') {
+          if (typeof response.data === 'undefined' || typeof response.data['password-correct'] === 'undefined') {
             e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
             $formLoginPasswordChecking.fadeOut(333)
             e2NiceError({
@@ -93,7 +93,7 @@ function initObsoleteFunction () {
             return false
           }
 
-          if (response['data']['password-correct']) {
+          if (response.data['password-correct']) {
             e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
             $formLoginPasswordChecking.hide()
             $('#password-correct').fadeIn(333, function () {
@@ -296,7 +296,7 @@ function initObsoleteFunction () {
       const noteId = $note.data('note-id').toString()
       const endpointUrl = $note.data('note-read-href')
       if (typeof endpointUrl !== 'undefined') {
-        viewCounter({noteId, endpointUrl})
+        viewCounter({ noteId, endpointUrl })
       }
     }
 

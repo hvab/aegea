@@ -45,6 +45,9 @@
 <div class="form-control">
   <div class="form-element">
     <form action="<?= $content['form-note-delete']['hide-href'] ?>" method="post"><button type="submit" class="e2-button"><?= _S ('fb--hide') ?></button></form>
+    <div class="form-control-sublabel">
+    <?= _S ('gs--post-will-be-hidden') ?>
+    </div>
   </div>
 </div>
 <?php } ?>
@@ -55,6 +58,9 @@
 <div class="form-control">
   <div class="form-element">
     <form action="<?= $content['form-note-delete']['withdraw-href'] ?>" method="post"><button type="submit" class="e2-button"><?= _S ('fb--withdraw') ?></button></form>
+    <div class="form-control-sublabel">
+    <?= _S ('gs--post-will-be-withdrawn') ?>
+    </div>
   </div>
 </div>
 <?php } ?>

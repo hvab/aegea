@@ -26,29 +26,29 @@ $IsCompact: 'screen and (max-width: 1023px)';
 
 :root {
 
-  --backgroundColor: $backgroundColor;
-  --backgroundTransparentColor: transparentize($backgroundColor, 0.2);
+  --backgroundColor: #{$backgroundColor};
+  --backgroundTransparentColor: #{transparentize($backgroundColor, 0.2)};
   --sheetBackgroundColor: rgba(240,240,240,0.8);
 
-  --foregroundColor: $foregroundColor;
-  --thinRuleColor: transparentize($foregroundColor, $thin);
+  --foregroundColor: #{$foregroundColor};
+  --thinRuleColor: #{transparentize($foregroundColor, $thin)};
 
-  --headingsColor: $headingsColor;
-  --headingsUnderlineColor: transparentize($headingsColor, $thin);
-  --boldColor: $headingsColor;
-  --boldUnderlineColor: transparentize($headingsColor, $thin);
-  --linkColor: $linkColor;
-  --linkUnderlineColor: transparentize($linkColor, $thin);
-  --linkColorVisited: $linkColorVisited;
-  --linkUnderlineColorVisited: transparentize($linkColorVisited, $thin);
-  --hoverColor: $hoverColor;
-  --hoverUnderlineColor: transparentize($hoverColor, $thin);
-  --tagColor: $tagColor;
-  --tagUnderlineColor: transparentize($tagColor, $thin);
-  --adminColor: $adminColor;
-  --adminUnderlineColor: transparentize($adminColor, $thin);
-  --engineTextColor: $engineTextColor;
-  --engineTextUnderlineColor: transparentize($engineTextColor, $thin);
+  --headingsColor: #{$headingsColor};
+  --headingsUnderlineColor: #{transparentize($headingsColor, $thin)};
+  --boldColor: #{$headingsColor};
+  --boldUnderlineColor: #{transparentize($headingsColor, $thin)};
+  --linkColor: #{$linkColor};
+  --linkUnderlineColor: #{transparentize($linkColor, $thin)};
+  --linkColorVisited: #{$linkColorVisited};
+  --linkUnderlineColorVisited: #{transparentize($linkColorVisited, $thin)};
+  --hoverColor: #{$hoverColor};
+  --hoverUnderlineColor: #{transparentize($hoverColor, $thin)};
+  --tagColor: #{$tagColor};
+  --tagUnderlineColor: #{transparentize($headingsColor, $thin)};
+  --adminColor: #{$adminColor};
+  --adminUnderlineColor: #{transparentize($adminColor, $thin)};
+  --engineTextColor: #{$engineTextColor};
+  --engineTextUnderlineColor: #{transparentize($engineTextColor, $thin)};
 
   --markedTextBackground: #fffada;
   --markedImageBorderColor: #fff8b8;

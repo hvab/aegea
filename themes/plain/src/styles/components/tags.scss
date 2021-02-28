@@ -5,6 +5,12 @@ a:visited.e2-tag {
   border-color: var(--tagUnderlineColor);
 }
 
+a.e2-tag-hidden,
+a:link.e2-tag-hidden,
+a:visited.e2-tag-hidden {
+  opacity: .2;
+}
+
 a:hover.e2-tag,
 a.hover.e2-tag,
 a:active.e2-tag {

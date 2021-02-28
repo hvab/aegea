@@ -91,6 +91,9 @@ function e2l_load_strings () {
   'pt--post-deletion' => 'Suppression du billet',
   'gs--post-will-be-deleted' => 'Le billet “$[post]” sera supprimé avec tous les commentaires.',
 
+  'gs--post-will-be-hidden' => 'Le billet restera en place, mais ne sera visible que par vous. D’autres ne verront même y pas par un lien direct. Peut être rendu visible à nouveau',
+  'gs--post-will-be-withdrawn' => 'Les commentaires seront supprimés, la date de publication sera oubliée. Peut être republié',
+
   // uploads
   'gs--kb' => 'Ko',
   'mi--upload-file' => 'Charger le fichier',

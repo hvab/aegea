@@ -91,6 +91,9 @@ function e2l_load_strings () {
   'pt--post-deletion' => 'Post deletion',
   'gs--post-will-be-deleted' => 'The post “$[post]” will be deleted with all comments.',
 
+  'gs--post-will-be-hidden' => 'The post will remain in place, but will be visible only to you. Others won’t be able to access it even by a direct link. You can show it back later',
+  'gs--post-will-be-withdrawn' => 'Comments will be deleted, the publish date forgotten. You can publish again later',
+
   // uploads
   'gs--kb' => 'KB',
   'mi--upload-file' => 'Upload file',

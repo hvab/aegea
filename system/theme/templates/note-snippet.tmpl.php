@@ -1,7 +1,7 @@
 <?php $note = $content['_']['_note']; ?>
 <?php unset ($content['_']['_note']); ?>
 
-<div class="e2-note-snippet<?= $note['hidden?']? ' e2-hidden' : '' ?>">
+<div class="e2-note-snippet<?= $note['hidden?']? ' e2-note-hidden' : '' ?>">
 
 <?php // THUMBS // ?>
 <?php $thumbs = []; ?>
@@ -78,7 +78,7 @@
 <?php // TEXT // ?>
 
 <?php if (array_key_exists ('snippet-text', $note) and $note['snippet-text'] != '') { ?>
-<div>
+<div class="e2-note-snippet-text">
 <p><?= $note['snippet-text'] ?></p>
 </div>
 <?php } ?>
@@ -111,7 +111,7 @@
 $tags = array ();
 foreach ($note['tags'] as $tag) {
 
-  $classname = 'e2-tag '. ($tag['visible?']? '' : ' e2-hidden');
+  $classname = 'e2-tag'. ($tag['visible?']? '' : ' e2-tag-hidden');
   if ($tag['current?']) {
     $tags[] = '<mark><span class="'. $classname .'">'. $tag['name'] .'</span></mark>';
   } else {

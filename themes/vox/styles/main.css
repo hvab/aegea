@@ -19,8 +19,8 @@
   --hoverUnderlineColor:        rgba( 135,  23,  25, .3  );
   /* --tagColor */
   /* --tagUnderlineColor */
-  /* --adminColor */
-  /* --adminUnderlineColor */
+  --adminColor:                  rgb( 112, 192,  32);
+  --adminUnderlineColor:        rgba( 112, 192,  32, .12 );
   --engineTextColor:             rgb(  86,  85, 103      );
   --engineTextUnderlineColor:   rgba(  86,  85, 103, .3 );
 
@@ -83,14 +83,7 @@
 
 .e2-text .lead {
   font-family: var(--mainFontFamily);
-  font-size: var(--noteTextFontSize);
-  line-height: var(--noteTextLineHeight);
   margin: 0 0 28px;
-}
-
-.e2-note-favourite .e2-text .lead {
-  font-size: var(--noteTitleFontSize);
-  line-height: var(--noteTitleLineHeight);
 }
 
 .e2-text .loud {

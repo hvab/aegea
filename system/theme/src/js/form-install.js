@@ -44,36 +44,36 @@ function e2AllCompleted () {
 function e2CheckServerResponse () {
   $('.db-everything-ok').removeClass('e2-verified').addClass('e2-wrong')
 
-  if (typeof serverResponse['data'] === 'undefined' || !serverResponse['data']['db-responding']) return false
+  if (typeof serverResponse.data === 'undefined' || !serverResponse.data['db-responding']) return false
 
   $('.db-server-ok').removeClass('e2-wrong').addClass('e2-verified')
   if (initialCheck) $dbUser.focus()
 
-  if (!serverResponse['data']['db-connected']) return
+  if (!serverResponse.data['db-connected']) return
 
   $('.db-user-password-ok').removeClass('e2-wrong').addClass('e2-verified')
 
-  if (!serverResponse['data']['db-found']) return
+  if (!serverResponse.data['db-found']) return
 
   $('.db-database-ok').removeClass('e2-wrong').addClass('e2-verified')
 
-  $('#db-database-message-text').text(serverResponse['data']['message'])
+  $('#db-database-message-text').text(serverResponse.data.message)
 
-  if (serverResponse['data']['message']) {
+  if (serverResponse.data.message) {
     $('#db-database-message').slideDown(333)
   } else {
     $('#db-database-message').slideUp(333)
   }
 
-  if (!serverResponse['data']['db-compatible']) return
-  if (!serverResponse['data']['db-good']) return
+  if (!serverResponse.data['db-compatible']) return
+  if (!serverResponse.data['db-good']) return
 
   $('.db-everything-ok').removeClass('e2-wrong').addClass('e2-verified')
 
   if (initialCheck) $e2Password.focus()
 
-  // if (serverResponse['data']['db-occupied']) {
-  //   if (serverResponse['data']['db-migrateable']) {
+  // if (serverResponse.data['db-occupied']) {
+  //   if (serverResponse.data['db-migrateable']) {
   //     $('#db-database-exists').slideDown(333)
   //     $('#db-database-incomplete').slideUp(333)
   //     if (initialCheck) $e2Password.focus()
@@ -122,7 +122,7 @@ function e2CheckDbConfig () {
       url: $formInstall.attr('data-action-database-config'),
       data: ajaxData,
       success: function (response) {
-        if (typeof response['data'] === 'undefined') {
+        if (typeof response.data === 'undefined') {
           e2NiceError({
             message: 'er--js-server-error',
             debug: {
@@ -139,7 +139,7 @@ function e2CheckDbConfig () {
 
         e2CheckServerResponse()
 
-        if (serverResponse['data']['db-connected']) {
+        if (serverResponse.data['db-connected']) {
           if (xhrCheckDBConfig) xhrCheckDBConfig.abort()
           if (xhrListDatabases) xhrListDatabases.abort()
 
@@ -147,7 +147,7 @@ function e2CheckDbConfig () {
             url: $formInstall.attr('data-action-databases-list'),
             data: ajaxData,
             success: function (response) {
-              if (typeof response['data'] === 'undefined' || typeof response['data']['databases-list'] === 'undefined') {
+              if (typeof response.data === 'undefined' || typeof response.data['databases-list'] === 'undefined') {
                 e2NiceError({
                   message: 'er--js-server-error',
                   debug: {
@@ -160,7 +160,7 @@ function e2CheckDbConfig () {
                 return false
               }
 
-              var dbs = response['data']['databases-list']
+              var dbs = response.data['databases-list']
               var valBefore = $dbDatabase.val()
 
               if ($dbDatabase.val() === '') {
@@ -209,7 +209,7 @@ function e2CheckDbConfig () {
           completedListDatabases = true
         }
 
-        bingo = serverResponse['data']['db-good']
+        bingo = serverResponse.data['db-good']
 
         e2UpdateSubmittability()
       },

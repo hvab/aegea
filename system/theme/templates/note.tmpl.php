@@ -4,7 +4,7 @@
 <?php _X ('note-pre') ?>
 
 <div
-  class="e2-note <?= $note['hidden?']? 'e2-hidden' : '' ?> <?= $note['favourite?']? 'e2-note-favourite' : '' ?>"
+  class="e2-note <?= $note['hidden?']? 'e2-note-hidden' : '' ?> <?= $note['favourite?']? 'e2-note-favourite' : '' ?>"
   data-note-id="<?= $note['id'] ?>"
   <?php if (!empty ($note['read-href'])) { ?>
   data-note-read-href="<?= $note['read-href'] ?>"
@@ -213,7 +213,7 @@
 $tags = array ();
 foreach ($note['tags'] as $tag) {
 
-  $classname = 'e2-tag '. ($tag['visible?']? '' : ' e2-hidden');
+  $classname = 'e2-tag'. ($tag['visible?']? '' : ' e2-tag-hidden');
   if ($tag['current?']) {
     $tags[] = '<mark><span class="'. $classname .'">'. $tag['name'] .'</span></mark>';
   } else {
@@ -236,7 +236,9 @@ echo implode (' &nbsp; ', $tags)
 
 <?php if (array_key_exists ('only', $content['notes'])) { ?>
 <?php if (!empty ($note['show-href'])): ?>
+<div class="e2-note-visibility-toggle">
 <form action="<?= $note['show-href'] ?>" method="post"><button type="submit" class="e2-button"><?= _S ('fb--show') ?></button></form>
+</div>
 <?php endif ?>
 <?php } ?>
 

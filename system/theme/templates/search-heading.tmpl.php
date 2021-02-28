@@ -23,7 +23,7 @@
 $tags = [];
 if (array_key_exists ('search-related-tags', $content)) {
   foreach ($content['search-related-tags'] as $tag) {
-    $classname = 'e2-tag '. ($tag['visible?']? '' : ' e2-hidden');
+    $classname = 'e2-tag'. ($tag['visible?']? '' : ' e2-tag-hidden');
     if ($tag['current?']) {
       $tags[] = '<mark class="'. $classname .'">'. $tag['name'] .'</mark>';
     } else {

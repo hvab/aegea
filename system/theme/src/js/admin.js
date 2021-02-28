@@ -189,7 +189,7 @@ function initObsoleteFunction () {
             var $link = $dropZone.find('.e2-user-picture-container-link')
             var $spinner = $dropZone.find('.e2-user-picture-spinner')
 
-            if (typeof response['data'] === 'undefined' || typeof response['data']['new-image-src'] === 'undefined') {
+            if (typeof response.data === 'undefined' || typeof response.data['new-image-src'] === 'undefined') {
               $dropZone.removeClass(dropZoneUploadingModificator)
               $link.attr('href', $link.attr('data-href')).removeAttr('data-href')
 
@@ -200,7 +200,7 @@ function initObsoleteFunction () {
             }
           })
 
-          if (typeof response['data'] === 'undefined' || typeof response['data']['new-image-src'] === 'undefined') {
+          if (typeof response.data === 'undefined' || typeof response.data['new-image-src'] === 'undefined') {
             e2NiceError({
               message: 'er--js-server-error',
               debug: {
@@ -233,7 +233,7 @@ function initObsoleteFunction () {
                 }
               })
 
-              $img.attr('src', response['data']['new-image-src'] + '?' + Date.now())
+              $img.attr('src', response.data['new-image-src'] + '?' + Date.now())
 
               $imgToLoad = $img
             } else {
@@ -359,12 +359,12 @@ function initObsoleteFunction () {
     if ($notesUnsaved && $nothingMessage) {
       const newName = document.e2.localCopies.getName('new')
 
-      if (localCopiesList.hasOwnProperty(newName)) {
+      if (Object.prototype.hasOwnProperty.call(localCopiesList, newName)) {
         delete localCopiesList[newName]
       }
 
       // show indicators near the drafts if they have local copies
-      for (let key in localCopiesList) {
+      for (const key in localCopiesList) {
         if (localCopiesList[key].isPublished === 'false') {
           $('#e2-draft-' + key + ' .e2-unsaved-led').show()
           delete localCopiesList[key]
@@ -372,7 +372,7 @@ function initObsoleteFunction () {
       }
 
       if (Object.keys(localCopiesList).length) {
-        for (let lc in localCopiesList) {
+        for (const lc in localCopiesList) {
           const copy = document.e2.localCopies.get(lc)
 
           if (!copy) continue // if smth goes wrong we just get out of here
@@ -437,7 +437,7 @@ function initAllAdminItems () {
       url: $link.attr('href'),
       data: 'result=ajaxresult',
       success: function (response) {
-        if (typeof response['data'] === 'undefined' || typeof response['data']['flag-now-on'] === 'undefined') {
+        if (typeof response.data === 'undefined' || typeof response.data['flag-now-on'] === 'undefined') {
           e2NiceError({
             message: 'er--js-server-error',
             debug: {
@@ -453,12 +453,12 @@ function initAllAdminItems () {
           return false
         }
 
-        if (response['data']['flag-now-on']) {
+        if (response.data['flag-now-on']) {
           $link.addClass('e2-admin-item_on')
-          functionWhenToggleOn($link, response['data']['new-href'])
+          functionWhenToggleOn($link, response.data['new-href'])
         } else {
           $link.removeClass('e2-admin-item_on')
-          functionWhenToggleOff($link, response['data']['new-href'])
+          functionWhenToggleOff($link, response.data['new-href'])
         }
       },
       error: function () {
@@ -525,7 +525,7 @@ function initAllAdminItems () {
               $comment.siblings('.e2-reply').slideUp(333)
             }
 
-            $link.trigger('E2_ADMIN_COUPLE_CHANGE_ITEM', {response: 'removed'})
+            $link.trigger('E2_ADMIN_COUPLE_CHANGE_ITEM', { response: 'removed' })
           }
         )
       },
@@ -542,7 +542,7 @@ function initAllAdminItems () {
               $comment.siblings('.e2-reply').slideDown(333)
             }
 
-            $link.trigger('E2_ADMIN_COUPLE_CHANGE_ITEM', {response: 'recovered'})
+            $link.trigger('E2_ADMIN_COUPLE_CHANGE_ITEM', { response: 'recovered' })
           },
           function ($link, newHref) {}
         )

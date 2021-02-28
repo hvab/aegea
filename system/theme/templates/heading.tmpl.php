@@ -106,7 +106,7 @@
       $tags = [];
       if (array_key_exists ('related', $content['tag']) and count ($content['tag']['related'])) {
         foreach ($content['tag']['related'] as $tag) {
-          $classname = 'e2-tag '. ($tag['visible?']? '' : ' e2-hidden');
+          $classname = 'e2-tag'. ($tag['visible?']? '' : ' e2-tag-hidden');
           if ($tag['current?']) {
             $tags[] = '<mark class="'. $classname .'">'. $tag['name'] .'</mark>';
           } else {
