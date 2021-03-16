@@ -123,7 +123,11 @@ foreach ($note['tags'] as $tag) {
     );
   }
 }
-echo implode (' &nbsp; ', $tags)
+echo implode (' &nbsp; ', $tags);
+
+// if (!empty ($note['search-result-provider'])) {
+//   echo '&nbsp; @'. $note['search-result-provider'];
+// }
 
 ?>
 </div>

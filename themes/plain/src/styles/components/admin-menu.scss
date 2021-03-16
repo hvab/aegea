@@ -92,7 +92,10 @@
   top: 48px;
 }
 
-.admin-links a {
+.admin-links a,
+.admin-links a:link,
+.admin-links a:active,
+.admin-links a:visited {
   color: var(--adminColor);
   border-color: var(--adminUnderlineColor);
 }

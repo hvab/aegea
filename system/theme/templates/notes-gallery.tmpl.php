@@ -6,7 +6,7 @@
 
 <?php
 
-if (!$areas) return;
+if (!$areas or !count ($areas['areas'])) return;
 
 $e2_notes_gallery_additional_class = '';
 if (@$areas['grid-rows'] == 2) $e2_notes_gallery_additional_class = 'e2-notes-gallery-2-rows';

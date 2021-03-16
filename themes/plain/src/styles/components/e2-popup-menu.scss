@@ -7,10 +7,10 @@
 .e2-popup-menu-button,
 .e2-popup-menu-button:active,
 .e2-popup-menu-button:hover,
+.e2-popup-menu-button.hover,
 .e2-popup-menu-button:focus,
 .e2-popup-menu-button:focus:hover,
-.e2-popup-menu-button:focus.hover,
-.e2-popup-menu-button.hover {
+.e2-popup-menu-button:focus.hover {
   border: 0;
   background: transparent;
   box-shadow: none;

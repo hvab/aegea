@@ -150,6 +150,7 @@
 <?php // LIKES // ?>
 
 <?php if (array_key_exists ('only', $content['notes'])) { ?>
+<?php if (is_array ($note['sharing-buttons'])) { ?>
 <?php if (count ($note['sharing-buttons'])) { ?>
 
 <div class="e2-note-likes">
@@ -182,6 +183,7 @@
 
 </div>
 
+<?php } ?>
 <?php } ?>
 <?php } ?>
 
@@ -225,7 +227,7 @@ foreach ($note['tags'] as $tag) {
     );
   }
 }
-echo implode (' &nbsp; ', $tags)
+echo implode (' &nbsp; ', $tags);
 
 ?>
 </div>

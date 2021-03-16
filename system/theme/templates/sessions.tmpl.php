@@ -1,4 +1,4 @@
-<?php if (count ($content['sessions']['each'])): ?>
+<?php if (array_key_exists ('sessions', $content) and count ($content['sessions']['each'])) { ?>
 
 <div class="e2-text">
 
@@ -30,4 +30,4 @@
 
 </div>
 
-<?php endif ?>
+<?php } ?>
