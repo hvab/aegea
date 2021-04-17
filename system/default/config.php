@@ -2,8 +2,7 @@
 
 
 // after changing some of these params it may be necessary
-// to drop the cache
-// for that, go to your-website-address/?go=@sync
+// to empty the caches at .../system/underhood/
 
 
 // UI
@@ -15,7 +14,7 @@ $_config['years_range_separator'] = ''; /* html */
 $_config['hot_period'] = 'month'; /* 'day', 'week', 'month', 'year', 'ever' */
 
 // period for the most read (popular) posts
-$_config['popular_period'] = 'month'; /* 'day', 'week', 'month', 'year', 'ever' */
+$_config['popular_period'] = 'ever'; /* 'day', 'week', 'month', 'year', 'ever' */
 
 // default text formatter (make sure you know why you change it)
 $_config['default_formatter'] = 'neasden'; /* 'raw', 'calliope', 'neasden' */

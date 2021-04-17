@@ -176,9 +176,8 @@ function e2l_load_strings () {
   'gs--tags' => 'Balises',
   
   // most commented and favourites
-  'pt--most-commented' => 'Les plus commentés durant $[period.periodname]',
-  'nm--most-commented' => 'Discuté en ce moment',
-  'pt--most-read' => 'Populaire',
+  'pt--most-commented' => 'Les plus commentés$[period.periodname]',
+  'pt--most-read' => 'Populaire$[period.periodname]',
   'nm--most-read' => 'Populaire',
   'pt--favourites' => 'Choisi',
   'nm--favourites' => 'Choisi',
@@ -433,11 +432,11 @@ function e2lstr_monthname ($number, $modifier) {
 
 
 function e2lstr_periodname ($period) {
-  /**/if ('year' == $period) return 'l’année';
-  elseif ('month' == $period) return 'le mois';
-  elseif ('week' == $period) return 'la semaine';
-  elseif ('day' == $period) return 'la journée';
-  else return 'toute l’histoire';
+  /**/if ('year' == $period) return ' durant l’année';
+  elseif ('month' == $period) return ' durant le mois';
+  elseif ('week' == $period) return ' durant la semaine';
+  elseif ('day' == $period) return ' durant la journée';
+  else return ''; // 'toute l’histoire';
 }
 
 

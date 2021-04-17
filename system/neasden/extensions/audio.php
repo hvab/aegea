@@ -41,13 +41,14 @@ class NeasdenGroup_audio implements NeasdenGroup {
     
     foreach ($group as $line) {
     
+      $jouele_data_length_attr = '';
+      
       if ($line['class'] == 'audio') {
         @list ($filebasename, $alt) = explode (' ', $line['content'], 2);
         $this->neasden->resource_detected ($filebasename);
         if (!$alt) $alt = basename ($filebasename);
         $filename = $myconf['folder'] . $filebasename;
         
-        $jouele_data_length_attr = '';
         try {
           require_once @$this->neasden->config['library'] .'mp3info/mp3info.php';
           $audio = new Mp3Info($filename);

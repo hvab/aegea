@@ -176,9 +176,8 @@ function e2l_load_strings () {
   'gs--tags' => 'Tags',
   
   // most commented and favourites
-  'pt--most-commented' => 'Most commented $[period.periodname]',
-  'nm--most-commented' => 'Hot',
-  'pt--most-read' => 'Popular',
+  'pt--most-commented' => 'Most commented$[period.periodname]',
+  'pt--most-read' => 'Popular$[period.periodname]',
   'nm--most-read' => 'Popular',
   'pt--favourites' => 'Selected',
   'nm--favourites' => 'Selected',
@@ -426,11 +425,11 @@ function e2lstr_monthname ($number, $modifier) {
 
 
 function e2lstr_periodname ($period) {
-  /**/if ('year' == $period) return 'over the year';
-  elseif ('month' == $period) return 'over the month';
-  elseif ('week' == $period) return 'over the week';
-  elseif ('day' == $period) return 'over the day';
-  else return 'ever';
+  /**/if ('year' == $period) return ' last year';
+  elseif ('month' == $period) return ' last month';
+  elseif ('week' == $period) return ' last week';
+  elseif ('day' == $period) return ' last day';
+  else return '';
 }
 
 

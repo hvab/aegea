@@ -130,7 +130,10 @@
   transition: none;
 }
 
-a.admin-menu-comments-count {
+a.admin-menu-comments-count,
+a.admin-menu-comments-count:link,
+a.admin-menu-comments-count:active,
+a.admin-menu-comments-count:visited {
   background: var(--adminColor);
   min-width: 17px;
   height: 17px;

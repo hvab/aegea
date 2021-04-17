@@ -176,9 +176,8 @@ function e2l_load_strings () {
   'gs--tags' => 'Тэгі',
 
   // most commented and favourites
-  'pt--most-commented' => 'Нататкі, якія каментуюць за $[period.periodname]',
-  'nm--most-commented' => 'Нататкі, якія абмяркоўваюць',
-  'pt--most-read' => 'Больш за ўсё чытаюць за $[period.periodname]',
+  'pt--most-commented' => 'Нататкі, якія каментуюць$[period.periodname]',
+  'pt--most-read' => 'Папулярнае$[period.periodname]',
   'nm--most-read' => 'Папулярнае',
   'pt--favourites' => 'Абранае',
   'nm--favourites' => 'Абранае',
@@ -433,11 +432,11 @@ function e2lstr_monthname ($number, $modifier) {
 
 
 function e2lstr_periodname ($period) {
-  /**/if ('year' == $period) return 'год';
-  elseif ('month' == $period) return 'месяц';
-  elseif ('week' == $period) return 'тыдзень';
-  elseif ('day' == $period) return 'дзень';
-  else return 'усю гісторыю';
+  /**/if ('year' == $period) return ' за год';
+  elseif ('month' == $period) return ' за месяц';
+  elseif ('week' == $period) return ' за тыдзень';
+  elseif ('day' == $period) return ' за дзень';
+  else return ''; // 'усю гісторыю';
 }
 
 
