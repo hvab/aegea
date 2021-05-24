@@ -124,7 +124,7 @@ $IsCompact: 'screen and (max-width: 1023px)';
 
     --backgroundColor:             rgb(  32,  32,  32      );
     --backgroundTransparentColor: rgba(  32,  32,  32, .8  );
-    --sheetBackgroundColor:       rgba(  32,  32,  32, .8  );
+    --sheetBackgroundColor:       rgba(  40,  40,  40, .8  );
     
     --foregroundColor:             rgb( 192, 192, 192      );
     --thinRuleColor:              rgba( 192, 192, 192, .25 );
@@ -151,7 +151,7 @@ $IsCompact: 'screen and (max-width: 1023px)';
     --inputBackgroundColor:           #404040;
     --inputTextColor:                var(--foregroundColor);
 
-    --imageBorderColor:             #404040;
+    --imageBorderColor:               #404040;
     --disabledColor:               rgb(  96,  96,  96      );
     --activeColor:                   var(--headingsColor);
     --errorColor:                  rgb( 240,  64,  32);

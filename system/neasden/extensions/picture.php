@@ -50,6 +50,8 @@ class NeasdenGroup_picture implements NeasdenGroup {
             if (!$height) $height = $myconf['max-width'];
           }
         } elseif ($size = @getimagesize ($filename)) {
+          // $size = false;
+          // sometimes it comes as false and breaks everything :-()
           list ($width, $height) = $size;
         }
 
@@ -58,8 +60,6 @@ class NeasdenGroup_picture implements NeasdenGroup {
           $height /= 2;
         }
   
-        $filename_original = $filename;
-        $width_original = $width;
         // image too wide
         if ($width > $myconf['max-width']) {
           $height = $height * ($myconf['max-width'] / $width);
@@ -91,8 +91,6 @@ class NeasdenGroup_picture implements NeasdenGroup {
         $cssc_link = $myconf['css-class'] .'-link';
         if ($link) {
           $image_html = (
-            // width="'. $width_original .'"
-            // style="width: '. $width_original .'px"
             '<a href="'. $link .'" class="'. $cssc_link .'">' ."\n".
             $image_html .
             '</a>'

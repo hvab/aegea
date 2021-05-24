@@ -331,7 +331,6 @@ function initObsoleteFunction () {
     const $draftsUnsavedLed = $draftsLink.find('.e2-unsaved-led')
     const $newNoteUnsavedLed = $('#e2-new-note-item .e2-unsaved-led')
     const $notesUnsaved = $('#e2-notes-unsaved')
-    const $nothingMessage = $('#e2-nothing-message')
     const $formNote = $('#form-note')
 
     const localCopiesList = document.e2.localCopies.getList()
@@ -356,7 +355,7 @@ function initObsoleteFunction () {
     }
 
     // indicators on the drafts page
-    if ($notesUnsaved && $nothingMessage) {
+    if ($notesUnsaved) {
       const newName = document.e2.localCopies.getName('new')
 
       if (Object.prototype.hasOwnProperty.call(localCopiesList, newName)) {
@@ -387,7 +386,6 @@ function initObsoleteFunction () {
         }
 
         $notesUnsaved.show()
-        $nothingMessage.hide()
       }
     }
   }

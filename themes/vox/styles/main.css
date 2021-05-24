@@ -2,7 +2,7 @@
     
   --backgroundColor:             rgb( 241, 243, 242      );
   --backgroundTransparentColor: rgba( 241, 243, 242, .8  );
-  --sheetBackgroundColor:       rgba( 227, 224, 211, .8  );
+  --sheetBackgroundColor:       rgba( 215, 224, 221, .8  );
 
   --foregroundColor:             rgb(  76,  78,  77      );
   --thinRuleColor:              rgba(  76,  78,  77, .3  );
@@ -35,7 +35,7 @@
   /* --activeColor */
   /* --errorColor */
   /* --currentItemBackgroundColor */
-  /* --windowBackgroundColor */
+  --windowBackgroundColor:       rgb( 233, 239, 237      );
   /* --unsavedIndicatorColor */
   
   /* to match .likely */

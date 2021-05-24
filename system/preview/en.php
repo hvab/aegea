@@ -1,7 +1,7 @@
 <?php
 
   $settings_href = '../settings';
-  $self_href = 'javascript:return false;';
+  $self_href = 'javascript:;';
   // $self_href = $_current_url;
   
   $return['class'] = 'themepreview';
@@ -95,6 +95,7 @@
       'comments-count' => 0,
       // 'comments-count-text' => '1 comment',
       'href' => $self_href,
+      'href-comments' => $self_href,
       // 'href-original' => 'http://e2/all/muzlo/',
       // 'comments-link?' => true,
       'new-comments-count' => 0,
@@ -192,6 +193,7 @@
       // 'comments-count' => 5,
       // 'comments-count-text' => '5 comments',
       'href' => $self_href,
+      'href-comments' => $self_href,
       // 'href-original' => 'http://e2/all/muzlo/',
       // 'comments-link?' => true,
       // 'new-comments-count' => 2,

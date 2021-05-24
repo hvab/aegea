@@ -2,7 +2,7 @@
     
   --backgroundColor:             rgb(255, 248, 252);
   --backgroundTransparentColor: rgba(255, 255, 255, 0.8);
-  --sheetBackgroundColor:       rgba(240, 248, 240, 0.8);
+  --sheetBackgroundColor:       rgba(212, 255, 246, 0.8);
 
   --foregroundColor:             rgb(64, 48, 144);
   --thinRuleColor:              rgba(64, 48, 144, 0.12);
@@ -87,7 +87,7 @@
 
     --backgroundColor:             rgb(38, 33, 43);
     --backgroundTransparentColor: rgba(0, 0, 0, 0.8);
-    --sheetBackgroundColor:       rgba(48, 24, 32, 0.8);
+    --sheetBackgroundColor:       rgba(24, 47, 42, 0.8);
 
     --foregroundColor:             rgb(234, 200, 234);
     --thinRuleColor:              rgba(234, 200, 234, .25);
@@ -115,11 +115,12 @@
     --inputBackgroundColor:           #253542;
     --inputTextColor:              var(--foregroundColor);
 
+
     --activeColor:                   var(--headingsColor);
     --errorColor:                  rgb( 240,  40,  32);
     --verifiedColor:               rgb(   40, 192, 32);
 
-    --windowBackgroundColor:       rgb(  32,   16,  24);
+    --windowBackgroundColor:       rgba(61, 82, 77, 0.8);
 
   }
 }

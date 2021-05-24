@@ -2,30 +2,60 @@ import { localStorage, isLocalStorageAvailable } from './local-storage'
 
 function initLocalCopies () {
   if (isLocalStorageAvailable) {
+    // it's a fallback storage, because of key naming migration
+    // earlier Aegea used LS keys like “copies-info” and “copy-:id”
+    // but then we moved to “:prefix-copies-info”, etc, because otherwise
+    // users with multiple Aegea instances on a same domain can't use LS properly
+    // TODO: replace this fallback with proper realisation when release with breaking changes comes
+
+    // even though we use “cookie prefix”, it's unique for each Aegea on a domain
+    // so it's fine
+    const storage = {
+      getItem(key) {
+        const prefixedKey = document.e2.cookiePrefix + key;
+
+        if (localStorage.hasOwnProperty(prefixedKey)) {
+          return localStorage.getItem(prefixedKey);
+        }
+
+        return localStorage.getItem(key);
+      },
+
+      setItem(key, value) {
+        // we read and remove prefixed and unprefixed keys
+        // but set prefixed only, to move all the users to prefixed keys
+        const prefixedKey = document.e2.cookiePrefix + key;
+        localStorage.setItem(prefixedKey, value);
+      },
+
+      removeItem(key) {
+        const prefixedKey = document.e2.cookiePrefix + key;
+        localStorage.removeItem(prefixedKey);
+        localStorage.removeItem(key); // remove even unprefixed variant, just to be sure
+      },
+
+      hasOwnProperty(key) {
+        const prefixedKey = document.e2.cookiePrefix + key;
+        return localStorage.hasOwnProperty(prefixedKey) || localStorage.hasOwnProperty(key);
+      }
+    }
+
     document.e2.localCopies = {
       _lsKey: 'copies-info',
       _lsPrefix: 'copy-',
       _cookieName: document.e2.cookiePrefix + 'local_copies',
-
-      getListName () {
-        return this._lsKey
-      },
-
-      getPrefix () {
-        return this._lsPrefix
-      },
 
       getName (id) {
         return this._lsPrefix + id
       },
 
       save (id, copy) {
-        localStorage.setItem(this.getName(id), JSON.stringify(copy))
+        storage.setItem(this.getName(id), JSON.stringify(copy))
         this.addToList(id, copy)
       },
 
       remove (id) {
-        localStorage.removeItem(this.getName(id))
+        storage.removeItem(this.getName(id))
         this.removeFromList(id)
       },
 
@@ -33,7 +63,7 @@ function initLocalCopies () {
         let copy = false
 
         try {
-          copy = JSON.parse(localStorage.getItem(this.getName(id)))
+          copy = JSON.parse(storage.getItem(this.getName(id)))
 
           if (!copy) return false
         } catch (e) {
@@ -54,7 +84,7 @@ function initLocalCopies () {
 
       getList () {
         try {
-          return JSON.parse(localStorage.getItem(this._lsKey)) || {}
+          return JSON.parse(storage.getItem(this._lsKey)) || {}
         } catch (e) {
           return {}
         }
@@ -65,7 +95,7 @@ function initLocalCopies () {
 
         if (!list.hasOwnProperty(id)) {
           list[id] = {isPublished: copy.isPublished, timestamp: copy.timestamp}
-          localStorage.setItem(this._lsKey, JSON.stringify(list))
+          storage.setItem(this._lsKey, JSON.stringify(list))
           this.updateCookie(list)
         }
       },
@@ -75,13 +105,13 @@ function initLocalCopies () {
 
         if (list.hasOwnProperty(id)) {
           delete list[id]
-          localStorage.setItem(this._lsKey, JSON.stringify(list))
+          storage.setItem(this._lsKey, JSON.stringify(list))
           this.updateCookie(list)
         }
       },
 
       doesCopyExist (id) {
-        return localStorage.hasOwnProperty(this.getName(id))
+        return storage.hasOwnProperty(this.getName(id))
       },
 
       // returns local copy if it is not outdated, else removes this copy (if it exists) and returns false

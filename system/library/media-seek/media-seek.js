@@ -189,8 +189,8 @@
   }
 
   function getYoutubeIdFromUrl(url) {
-    const match = url.match(/^https?:\/\/(www\.)?youtube\.com\/watch\?v=([^#&?]*)/);
-    return (match && match[2].length === 11) ? match[2] : null;
+    const match = url.match(/^https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu.be\/)([^#&?]*)/);
+    return (match && match[3].length === 11) ? match[3] : null;
   }
 
   function getVimeoIdFromUrl(url) {
