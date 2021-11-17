@@ -152,6 +152,7 @@ function e2l_load_strings () {
   'mi--edit' => 'Рэдагаваць',
   'mi--highlight' => 'Выдзеліць',
   'mi--remove' => 'Прыбраць',
+  'gs--replace' => 'Вярнуць',
 
   // tags
   'pt--tags' => 'Тэгі',
@@ -186,6 +187,7 @@ function e2l_load_strings () {
 
   // generic posts pages
   'nm--pages' => 'Старонкі',
+  'gs--page' => 'старонка',
   'gs--next-page' => 'наступная',
   'gs--prev-page' => 'папярэдняя',
   'gs--earlier' => 'Раней',

@@ -42,18 +42,18 @@
               <div class="e2-popup-menu-widget">
                 <?php if (!$comment['replying?'] and array_key_exists ('reply-href', $comment)): ?>
                   <a href="<?= $comment['reply-href'] ?>" class="nu e2-popup-menu-widget-item">
-                <span class="e2-popup-menu-widget-item-icon">
-                  <span class="e2-svgi"><?= _SVG ('reply') ?></span>
-                </span>
+                    <span class="e2-popup-menu-widget-item-icon">
+                      <span class="e2-svgi"><?= _SVG ('reply') ?></span>
+                    </span>
                     <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--reply') ?></span>
                   </a>
                 <?php endif; ?>
 
                 <?php if (array_key_exists ('edit-href', $comment)): ?>
                   <a href="<?= $comment['edit-href'] ?>" class="nu e2-popup-menu-widget-item">
-                <span class="e2-popup-menu-widget-item-icon">
-                  <span class="e2-svgi"><?= _SVG ('edit') ?></span>
-                </span>
+                    <span class="e2-popup-menu-widget-item-icon">
+                      <span class="e2-svgi"><?= _SVG ('edit') ?></span>
+                    </span>
                     <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--edit') ?></span>
                   </a>
                 <?php endif; ?>
@@ -64,11 +64,11 @@
                       data-e2-popup-menu-action="do-not-close-popup-menu"
                       data-e2-js-action="toggle-important"
                   >
-                <span class="e2-popup-menu-widget-item-icon">
-                  <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('favourite-off') ?></span></span>
-                  <span class="e2-toggle-state-on"><span class="e2-svgi"><?= _SVG ('favourite-on') ?></span></span>
-                  <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
-                </span>
+                    <span class="e2-popup-menu-widget-item-icon">
+                      <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('favourite-off') ?></span></span>
+                      <span class="e2-toggle-state-on"><span class="e2-svgi"><?= _SVG ('favourite-on') ?></span></span>
+                      <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
+                    </span>
                     <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--highlight') ?></span>
                   </a>
                 <?php endif ?>
@@ -80,10 +80,10 @@
                       class="nu e2-popup-menu-widget-item e2-popup-menu-widget-item_remove"
                       data-e2-js-action="removed-href,couple-trigger"
                   >
-                <span class="e2-popup-menu-widget-item-icon">
-                  <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('trash') ?></span></span>
-                  <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
-                </span>
+                    <span class="e2-popup-menu-widget-item-icon">
+                      <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('trash') ?></span></span>
+                      <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
+                    </span>
                     <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--remove') ?></span>
                   </a>
                 <?php endif ?>
@@ -92,19 +92,19 @@
 
             <div class="e2-admin-couple-item e2-admin-couple-item_removed e2-admin-couple-item_hidden">
               <?php if (array_key_exists ('replaced-href', $comment)): ?>
-                <a href="<?= $comment['replaced-href'] ?>" class="nu e2-admin-link e2-admin-item" data-e2-js-action="replaced-href,couple-trigger">
-              <span class="e2-admin-item-icon">
-                <span class="e2-svgi"><?= _SVG ('replace') ?></span>
-              </span>
-                  <span class="e2-admin-item-text">* Вернуть</span>
+                <a href="<?= $comment['replaced-href'] ?>" class="nu e2-admin-link e2-admin-item" data-e2-js-action="replaced-href,couple-trigger" title="<?= _S ('gs--replace') ?>">
+                  <span class="e2-admin-item-icon">
+                    <span class="e2-svgi"><?= _SVG ('replace') ?></span>
+                  </span>
+                  <span class="e2-admin-item-text"><?= _S ('gs--replace') ?></span>
                 </a>
               <?php endif; ?>
             </div>
 
             <div class="e2-admin-couple-spinner">
-          <span class="e2-admin-couple-spinner-icon">
-            <span class="e2-svgi"><?= _SVG ('spin') ?></span>
-          </span>
+              <span class="e2-admin-couple-spinner-icon">
+                <span class="e2-svgi"><?= _SVG ('spin') ?></span>
+              </span>
             </div>
 
           </div>

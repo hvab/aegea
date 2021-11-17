@@ -152,6 +152,7 @@ function e2l_load_strings () {
   'mi--edit' => 'Редагувати',
   'mi--highlight' => 'Виділити',
   'mi--remove' => 'Поприбирати',
+  'gs--replace' => 'Вернути',
 
   // tags
   'pt--tags' => 'Теги',
@@ -186,6 +187,7 @@ function e2l_load_strings () {
   
   // generic posts pages
   'nm--pages' => 'Сторінки',
+  'gs--page' => 'сторінка',
   'gs--next-page' => 'наступна',
   'gs--prev-page' => 'попередня',
   'gs--earlier' => 'Раніше',

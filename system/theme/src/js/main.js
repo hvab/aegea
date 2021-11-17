@@ -28,7 +28,7 @@ function initObsoleteFunction () {
       var $this = $(this)
       var h = $this.attr('href')
 
-      if (h) h = h.substr(0, h.indexOf('#')) // remove anchor
+      if (h && (h.indexOf('#') >= 0)) h = h.substr(0, h.indexOf('#')) // remove anchor
 
       if (h && !h.match(/^javascript:/)) {
         $pseudohoveredLinks = $('a[href="' + h + '"]').addClass('hover')

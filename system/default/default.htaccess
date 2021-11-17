@@ -9,8 +9,7 @@ RewriteEngine On
 
 # Next lines fix mod_rewrite's trailing slash bug
 RewriteCond %{REQUEST_FILENAME} -d
-RewriteCond %{REQUEST_URI} (.*)
-RewriteRule (.+)[^/]$ %1/ [R=301,L]
+RewriteRule (.+)[^/]$ $1/ [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]

@@ -152,6 +152,7 @@ function e2l_load_strings () {
   'mi--edit' => 'Modifier',
   'mi--highlight' => 'Surligner',
   'mi--remove' => 'Supprimer',
+  'gs--replace' => 'Replacer',
 
   // tags
   'pt--tags' => 'Balises',
@@ -186,6 +187,7 @@ function e2l_load_strings () {
   
   // generic posts pages
   'nm--pages' => 'Pages',
+  'gs--page' => 'page',
   'gs--next-page' => 'la suivante',
   'gs--prev-page' => 'la précédente',
   'gs--earlier' => 'Antérieurement',

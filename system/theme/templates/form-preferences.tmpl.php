@@ -50,7 +50,7 @@
             <div class="e2-user-picture-inner">
               <img
                 src="<?php if (@$content['blog']['userpic-set?']) { ?><?= $content['form-preferences']['userpic-href'] ?><?php } ?>"
-                title="<? _S ('gs--drag-userpic-here') ?>"
+                title="<?php _S ('gs--drag-userpic-here') ?>"
                 class="e2-user-picture-image"
                 alt=""
               />

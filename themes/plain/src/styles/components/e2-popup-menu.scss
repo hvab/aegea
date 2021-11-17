@@ -93,12 +93,16 @@
   left: auto;
   right: 0;
 }
-.e2-popup-menu-widget-item,
-.e2-popup-menu-widget-item:active,
-.e2-popup-menu-widget-item:visited,
-.e2-popup-menu-widget-item:focus,
-.e2-popup-menu-widget-item:focus:hover,
-.e2-popup-menu-widget-item:focus.hover {
+.e2-popup-menu-widget .e2-popup-menu-widget-item,
+.e2-popup-menu-widget .e2-popup-menu-widget-item:link,
+.e2-popup-menu-widget .e2-popup-menu-widget-item:active,
+.e2-popup-menu-widget .e2-popup-menu-widget-item:visited,
+.e2-popup-menu-widget .e2-popup-menu-widget-item:focus,
+.e2-popup-menu-widget .e2-popup-menu-widget-item:focus:hover,
+.e2-popup-menu-widget .e2-popup-menu-widget-item:focus.hover {
+  // should not need .e2-popup-menu-widget in the beginning, put without it
+  // menu item color (--foregroundColor) get overwritten with .admin-links stuff,
+  // and it turned out not to be easy to fix
   text-align: left;
   border: 0;
   box-shadow: none;
@@ -113,8 +117,11 @@
   background-color: transparent;
   transition: background-color var(--time) ease-out, color var(--time) ease-out;
 }
-.e2-popup-menu-widget-item:hover,
-.e2-popup-menu-widget-item.hover {
+.e2-popup-menu-widget .e2-popup-menu-widget-item:hover,
+.e2-popup-menu-widget .e2-popup-menu-widget-item.hover {
+  // should not need .e2-popup-menu-widget in the beginning, put without it
+  // menu item color (--foregroundColor) get overwritten with .admin-links stuff,
+  // and it turned out not to be easy to fix
   background-color: var(--sheetBackgroundColor);
   color: var(--foregroundColor);
   transition: none;

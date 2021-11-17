@@ -152,6 +152,7 @@ function e2l_load_strings () {
   'mi--edit' => 'Edit',
   'mi--highlight' => 'Highlight',
   'mi--remove' => 'Remove',
+  'gs--replace' => 'Put back',
 
   // tags
   'pt--tags' => 'Tags',
@@ -186,6 +187,7 @@ function e2l_load_strings () {
   
   // generic posts pages
   'nm--pages' => 'Pages',
+  'gs--page' => 'page',
   'gs--next-page' => 'next',
   'gs--prev-page' => 'previous',
   'gs--earlier' => 'Earlier',
