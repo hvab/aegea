@@ -11,6 +11,13 @@
   value="<?= @$content['form-tag-delete']['.tag-id'] ?>" 
 />
 
+<input
+  type="hidden"
+  id="token"
+  name="token"
+  value="<?= @$content['form-tag-delete']['.token'] ?>"
+/>
+
 
 <div class="form">
 

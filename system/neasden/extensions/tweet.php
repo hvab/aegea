@@ -8,7 +8,7 @@ class NeasdenGroup_tweet implements NeasdenGroup {
   
     $neasden->define_line_class (
       'tweet',
-      'https?\:\/\/(?:www\.)?(?:twitter\.com\/(.+?)\/status\/)(.{16,20})([&#?].*)?'
+      'https?\:\/\/(?:www\.)?(?:twitter\.com\/(#!\/)?(\w+)\/status\/)(\d+)([&#?].*)?'
     );
     $neasden->define_group ('tweet', '(-tweet-)');
   

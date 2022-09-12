@@ -13,6 +13,7 @@
       <?php if (!empty ($content['form-underhood']['form-action-engine-rebuild'])) { ?>
       <div class="form-element">
         <form action="<?= $content['form-underhood']['form-action-engine-rebuild'] ?>" method="post">
+          <input type="hidden" name="token" value="<?= @$content['form-underhood']['.token'] ?>" />
           <input type="submit" class="e2-button" value="Rebuild core" />
         </form>
       </div>
@@ -29,6 +30,7 @@
       </div>
       <div class="form-element">
         <form action="<?= @$content['form-underhood']['form-action-cache-invalidate'] ?>" method="post">
+          <input type="hidden" name="token" value="<?= @$content['form-underhood']['.token'] ?>" />
           <input type="submit" class="e2-button" value="Invalidate" />
         </form>
       </div>
@@ -50,6 +52,7 @@
       <?php if (!empty ($content['form-underhood']['form-action-search-index-rebuild'])) { ?>
       <div class="form-element">
         <form action="<?= @$content['form-underhood']['form-action-search-index-rebuild'] ?>" method="post">
+          <input type="hidden" name="token" value="<?= @$content['form-underhood']['.token'] ?>" />
           <input type="submit" class="e2-button" value="Erase and rebuild" />
         </form>
       </div>
@@ -67,6 +70,7 @@
       <?php if (!empty ($content['form-underhood']['form-action-logs-enable'])) { ?>
       <div class="form-element">
         <form action="<?= @$content['form-underhood']['form-action-logs-enable'] ?>" method="post">
+          <input type="hidden" name="token" value="<?= @$content['form-underhood']['.token'] ?>" />
           <input type="submit" class="e2-button" value="Enable" />
         </form>
       </div>
@@ -74,6 +78,7 @@
       <?php if (!empty ($content['form-underhood']['form-action-logs-erase-disable'])) { ?>
       <div class="form-element">
         <form action="<?= @$content['form-underhood']['form-action-logs-erase-disable'] ?>" method="post">
+          <input type="hidden" name="token" value="<?= @$content['form-underhood']['.token'] ?>" />
           <input type="submit" class="e2-button" value="Erase and disable" />
         </form>
       </div>
@@ -85,6 +90,7 @@
       <div class="form-label"><label>Model</label></div>
       <div class="form-element">
         <form action="<?= @$content['form-underhood']['form-action-database-migrate'] ?>" method="post">
+          <input type="hidden" name="token" value="<?= @$content['form-underhood']['.token'] ?>" />
           <input type="submit" class="e2-button" value="Ensure" />
         </form>
       </div>
@@ -96,6 +102,7 @@
       <div class="form-label"><label>License</label></div>
       <div class="form-element">
         <form action="<?= @$content['form-underhood']['form-action-license-verify'] ?>" method="post">
+          <input type="hidden" name="token" value="<?= @$content['form-underhood']['.token'] ?>" />
           <input type="submit" class="e2-button" value="Verify" />
         </form>
       </div>

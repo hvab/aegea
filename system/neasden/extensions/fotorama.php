@@ -34,15 +34,8 @@ class NeasdenGroup_fotorama implements NeasdenGroup {
         
         $filename = $myconf['folder'] . $filebasename;
 
-        $size = getimagesize ($filename);
+        $size = e2_getimagesize ($filename);
         list ($width, $height) = $size;
-
-        if (substr ($filebasename, strrpos ($filebasename, '.') - 3, 3) == '@2x') {
-          if (! ($width%2 or $height%2)) {
-            $width /= 2;
-            $height /= 2;
-          }
-        }  
     
         if ($width > $myconf['max-width']) {
           $height = $height * ($myconf['max-width'] / $width);

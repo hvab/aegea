@@ -14,18 +14,20 @@ class NeasdenGroup_picture implements NeasdenGroup {
   function detect_line ($line, $myconf) {
     list ($filebasename, ) = explode (' ', $line, 2);  
     return is_file ($myconf['folder'] . $filebasename);
-  }  
-  
+  }
+
   function render ($group, $myconf) {
     $p = false;
-
+  
     $result = '<div class="'. $myconf['css-class'] .'">'."\n";
     foreach ($group as $line) {
       @list ($filebasename, $alt) = explode (' ', $line['content'], 2);
+      $alt = trim ((string) $alt);
       
       // check if alt start with an url
       @list ($link, $newalt) = explode (' ', $alt, 2);
-      if (preg_match ('/[a-z]+\:.+/i', $link)) { // usafe
+      $newalt = trim ((string) $newalt);
+      if (preg_match ('/[a-z]+\:.+/i', $link)) {
         $alt = $newalt;
       } else {
         $link = '';
@@ -49,19 +51,15 @@ class NeasdenGroup_picture implements NeasdenGroup {
             if (!$width) $width = $myconf['max-width'];
             if (!$height) $height = $myconf['max-width'];
           }
-        } elseif ($size = @getimagesize ($filename)) {
+        } elseif ($size = e2_getimagesize ($filename)) {
           // $size = false;
           // sometimes it comes as false and breaks everything :-()
+          if ($size === false) throw new Exception();
           list ($width, $height) = $size;
         }
 
-        if (substr ($filebasename, strrpos ($filebasename, '.') - 3, 3) == '@2x') {
-          $width /= 2;
-          $height /= 2;
-        }
-  
         // image too wide
-        if ($width > $myconf['max-width']) {
+        if (is_int (@$myconf['max-width']) and $width > $myconf['max-width']) {
           $height = $height * ($myconf['max-width'] / $width);
           $width = $myconf['max-width'];  
         }
@@ -79,7 +77,7 @@ class NeasdenGroup_picture implements NeasdenGroup {
           $image_html = (
             '<div style="width: '. $width .'px; max-width: 100%">'.
             '<div class="e2-text-proportional-wrapper" style="'.
-            'padding-bottom: '. @round ($ratio * 100, 2).'%'.
+            'padding-bottom: '. round ($ratio * 100, 2).'%'.
             '">'.
             $image_html.
             '</div>'.

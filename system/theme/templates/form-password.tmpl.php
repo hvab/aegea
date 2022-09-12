@@ -4,7 +4,12 @@
   class="e2-enterable"
 >
 
-<div class="form">
+<input
+  type="hidden"
+  id="token"
+  name="token"
+  value="<?= @$content['form-password']['.token'] ?>"
+/>
 
 <input
   type="hidden"
@@ -12,6 +17,8 @@
   name="recovery-key"
   value="<?=@$content['form-password']['.recovery-key']?>"
 />
+
+<div class="form">
 
 <?php if (!$content['form-password']['recovering?']) { ?>
 <div class="form-control">

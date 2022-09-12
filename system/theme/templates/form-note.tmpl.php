@@ -63,6 +63,13 @@
   
   <input
     type="hidden"
+    id="token"
+    name="token"
+    value="<?= @$content['form-note']['.token'] ?>"
+  />
+  
+  <input
+    type="hidden"
     id="browser-offset"
     name="browser-offset"
     value="unknown"

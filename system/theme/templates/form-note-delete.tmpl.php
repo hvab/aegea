@@ -18,6 +18,13 @@
   value="<?= @$content['form-note-delete']['.is-draft'] ?>"
 />
 
+<input
+  type="hidden"
+  id="token"
+  name="token"
+  value="<?= @$content['form-note-delete']['.token'] ?>"
+/>
+
 <div class="form">
 
 <div class="form-control delete-box">
@@ -44,7 +51,7 @@
 <?php if (array_key_exists ('hide-href', $content['form-note-delete'])) { ?>
 <div class="form-control">
   <div class="form-element">
-    <form action="<?= $content['form-note-delete']['hide-href'] ?>" method="post"><button type="submit" class="e2-button"><?= _S ('fb--hide') ?></button></form>
+    <form action="<?= $content['form-note-delete']['hide-href'] ?>" method="post"><input type="hidden" name="token" value="<?= @$content['form-note-delete']['.token'] ?>" /><button type="submit" class="e2-button"><?= _S ('fb--hide') ?></button></form>
     <div class="form-control-sublabel">
     <?= _S ('gs--post-will-be-hidden') ?>
     </div>
@@ -57,7 +64,7 @@
 <?php if (array_key_exists ('withdraw-href', $content['form-note-delete'])) { ?>
 <div class="form-control">
   <div class="form-element">
-    <form action="<?= $content['form-note-delete']['withdraw-href'] ?>" method="post"><button type="submit" class="e2-button"><?= _S ('fb--withdraw') ?></button></form>
+    <form action="<?= $content['form-note-delete']['withdraw-href'] ?>" method="post"><input type="hidden" name="token" value="<?= @$content['form-note-delete']['.token'] ?>" /><button type="submit" class="e2-button"><?= _S ('fb--withdraw') ?></button></form>
     <div class="form-control-sublabel">
     <?= _S ('gs--post-will-be-withdrawn') ?>
     </div>

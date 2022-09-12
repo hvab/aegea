@@ -27,6 +27,13 @@
     value="<?= @$content['form-tag']['.cache-sensitive-hash'] ?>"
   />
   
+  <input
+    type="hidden"
+    id="token"
+    name="token"
+    value="<?= @$content['form-tag']['.token'] ?>"
+  />
+
   <div class="form">
   
     <div class="form-part">

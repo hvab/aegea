@@ -47,6 +47,14 @@
   type="hidden"
   name="comment"
   value="&amp;&#x2605;&copy;"
+  <? // unicode browser test for spam detection by Victor Koreysha ?>
+/>
+
+<input
+  type="hidden"
+  id="token"
+  name="token"
+  value="<?= @$content['form-comment']['.token'] ?>"
 />
 
 <script type="text/javascript">

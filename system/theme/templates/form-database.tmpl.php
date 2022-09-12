@@ -3,6 +3,13 @@
   method="post"
 >
 
+<input
+  type="hidden"
+  id="token"
+  name="token"
+  value="<?= @$content['form-database']['.token'] ?>"
+/>
+
 <div class="form">
 
 <div class="form-control">

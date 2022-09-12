@@ -3,6 +3,14 @@
   action="<?= @$content['form-preferences']['form-action'] ?>"
   method="post"
 >
+
+  <input
+    type="hidden"
+    id="token"
+    name="token"
+    value="<?= @$content['form-preferences']['.token'] ?>"
+  />
+
   <input
     type="hidden"
     id="e2-blog-title-default"

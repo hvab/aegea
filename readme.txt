@@ -3,6 +3,7 @@ License: http://blogengine.ru/get/
 To each copy of Aegea applies the license which is the latest at the moment of installation or update.
 
 Thanks to
+Arseny Sharoglazov for security audit of version 2.10, https://twitter.com/_mohemiv
 Evgeniy Lazarev for help with version 2.9 development, https://eugene-lazarev.ru/
 Victor Koreysha for multiple improvements in comments
 Roman Parpalak for “Rose” search engine, https://written.ru/
@@ -23,6 +24,7 @@ Alexander Karpinsky, Artem Sapegin, Ivan Zviahih, Ivan Scholokov, Maxim Ilyahov,
 К каждой инсталляции Эгеи применима та лицензия, которая была самой свежей на момент установки или последнего обновления.
 
 Спасибо
+Арсению Шароглазову за аудит безопасности версии 2.10, https://twitter.com/_mohemiv
 Жене Лазереву за помощь в разработке версии 2.9, https://eugene-lazarev.ru/
 Виктору Корейше за многочисленные улучшения в комментариях
 Роману Парпалаку за движок поиска «Роза», https://written.ru/

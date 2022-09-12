@@ -56,7 +56,7 @@ $_config['try_redirect_to_all'] = false;
 $_config['mail_from'] = 'blog@';
   
 // use 'index, follow' everywhere (otherwise will be only where necessary)
-$_config['index_follow_everything'] = true;
+$_config['index_follow_everything'] = false;
   
 // accept holborn notifications
 $_config['holborn'] = false;

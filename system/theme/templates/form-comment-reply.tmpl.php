@@ -25,6 +25,13 @@
   value="<?= @$content['form-comment-reply']['.reply-action'] ?>"
 />
 
+<input
+  type="hidden"
+  id="token"
+  name="token"
+  value="<?= @$content['form-comment-reply']['.token'] ?>"
+/>
+
 <div class="form">
 
 <?php $comment = $content['comments']['each']['only'] ?>

@@ -8,7 +8,9 @@ class NeasdenGroup_onlinevideo implements NeasdenGroup {
     $neasden->require_line_class ('timed-media-section');
     $neasden->define_line_class (
       'youtube',
-      'https?\:\/\/(?:www\.)?(?:(?:youtube\.com\/watch\/?\?v\=)|(?:youtu\.be\/))(.{11})([&#?].*)?'
+      'https?\:\/\/(?:www\.)?'.
+      '(?:(?:youtube\.com\/watch\/?\?v\=)|(?:youtu\.be\/))'.
+      '([A-Za-z0-9_-]{11})([&#?].*)?'
     );
     $neasden->define_line_class (
       'vimeo',

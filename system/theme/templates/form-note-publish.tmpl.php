@@ -23,6 +23,13 @@
 
 <input
   type="hidden"
+  id="token"
+  name="token"
+  value="<?= @$content['form-note-publish']['.token'] ?>"
+/>
+
+<input
+  type="hidden"
   id="browser-offset"
   name="browser-offset"
   value="unknown"
