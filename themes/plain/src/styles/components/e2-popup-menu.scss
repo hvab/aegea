@@ -126,38 +126,38 @@
   color: var(--foregroundColor);
   transition: none;
 }
-.e2-popup-menu-widget-item_extended:after {
+.e2-popup-menu-widget .e2-popup-menu-widget-item_extended:after {
   content: attr(data-extend);
   position: absolute;
   top: 10px;
   right: 10px;
   color: #ff00ff;
 }
-.e2-popup-menu-widget-item_disabled,
-.e2-popup-menu-widget-item_disabled:link,
-.e2-popup-menu-widget-item_disabled:active,
-.e2-popup-menu-widget-item_disabled:focus,
-.e2-popup-menu-widget-item_disabled:focus:hover,
-.e2-popup-menu-widget-item_disabled:focus.hover,
-.e2-popup-menu-widget-item_disabled:visited,
-.e2-popup-menu-widget-item_disabled:hover,
-.e2-popup-menu-widget-item_disabled.hover {
+.e2-popup-menu-widget .e2-popup-menu-widget-item_disabled,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_disabled:link,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_disabled:active,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_disabled:focus,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_disabled:focus:hover,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_disabled:focus.hover,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_disabled:visited,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_disabled:hover,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_disabled.hover {
   background-color: transparent;
   color: var(--disabledColor);
   cursor: default;
   transition: none;
 }
-.e2-popup-menu-widget-item_remove,
-.e2-popup-menu-widget-item_remove:link,
-.e2-popup-menu-widget-item_remove:active,
-.e2-popup-menu-widget-item_remove:focus,
-.e2-popup-menu-widget-item_remove:focus:hover,
-.e2-popup-menu-widget-item_remove:focus.hover,
-.e2-popup-menu-widget-item_remove:visited {
+.e2-popup-menu-widget .e2-popup-menu-widget-item_remove,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_remove:link,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_remove:active,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_remove:focus,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_remove:focus:hover,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_remove:focus.hover,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_remove:visited {
   color: var(--errorColor);
 }
-.e2-popup-menu-widget-item_remove.hover,
-.e2-popup-menu-widget-item_remove:hover {
+.e2-popup-menu-widget .e2-popup-menu-widget-item_remove.hover,
+.e2-popup-menu-widget .e2-popup-menu-widget-item_remove:hover {
   color: var(--errorColor);
 }
 .e2-popup-menu-widget-item_info,
@@ -175,7 +175,7 @@
   cursor: default;
   transition: none;
 }
-.e2-popup-menu-widget-item-icon {
+.e2-popup-menu-widget .e2-popup-menu-widget-item-icon {
   position: absolute;
   top: 11px;
   left: 12px;
@@ -184,7 +184,7 @@
   font-size: 0;
   line-height: 0;
 }
-.e2-popup-menu-widget-item-text {
+.e2-popup-menu-widget .e2-popup-menu-widget-item-text {
   display: block;
   max-width: 280px;
   padding: 10px 40px 14px;
@@ -192,18 +192,18 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.e2-popup-menu-widget-item_extended .e2-popup-menu-widget-item-text {
+.e2-popup-menu-widget .e2-popup-menu-widget-item_extended .e2-popup-menu-widget-item-text {
   padding-right: 20px;
   margin-right: 40px;
   min-height: 200px;
 }
-.e2-popup-menu-widget-item-text-row {
+.e2-popup-menu-widget .e2-popup-menu-widget-item-text-row {
   display: block;
   line-height: 1.25;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.e2-popup-menu-widget-separator {
+.e2-popup-menu-widget .e2-popup-menu-widget-separator {
   height: 0;
   width: auto;
   margin: 0.5em 0 -1px 40px;

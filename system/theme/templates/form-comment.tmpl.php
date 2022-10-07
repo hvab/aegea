@@ -47,7 +47,7 @@
   type="hidden"
   name="comment"
   value="&amp;&#x2605;&copy;"
-  <? // unicode browser test for spam detection by Victor Koreysha ?>
+  <?php // unicode browser test for spam detection by Victor Koreysha ?>
 />
 
 <input
