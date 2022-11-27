@@ -12,9 +12,9 @@
 
 <?php } else { ?>
 
-<div class="e2-heading-description e2-text">
+<div class="e2-note"><div class="e2-note-text e2-text">
 <?= $content['theme-preview']['no-themes'] ?>
-</div>
+</div></div>
 
 <?php } ?>
 

@@ -30,6 +30,7 @@ function e2UpdateSubmittability () {
     (!bingo) ||
     /^ *$/.test($e2Password.val())
   )
+  $submitButton.hide().show(0) // force repaint on stupid safari
 }
 
 function e2AllCompleted () {

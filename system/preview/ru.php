@@ -2,7 +2,6 @@
 
   $settings_href = '../settings';
   $self_href = 'javascript:;';
-  // $self_href = $_current_url;
   
   $return['class'] = 'themepreview';
   $return['title'] = 'Предпросмотр темы';
@@ -17,9 +16,7 @@
   // </ol>
   // ';
 
-  $return['theme-preview']['no-themes'] = '
-  <p>На этой странице смотрите и настраивайте вашу тему оформления.</p>
-  ';
+  $return['theme-preview']['no-themes'] = '<p>На этой странице смотрите и настраивайте вашу тему оформления.</p>';
 
   // $return['theme-preview']['themes-before'] = '
   // <p>Выберите оформление:</p>
@@ -30,6 +27,75 @@
   // <p>На этой странице смотрите и настраивайте вашу тему. Она состоит из элементов блога, начиная с заметок. Не забудьте проверить на мобильном телефоне.</p>
   // ';
   
+  if (E2_EDITION) {
+
+    $return['theme-preview']['no-themes'] .= '<p>Главное меню показывает разные состояния пунктов: '.
+      'обычная ссылка, ссылка на родительский раздел и выбранное название текущего раздела.</p>';
+
+    $return['main-menu'] = array (
+      'each' => 
+      array (
+        array (
+          'href' => $self_href,
+          'svg-id' => 'favourite-on',
+          'title' => 'Главное меню',
+          'current?' => false,
+          'parent?' => false,
+          'visible?' => true,
+        ),
+        array (
+          'href' => $settings_href,
+          'svg-id' => 'settings',
+          'title' => 'Настройка',
+          'visible?' => true,
+          'parent?' => true,
+          'current?' => false,
+        ),
+        array (
+          'href' => $self_href,
+          'svg-id' => 'tags',
+          'title' => 'Теги',
+          'current?' => false,
+          'parent?' => false,
+          'visible?' => true,
+        ),
+        array (
+          'tag' => 'кино',
+          'title' => 'Кино',
+          'href' => $self_href,
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => false,
+        ),
+        array (
+          'tag' => 'музыка',
+          'title' => 'Музыка',
+          'href' => $self_href,
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => false,
+        ),
+        array (
+          'tag' => 'книги',
+          'title' => 'Книги',
+          'href' => $self_href,
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => false,
+        ),
+        array (
+          'href' => $self_href,
+          'title' => 'Предпросмотр темы',
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => true,
+        ),
+      ),
+      'reorderable?' => false,
+    );
+
+  }
+
   $return['notes'] = array (
     array (
       'id' => 1,
@@ -78,19 +144,26 @@
       'scheduled?' => false,
       'public?' => true,
       'hidden?' => false,
-      'commentable?' => true,
       'favourite?' => true,
       'tags' => array (
-         array (
-           'name' => 'тег',
-           'href' => '',
-           'current?' => false,
-         ),
-         array (
-           'name' => 'другой тег',
-           'href' => '',
-           'current?' => false,
-         ),
+        array (
+          'name' => 'тег',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ),
+        array (
+          'name' => 'другой тег',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ),
+        array (
+          'name' => 'скрытый тег',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => false,
+        ),
       ),
       'read-count' => 42,
       'comments-count' => 5,
@@ -101,7 +174,7 @@
       'comments-link?' => true,
       'new-comments-count' => 0,
       'new-comments-count-text' => '0 new',
-      // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
+      // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
       // 'og-images' => array (),
     ),
@@ -120,24 +193,26 @@
       'scheduled?' => false,
       'public?' => true,
       'hidden?' => false,
-      'commentable?' => false,
       'favourite?' => false,
       'tags' => array (
-         array (
-           'name' => 'первый тег',
-           'href' => $self_href,
-           'current?' => false,
-         ),
-         array (
-           'name' => 'текущий тег',
-           'href' => $self_href,
-           'current?' => true,
-         ),
-         array (
-           'name' => 'и ещё один',
-           'href' => $self_href,
-           'current?' => false,
-         ),
+        array (
+          'name' => 'первый тег',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ),
+        array (
+          'name' => 'текущий тег',
+          'href' => $self_href,
+          'current?' => true,
+          'visible?' => true,
+        ),
+        array (
+          'name' => 'и ещё один',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ),
       ),
       'read-count' => 147,
       // 'comments-count' => 0,
@@ -147,7 +222,7 @@
       // 'comments-link?' => true,
       // 'new-comments-count' => 2,
       // 'new-comments-count-text' => '2 new',
-      // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
+      // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
       // 'og-images' => array (),
     ),
@@ -156,7 +231,7 @@
       'title' => 'Пример заметки в результатах <mark>поиска</mark>',
       'text' => '',
       'snippet-text' => '
-      <p>Так выглядит заметка в результатах <mark>поиска</mark>. Текст запроса <mark>подсвечивается</mark>, а все картинки из заметки показываются ниже. Некоторые из них тоже могут быть <mark>подсвечены</mark>. Тег <tt>mark</tt> используется для всей <mark>подсветки</mark>, включая тег в предыдущей заметке.</p>
+      <p>Так выглядит заметка в результатах <mark>поиска</mark>. Текст запроса <mark>подсвечивается</mark>, а все картинки из заметки показываются ниже. Некоторые из них тоже могут быть <mark>подсвечены</mark>. Тег <tt>mark</tt> используется для всей <mark>подсветки</mark>, включая тег в предыдущей заметке.</p>
       ',
       // 'summary' => '',
       // 'format-info' => array 2
@@ -167,7 +242,6 @@
       'scheduled?' => false,
       'public?' => true,
       'hidden?' => false,
-      'commentable?' => false,
       'favourite?' => false,
       'read-count' => 31,
       'thumbs' => [
@@ -201,7 +275,7 @@
       // 'comments-link?' => true,
       // 'new-comments-count' => 2,
       // 'new-comments-count-text' => '2 new',
-      // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
+      // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
       // 'og-images' => array (),
     ),
@@ -269,9 +343,8 @@
       ),
     ),
     // 'rss-href' => 'http://e2/all/muzlo/comments-rss/',
-    // 'toggle' => array 2
     'count' => 2,
-    'count-text' => '2 comments',
+    'count-text' => '2 комментария',
     // 'new-count' => 0,
     // 'new-count-text' => '0 new',
     'display-form?' => true,
@@ -294,86 +367,6 @@
     'name' => 'Иван Петров',
     'email' => '',
     'text' => 'Это пример формы комментариев',
-  );
-
-  $return['tags'] = array (
-    'menu-each' => array (
-      array (
-        'tag' => 'this is a list of',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'tags',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'that',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'you have chosen',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'to be shown',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'in the bottom',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'of the frontpage',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'it may',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'span',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'several',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'lines',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'depending on the number',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'of tags',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'and',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'screen size',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-    ),
   );
 
   // $return['popular'] = array (

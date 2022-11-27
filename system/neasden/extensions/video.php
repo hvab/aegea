@@ -31,10 +31,11 @@ class NeasdenGroup_video implements NeasdenGroup {
       if ($line['class'] == 'video') {
   
         @list ($filebasename, $alt) = explode (' ', $line['content'], 2);
+        $alt = trim ((string) $alt);
         
         // check if alt start with an url
         @list ($link, $newalt) = explode (' ', $alt, 2);
-        if (preg_match ('/[a-z]+\:.+/i', $link)) { // usafe
+        if (preg_match ('/[a-z]+\:.+/i', $link)) {
           $alt = $newalt;
         } else {
           $link = '';
@@ -50,7 +51,7 @@ class NeasdenGroup_video implements NeasdenGroup {
         try {
           require_once @$this->neasden->config['library'] .'getid3/getid3.php';
           $info = new getid3 ();
-          $info = $info->analyze ($filename);
+          $info = @$info -> analyze ($filename); // may have a divbyzero inside
           $width = $info['video']['resolution_x'];
           $height = $info['video']['resolution_y'];
           // require_once @$this->neasden->config['library'] .'mp4info/MP4Info.php';
@@ -61,9 +62,16 @@ class NeasdenGroup_video implements NeasdenGroup {
           // }
         } catch (\Exception $e) {}
 
-        if (substr ($filebasename, strrpos ($filebasename, '.') - 3, 3) == '@2x') {
+        $filebasename_modifiers = substr ($filebasename, 0, strrpos ($filebasename, '.')) . '@"';
+
+        if (strstr ($filebasename_modifiers, '@2x@')) {
           $width /= 2;
           $height /= 2;
+        }
+  
+        $attrs = 'controls';
+        if (strstr ($filebasename_modifiers, '@loop@')) {
+          $attrs = 'autoplay loop';
         }
   
         $filename_original = $filename;
@@ -82,7 +90,7 @@ class NeasdenGroup_video implements NeasdenGroup {
           // 'alt="'. htmlspecialchars ($alt) .'" />'. "\n"
           '<video src="'. $myconf['src-prefix'] . $filebasename .'#t=0.001" '.
           'width="'. $width .'" height="'. $height.'" '.
-          'controls '.
+          $attrs .' '.
           'alt="'. htmlspecialchars ($alt) .'" />'. "\n"
         );
   

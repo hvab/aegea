@@ -7,7 +7,7 @@
   type="hidden"
   id="token"
   name="token"
-  value="<?= @$content['form-timezone']['.token'] ?>"
+  value="<?= $content['sign-in']['token'] ?>"
 />
 
 <div class="form">
@@ -32,11 +32,11 @@
   </div>    
   <div class="form-element">
     <div>
-      <label class="checkbox">
+      <label class="e2-switch">
       <input type="checkbox"
         name="is_dst" 
         <?= @$content['form-timezone']['dst?']? ' checked="checked"' : '' ?>
-      />&nbsp;<?= _S ('ff--with-dst') ?></label><br />
+      /><i></i> <?= _S ('ff--with-dst') ?></label><br />
     </div>
     
   </div>

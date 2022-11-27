@@ -88,7 +88,7 @@ function initTextWithFileUpload () {
       var file = filesToUpload.shift()
       var url = $('#e2-file-upload-action').attr('href') + '?'
 
-      if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png|svg|mp3|mp4|mov$/i)) {
+      if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png|webp|svg|mp3|mp4|mov$/i)) {
         e2NiceError({
           message: 'er--unsupported-file',
           debug: {

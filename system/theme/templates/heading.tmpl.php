@@ -10,6 +10,12 @@
 
     <span class="admin-links admin-links-floating <?php if ($content['class'] != 'settings'): ?>admin-links-sticky<?php endif ?>">
 
+      <?php if (array_key_exists ('tag', $content)): ?>
+      <?php if (array_key_exists ('pinned-toggle-action', $content['tag'])): ?>
+      <span class="admin-icon"><form action="<?= $content['tag']['pinned-toggle-action'] ?>" method="post" class="nu"><input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" /><button type="submit" href="<?= $content['tag']['pinned-toggle-action'] ?>" class="e2-admin-link nu e2-admin-item <?= ($content['tag']['pinned?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-pinned" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('pinned-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('pinned-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></button></form></span>
+      <?php endif ?>
+      <?php endif ?>
+
       <?php if (array_key_exists ('related-edit-href', $content)): ?>
       <span class="admin-icon"><a href="<?= $content['related-edit-href'] ?>" class="nu e2-edit-link e2-admin-link"><span class="e2-svgi"><?= _SVG ('edit') ?></span></a></span>
       <?php endif ?>
@@ -76,12 +82,13 @@
     </span>
 
     <?php if (array_key_exists ('tag', $content)) { ?>
-    <?php if (!$content['tag']['visible?']) { ?> <div class="e2-nonpublic-label"><?= _S ('gs--not-published') ?></div><?php } ?>
+    <?php if (array_key_exists ('visible?', $content['tag'])) { ?>
+    <?php if (!$content['tag']['visible?']) { ?> <div class="e2-nonpublic-label"><span class="e2-svgi e2-svgi-lock-nano"><?= _SVG ('lock-nano') ?> </span> <?= _S ('gs--hidden') ?></div><?php } ?>
+    <?php } ?>
     <?php } ?>
     <h2><?= $content['heading'] ?></h2>
 
-    <?php _T_FOR ('year-months') ?>
-    <?php _T_FOR ('month-days') ?>
+    <?php _T_FOR ('calendar') ?>
 
     <?php if (array_key_exists ('tag', $content) and $content['pages']['this'] == 1) { ?>
     
@@ -102,25 +109,14 @@
       <?= $content['tag']['notes-count-text'] ?>: <a href="">*с первой</a> · <a href="">с последней</a>
       </div> -->
 
-      <?php
-      $tags = [];
-      if (array_key_exists ('related', $content['tag']) and count ($content['tag']['related'])) {
-        foreach ($content['tag']['related'] as $tag) {
-          $classname = 'e2-tag'. ($tag['visible?']? '' : ' e2-tag-hidden');
-          if ($tag['current?']) {
-            $tags[] = '<mark class="'. $classname .'">'. $tag['name'] .'</mark>';
-          } else {
-            $tags[] = '<a href="'. $tag['href'] .'" class="'. $classname .'">'. $tag['name'] .'</a>';
-          }
-        }
-      }
-      $tags = implode (' &nbsp; ', $tags);
-      if ((string) $tags !== '') {
-        $tags = '   '. _S ('gs--see-also') .':  '. $tags;
-      }
-      ?>
-
-      <div class="e2-heading-meta"><?= $content['tag']['notes-count-text'] ?><?= $tags ?></div>
+      <div class="e2-heading-meta">
+        <?= $content['tag']['notes-count-text'] ?>
+        <?php if (array_key_exists ('related', $content['tag']) and count ($content['tag']['related'])) { ?>
+          <?php $content['_']['_tags_line']['_prepend'] = '   '. _S ('gs--see-also') .':  '; ?>
+          <?php $content['_']['_tags_line']['_tags'] = $content['tag']['related']; ?>
+          <?php _T ('tags-line') ?>
+        <?php } ?>
+      </div>
 
       <?php if ((string) $content['tag']['description'] !== ''): ?>
       <div class="e2-heading-description e2-text">

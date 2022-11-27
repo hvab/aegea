@@ -6,16 +6,16 @@
 
 <input
   type="hidden"
-  id="token"
-  name="token"
-  value="<?= @$content['form-password']['.token'] ?>"
+  id="recovery-key"
+  name="recovery-key"
+  value="<?=@$content['form-password']['.recovery-key']?>"
 />
 
 <input
   type="hidden"
-  id="recovery-key"
-  name="recovery-key"
-  value="<?=@$content['form-password']['.recovery-key']?>"
+  id="token"
+  name="token"
+  value="<?= $content['sign-in']['token'] ?>"
 />
 
 <div class="form">

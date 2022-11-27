@@ -1,0 +1,225 @@
+/* Scrolling Module */
+.e2-band-scrollable {
+	padding-bottom: 1px;
+	flex-grow: 1;
+}
+
+.e2-band-scrollable + .e2-band-scrollable {
+  margin-top: 12px;
+}
+
+.e2-band-scrollable::after {
+	content: '';
+	display: block;
+	height: 1px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: var(--thinRuleColor);
+}
+
+.e2-band-scrollable nav {
+	display: flex;
+	flex-flow: row nowrap;
+	flex-grow: 1;
+	align-items: baseline;
+	position: relative;
+	white-space: nowrap;
+}
+
+.band-item a {
+	border: 0;
+	outline: 0;
+}
+
+.band-item .band-item-inner {
+	--padding: 6px;
+	display: block;
+	padding: 0 var(--padding);
+	position: relative;
+	font-size: 16px;
+	line-height: 28px;
+	color: var(--headingsColor);
+	border-bottom: none;
+	white-space: nowrap;
+	touch-action: manipulation;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.band-item .band-item-inner::after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 100%;
+	bottom: 0;
+	left: var(--padding);
+	right: var(--padding);
+	height: 1px;
+}
+
+.band-item:first-child .band-item-inner {
+	padding-left: 0;
+}
+
+.band-item:first-child .band-item-inner::after {
+	left: 0;
+}
+
+.band-item:last-child .band-item-inner {
+	padding-right: 0;
+}
+
+.band-item:last-child .band-item-inner::after {
+	right: 0;
+}
+
+.band-item .band-item-clickable {
+  cursor: pointer;
+}
+
+.band-item a,
+.band-item .band-item-clickable {
+  transition-property: (color);
+  transition-duration: var(--time);
+  transition-timing-function: ease-out;
+}
+
+.band-item a::after,
+.band-item .band-item-clickable::after {
+  transition-property: (background-color);
+  transition-duration: var(--time);
+  transition-timing-function: ease-out;
+}
+
+.band-item a.band-item-inner:hover,
+.band-item a.band-item-inner.hover,
+.band-item a.band-item-inner:focus,
+.band-item .band-item-clickable.band-item-inner:hover,
+.band-item .band-item-clickable.band-item-inner.hover,
+.band-item .band-item-clickable.band-item-inner:focus {
+	color: var(--hoverColor);
+  transition: none;
+}
+
+.band-item a.band-item-inner:hover::after,
+.band-item a.band-item-inner.hover::after,
+.band-item a.band-item-inner:focus::after,
+.band-item .band-item-clickable.band-item-inner:hover::after,
+.band-item .band-item-clickable.band-item-inner.hover::after,
+.band-item .band-item-clickable.band-item-inner:focus::after {
+	background-color: var(--hoverColor);
+  transition: none;
+}
+
+.band-item.band-item-disabled .band-item-inner {
+	color: var(--disabledColor);
+	pointer-events: none;
+}
+
+.band-item.band-item-current .band-item-inner {
+	color: var(--activeColor);
+	font-weight: bold;
+}
+
+.band-item.band-item-parent .band-item-inner {
+	color: var(--activeColor);
+	font-weight: bold;
+}
+
+.band-item.band-item-parent .band-item-inner::after {
+	background-color: var(--activeColor);
+}
+
+.band-item__icon.e2-svgi {
+	top: -3px;
+}
+
+@media #{$ShouldSmallItemsBeSparse} {
+	.band-item .band-item-inner {
+		--padding: 10px;
+	}
+}
+
+/* Follow button */
+.band-follow-button {
+	white-space: nowrap;
+	padding: 0 6px;
+	margin-bottom: 3px;
+	font-size: 12px;
+	line-height: 22px;
+	background-color: var(--followButtonBackground);
+  color: var(--followButtonTextColor);
+  transition: background var(--time) ease-out, color var(--time) ease-out, fill var(--time) ease-out;
+	border-radius: 4px;
+}
+
+.band-follow-button:hover,
+.band-follow-button.hover {
+	white-space: nowrap;
+	padding: 0 6px;
+	margin-bottom: 3px;
+	font-size: 12px;
+	line-height: 22px;
+  background: var(--followButtonHoverBackground);
+  color: var(--followButtonTextColor);
+  transition: none;
+	border-radius: 4px;
+}
+
+.band-follow-button a {
+	position: relative;
+	top: -1px;
+	border-bottom: none;
+	color: var(--headingsColor);
+	touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Integrate with sortable module */
+.band-item.e2-js-menu-reorderable-item-chosen a {
+	color: var(--headingsColor);
+}
+
+.band-item.e2-js-menu-reorderable-item-chosen a::after {
+	display: none;
+}
+
+.e2-js-menu-reorderable-in-process .band-item .band-item-inner {
+	cursor: default;
+}
+
+/* e2-band */
+.e2-band {
+	display: flex;
+	flex-flow: row nowrap;
+	position: relative;
+	overflow: hidden;
+}
+
+.e2-band::after {
+	content: '';
+	display: block;
+	height: 1px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: var(--thinRuleColor);
+}
+
+.e2-band .e2-band-scrollable::after {
+	background-color: transparent;
+}
+
+.e2-band-sticky {
+	display: flex;
+	flex-flow: row nowrap;
+	flex-grow: 0;
+	flex-shrink: 0;
+	align-items: baseline;
+	position: relative;
+	white-space: nowrap;
+	padding-left: 6px;
+	background: var(--backgroundColor);
+}

@@ -25,7 +25,7 @@
   type="hidden"
   id="token"
   name="token"
-  value="<?= @$content['form-note-publish']['.token'] ?>"
+  value="<?= $content['sign-in']['token'] ?>"
 />
 
 <input
@@ -85,7 +85,7 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
 
   &nbsp;&nbsp;&nbsp;
 
-  <a href="#" class="e2-admin-link nu e2-schedule-controls-revealer e2-svgi e2-svgi-calendar"><?= _SVG ('calendar') ?></a>
+  <a href="#" class="e2-admin-link nu e2-schedule-controls-revealer e2-svgi e2-svgi-calendar"><?= _SVG ('calendar-bigger') ?></a>
 
   <?php } ?>
 
@@ -98,6 +98,12 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
   </button>
 </div>
 
+
+<?php if (@$content['form-note-publish']['scheduling-promo']) { ?>
+<div class="e2-promo-box">
+  <span class="e2-paid e2-paid-hanging"><?= _S ('e2--currency-sign') ?></span> <?= $content['form-note-publish']['scheduling-promo'] ?>
+</div>
+<?php } ?>
 
 </div>
 

@@ -2,7 +2,6 @@
 
   $settings_href = '../settings';
   $self_href = 'javascript:;';
-  // $self_href = $_current_url;
   
   $return['class'] = 'themepreview';
   $return['title'] = 'Theme preview';
@@ -17,18 +16,85 @@
   // </ol>
   // ';
 
-  $return['theme-preview']['no-themes'] = '
-  <p>Use this page to preview and adjust your theme.</p>
-  ';
+  $return['theme-preview']['no-themes'] = '<p>Use this page to preview and adjust your theme.</p>';
 
   // $return['theme-preview']['themes-before'] = '
   // <p>Select appearance:</p>
   // ';
 
-  $return['theme-preview']['themes-after'] = '
-  <p>Select the new theme from the list to apply it.</p>
-  <p>Use this page to preview and adjust your theme. It is made out of elements of the blog, starting with posts. Don’t forget to check on mobile phones</p>
-  ';
+  // $return['theme-preview']['themes-after'] = '
+  // <p>Select the new theme from the list to apply it.</p>
+  // <p>Use this page to preview and adjust your theme. It is made out of elements of the blog, starting with posts. Don’t forget to check on mobile phones</p>
+  // ';
+
+  if (E2_EDITION) {
+
+    $return['theme-preview']['no-themes'] .= '<p>The main menu display the different states of the items: '.
+      'regular link, parent page link, and selected title of the current page.</p>';
+
+    $return['main-menu'] = array (
+      'each' => 
+      array (
+        array (
+          'href' => $self_href,
+          'svg-id' => 'favourite-on',
+          'title' => 'Main menu',
+          'current?' => false,
+          'parent?' => false,
+          'visible?' => true,
+        ),
+        array (
+          'href' => $settings_href,
+          'svg-id' => 'settings',
+          'title' => 'Preferences',
+          'visible?' => true,
+          'parent?' => true,
+          'current?' => false,
+        ),
+        array (
+          'href' => $self_href,
+          'svg-id' => 'tags',
+          'title' => 'Tags',
+          'current?' => false,
+          'parent?' => false,
+          'visible?' => true,
+        ),
+        array (
+          'tag' => 'movies',
+          'title' => 'Movies',
+          'href' => $self_href,
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => false,
+        ),
+        array (
+          'tag' => 'music',
+          'title' => 'Music',
+          'href' => $self_href,
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => false,
+        ),
+        array (
+          'tag' => 'books',
+          'title' => 'Books',
+          'href' => $self_href,
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => false,
+        ),
+        array (
+          'href' => $self_href,
+          'title' => 'Theme preview',
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => true,
+        ),
+      ),
+      'reorderable?' => false,
+    );
+
+  }
 
   $return['notes'] = array (
     array (
@@ -80,16 +146,24 @@
       'hidden?' => false,
       'favourite?' => true,
       'tags' => array (
-         array (
-           'name' => 'a tag',
-           'href' => '',
-           'current?' => false,
-         ),
-         array (
-           'name' => 'another one',
-           'href' => '',
-           'current?' => false,
-         ),
+        array (
+          'name' => 'a tag',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ),
+        array (
+          'name' => 'another one',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ),
+        array (
+          'name' => 'hidden one',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => false,
+        ),
       ),
       'read-count' => 42,
       'comments-count' => 0,
@@ -100,7 +174,7 @@
       // 'comments-link?' => true,
       'new-comments-count' => 0,
       'new-comments-count-text' => '0 new',
-      // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
+      // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
       // 'og-images' => array (),
     ),
@@ -121,31 +195,34 @@
       'hidden?' => false,
       'favourite?' => false,
       'tags' => array (
-         array (
-           'name' => 'first tag',
-           'href' => $self_href,
-           'current?' => false,
-         ),
-         array (
-           'name' => 'the current one',
-           'href' => $self_href,
-           'current?' => true,
-         ),
-         array (
-           'name' => 'and one more',
-           'href' => $self_href,
-           'current?' => false,
-         ),
+        array (
+          'name' => 'first tag',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ),
+        array (
+          'name' => 'the current one',
+          'href' => $self_href,
+          'current?' => true,
+          'visible?' => true,
+        ),
+        array (
+          'name' => 'and one more',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ),
       ),
       'read-count' => 147,
-      'comments-count' => 5,
-      'comments-count-text' => '5 comments',
+      // 'comments-count' => 5,
+      // 'comments-count-text' => '5 comments',
       // 'href' => $self_href,
       // 'href-original' => 'http://e2/all/muzlo/',
-      'comments-link?' => true,
+      // 'comments-link?' => true,
       // 'new-comments-count' => 2,
       // 'new-comments-count-text' => '2 new',
-      // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
+      // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
       // 'og-images' => array (),
     ),
@@ -198,7 +275,7 @@
       // 'comments-link?' => true,
       // 'new-comments-count' => 2,
       // 'new-comments-count-text' => '2 new',
-      // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
+      // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
       // 'og-images' => array (),
     ),
@@ -266,7 +343,6 @@
       ),
     ),
     // 'rss-href' => 'http://e2/all/muzlo/comments-rss/',
-    // 'toggle' => array 2
     'count' => 2,
     'count-text' => '2 comments',
     // 'new-count' => 0,
@@ -291,86 +367,6 @@
     'name' => 'John Smith',
     'email' => '',
     'text' => 'This is a sample comment form',
-  );
-
-  $return['tags'] = array (
-    'menu-each' => array (
-      array (
-        'tag' => 'this is a list of',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'tags',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'that',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'you have chosen',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'to be shown',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'in the bottom',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'of the frontpage',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'it may',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'span',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'several',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'lines',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'depending on the number',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'of tags',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'and',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'screen size',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-    ),
   );
 
   // $return['popular'] = array (

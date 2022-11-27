@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <?php if (array_key_exists ('edit-href', $comment) or array_key_exists ('removed-href', $comment)): ?>
+      <?php if (array_key_exists ('edit-href', $comment) or array_key_exists ('removed-action', $comment)): ?>
         <div class="e2-comment-control-area">
           <div class="e2-admin-couple e2-comment-control-area-actions">
 
@@ -58,46 +58,48 @@
                   </a>
                 <?php endif; ?>
 
-                <?php if (array_key_exists ('important-toggle-href', $comment)): ?>
-                  <a href="<?= $comment['important-toggle-href'] ?>"
-                      class="nu e2-popup-menu-widget-item <?= ($comment['important?']? 'e2-admin-item_on' : '') ?>"
-                      data-e2-popup-menu-action="do-not-close-popup-menu"
-                      data-e2-js-action="toggle-important"
-                  >
+                <?php if (array_key_exists ('important-toggle-action', $comment)): ?>
+                  <form action="<?= $comment['important-toggle-action'] ?>" method="post">
+                  <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
+                  <button type="submit" href="<?= $comment['important-toggle-action'] ?>" class="nu e2-popup-menu-widget-item <?= ($comment['important?']? 'e2-admin-item_on' : '') ?>" data-e2-popup-menu-action="do-not-close-popup-menu" data-e2-js-action="toggle-important" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
                     <span class="e2-popup-menu-widget-item-icon">
                       <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('favourite-off') ?></span></span>
                       <span class="e2-toggle-state-on"><span class="e2-svgi"><?= _SVG ('favourite-on') ?></span></span>
                       <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
                     </span>
                     <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--highlight') ?></span>
-                  </a>
+                  </button>
+                  </form>
                 <?php endif ?>
 
                 <hr class="e2-popup-menu-widget-separator">
 
-                <?php if (array_key_exists ('removed-href', $comment)): ?>
-                  <a href="<?= $comment['removed-href'] ?>"
-                      class="nu e2-popup-menu-widget-item e2-popup-menu-widget-item_remove"
-                      data-e2-js-action="removed-href,couple-trigger"
-                  >
+                <?php if (array_key_exists ('removed-action', $comment)): ?>
+                  <form action="<?= $comment['removed-action'] ?>" method="post" style="line-height: 0">
+                  <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
+                  <button type="submit" href="<?= $comment['removed-action'] ?>" class="nu e2-popup-menu-widget-item e2-popup-menu-widget-item_remove" data-e2-js-action="removed-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
                     <span class="e2-popup-menu-widget-item-icon">
                       <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('trash') ?></span></span>
                       <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
                     </span>
                     <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--remove') ?></span>
-                  </a>
+                  </button>
+                  </form>
                 <?php endif ?>
               </div>
             </div>
 
             <div class="e2-admin-couple-item e2-admin-couple-item_removed e2-admin-couple-item_hidden">
-              <?php if (array_key_exists ('replaced-href', $comment)): ?>
-                <a href="<?= $comment['replaced-href'] ?>" class="nu e2-admin-link e2-admin-item" data-e2-js-action="replaced-href,couple-trigger" title="<?= _S ('gs--replace') ?>">
+              <?php if (array_key_exists ('replaced-action', $comment)): ?>
+                <form action="<?= $comment['replaced-action'] ?>" method="post" style="line-height: 0">
+                <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
+                <button type="submit" href="<?= $comment['replaced-action'] ?>" class="nu e2-admin-link e2-admin-item" data-e2-js-action="replaced-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>" title="<?= _S ('gs--replace') ?>">
                   <span class="e2-admin-item-icon">
                     <span class="e2-svgi"><?= _SVG ('replace') ?></span>
                   </span>
                   <span class="e2-admin-item-text"><?= _S ('gs--replace') ?></span>
-                </a>
+                </button>
+                </form>
               <?php endif; ?>
             </div>
 
@@ -138,7 +140,7 @@
           </div>
         </div>
 
-        <?php if (array_key_exists ('edit-reply-href', $comment) or array_key_exists ('removed-reply-href', $comment)): ?>
+        <?php if (array_key_exists ('edit-reply-href', $comment) or array_key_exists ('removed-reply-action', $comment)): ?>
           <div class="e2-comment-control-area">
             <div class="e2-admin-couple e2-comment-control-area-actions">
 
@@ -158,56 +160,55 @@
                     </a>
                   <?php endif; ?>
 
-                  <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?>
-                    <a href="<?= $comment['reply-important-toggle-href'] ?>"
-                        class="nu e2-popup-menu-widget-item <?= ($comment['reply-important?']? 'e2-admin-item_on' : '') ?>"
-                        data-e2-popup-menu-action="do-not-close-popup-menu"
-                        data-e2-js-action="toggle-important"
-                    >
-                  <span class="e2-popup-menu-widget-item-icon">
-                    <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('favourite-off') ?></span></span>
-                    <span class="e2-toggle-state-on"><span class="e2-svgi"><?= _SVG ('favourite-on') ?></span></span>
-                    <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
-                  </span>
+                  <?php if (array_key_exists ('reply-important-toggle-action', $comment)): ?>
+                    <form action="<?= $comment['reply-important-toggle-action'] ?>" method="post">
+                    <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
+                    <button type="submit" href="<?= $comment['reply-important-toggle-action'] ?>" class="nu e2-popup-menu-widget-item <?= ($comment['reply-important?']? 'e2-admin-item_on' : '') ?>" data-e2-popup-menu-action="do-not-close-popup-menu" data-e2-js-action="toggle-important" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
+                      <span class="e2-popup-menu-widget-item-icon">
+                        <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('favourite-off') ?></span></span>
+                        <span class="e2-toggle-state-on"><span class="e2-svgi"><?= _SVG ('favourite-on') ?></span></span>
+                        <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
+                      </span>
                       <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--highlight') ?></span>
-                    </a>
+                    </button>
+                    </form>
                   <?php endif ?>
 
                   <hr class="e2-popup-menu-widget-separator">
 
-                  <?php if (array_key_exists ('removed-reply-href', $comment)): ?>
-                    <a href="<?= $comment['removed-reply-href'] ?>"
-                        class="nu e2-popup-menu-widget-item e2-popup-menu-widget-item_remove"
-                        data-e2-js-action="removed-href,couple-trigger"
-                    >
-                  <span class="e2-popup-menu-widget-item-icon">
-                    <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('trash') ?></span></span>
-                    <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
-                  </span>
+                  <?php if (array_key_exists ('removed-reply-action', $comment)): ?>
+                    <form action="<?= $comment['removed-reply-action'] ?>" method="post" style="line-height: 0">
+                    <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
+                    <button type="submit" href="<?= $comment['removed-reply-action'] ?>" class="nu e2-popup-menu-widget-item e2-popup-menu-widget-item_remove" data-e2-js-action="removed-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
+                      <span class="e2-popup-menu-widget-item-icon">
+                        <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('trash') ?></span></span>
+                        <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
+                      </span>
                       <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--remove') ?></span>
-                    </a>
+                    </button>
+                    </form>
                   <?php endif ?>
                 </div>
               </div>
 
               <div class="e2-admin-couple-item e2-admin-couple-item_removed e2-admin-couple-item_hidden">
-                <?php if (array_key_exists ('replaced-reply-href', $comment)): ?>
-                  <a href="<?= $comment['replaced-reply-href'] ?>"
-                      class="nu e2-admin-link e2-admin-item"
-                      data-e2-js-action="replaced-href,couple-trigger"
-                  >
-                <span class="e2-admin-item-icon">
-                  <span class="e2-svgi"><?= _SVG ('replace') ?></span>
-                </span>
-                    <span class="e2-admin-item-text">* Вернуть</span>
-                  </a>
+                <?php if (array_key_exists ('replaced-reply-action', $comment)): ?>
+                  <form action="<?= $comment['replaced-reply-action'] ?>" method="post" style="line-height: 0">
+                  <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
+                  <button type="submit" href="<?= $comment['replaced-reply-action'] ?>" class="nu e2-admin-link e2-admin-item" data-e2-js-action="replaced-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>" title="<?= _S ('gs--replace') ?>">
+                    <span class="e2-admin-item-icon">
+                      <span class="e2-svgi"><?= _SVG ('replace') ?></span>
+                    </span>
+                    <span class="e2-admin-item-text"><?= _S ('gs--replace') ?></span>
+                  </button>
+                  </form>
                 <?php endif; ?>
               </div>
 
               <div class="e2-admin-couple-spinner">
-            <span class="e2-admin-couple-spinner-icon">
-              <span class="e2-svgi"><?= _SVG ('spin') ?></span>
-            </span>
+                <span class="e2-admin-couple-spinner-icon">
+                  <span class="e2-svgi"><?= _SVG ('spin') ?></span>
+                </span>
               </div>
 
             </div>

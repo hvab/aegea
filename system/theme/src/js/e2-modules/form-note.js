@@ -110,12 +110,13 @@ function initFormNote () {
     )
 
     $submitButton.prop('disabled', !shouldBeEnabled)
+    $submitButton.hide().show(0) // force repaint on stupid safari
   }
 
   function e2LiveSaveError () {
     e2SpinningAnimationStartStop($('#livesaving'), 0)
     $('#livesaving').hide()
-    $('#livesave-button, #livesave-button + .e2-unsaved-led').show()
+    $('#livesave-button, #livesave-button + .js-unsaved-led').show()
   }
 
   function e2LiveSave () {
@@ -137,7 +138,7 @@ function initFormNote () {
       generatedTitle = generatedTitle.substr(0, 1).toUpperCase() + generatedTitle.substr(1)
       $('#title').val(generatedTitle).change()
     }
-    $('#livesave-button, #livesave-button + .e2-unsaved-led').hide()
+    $('#livesave-button, #livesave-button + .js-unsaved-led').hide()
     $('#livesaving').fadeIn(333)
     e2SpinningAnimationStartStop($('#livesaving'), 1)
 
@@ -241,7 +242,7 @@ function initFormNote () {
     edited = !comparePageObjects(prevPO, newPO)
     changed = initPO ? !comparePageObjects(initPO, newPO) : true
 
-    var $livesaveButton = $('#livesave-button, #livesave-button + .e2-unsaved-led')
+    var $livesaveButton = $('#livesave-button, #livesave-button + .js-unsaved-led')
     if (edited && changed && (newPO.text !== '')) {
       edited = false
       $('#livesaving').hide()

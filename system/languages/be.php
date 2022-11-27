@@ -13,6 +13,7 @@ function e2l_load_strings () {
   'e2--default-blog-title' => 'Мой блог',
   'e2--default-blog-author' => 'Аўтар блогу',
   'e2--website-host' => 'blogengine.ru',
+  'e2--currency-sign' => '$',
 
   // installer
   'pt--install' => 'Усталяванне Эгеі',
@@ -47,6 +48,7 @@ function e2l_load_strings () {
   'gs--nth-month-of-nth-year' => '$[month.monthname] $[year]',
   'gs--nth-day-of-nth-month-of-nth-year' => '$[day] $[month.monthname.genitive] $[year]',
   'gs--everything' => 'Ўсё',
+  'gs--calendar' => 'Каляндар',
   'gs--part-x-of-y' => 'частка $[part] з $[of]',
 
   // posts
@@ -59,8 +61,6 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Памылка пры змяненні нататкі',
   'er--error-deleting-post-tag-info' => 'Памылка пры выдаленні дадзеных аб тэгах нататкі',
   'er--wrong-datetime-format' => 'Няправільны фармат даты-часу. Павінен быць: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',
-  'er--cannot-create-thumbnail' => 'Не атрымалася стварыць паменшаную выяву',
-  'er--cannot-upload' => 'Не атрымалася запампаваць файл',
   'ff--title' => 'Назва',
   'ff--text' => 'Тэкст',
   'ff--saving' => 'Захаванне...',
@@ -80,9 +80,15 @@ function e2l_load_strings () {
   'gs--no-notes' => 'Нататак няма.',
   'gs--will-be-published' => 'Апублікуецца',
 
+  // uploads
+  'er--cannot-create-thumbnail' => 'Не атрымалася стварыць паменшаную выяву',
+  'er--cannot-upload-file-too-big' => 'Файл занадта вялікі',
+  'er--cannot-upload-no-or-too-many-files' => 'Не прыйшло ніводнага або занадта шмат файлаў',
+  'er--cannot-upload' => 'Не атрымалася запампаваць файл (памылка $[error])',
+
   // see NiceError.php!
-  'er--supported-only-png-jpg-gif' => 'Падтрымлiваюцца толькi выявы png, jpg i gif',
-  'er--unsupported-file' => 'Падтрымлiваюцца толькi выявы png, jpg, gif i svg, відэа mp4 і mov i аудыёфайлы mp3',
+  'er--supported-only-png-jpg-gif' => 'Падтрымлiваюцца толькi выявы png, wepb, jpg i gif',
+  'er--unsupported-file' => 'Падтрымлiваюцца толькi выявы png, wepb, jpg, gif i svg, відэа mp4 і mov i аудыёфайлы mp3',
 
   'ff--gmt-offset' => 'Розніца з Грынвічам',
   'ff--with-dst' => '+1 летам',
@@ -127,14 +133,15 @@ function e2l_load_strings () {
   'gs--you-are-no-longer-subscribed' => 'Вы больш не падпісаны на каментары да нататкі',
   'gs--unsubscription-didnt-work' => 'Чамусьці адпіска не спрацавала',
   'gs--post-not-found' => 'Нататка не знойдзена',
-  'gs--comment-too-long' => 'Занадта доўгі каментар',
-  'gs--comment-too-long-description' => 'Вы даслалі занадта доўгі каментар, таму ён не быў захаваны.',
   'gs--comment-double-post' => 'Паўторны каментар',
   'gs--comment-double-post-description' => 'Вы даслалі каментар двойчы, захаваны быў толькі адзін.',
+  'gs--comment-too-long' => 'Занадта доўгі каментар',
+  'gs--comment-too-long-description' => 'Вы даслалі занадта доўгі каментар, таму ён не быў захаваны.',
+  'gs--comment-post-not-commentable' => 'Каментары закрыты',
+  'gs--comment-post-not-commentable-description' => 'Вы адправілі каментар, але каментары да гэтай нататкі былі закрыты.',
   'gs--comment-spam-suspect' => 'каментар выглядае як спам',
   'gs--comment-spam-suspect-description' => 'Прабачце, але робат вырашыў, што гэта спам, таму каментар ня быў дасланы.',
   'gs--you-are-already-subscribed' => 'Вы падпісаныя на каментары. Спасылка, каб адпісацца прыходзіць у кожным пісьме з новым каментаром.',
-  'er--post-not-commentable' => 'Гэту нататку нельга каментаваць',
   'er--name-email-text-required' => 'І імя, і эл. адрас, і тэкст каментара абавязковы',
   'ff--notify-subscribers' => 'Даслаць па пошце каментатару і іншым падпісчыкам',
   'gs--your-comment' => 'Ваш каментар',
@@ -165,6 +172,8 @@ function e2l_load_strings () {
   'pt--posts-without-tags' => 'Нататкі без тэгаў',
   'gs--no-tags' => 'Тэгаў няма.',
   'gs--no-posts-without-tags' => 'Нататак без тэгаў няма.',
+  'gs--hidden' => 'Схаваны',
+  'er--tag-must-have-name' => 'У тэга павінна быць назва',
   'er--cannot-rename-tag' => 'Такое імя ці выгляд у адрасным радку ўжо выкарыстоўваецца іншым тэгам',
   'ff--tag-name' => 'Тэг',
   'ff--tag-urlname' => 'У адрасным радку',
@@ -176,14 +185,16 @@ function e2l_load_strings () {
   'gs--tags-all' => 'усе',
   'gs--tags' => 'Тэгі',
 
-  // most commented and favourites
-  'pt--most-commented' => 'Нататкі, якія каментуюць$[period.periodname]',
+  // most discussed and favourites
+  'pt--most-commented' => 'Нататкі, якія абмяркоўваюць$[period.periodname]',
+  'nm--most-commented' => 'Абмяркоўваецца',
   'pt--most-read' => 'Папулярнае$[period.periodname]',
   'nm--most-read' => 'Папулярнае',
   'pt--favourites' => 'Абранае',
   'nm--favourites' => 'Абранае',
   'gs--no-favourites' => 'Абранага няма.',
   'nm--read-next' => 'Далей',
+  'nm--random-note' => 'Выпадковая нататка',
 
   // generic posts pages
   'nm--pages' => 'Старонкі',
@@ -200,6 +211,7 @@ function e2l_load_strings () {
   'pt--search-query-empty' => 'Тэкст для пошуку пусты',
   'pt--search-query-too-short' => 'Занадта кароткі тэкст',
   'gs--found-for-query' => 'па запыту',
+  'gs--search' => 'Пошук',
   'gs--search-query-empty' => 'Тэкст для пошуку пусты, напішыце што-небудзь',
   'gs--search-query-too-short' => 'Занадта кароткі тэкст, напішыце хоць 4 літары.',
   'gs--search-too-few-notes' => 'Пошук запрацуе, калі будзе больш нататак.',
@@ -250,18 +262,24 @@ function e2l_load_strings () {
   'ff--theme' => 'Выгляд',
   'ff--theme-how-to' => 'Як стварыць сваю тэму?',
   'gs--theme-preview' => 'Прадпрагляд',
+  'ff--main-menu' => 'Галоўнае меню',
+  'ff--show' => 'Паказваць',
+  'gs--after-you-publish' => '(пасля публікацыі нататак)',
+  'gs--main-menu-description' => 'У меню паказваюцца замацаваныя тэгі, спасылкі на спецыяльныя старонкі, выбраныя ніжэй, і пошук. Пункты меню можна расставіць у патрэбным парадку прама ў ім',
+  'gs--how-to-pin-tags' => 'Замацоўвайце асобныя тэгі кнопай ::svg:: на іх старонках',
   'ff--posts' => 'Нататкі',
   'ff--respond-to-dark-mode' => 'Падтрымліваць Цёмны рэжым',
   'ff--items-per-page-after' => 'на старонцы',
-  'ff--show-view-counts' => 'Паказваць лічыльнікі праглядаў',
+  'ff--show-view-counts' => 'Паказваць ::svg:: лічыльнікі праглядаў',
   'ff--show-sharing-buttons' => 'Паказваць кнопкі адсылання ў соцсеткі',
   'ff--comments' => 'Каментары',
   'ff--comments-enable-by-default' => 'Дазваляць па змаўчанні ў новых нататках',
   'ff--comments-require-social-id' => 'Толькі пры ўваходзе праз сацсетку',
   'ff--only-for-recent-posts' => 'Толькі да новых нататак',
   'ff--send-by-email' => 'Дасылаць па пошце',
-  'ff--yandex-metrika' => 'Яндекс.Метрика',
-  'ff--google-analytics' => 'Гугль-Аналитика',
+  'ff--analytics' => 'Аналітыка',
+  'ff--yandex-metrika' => 'Яндэкс.Метрыка',
+  'ff--google-analytics' => 'Гугль-аналітыка',
   'gs--password' => 'Пароль',
   'gs--db-connection' => 'Злучэнне з базай',
   'gs--get-backup' => 'Спампаваць апошні бэкапу',
@@ -365,7 +383,7 @@ function e2l_load_strings () {
   // rss
   'gs--posts-tagged' => 'нататкі з тэгам',
 
-  'gs--subscribe-to-blog' => 'Падпісацца на блог',
+  'gs--follow-this-blog' => 'Падпісацца на блог',
   
   // social networks
   'sn--twitter-verb' => 'Твітнуць',
@@ -376,13 +394,39 @@ function e2l_load_strings () {
   'sn--whatsapp-verb' => 'Адаслаць',
   'sn--pinterest-verb' => 'Запініць',
 
+  // updating
+  'pt--confused' => 'Дзіўная сітуацыя',
+  'gs--downdate-explanation' => 'Раней на гэтым серверы выкарыстоўвалася Эгея $[dr], але зараз працуе больш старая версія $[rr], якая можа быць не ў курсе новых функцый і фарматаў дадзеных. Каб не страціць вашыя дадзеныя, Эгея вырашыла нічога не чапаць і проста спыніцца.',  
+
+  'pt--updating' => 'Эгея абнаўляецца',
+  'gs--this-takes-seconds' => 'Звычайна гэта займае некалькі секунд.',
+
+  'pt--fix-permissions' => 'Усталяваць правы',
+  'gs--fix-permissions' => 'Эгее трэба запісаць некаторыя файлы.',
+
+  'pt--multi-step-update' => 'Абнаўленне ў некалькі прыёмаў',
+  'gs--multi-step-update-p1' => 'Каб абнавіцца да Эгеі $[rr], спачатку абновіцеся да Эгеі 2.10.',
+  'gs--multi-step-update-p2' => 'Эгея ўмее абнаўляцца з $[ur] ці пазнейшай, але на гэтым серверы выкарыстоўвалася Эгея $[dr]. Каб не страціць вашыя дадзеныя, Эгея вырашыла нічога не чапаць і проста спыніцца. Калі вы вернеце папярэднюю сістэму, што павінна працягнуць працаваць як раней.',
+
+  'pt--update-cancelled' => 'Абнаўленне не выканана',
+  'gs--cannot-backup-before-update' => 'Эгея не змагла зрабіць бекап перад абнаўленнем. Каб не страціць вашыя дадзеныя, Эгея вырашыла нічога не чапаць і проста спыніцца.',
+  'gs--dbs-version-too-old' => 'Вы карыстаецеся занадта старую версію $[dbs], $[dbv]. Абнавіцеся да MySQL $[minmysql] або вышэй або MariaDB $[minmariadb] або вышэй каб выкарыстоўваць Эгею $[aegearelease].',  
+  'gs--update-db-incomplete' => 'У вашай базе ёсць дадзеныя, але яны няпоўныя.',
+  'gs--db-no-data-configure-or-reinstall' => 'У вашай базе дадзеных пуста. Праверце канфігурацыю базы. Калі вы хацелі стварыць новы блог, пераўсталюеце Эгею.',
+
   // umacros
   'um--month' => '$[month.monthname]',
   'um--month-short' => '$[month.monthname.short]',
   'um--month-g' => '$[month.monthname.genitive]',
 
+  // promo
+  'pm--main-menu' => 'У платнай версіі Эгеі тут наладжваецца галоўнае мяне. У ім паказваюцца замацаваныя тэгі, а таксама спасылкі на абранае, якое абмяркоўваецца, папулярнае, тэгі, каляндар і выпадковую нататку. <a href="$[url]">Даведацца</a>',
+  'pm--analytics' => 'У платнай версіі Эгеі тут падключаецца Гугль-аналітыка і Яндэкс.Метрыка. <a href="$[url]">Даведацца</a>',
+  'pm--secret-link' => 'У платнай версіі Эгеі вы можаце даць сакрэтную спасылку на чарнавік, напрыклад, каб узгадніць нататку перад публікацыяй. <a href="$[url]">Даведацца</a>',
+  'pm--scheduling' => 'У платнай версіі Эгеі вы можаце запланаваць аўтаматычную публікацыю вызначаны час або апублікаваць заднім лікам. <a href="$[url]">Даведацца</a>',
+  
   // more strings
-  'gs--subscribe' => 'Падпіска на блог',
+  'gs--follow' => 'Падпіска на блог',
 
   'gs--no-such-notes' => 'Нататак няма.',
   'pt--page-not-found' => 'Старонка не знойдзена',
@@ -390,7 +434,7 @@ function e2l_load_strings () {
 
   'er--cannot-find-db' => 'Не магу знайсці базу звестак',
   'er--cannot-connect-to-db' => 'Не магу злучыцца з базай звестак',
-  'er--mysql-version-too-old' => 'Версія базы звестак занадта старая ($[v1], патрэбна $[v2]+)',
+  'er--dbs-version-too-old' => 'Версія $[dbs] занадта старая ($[v1], патрэбна $[v2]+)',
   'er--error-occurred' => 'Адбылася памылка',
   'er--too-many-errors' => 'Занадта шмат памылак',
   'gs--rss' => 'РСС',

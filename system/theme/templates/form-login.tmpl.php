@@ -1,5 +1,3 @@
-<?php // mui ?>
-
 <a id="e2-check-password-action" href="<?= $content['form-login']['form-check-password-action'] ?>"></a>
   
 <div
@@ -40,12 +38,14 @@
         
       <label><a href="<?= $content['form-login']['reset-href'] ?>"><?= _S ('gs--i-forgot') ?></a></label>
 
-      <label><input type="checkbox"
+      &nbsp;&nbsp;&nbsp;
+
+      <label class="e2-switch"><input type="checkbox"
         class="checkbox input-disableable"
         name="is_public_pc"
         id="is_public_pc"
         <?= $content['form-login']['public-pc?']? ' checked="checked"' : '' ?>
-      />&nbsp;<?= _S ('ff--public-computer') ?></label>
+      /><i></i> <?= _S ('ff--public-computer') ?></label>
 
       <div class="e2-login-window-button">
         <button type="submit" id="login-button" class="e2-button e2-submit-button input-disableable">

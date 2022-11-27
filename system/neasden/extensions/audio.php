@@ -45,6 +45,8 @@ class NeasdenGroup_audio implements NeasdenGroup {
       
       if ($line['class'] == 'audio') {
         @list ($filebasename, $alt) = explode (' ', $line['content'], 2);
+        $alt = trim ((string) $alt);
+        
         $this->neasden->resource_detected ($filebasename);
         if (!$alt) $alt = basename ($filebasename);
         $filename = $myconf['folder'] . $filebasename;
@@ -59,7 +61,7 @@ class NeasdenGroup_audio implements NeasdenGroup {
       }
   
       if ($line['class'] == 'audio-play') {
-        @list ($href, $alt) = explode (' ', trim ($line['class-data'][1]), 2); // usafe
+        @list ($href, $alt) = explode (' ', trim ($line['class-data'][1]), 2);
         $this->neasden->resource_detected ($href);
         if (!$alt) $alt = basename ($href);
       }

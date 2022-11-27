@@ -22,8 +22,8 @@ function e2NiceError (error) {
       'er--js-file-upload-not-supported': 'The browser does not support file upload',
       'er--js-no-files-to-upload': 'No files to upload',
       'er--js-can-upload-only-one-file': 'Only one file may be uploaded here',
-      'er--supported-only-png-jpg-gif': 'Only png, jpg, & gif images are supported',
-      'er--unsupported-file': 'Only png, jpg, gif, & svg images, mp4 & mov videos, and mp3 audio files are supported',
+      'er--supported-only-png-jpg-gif': 'Only png, wepb, jpg, & gif images are supported',
+      'er--unsupported-file': 'Only png, wepb, jpg, gif, & svg images, mp4 & mov videos, and mp3 audio files are supported',
     },
     'ru': {
       'er--js-server-error': 'Ошибка на сервере',
@@ -32,8 +32,8 @@ function e2NiceError (error) {
       'er--js-file-upload-not-supported': 'Браузер не поддерживает загрузку файлов',
       'er--js-no-files-to-upload': 'Нет файлов для загрузки',
       'er--js-can-upload-only-one-file': 'Можно загрузить только одно изображение',
-      'er--supported-only-png-jpg-gif': 'Поддерживаются только изображения png, jpg и gif',
-      'er--unsupported-file': 'Поддерживаются только изображения png, jpg, gif и svg, видео mp4 и mov и аудиофайлы mp3',
+      'er--supported-only-png-jpg-gif': 'Поддерживаются только изображения png, wepb, jpg и gif',
+      'er--unsupported-file': 'Поддерживаются только изображения png, wepb, jpg, gif и svg, видео mp4 и mov и аудиофайлы mp3',
     },
     'fr': {
       'er--js-server-error': 'Erreur sur le serveur',
@@ -42,8 +42,8 @@ function e2NiceError (error) {
       'er--js-file-upload-not-supported': 'Le navigateur ne prend pas en charge le téléchargement de fichiers',
       'er--js-no-files-to-upload': 'Aucun fichier à télécharger',
       'er--js-can-upload-only-one-file': 'Un seul fichier peut être téléchargé ici',
-      'er--supported-only-png-jpg-gif': 'Seules les images png, jpg et gif sont prises en charge',
-      'er--unsupported-file': 'Seuls les images png, jpg, gif et svg, vidéos mp4 et mov et les fichiers audio mp3 sont pris en charge',
+      'er--supported-only-png-jpg-gif': 'Seules les images png, wepb, jpg et gif sont prises en charge',
+      'er--unsupported-file': 'Seuls les images png, wepb, jpg, gif et svg, vidéos mp4 et mov et les fichiers audio mp3 sont pris en charge',
     },
     'be': {
       'er--js-server-error': 'Памылка на серверы',
@@ -52,8 +52,8 @@ function e2NiceError (error) {
       'er--js-file-upload-not-supported': 'Браўзэр не падтрымлівае загрузку файлаў',
       'er--js-no-files-to-upload': 'Няма файлаў для загрузкі',
       'er--js-can-upload-only-one-file': 'Можна загрузіць толькі адна выява',
-      'er--supported-only-png-jpg-gif': 'Падтрымлiваюцца толькi выявы png, jpg i gif',
-      'er--unsupported-file': 'Падтрымлiваюцца толькi выявы png, jpg, gif i svg, відэа mp4 і mov i аудыёфайлы mp3',
+      'er--supported-only-png-jpg-gif': 'Падтрымлiваюцца толькi выявы png, wepb, jpg i gif',
+      'er--unsupported-file': 'Падтрымлiваюцца толькi выявы png, wepb, jpg, gif i svg, відэа mp4 і mov i аудыёфайлы mp3',
     },
     'uk': {
       'er--js-server-error': 'Помилка на сервері',
@@ -62,8 +62,8 @@ function e2NiceError (error) {
       'er--js-file-upload-not-supported': 'Браузер не підтримує завантаження файлів',
       'er--js-no-files-to-upload': 'Немає файлів для завантаження',
       'er--js-can-upload-only-one-file': 'Можна завантажити лише одне зображення',
-      'er--supported-only-png-jpg-gif': 'Підтримуються лише зображення png, jpg і gif',
-      'er--unsupported-file': 'Підтримуються лише зображення png, jpg, gif і svg, відео mp4 і mov і аудіофайли mp3',
+      'er--supported-only-png-jpg-gif': 'Підтримуються лише зображення png, wepb, jpg і gif',
+      'er--unsupported-file': 'Підтримуються лише зображення png, wepb, jpg, gif і svg, відео mp4 і mov і аудіофайли mp3',
     }
   }
 

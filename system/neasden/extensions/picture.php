@@ -7,7 +7,7 @@ class NeasdenGroup_picture implements NeasdenGroup {
   function __construct ($neasden) {
     $this->neasden = $neasden;
 
-    $neasden->define_line_class ('picture', '.*\.(jpe?g|gif|png|svg)(?: +(.+))?');
+    $neasden->define_line_class ('picture', '.*\.(jpe?g|gif|png|webp|svg)(?: +(.+))?');
     $neasden->define_group ('picture', '(-picture-)(-p-)*');
   }
     
@@ -53,8 +53,8 @@ class NeasdenGroup_picture implements NeasdenGroup {
           }
         } elseif ($size = e2_getimagesize ($filename)) {
           // $size = false;
-          // sometimes it comes as false and breaks everything :-()
-          if ($size === false) throw new Exception();
+          // sometimes it comes as false and breaks everything :-(
+          if ($size === false) throw new Exception ();
           list ($width, $height) = $size;
         }
 

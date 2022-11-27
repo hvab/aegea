@@ -3,12 +3,11 @@
 
 <div class="e2-tags">
 <?php foreach ($content['tags']['each'] as $tag): ?>
-<?php if (!$tag['visible?']) continue; ?>
 <a
-  href="<?=@$tag['href']?>"
+  href="<?= @$tag['href'] ?>"
   class="e2-tag"
   style="opacity: <?= 0.3 + 0.7 * pow ($tag['weight'], 0.7) ?>"
-><?=@$tag['tag']?></a>
+><?php if (!$tag['visible?']) { ?><span class="e2-svgi e2-svgi-lock-nano"><?= _SVG ('lock-nano') ?></span> <?php } ?><?=@$tag['tag']?></a>
 <?php endforeach ?>
 </div>
 

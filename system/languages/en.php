@@ -1,4 +1,4 @@
-<?php // mui
+<?php
 
 // display_name = English
 
@@ -13,6 +13,7 @@ function e2l_load_strings () {
   'e2--default-blog-title' => 'My blog',
   'e2--default-blog-author' => 'Blog author',
   'e2--website-host' => 'blogengine.me',
+  'e2--currency-sign' => '$',
   
   // installer
   'pt--install' => 'Install Aegea',
@@ -47,6 +48,7 @@ function e2l_load_strings () {
   'gs--nth-month-of-nth-year' => '$[month.monthname] $[year]',
   'gs--nth-day-of-nth-month-of-nth-year' => '$[month.monthname.short] $[day], $[year]',
   'gs--everything' => 'All',
+  'gs--calendar' => 'Calendar',
   'gs--part-x-of-y' => 'part $[part] of $[of]',
   
   // posts
@@ -59,8 +61,6 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Error updating this post',
   'er--error-deleting-post-tag-info' => 'Error deleting this post’s tag information',
   'er--wrong-datetime-format' => 'Wrong date & time format. Must be “dd.mm.yyyy hh:mm:ss”',  
-  'er--cannot-create-thumbnail' => 'Can’t create thumbnail',
-  'er--cannot-upload' => 'Can’t upload file',
   'ff--title' => 'Title',
   'ff--text' => 'Text',
   'ff--saving' => 'Saving...',
@@ -80,9 +80,15 @@ function e2l_load_strings () {
   'gs--no-notes' => 'There are no posts.',
   'gs--will-be-published' => 'Will be published',
 
+  // uploads
+  'er--cannot-create-thumbnail' => 'Can’t create thumbnail',
+  'er--cannot-upload-file-too-big' => 'A file is too big',
+  'er--cannot-upload-no-or-too-many-files' => 'No or too many files were received by server',
+  'er--cannot-upload' => 'Can’t upload file (error $[error])',
+
   // see NiceError.php!
-  'er--supported-only-png-jpg-gif' => 'Only png, jpg, & gif images are supported',
-  'er--unsupported-file' => 'Only png, jpg, gif, & svg images, mp4 & mov videos, and mp3 audio files are supported',
+  'er--supported-only-png-jpg-gif' => 'Only png, wepb, jpg, & gif images are supported',
+  'er--unsupported-file' => 'Only png, wepb, jpg, gif, & svg images, mp4 & mov videos, and mp3 audio files are supported',
 
   'ff--gmt-offset' => 'GMT offset',
   'ff--with-dst' => '+1 in summer',
@@ -127,14 +133,15 @@ function e2l_load_strings () {
   'gs--you-are-not-subscribed' => 'Looks like you aren’t subscribed to this post’s comments',
   'gs--unsubscription-didnt-work' => 'Couldn’t unsubscribe you for unknown reason',
   'gs--post-not-found' => 'Post not found',
-  'gs--comment-too-long' => 'Comment too long',
-  'gs--comment-too-long-description' => 'You’ve submitted a very long comment, and it was not posted.',
   'gs--comment-double-post' => 'Double comment',
   'gs--comment-double-post-description' => 'You’ve submitted a comment more than once, only one was posted.',
+  'gs--comment-too-long' => 'Comment too long',
+  'gs--comment-too-long-description' => 'You’ve submitted a very long comment, and it was not posted.',
+  'gs--comment-post-not-commentable' => 'Comments disallowed',
+  'gs--comment-post-not-commentable-description' => 'You’ve submitted a comment, but comments in this post have been disallowed.',
   'gs--comment-spam-suspect' => 'Comment looks like spam',
   'gs--comment-spam-suspect-description' => 'Sorry, our robot has decided that this comment is spam, and it was not posted.',
   'gs--you-are-already-subscribed' => 'You are subscribed to comments. The link to unsubscribe is available in every mail with a new comment.',
-  'er--post-not-commentable' => 'This post cannot be commented',
   'er--name-email-text-required' => 'Name, e-mail and comment text are all required',
   'ff--notify-subscribers' => 'Notify sender and other subscribers by email',
   'gs--your-comment' => 'Your comment',
@@ -165,6 +172,8 @@ function e2l_load_strings () {
   'pt--posts-without-tags' => 'Posts without tags',
   'gs--no-tags' => 'There are no tags.',
   'gs--no-posts-without-tags' => 'There are no posts without tags.',
+  'gs--hidden' => 'Hidden',
+  'er--tag-must-have-name' => 'A tag must have a name',
   'er--cannot-rename-tag' => 'This name or URL name are already in use by another tag',
   'ff--tag-name' => 'Tag',
   'ff--tag-urlname' => 'Name in URL',
@@ -176,14 +185,16 @@ function e2l_load_strings () {
   'gs--tags-all' => 'all',
   'gs--tags' => 'Tags',
   
-  // most commented and favourites
-  'pt--most-commented' => 'Most commented$[period.periodname]',
+  // most discussed and favourites
+  'pt--most-commented' => 'Most discussed$[period.periodname]',
+  'nm--most-commented' => 'Discussed',
   'pt--most-read' => 'Popular$[period.periodname]',
   'nm--most-read' => 'Popular',
   'pt--favourites' => 'Selected',
   'nm--favourites' => 'Selected',
   'gs--no-favourites' => 'There are no selected posts.',
   'nm--read-next' => 'Next',
+  'nm--random-note' => 'Random post',
   
   // generic posts pages
   'nm--pages' => 'Pages',
@@ -200,6 +211,7 @@ function e2l_load_strings () {
   'pt--search-query-empty' => 'Search text is empty',
   'pt--search-query-too-short' => 'Search text is too short',
   'gs--found-for-query' => 'found for',
+  'gs--search' => 'Search',
   'gs--search-query-empty' => 'Search text is empty, please enter something.',
   'gs--search-query-too-short' => 'Text too short, enter at least 4 characters.',
   'gs--search-too-few-notes' => 'Search will work when more notes are published.',
@@ -250,16 +262,22 @@ function e2l_load_strings () {
   'ff--theme' => 'Theme',
   'ff--theme-how-to' => 'How to create a theme?',
   'gs--theme-preview' => 'Preview',
+  'ff--main-menu' => 'Main menu',
+  'ff--show' => 'Show',
+  'gs--after-you-publish' => '(after you publish something)',
+  'gs--main-menu-description' => 'The main menu displays your pinned tags, links to special pages chosen below, and the search box. The items can be rearranged in the menu itself',
+  'gs--how-to-pin-tags' => 'Pin individual tags using the ::svg:: button on their pages',
   'ff--posts' => 'Posts',
   'ff--respond-to-dark-mode' => 'Support Dark Mode',
   'ff--items-per-page-after' => 'per page',
-  'ff--show-view-counts' => 'Show view counts',
+  'ff--show-view-counts' => 'Show ::svg:: view counts',
   'ff--show-sharing-buttons' => 'Show social sharing buttons',
   'ff--comments' => 'Comments',
   'ff--comments-enable-by-default' => 'Allow by default in new posts',
   'ff--comments-require-social-id' => 'Require identification with a social network',
   'ff--only-for-recent-posts' => 'Only for recent posts',
   'ff--send-by-email' => 'Send by email',
+  'ff--analytics' => 'Analytics',
   'ff--yandex-metrika' => 'Yandex.Metrika',
   'ff--google-analytics' => 'Google Analytics',
   'gs--password' => 'Password',
@@ -365,7 +383,7 @@ function e2l_load_strings () {
   // rss
   'gs--posts-tagged' => 'posts tagged',
   
-  'gs--subscribe-to-blog' => 'Subscribe to this blog',
+  'gs--follow-this-blog' => 'Follow this blog',
 
   // social networks
   'sn--twitter-verb' => 'Tweet',
@@ -376,13 +394,39 @@ function e2l_load_strings () {
   'sn--whatsapp-verb' => 'Send',
   'sn--pinterest-verb' => 'Pin',
 
+  // updating
+  'pt--confused' => 'Aegea is confused',
+  'gs--downdate-explanation' => 'This server has been used with Aegea $[dr], but is running an earlier version $[rr] that may be unaware of the newer features and data formats. To protect your data, Aegea has decided to not touch anything and just stop.',  
+
+  'pt--updating' => 'Aegea is updating',
+  'gs--this-takes-seconds' => 'This usually takes several seconds.',
+
+  'pt--fix-permissions' => 'Adjust permissions',
+  'gs--fix-permissions' => 'Aegea needs to be able to write some files.',
+
+  'pt--multi-step-update' => 'Multi-step update',
+  'gs--multi-step-update-p1' => 'To complete the update to $[rr], first update to Aegea 2.10.',
+  'gs--multi-step-update-p2' => 'Aegea knows how to update from $[ur] or later but the server was used with Aegea $[dr]. To protect your data, Aegea has decided to not touch anything and just stop. If you put back the previous system, everything should work as before.',
+
+  'pt--update-cancelled' => 'Aegea has cancelled the update',
+  'gs--cannot-backup-before-update' => 'Aegea was not able to complete backup before update. To protect your data, Aegea has decided to not touch anything and just stop.',
+  'gs--dbs-version-too-old' => 'The $[dbs] version you are using is $[dbv], which is too old. Upgrade to MySQL $[minmysql] or later or MariaDB $[minmariadb] or later to use Aegea $[aegearelease].',
+  'gs--update-db-incomplete' => 'Aegea has found some data in your database, but it’s incomplete.',
+  'gs--update-db-no-data-configure-or-reinstall' => 'Your database appears to be empty. Check your database configuration. If you wanted a new blog, reinstall Aegea.',
+
   // umacros
   'um--month' => '$[month.monthname]',
   'um--month-short' => '$[month.monthname.short]',
   'um--month-g' => '$[month.monthname]',
   
+  // promo
+  'pm--main-menu' => 'In the paid version of Aegea, you configure the main menu here. It can contain pinned tags, as wall as links to selected, most discussed, and popular posts, tags, calendar, and a random post. <a href="$[url]">Learn more</a>',
+  'pm--analytics' => 'In the paid version of Aegea, you can easily connect Google Analytics and Yandex Metrika from here. <a href="$[url]">Learn more</a>',
+  'pm--secret-link' => 'In the paid version of Aegea, you can share a draft privately, say, to approve a post before publishing. <a href="$[url]">Learn more</a>',
+  'pm--scheduling' => 'In the paid version of Aegea, you can schedule a post to be published at particular time or publish it in the past. <a href="$[url]">Learn more</a>',
+
   // more strings
-  'gs--subscribe' => 'Subscribe to this blog',
+  'gs--follow' => 'Follow this blog',
   
   'gs--no-such-notes' => 'There are no posts.',
   'pt--page-not-found' => 'Page not found',
@@ -390,7 +434,7 @@ function e2l_load_strings () {
   
   'er--cannot-find-db' => 'Cannot find database',
   'er--cannot-connect-to-db' => 'Cannot connect to database',
-  'er--mysql-version-too-old' => 'MySQL version too old ($[v1], $[v2]+ needed)',
+  'er--dbs-version-too-old' => '$[dbs] version too old ($[v1], $[v2]+ needed)',
   'er--error-occurred' => 'Error occurred',
   'er--too-many-errors' => 'Too many errors',
   'gs--rss' => 'RSS',

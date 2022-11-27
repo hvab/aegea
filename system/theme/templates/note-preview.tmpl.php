@@ -4,7 +4,7 @@
 <div class="e2-draft-preview" id="e2-draft-<?= $note['id'] ?>">
 <a href="<?= $note['href'] ?>" class="e2-admin-link nu">
   <div class="e2-draft-preview-box">
-    <span class="e2-unsaved-led" style="display: none"></span>
+    <span class="e2-attention-led js-unsaved-led" style="display: none"></span>
     <div class="e2-draft-preview-content">
     <?php if ($thumb = $note['thumbs'][0] and $thumb['is-available?']) { ?>
       <img src="<?= $thumb['src']?>" width="<?= $thumb['width'] * 10/9 ?>" height="<?= $thumb['height'] * 10/9 ?>" alt="" />

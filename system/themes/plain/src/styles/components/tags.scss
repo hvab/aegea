@@ -1,0 +1,49 @@
+a.e2-tag,
+a:link.e2-tag,
+a:visited.e2-tag,
+.e2-tag a,
+.e2-tag a:link,
+.e2-tag a:visited {
+  color: var(--tagColor);
+  border-color: var(--tagUnderlineColor);
+}
+
+a:hover.e2-tag,
+a.hover.e2-tag,
+a:active.e2-tag,
+.e2-tag a:hover,
+.e2-tag a.hover,
+.e2-tag a:active {
+  color: var(--hoverColor);
+  border-color: var(--hoverUnderlineColor);
+}
+
+.e2-tags {
+  margin: 0 0 60px;
+	line-height: 28px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.e2-js-menu-reorderable-item-ghost {
+  visibility: hidden;
+}
+
+.e2-tag {
+  white-space: nowrap;
+}
+
+mark .e2-tag {
+  padding: 0 .17em;
+}
+
+.e2-tags .e2-tag {
+  margin-right: 12px;
+  margin-bottom: 12px;
+}
+
+@media #{$ShouldSmallItemsBeSparse} {
+  .e2-tags .e2-tag {
+    margin-right: 20px;
+  }
+}

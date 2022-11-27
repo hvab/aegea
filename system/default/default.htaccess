@@ -80,4 +80,3 @@ php_value date.timezone GMT
 php_value upload_max_filesize 256M
 php_value post_max_size 256M
 </IfModule>
-

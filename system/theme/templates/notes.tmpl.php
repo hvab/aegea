@@ -1,6 +1,6 @@
 <?php if ($content['class'] == 'drafts') { ?>
 <div class="e2-notes-unsaved" id="e2-notes-unsaved"><?= _S ('gs--unsaved-changes') ?></div>
-<p id="e2-unsaved-note-prototype" style="display: none"><a href="" class="e2-admin-link nu"><u></u></a><span class="e2-unsaved-led"></span></p>
+<p id="e2-unsaved-note-prototype" style="display: none"><a href="" class="e2-admin-link nu"><u></u></a><span class="e2-attention-led js-unsaved-led"></span></p>
 <?php } ?>
 
 <?php if (@$content['pages']['timeline?']) _T ('pages-later') ?>
@@ -20,6 +20,12 @@
 <?php _T ('note') ?>
 <?php } ?>
 
+<?php } ?>
+
+<?php if (@$content['secret-link-promo']) { ?>
+<div class="e2-promo-box">
+  <span class="e2-paid e2-paid-hanging"><?= _S ('e2--currency-sign') ?></span> <?= $content['secret-link-promo'] ?>
+</div>
 <?php } ?>
 
 <?php if (@$content['pages']['timeline?']) _T ('pages-earlier') ?>

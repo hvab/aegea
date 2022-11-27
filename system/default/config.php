@@ -5,6 +5,36 @@
 // to empty the caches at .../system/underhood/
 
 
+
+// PATHS
+
+// path to user directory relative to index.php,
+// may be overwritten by instance config
+// use %USERKEY% for automatching subfolder to request string
+$_config['path_user'] = 'user/';
+
+// force using these user directories for these domain names
+$_config['path_user_rewrites'] = [];
+
+// path to media root directory, relative to index.php
+// earlier done with superconfig’s 'store_files_by_users'
+$_config['path_media'] = '';
+
+
+
+// DB
+
+// to be configured in instance or user settings, must be a db_params array
+$_config['db'] = null;
+
+// database table prefix for storing multiple blogs in one database
+$_config['db_table_prefix'] = 'e2Blog';
+
+// database table subset for storing multiple blogs in one table set
+$_config['db_table_subset'] = 1;
+
+
+
 // UI
 
 // years range separator for the copyright line, if different from default
@@ -15,9 +45,6 @@ $_config['hot_period'] = 'month'; /* 'day', 'week', 'month', 'year', 'ever' */
 
 // period for the most read (popular) posts
 $_config['popular_period'] = 'ever'; /* 'day', 'week', 'month', 'year', 'ever' */
-
-// default text formatter (make sure you know why you change it)
-$_config['default_formatter'] = 'neasden'; /* 'raw', 'calliope', 'neasden' */
 
 
 
@@ -39,6 +66,9 @@ $_config['max_image_width'] = 2560; /* pixels */
 // redirect to canonical urls when synonims are used
 $_config['force_canonical_urls'] = true;
   
+// use https protocol in all generated hrefs
+$_config['force_https'] = false;
+  
 // redirect to this domain name (will work only if force_canonical_urls is on)
 $_config['preferred_domain_name'] = null; /* null or string */
   
@@ -50,6 +80,28 @@ $_config['try_redirect_to_all'] = false;
   
 
 
+// ENABLED FEATURES
+
+// to be overwritten by instance if needed
+$_config['read_only'] = false;
+
+// to be overwritten by instance if needed
+$_config['allow_installer'] = true;
+
+// to be overwritten by instance if needed
+$_config['allow_update'] = true;
+
+// to be overwritten by instance if needed
+$_config['allow_db_config'] = true;
+
+// to be overwritten by instance if needed
+$_config['allow_themes_preview'] = true;
+
+// to be overwritten by instance if needed
+$_config['allow_underhood_access'] = true;
+
+
+
 // MISC
 
 // sender address for outgoing mail (if ends with @, domain name will be added)
@@ -57,7 +109,7 @@ $_config['mail_from'] = 'blog@';
   
 // use 'index, follow' everywhere (otherwise will be only where necessary)
 $_config['index_follow_everything'] = false;
-  
+
 // accept holborn notifications
 $_config['holborn'] = false;
   
@@ -73,14 +125,11 @@ $_config['files_total_size_limit'] = 0;
 // scale images bigger than this; 0 to disable
 $_config['fit_uploaded_images'] = 2560; /* pixels */
 
-// database table prefix for storing multiple blogs in one database
-$_config['db_table_prefix'] = 'e2Blog';
-
-// database table subset for storing multiple blogs in one table set
-$_config['db_table_subset'] = 1;
-
 // by default, Aegea reindexes databases for search on switch
 $_config['retain_search_indexes_on_db_switch'] = false;
+
+// influence password recovery UI
+$_config['user_has_access_to_filesystem'] = true;
 
 // url to ping when posts become available
 $_config['broadcast_url'] = 'http://blogengine.ru/blogs/@notify';
@@ -96,6 +145,9 @@ $_config['autoreplace_for_aliases'] = [];
 
 // url to check lincense information
 $_config['license_url'] = 'http://blogengine.ru/licenses/?domain=';
+
+// url to check lincense information
+$_config['paid_features_url'] = 'http://blogengine.ru/features/';
 
 
 
@@ -187,24 +239,27 @@ $_config['display_stat'] = 0; /* 0 - no; 1 - when logged in; 2 - always */
 $_config['show_call_stack'] = 0; /* 0 - no; 1 - when logged in; 2 - always */
 
 // store backtrace in backtrace.psa?
-$_config['store_backtrace'] = 0;
+$_config['store_backtrace'] = false;
   
 // make ajax slower?
 $_config['dev_verbose'] = 0; /* 0 - no; 1 - when logged in; 2 - always */
   
 // serve all XML content as plain text
-$_config['dev_xml_as_text'] = 0;
+$_config['dev_xml_as_text'] = false;
+  
+// write emails to files instead of sending them
+$_config['dev_mail_debug'] = false;
   
 // dump the CTree to a php file
-$_config['dev_dump_ctree'] = 0;
+$_config['dev_dump_ctree'] = false;
   
 // make ajax slower?
-$_config['dev_slow_ajax'] = 0;
+$_config['dev_slow_ajax'] = false;
   
-// break thing randomly?
+// probability of DB being inaccessible for no reasor (0...1)
 $_config['dev_chaos'] = 0;
   
-// make ajax slower?
+// don’t die if using lower version code on higher version instance
 $_config['dev_ignore_version_mismatch'] = 0;
   
 // output rose debug info
@@ -220,6 +275,6 @@ $_config['fitter_ignore_default_constraints'] = 0;
 $_config['fitter_force_layout'] = false;
 $_config['fitter_force_seed'] = false;
 
- 
+
 
 ?>

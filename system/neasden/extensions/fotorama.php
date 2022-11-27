@@ -28,7 +28,7 @@ class NeasdenGroup_fotorama implements NeasdenGroup {
       if ($line['class'] == 'picture') {
     
         list ($filebasename, $alt) = explode (' ', $line['content'].' ', 2);
-        $alt = trim ($alt); // usafe
+        $alt = trim ((string) $alt);
         
         $this->neasden->resource_detected ($filebasename);
         

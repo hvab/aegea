@@ -13,6 +13,7 @@ function e2l_load_strings () {
   'e2--default-blog-title' => 'Мій блог',
   'e2--default-blog-author' => 'Автор блогу',
   'e2--website-host' => 'blogengine.ru',
+  'e2--currency-sign' => '₴',
   
   // installer
   'pt--install' => 'Встановлення Егеї',
@@ -47,6 +48,7 @@ function e2l_load_strings () {
   'gs--nth-month-of-nth-year' => '$[month.monthname] $[year]',
   'gs--nth-day-of-nth-month-of-nth-year' => '$[day] $[month.monthname.genitive] $[year]',
   'gs--everything' => 'Все',
+  'gs--calendar' => 'Календар',
   'gs--part-x-of-y' => 'частина $[part] з $[of]',
   
   // posts
@@ -59,8 +61,6 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Не вдалося змінити допис',
   'er--error-deleting-post-tag-info' => 'Не вдалося видалити дані про теги допису',
   'er--wrong-datetime-format' => 'Неправильний формат дати й часу. Має бути: «ДД.ММ.РРРР ГГ:ХХ:СС»',
-  'er--cannot-create-thumbnail' => 'Не вдалося створити ескіз зображення',
-  'er--cannot-upload' => 'Не вдалося завантажити файл',
   'ff--title' => 'Назва',
   'ff--text' => 'Текст',
   'ff--saving' => 'Збереження...',
@@ -80,9 +80,15 @@ function e2l_load_strings () {
   'gs--no-notes' => 'Дописів немає.',
   'gs--will-be-published' => 'Опубліковуватиметься',
 
+  // uploads
+  'er--cannot-create-thumbnail' => 'Не вдалося створити ескіз зображення',
+  'er--cannot-upload-file-too-big' => 'Файл занадто великий',
+  'er--cannot-upload-no-or-too-many-files' => 'Не прийшло жодного чи занадто багато файлів',
+  'er--cannot-upload' => 'Не вдалося завантажити файл (помилка $[error])',
+
   // see NiceError.php!
-  'er--supported-only-png-jpg-gif' => 'Підтримуються лише зображення png, jpg і gif',
-  'er--unsupported-file' => 'Підтримуються лише зображення png, jpg, gif і svg, відео mp4 і mov і аудіофайли mp3',
+  'er--supported-only-png-jpg-gif' => 'Підтримуються лише зображення png, wepb, jpg і gif',
+  'er--unsupported-file' => 'Підтримуються лише зображення png, wepb, jpg, gif і svg, відео mp4 і mov і аудіофайли mp3',
 
   'ff--gmt-offset' => 'Різниця з Гринвічем',
   'ff--with-dst' => '+1 влітку',
@@ -127,14 +133,15 @@ function e2l_load_strings () {
   'gs--you-are-no-longer-subscribed' => 'Ви більше не підписані на коментарі до цього допису',
   'gs--unsubscription-didnt-work' => 'Чомусь не вдалося скасувати підписку',
   'gs--post-not-found' => 'Допису не знайдено',
-  'gs--comment-too-long' => 'Задовгий коментар',
-  'gs--comment-too-long-description' => 'Ваш коментар не збережено, оскільки він задовгий.',
   'gs--comment-double-post' => 'Повторний коментар',
   'gs--comment-double-post-description' => 'Ви надіслали цей коментар двічі, тому збережено лише один.',
+  'gs--comment-too-long' => 'Задовгий коментар',
+  'gs--comment-too-long-description' => 'Ваш коментар не збережено, оскільки він задовгий.',
+  'gs--comment-post-not-commentable' => 'Коментарі заборонені',
+  'gs--comment-post-not-commentable-description' => 'Ви надіслали коментар, але коментарі до цієї допису були заборонені.',
   'gs--comment-spam-suspect' => 'Коментар схожий на спам',
   'gs--comment-spam-suspect-description' => 'На жаль, коментар не надіслано, оскільки робот вирішив, що це спам.',
   'gs--you-are-already-subscribed' => 'Ви вже підписані на коментарі. Ви можете будь-коли скасувати підписку, перейшовши за посиланням у листі про коментар.',
-  'er--post-not-commentable' => 'Цей допис не можна коментувати',
   'er--name-email-text-required' => 'Імʼя, ел. адреса та текст коментаря обовʼязкові',
   'ff--notify-subscribers' => 'Повідомити коментатора й інших підписників',
   'gs--your-comment' => 'Ваш коментар',
@@ -165,6 +172,8 @@ function e2l_load_strings () {
   'pt--posts-without-tags' => 'Дописи без тегів',
   'gs--no-tags' => 'Тегів немає.',
   'gs--no-posts-without-tags' => 'Немає дописів без тегів.',
+  'gs--hidden' => 'Прихований',
+  'er--tag-must-have-name' => 'У тега має бути назва',
   'er--cannot-rename-tag' => 'Така назва чи посилання вже використовуються з іншим тегом',
   'ff--tag-name' => 'Тег',
   'ff--tag-urlname' => 'В адресному рядку',
@@ -176,14 +185,16 @@ function e2l_load_strings () {
   'gs--tags-all' => 'усі',
   'gs--tags' => 'Теги',
   
-  // most commented and favourites
+  // most discussed and favourites
   'pt--most-commented' => 'Найбільш обговорювані$[period.periodname]',
+  'nm--most-commented' => 'Обговорюване',
   'pt--most-read' => 'Популярне$[period.periodname]',
   'nm--most-read' => 'Популярне',
   'pt--favourites' => 'Обране',
   'nm--favourites' => 'Обране',
   'gs--no-favourites' => 'Нічого не обрано.',
   'nm--read-next' => 'Далі',
+  'nm--random-note' => 'Випадковий допис',
   
   // generic posts pages
   'nm--pages' => 'Сторінки',
@@ -200,6 +211,7 @@ function e2l_load_strings () {
   'pt--search-query-empty' => 'Напишіть що-небудь',
   'pt--search-query-too-short' => 'Запит закороткий',
   'gs--found-for-query' => 'за запитом',
+  'gs--search' => 'Пошук',
   'gs--search-query-empty' => 'Напишіть що-небудь',
   'gs--search-query-too-short' => 'Закороткий запит, напишіть хоча б 4 літери.',
   'gs--search-too-few-notes' => 'Пошук запрацює, коли буде більше дописів.',
@@ -250,18 +262,24 @@ function e2l_load_strings () {
   'ff--theme' => 'Оформлення',
   'ff--theme-how-to' => 'Як створити свою тему?',
   'gs--theme-preview' => 'Перегляд',
+  'ff--main-menu' => 'Головне меню',
+  'ff--show' => 'Показувати',
+  'gs--after-you-publish' => '(після публікації дописів)',
+  'gs--main-menu-description' => 'У меню відображаються закріплені теги, посилання на спеціальні сторінки, вибрані нижче, та пошук. Пункти меню можна розставити у потрібному порядку прямо у ньому',
+  'gs--how-to-pin-tags' => 'Закріплюйте окремі теги кнопкою ::svg:: на їхніх сторінках',
   'ff--posts' => 'Дописи',
   'ff--respond-to-dark-mode' => 'Підтримувати Темний режим',
   'ff--items-per-page-after' => 'на сторінку',
-  'ff--show-view-counts' => 'Показувати лічильники переглядів',
+  'ff--show-view-counts' => 'Показувати ::svg:: лічильники переглядів',
   'ff--show-sharing-buttons' => 'Показувати кнопки поширення в соцмережах',
   'ff--comments' => 'Коментарі',
   'ff--comments-enable-by-default' => 'Дозволяти за замовчуванням в нових дописах',
   'ff--comments-require-social-id' => 'Тільки при вході через соцмережу',
   'ff--only-for-recent-posts' => 'Тільки до нових дописів',
   'ff--send-by-email' => 'Надсилати ел. поштою',
+  'ff--analytics' => 'Аналітика',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
-  'ff--google-analytics' => 'Гугль-Аналитика',
+  'ff--google-analytics' => 'Гугль-аналітика',
   'gs--password' => 'Пароль',
   'gs--db-connection' => 'З’єднання з базою',
   'gs--get-backup' => 'Завантажити останній бекап',
@@ -365,7 +383,7 @@ function e2l_load_strings () {
   // rss
   'gs--posts-tagged' => 'дописи з тегом',
 
-  'gs--subscribe-to-blog' => 'Підписатися на блог',
+  'gs--follow-this-blog' => 'Підписатися на блог',
   
   // social networks
   'sn--twitter-verb' => 'Твітнути',
@@ -376,13 +394,39 @@ function e2l_load_strings () {
   'sn--whatsapp-verb' => 'Надіслати',
   'sn--pinterest-verb' => 'Запінити',
 
+  // updating
+  'pt--confused' => 'Незрозуміла ситуація',
+  'gs--downdate-explanation' => 'Раніше на цьому сервері використовувалася Егея $[dr], але зараз працює стара версія $[rr], яка може бути не в курсі нових функцій і форматів даних. Щоб не втратити ваші дані, Егея вирішила нічого не чіпати і просто зупинитися.',  
+
+  'pt--updating' => 'Егея оновлюється',
+  'gs--this-takes-seconds' => 'Зазвичай це триває кілька секунд.',
+
+  'pt--fix-permissions' => 'Встановити права',
+  'gs--fix-permissions' => 'Егеє потрібно записати деякі файли.',
+
+  'pt--multi-step-update' => 'Оновлення у декілька прийомів',
+  'gs--multi-step-update-p1' => 'Щоб оновитися до Егеї $[rr], спочатку оновіться до Егеї 2.10.',
+  'gs--multi-step-update-p2' => 'Егея вміє оновлюватися з $[ur] або пізніше, але на цьому сервері використовувалася Егея $[dr]. Щоб не втратити ваші дані, Егея вирішила нічого не чіпати і просто зупинитися. Якщо ви повернете попередню систему, що має продовжити працювати як раніше.',
+
+  'pt--update-cancelled' => 'Оновлення не виконано',
+  'gs--cannot-backup-before-update' => 'Егея не спромоглася зробити бекап перед оновленням. Щоб не втратити ваші дані, Егея вирішила нічого не чіпати і просто зупинитися.',
+  'gs--dbs-version-too-old' => 'Ви використовуєте стару версію $[dbs], $[dbv]. Оновитеся до MySQL $[minmysql] або вище або MariaDB $[minmariadb] або вище, щоб використовувати Егею $[aegearelease].',  
+  'gs--update-db-incomplete' => 'У вашій базі є дані, але вони неповні.',
+  'gs--db-no-data-configure-or-reinstall' => 'У базі даних порожньо. Перевірте конфігурацію бази. Якщо ви хотіли створити новий блог, перевстановіть Егею.',
+
   // umacros
   'um--month' => '$[month.monthname]',
   'um--month-short' => '$[month.monthname.short]',
   'um--month-g' => '$[month.monthname.genitive]',
   
+  // promo
+  'pm--main-menu' => 'У платній версії Егеї тут налаштовується головне меню. У ньому показуються закріплені теги, а також посилання на обране, обговорюване, популярне, теги, календар і випадкову замітку. <a href="$[url]">Дізнатися</a>',
+  'pm--analytics' => 'У платній версії Егеї тут підключається Гугль-аналітика і Яндекс.Метрика. <a href="$[url]">Дізнатися</a>',
+  'pm--secret-link' => 'У платній версії Егеї ви можете дати секретне посилання на чернетку, наприклад, щоб узгодити допис перед публікацією. <a href="$[url]">Дізнатися</a>',
+  'pm--scheduling' => 'У платній версії Егеї ви можете запланувати автоматичну публікацію в певний час або опублікувати заднім числом <a href="$[url]">Дізнатися</a>',
+
   // more strings
-  'gs--subscribe' => 'Підписка на блозі',
+  'gs--follow' => 'Підписка на блозі',
 
   'gs--no-such-notes' => 'Дописів немає.',
   'pt--page-not-found' => 'Сторінку не знайдено',
@@ -390,7 +434,7 @@ function e2l_load_strings () {
   
   'er--cannot-find-db' => 'Не можу знайти базу даних',
   'er--cannot-connect-to-db' => 'Не можу зʼєднатися з базою даних',
-  'er--mysql-version-too-old' => 'Версія бази даних занадто стара ($[v1], потрібна $[v2]+)',
+  'er--dbs-version-too-old' => 'Версія $[dbs] занадто стара ($[v1], потрібна $[v2]+)',
   'er--error-occurred' => 'Сталася помилка',
   'er--too-many-errors' => 'Забагато помилок',
   'gs--rss' => 'РСС',

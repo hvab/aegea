@@ -1,5 +1,3 @@
-<?php // mui ?>
-
 <form
   action="<?= @$content['form-tag-delete']['form-action'] ?>"
   method="post"
@@ -15,7 +13,7 @@
   type="hidden"
   id="token"
   name="token"
-  value="<?= @$content['form-tag-delete']['.token'] ?>"
+  value="<?= $content['sign-in']['token'] ?>"
 />
 
 

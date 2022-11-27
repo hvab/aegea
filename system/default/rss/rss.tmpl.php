@@ -5,7 +5,7 @@
 
 <channel>
 
-<title><?= htmlspecialchars ($content['title'], ENT_NOQUOTES, HSC_ENC); ?></title>
+<title><?= htmlspecialchars ($content['title'], ENT_NOQUOTES, 'UTF-8'); ?></title>
 <link><?= $content['home_page_url'] ?></link>
 <description><?= $content['_rss_description'] ?></description>
 <author><?= $content['author']['name'] ?></author>
@@ -23,7 +23,7 @@
 
 <?php foreach ($content['items'] as $item) { ?>
 <item>
-<title><?= htmlspecialchars ($item['title'], ENT_NOQUOTES, HSC_ENC); ?></title>
+<title><?= htmlspecialchars ($item['title'], ENT_NOQUOTES, 'UTF-8'); ?></title>
 <guid isPermaLink="<?= $item['_rss_guid_is_permalink'] ?>"><?= $item['_rss_guid'] ?></guid>
 <link><?= $item['url'] ?></link>
 <pubDate><?= $item['_date_published_rfc2822'] ?></pubDate>
@@ -40,7 +40,7 @@
 <?php if (array_key_exists ('author', $item)) { ?>
 &lt;p&gt;&lt;a href="<?= $item['author']['url'] ?>"&gt;<?= $item['author']['name'] ?>&lt;/a&gt;:&lt;/p&gt;
 <?php } ?>
-<?= htmlspecialchars ($item['content_html'], ENT_NOQUOTES, HSC_ENC) ?>
+<?= htmlspecialchars ($item['content_html'], ENT_NOQUOTES, 'UTF-8') ?>
 </description>
 </item>
 

@@ -10,23 +10,15 @@
 <style type="text/css">
 
   html, body { height: 100%; margin: 0; padding: 0 }
+  body { padding: 20px }
   pre { font-size: 14px; line-height: 18px }
-  .e2-logo-svg { width: 32px; height: 32px; fill: #ccc }
 
   /* Next lines must be the same as in e2-unavailable.scss */
+  .e2-logo-svg { width: 32px; height: 32px; fill: #f8c850; color: #f8c850; }
   .e2-unavailable { display: table; width: 100%; height: 100% }
   .e2-unavailable>div { display: table-cell; width: 100%; vertical-align: middle }
+  .e2-heading .e2-logo-svg { width: 80px; height: 80px; margin: 0 0 1em 0 }
   .e2-unavailable .e2-logo-svg { width: 160px; height: 160px; margin: auto }
-
-  .e2-logo-svg {
-    animation-duration: .67s; animation-fill-mode: both; animation-timing-function: ease-out;
-    animation-name: bounceIn;
-  }
-
-  @keyframes bounceIn {
-    0% { opacity: 0;transform: scale(.3); }
-    100% { transform: scale(1);}
-  }
 
 </style>
 </head>

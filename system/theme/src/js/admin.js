@@ -14,6 +14,7 @@ import e2UploadFile from './e2-modules/e2UploadFile'
 import initTextWithFileUpload from './e2-modules/text-with-file-upload'
 import e2NiceError from './e2-modules/e2NiceError'
 import e2CanUploadThisFile from './e2-modules/e2CanUploadThisFile'
+import initSortable from './e2-modules/sortable'
 
 /* First init modules */
 initLocalCopies()
@@ -24,6 +25,7 @@ initTextWithFileUpload()
 initFormNotePublish()
 initFormPreferences()
 initFormTag()
+initSortable()
 
 /* Second init obsolete functions */
 function initObsoleteFunction () {
@@ -328,8 +330,8 @@ function initObsoleteFunction () {
     if (!isLocalStorageAvailable || !document.e2.localCopies) return
 
     const $draftsLink = $('#e2-drafts-item')
-    const $draftsUnsavedLed = $draftsLink.find('.e2-unsaved-led')
-    const $newNoteUnsavedLed = $('#e2-new-note-item .e2-unsaved-led')
+    const $draftsUnsavedLed = $draftsLink.find('.js-unsaved-led')
+    const $newNoteUnsavedLed = $('#e2-new-note-item .js-unsaved-led')
     const $notesUnsaved = $('#e2-notes-unsaved')
     const $formNote = $('#form-note')
 
@@ -365,7 +367,7 @@ function initObsoleteFunction () {
       // show indicators near the drafts if they have local copies
       for (const key in localCopiesList) {
         if (localCopiesList[key].isPublished === 'false') {
-          $('#e2-draft-' + key + ' .e2-unsaved-led').show()
+          $('#e2-draft-' + key + ' .js-unsaved-led').show()
           delete localCopiesList[key]
         }
       }
@@ -433,7 +435,7 @@ function initAllAdminItems () {
 
     e2Ajax({
       url: $link.attr('href'),
-      data: 'result=ajaxresult',
+      data: 'token=' + $link.data('e2-js-action-token') + '&result=ajaxresult',
       success: function (response) {
         if (typeof response.data === 'undefined' || typeof response.data['flag-now-on'] === 'undefined') {
           e2NiceError({

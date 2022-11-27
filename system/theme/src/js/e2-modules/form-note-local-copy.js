@@ -8,7 +8,7 @@ function initFormNoteLocalCopy () {
   const $noteId = $('#note-id')
   const $isNotePublished = $('#is-note-published')
   const $liveSaveButon = $('#livesave-button')
-  const $copyIndicator = $('#livesave-button + .e2-unsaved-led')
+  const $copyIndicator = $('#livesave-button + .js-unsaved-led')
   const $title = $('#title')
   const $text = $('#text')
   const $tags = $('#tags')

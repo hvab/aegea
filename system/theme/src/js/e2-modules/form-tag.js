@@ -26,12 +26,14 @@ function initFormTag () {
   updateSubmittability()
 
   function updateSubmittability () {
-    const shouldBeDisabled = /^ *$/.test($('#tag').val()) || /^ *$/.test($('#urlname').val())
+    const shouldBeDisabled = /^(\.|\s)*$/.test($('#tag').val()) || /^ *$/.test($('#urlname').val())
 
     if (shouldBeDisabled) {
       $submitButton.prop('disabled', true)
+      $submitButton.hide().show(0) // force repaint on stupid safari
     } else {
       $submitButton.prop('disabled', false)
+      $submitButton.hide().show(0) // force repaint on stupid safari
     }
   }
 }

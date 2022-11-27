@@ -1,6 +1,6 @@
 <?php
 
-global $settings, $full_blog_url, $_lang, $_template;
+global $settings, $_lang, $_config;
 
 return array (
 
@@ -50,7 +50,7 @@ return array (
     ),
  ),
     
-  'library' => SYSTEM_LIBRARY_FOLDER,
+  'library' => SYSTEM_DIR . LIBRARY_DIRNAME,
   
   'language' => $_lang,
   
@@ -64,7 +64,7 @@ return array (
   'html.code.wrap' => array ('<pre class="e2-text-code"><code class="%s">', '</code></pre>'),  
   'html.code.highlightjs' => true,
 
-  'html.img.prefix' => $full_blog_url .'/'. PICTURES_FOLDER,
+  'html.img.prefix' => AeEnv::$base_url . PICTURES_DIRNAME,
   'html.img.detect' => true,
 
   'groups.on' => true,
@@ -75,35 +75,35 @@ return array (
   'groups.generic-css-class' => 'e2-text-generic-object',
   'groups.classes' => array (
     'picture' => array (
-      'src-prefix' => $full_blog_url .'/'. PICTURES_FOLDER,
-      'folder' => MEDIA_ROOT_FOLDER . PICTURES_FOLDER,
+      'src-prefix' => AeEnv::$base_url . PICTURES_DIRNAME,
+      'folder' => $_config['path_media'] . PICTURES_DIRNAME,
       'css-class' => 'e2-text-picture', 
-      'max-width' => $_template['max_image_width'],
+      'max-width' => $_config['max_image_width'],
     ),
     'video' => array (
-      'src-prefix' => $full_blog_url .'/'. VIDEO_FOLDER,
-      'folder' => MEDIA_ROOT_FOLDER . VIDEO_FOLDER,
+      'src-prefix' => AeEnv::$base_url . VIDEO_DIRNAME,
+      'folder' => $_config['path_media'] . VIDEO_DIRNAME,
       'css-class' => 'e2-text-video', 
-      'max-width' => $_template['max_image_width'],
+      'max-width' => $_config['max_image_width'],
     ),
     'fotorama' => array (
-      'src-prefix' => $full_blog_url .'/'. PICTURES_FOLDER,
-      'folder' => MEDIA_ROOT_FOLDER . PICTURES_FOLDER,
+      'src-prefix' => AeEnv::$base_url . PICTURES_DIRNAME,
+      'folder' => $_config['path_media'] . PICTURES_DIRNAME,
       'css-class' => 'e2-text-picture',
-      'max-width' => $_template['max_image_width'],
+      'max-width' => $_config['max_image_width'],
     ),
     'table' => array (
       'css-class' => 'e2-text-table',
     ),
     'onlinevideo' => array (
       'css-class' => 'e2-text-video',
-      'max-width' => $_template['max_image_width'],
+      'max-width' => $_config['max_image_width'],
       'ratio' => 16/9,
     ),
     'audio' => array (
       'css-class' => 'e2-text-audio',
-      'src-prefix' => $full_blog_url .'/'. AUDIO_FOLDER,
-      'folder' => MEDIA_ROOT_FOLDER . AUDIO_FOLDER,
+      'src-prefix' => AeEnv::$base_url . AUDIO_DIRNAME,
+      'folder' => $_config['path_media'] . AUDIO_DIRNAME,
     ),
     'tweet' => array (
       'css-class' => 'e2-text-generic-object',

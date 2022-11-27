@@ -13,6 +13,7 @@ function e2l_load_strings () {
   'e2--default-blog-title' => 'Мой блог',
   'e2--default-blog-author' => 'Автор блога',
   'e2--website-host' => 'blogengine.ru',
+  'e2--currency-sign' => '₽',
   
   // installer
   'pt--install' => 'Установка Эгеи',
@@ -47,6 +48,7 @@ function e2l_load_strings () {
   'gs--nth-month-of-nth-year' => '$[month.monthname] $[year]',
   'gs--nth-day-of-nth-month-of-nth-year' => '$[day] $[month.monthname.genitive] $[year]',
   'gs--everything' => 'Всё',
+  'gs--calendar' => 'Календарь',
   'gs--part-x-of-y' => 'часть $[part] из $[of]',
   
   // posts
@@ -59,8 +61,6 @@ function e2l_load_strings () {
   'er--error-updating-post' => 'Ошибка при изменении заметки',
   'er--error-deleting-post-tag-info' => 'Ошибка при удалении данных о тегах заметки',
   'er--wrong-datetime-format' => 'Неправильный формат даты-времени. Должен быть: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',  
-  'er--cannot-create-thumbnail' => 'Не удалось создать уменьшенное изображение',
-  'er--cannot-upload' => 'Не удалось загрузить файл',
   'ff--title' => 'Название',
   'ff--text' => 'Текст',
   'ff--saving' => 'Сохранение...',
@@ -80,9 +80,15 @@ function e2l_load_strings () {
   'gs--no-notes' => 'Заметок нет.',
   'gs--will-be-published' => 'Опубликуется',
 
+  // uploads
+  'er--cannot-create-thumbnail' => 'Не удалось создать уменьшенное изображение',
+  'er--cannot-upload-file-too-big' => 'Файл слишком большой',
+  'er--cannot-upload-no-or-too-many-files' => 'Не пришло ни одного или слишком много файлов',
+  'er--cannot-upload' => 'Не удалось загрузить файл (ошибка $[error])',
+
   // see NiceError.php!
-  'er--supported-only-png-jpg-gif' => 'Поддерживаются только изображения png, jpg и gif',
-  'er--unsupported-file' => 'Поддерживаются только изображения png, jpg, gif и svg, видео mp4 и mov и аудиофайлы mp3',
+  'er--supported-only-png-jpg-gif' => 'Поддерживаются только изображения png, wepb, jpg и gif',
+  'er--unsupported-file' => 'Поддерживаются только изображения png, wepb, jpg, gif и svg, видео mp4 и mov и аудиофайлы mp3',
 
   'ff--gmt-offset' => 'Разница с Гринвичем',
   'ff--with-dst' => '+1 летом',
@@ -127,14 +133,15 @@ function e2l_load_strings () {
   'gs--you-are-no-longer-subscribed' => 'Вы больше не подписаны на комментарии к заметке',
   'gs--unsubscription-didnt-work' => 'Почему-то отписка не сработала',          
   'gs--post-not-found' => 'Заметка не найдена',
-  'gs--comment-too-long' => 'Слишком длинный комментарий',
-  'gs--comment-too-long-description' => 'Вы отправили слишком длинный комментарий, поэтому он не был сохранён.',
   'gs--comment-double-post' => 'Повторный комментарий',
   'gs--comment-double-post-description' => 'Вы отправили комментарий дважды, сохранён был только один.',
+  'gs--comment-too-long' => 'Слишком длинный комментарий',
+  'gs--comment-too-long-description' => 'Вы отправили слишком длинный комментарий, поэтому он не был сохранён.',
+  'gs--comment-post-not-commentable' => 'Комментарии закрыты',
+  'gs--comment-post-not-commentable-description' => 'Вы отправили комментарий, но комментарии к этой заметке были закрыты.',
   'gs--comment-spam-suspect' => 'Комментарий похож на спам',
   'gs--comment-spam-suspect-description' => 'Простите, но робот решил, что это спам, поэтому комментарий не был отправлен.',
   'gs--you-are-already-subscribed' => 'Вы подписаны на комментарии. Ссылка для отписки приходит в каждом письме с новым комментарием.',
-  'er--post-not-commentable' => 'Эту заметку нельзя комментировать',
   'er--name-email-text-required' => 'И имя, и эл. адрес, и текст комментария обязательны',
   'ff--notify-subscribers' => 'Отправить по почте комментатору и другим подписчикам',
   'gs--your-comment' => 'Ваш комментарий',
@@ -165,6 +172,8 @@ function e2l_load_strings () {
   'pt--posts-without-tags' => 'Заметки без тегов',
   'gs--no-tags' => 'Тегов нет.',
   'gs--no-posts-without-tags' => 'Заметок без тегов нет.',
+  'gs--hidden' => 'Скрытый',
+  'er--tag-must-have-name' => 'У тега должно быть название',
   'er--cannot-rename-tag' => 'Такое имя или вид в адресной строке уже используются другим тегом',
   'ff--tag-name' => 'Тег',
   'ff--tag-urlname' => 'В адресной строке',
@@ -176,14 +185,16 @@ function e2l_load_strings () {
   'gs--tags-all' => 'все',
   'gs--tags' => 'Теги',
   
-  // most commented and favourites
-  'pt--most-commented' => 'Самые комментируемые$[period.periodname]',
+  // most discussed and favourites
+  'pt--most-commented' => 'Самые обсуждаемые$[period.periodname]',
+  'nm--most-commented' => 'Обсуждаемое',
   'pt--most-read' => 'Популярное$[period.periodname]',
   'nm--most-read' => 'Популярное',
   'pt--favourites' => 'Избранное',
   'nm--favourites' => 'Избранное',
   'gs--no-favourites' => 'Избранного нет.',
   'nm--read-next' => 'Дальше',
+  'nm--random-note' => 'Случайная заметка',
   
   // generic posts pages
   'nm--pages' => 'Страницы',
@@ -200,6 +211,7 @@ function e2l_load_strings () {
   'pt--search-query-empty' => 'Текст для поиска пуст',
   'pt--search-query-too-short' => 'Слишком короткий текст',
   'gs--found-for-query' => 'по запросу',
+  'gs--search' => 'Поиск',
   'gs--search-query-empty' => 'Текст для поиска пуст, напишите что-нибудь',
   'gs--search-query-too-short' => 'Слишком короткий текст, напишите хотя бы 4 буквы.',
   'gs--search-too-few-notes' => 'Поиск заработает, когда будет больше заметок.',
@@ -250,16 +262,22 @@ function e2l_load_strings () {
   'ff--theme' => 'Тема',
   'ff--theme-how-to' => 'Как создать свою тему?',
   'gs--theme-preview' => 'Предпросмотр',
+  'ff--main-menu' => 'Главное меню',
+  'ff--show' => 'Показывать',
+  'gs--after-you-publish' => '(после публикации заметок)',
+  'gs--main-menu-description' => 'В меню показываются закреплённые теги, ссылки на специальные страницы, выбранные ниже, и поиск. Пункты меню можно расставить в нужном порядке прямо в нём',
+  'gs--how-to-pin-tags' => 'Закрепляйте отдельные теги кнопой ::svg:: на их страницах',
   'ff--posts' => 'Заметки',
   'ff--respond-to-dark-mode' => 'Поддерживать Тёмный режим',
-  'ff--items-per-page-after' => 'на странице',
-  'ff--show-view-counts' => 'Показывать счётчики просмотров',
+  'ff--items-per-page-after' => 'на странице',
+  'ff--show-view-counts' => 'Показывать ::svg:: счётчики просмотров',
   'ff--show-sharing-buttons' => 'Показывать социокнопки',
   'ff--comments' => 'Комментарии',
-  'ff--comments-enable-by-default' => 'Разрешать по умолчанию в новых заметках',
-  'ff--comments-require-social-id' => 'Только при входе через соцсеть',
-  'ff--only-for-recent-posts' => 'Только к свежим заметкам',
-  'ff--send-by-email' => 'Присылать по почте',
+  'ff--comments-enable-by-default' => 'Разрешать по умолчанию в новых заметках',
+  'ff--comments-require-social-id' => 'Только при входе через соцсеть',
+  'ff--only-for-recent-posts' => 'Только к свежим заметкам',
+  'ff--send-by-email' => 'Присылать по почте',
+  'ff--analytics' => 'Аналитика',
   'ff--yandex-metrika' => 'Яндекс.​Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',
   'gs--password' => 'Пароль',
@@ -365,7 +383,7 @@ function e2l_load_strings () {
   // rss
   'gs--posts-tagged' => 'заметки с тегом',
 
-  'gs--subscribe-to-blog' => 'Подписаться на блог',
+  'gs--follow-this-blog' => 'Подписаться на блог',
 
   // social networks
   'sn--twitter-verb' => 'Твитнуть',
@@ -376,13 +394,39 @@ function e2l_load_strings () {
   'sn--whatsapp-verb' => 'Отправить',
   'sn--pinterest-verb' => 'Запинить',
 
+  // updating
+  'pt--confused' => 'Непонятная ситуация',
+  'gs--downdate-explanation' => 'Ранее на этом сервере использовалась Эгея $[dr], но сейчас работает более старая версия $[rr], которая может быть не в курсе новых функций и форматов данных. Чтобы не потерять ваши данные, Эгея решила ничего не трогать и просто остановиться.',
+
+  'pt--updating' => 'Эгея обновляется',
+  'gs--this-takes-seconds' => 'Обычно это занимает несколько секунд.',
+
+  'pt--fix-permissions' => 'Настройте права',
+  'gs--fix-permissions' => 'Эгее нужно записать некоторые файлы.',
+
+  'pt--multi-step-update' => 'Обновление в несколько приёмов',
+  'gs--multi-step-update-p1' => 'Чтобы обновиться до Эгеи $[rr], сначала обновитесь до Эгеи 2.10.',
+  'gs--multi-step-update-p2' => 'Эгея умеет обновляться с $[ur] или более поздней, но на этом сервере использовалась Эгея $[dr]. Чтобы не потерять ваши данные, Эгея решила ничего не трогать и просто останови. Если вы вернёте предыдущую систему, что должно продолжить работать как раньше.',
+
+  'pt--update-cancelled' => 'Обновление не выполнено',
+  'gs--cannot-backup-before-update' => 'Эгея не смогла сделать бекап перед обновлением. Чтобы не потерять ваши данные, Эгея решила ничего не трогать и просто остановиться.',
+  'gs--dbs-version-too-old' => 'Вы используете слишком старую версию $[dbs], $[dbv]. Обновитесь до MySQL $[minmysql] или выше или MariaDB $[minmariadb] или выше чтобы использовать Эгею $[aegearelease].',
+  'gs--update-db-incomplete' => 'В вашей базе есть данные, но они неполные.',
+  'gs--db-no-data-configure-or-reinstall' => 'В вашей базе данных пусто. Проверьте конфигурацию базы. Если вы хотели создать новый блог, переустановите Эгею.',
+
   // umacros
   'um--month' => '$[month.monthname]',
   'um--month-short' => '$[month.monthname.short]',
   'um--month-g' => '$[month.monthname.genitive]',
   
+  // promo
+  'pm--main-menu' => 'В платной версии Эгеи здесь настраивается главное меню. В нём показываются закреплённые теги, а также ссылки на избранное, обсуждаемое, популярное, теги, календарь и случайную заметку. <a href="$[url]">Разузнать</a>',
+  'pm--analytics' => 'В платной версии Эгеи здесь подключается Гугль-аналитика и Яндекс.Метрика. <a href="$[url]">Разузнать</a>',
+  'pm--secret-link' => 'В платной версии Эгеи вы можете дать секретную ссылку на черновик, например, чтобы согласовать заметку перед публикацией. <a href="$[url]">Разузнать</a>',
+  'pm--scheduling' => 'В платной версии Эгеи вы можете запланировать автоматическую публикацию в определённое время или опубликовать задним числом. <a href="$[url]">Разузнать</a>',
+  
   // more strings
-  'gs--subscribe' => 'Подписка на блог',
+  'gs--follow' => 'Подписка на блог',
   
   'gs--no-such-notes' => 'Заметок нет.',
   'pt--page-not-found' => 'Страница не найдена',
@@ -390,7 +434,7 @@ function e2l_load_strings () {
   
   'er--cannot-find-db' => 'Не могу найти базу данных',
   'er--cannot-connect-to-db' => 'Не могу соединиться с базой данных',
-  'er--mysql-version-too-old' => 'Версия базы данных слишком старая ($[v1], нужна $[v2]+)',
+  'er--dbs-version-too-old' => 'Версия $[dbs] слишком старая ($[v1], нужна $[v2]+)',
   'er--error-occurred' => 'Произошла ошибка',
   'er--too-many-errors' => 'Слишком много ошибок',
   'gs--rss' => 'РСС',

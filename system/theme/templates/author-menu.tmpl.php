@@ -1,4 +1,4 @@
-<?php // mui
+<?php
 
 if (
   array_key_exists ('admin', $content) and (
@@ -29,7 +29,7 @@ if (
 
   <?php } else { ?>
 
-  <span class="admin-icon e2-new-note-item" title="<?= _S ('ln--new-post') ?>" id="e2-new-note-item"><a href="<?= $content['admin']['new-note-href'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('new') ?><span class="e2-unsaved-led" style="display: none"></span></span></a></span>
+  <span class="admin-icon e2-new-note-item" title="<?= _S ('ln--new-post') ?>" id="e2-new-note-item"><a href="<?= $content['admin']['new-note-href'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('new') ?><span class="e2-attention-led js-unsaved-led" style="display: none"></span></span></a></span>
 
   <?php } ?>
   <?php } ?>
@@ -49,7 +49,7 @@ if (
         _A (
           '<a href="'. $content['admin']['drafts-href'] .'" class="nu"><span class="e2-svgi">'.
           _SVG ('drafts').
-          '<span class="e2-unsaved-led" style="display: none"></span></span></a>'
+          '<span class="e2-attention-led js-unsaved-led" style="display: none"></span></span></a>'
         )
       ?>
     </span>
@@ -65,7 +65,12 @@ if (
       _A (
         '<a href="'. $content['admin']['settings-href'] .'" class="nu"><span class="e2-svgi">'.
         _SVG ('settings').
-        '</span></a>'
+        '</span>'.
+        (
+          ($content['blog']['license-expired?'])?
+          '<span class="e2-attention-led"></span>' : ''
+        ).
+        '</span></a></a>'
       )
     ?>
     </span>
