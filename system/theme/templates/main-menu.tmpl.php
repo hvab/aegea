@@ -101,11 +101,13 @@
       >
         <label>
           <input class="js-search-query" type="search" inputmode="search" name="query" id="band-query" value="<?= @$content['form-search']['query'] ?>" placeholder="<?= _S ('gs--search')?>" required="required" />
-          <span class="e2-search-blank-window">
-            <span class="e2-svgi"><?= _SVG ('blank-window') ?></span>
-          </span>
           <span class="e2-search-icon">
-            <span class="band-item__icon e2-svgi"><?= _SVG ('loupe') ?></span>
+            <span class="e2-search-icon-usual">
+              <span class="band-item__icon e2-svgi"><?= _SVG ('loupe') ?></span>
+            </span>
+            <span class="e2-search-icon-blank-window">
+              <span class="band-item__icon e2-svgi"><?= _SVG ('loupe-blank-window') ?></span>
+            </span>
           </span>
         </label>
       </form>

@@ -11,8 +11,10 @@
 >
   <label>
     <input class="js-search-query" type="search" inputmode="search" name="query" id="query" value="<?= @$content['form-search']['query'] ?>" placeholder="<?= _S ('gs--search')?>" required="required" />
-    <span class="e2-search-blank-window"><span class="e2-svgi"><?= _SVG ('blank-window') ?></span></span>
-    <span class="e2-search-icon"><span class="e2-svgi"><?= _SVG ('loupe') ?></span></span>
+    <span class="e2-search-icon">
+      <span class="e2-search-icon-usual"><span class="e2-svgi"><?= _SVG ('loupe') ?></span></span>
+      <span class="e2-search-icon-blank-window"><span class="e2-svgi"><?= _SVG ('loupe-blank-window') ?></span></span>
+    </span>
   </label>
 </form>
 

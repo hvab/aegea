@@ -2,6 +2,8 @@
 
 class NeasdenGroup_onlinevideo implements NeasdenGroup {
 
+  private $neasden = null;
+
   function __construct ($neasden) {
     $this->neasden = $neasden;
   

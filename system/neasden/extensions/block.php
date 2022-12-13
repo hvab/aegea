@@ -2,6 +2,8 @@
 
 class NeasdenGroup_block implements NeasdenGroup {
 
+  private $neasden = null;
+
   function __construct ($neasden) {
     $this->neasden = $neasden;
   

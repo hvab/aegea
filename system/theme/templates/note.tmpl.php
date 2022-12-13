@@ -237,7 +237,8 @@
 
 <?php $content['_']['_notes_gallery'] = $note['related']; ?>
 
-<?php if (!empty ($note['related']) and $content['class'] == 'note') { ?>
+<?php if (!empty ($note['related'])) { ?>
+<?php if ($content['class'] == 'note') { ?>
 
 <section>
 <div class="e2-section-heading"><?= $note['related']['title']?></div>
@@ -252,6 +253,7 @@
 </div>
 </section>
 
+<?php } ?>
 <?php } ?>
 
 <?php _X ('note-post') ?>

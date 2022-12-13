@@ -2,6 +2,8 @@
 
 class NeasdenGroup_tweet implements NeasdenGroup {
 
+  private $neasden = null;
+
   // done:
   function __construct ($neasden) {
     $this->neasden = $neasden;

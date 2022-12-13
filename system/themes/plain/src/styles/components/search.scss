@@ -25,18 +25,10 @@ input[type="search"]::placeholder {
   -webkit-appearance: none;
 }
 
-.e2-search-blank-window {
-  display: none;
-  pointer-events: none;
-  color: var(--foregroundColor);
-}
-
-
 .e2-search-box label {
   position: relative;
 }
 
-.e2-search-box .e2-search-blank-window,
 .e2-search-box .e2-search-icon {
   position: absolute;
   // color: var(--inputTextColor); // can’t use: some themes have inverted inputs
@@ -105,9 +97,22 @@ input[type="search"]::placeholder {
   margin-right: -20px;
 }
 
+.e2-search-icon .e2-search-icon-usual,
+.e2-search-icon .e2-search-icon-blank-window {
+  color: inherit;
+}
 
-form.e2-search-box-nano[target="_blank"] input[type="search"]:focus+.e2-search-blank-window,
-form.e2-search-box-banded[target="_blank"] input[type="search"]:focus+.e2-search-blank-window {
+.e2-search-icon-blank-window {
+  display: none;
+}
+
+form.e2-search-box-nano[target="_blank"] input[type="search"]:focus+.e2-search-icon .e2-search-icon-usual,
+form.e2-search-box-banded[target="_blank"] input[type="search"]:focus+.e2-search-icon .e2-search-icon-usual {
+  display: none;
+}
+
+form.e2-search-box-nano[target="_blank"] input[type="search"]:focus+.e2-search-icon .e2-search-icon-blank-window,
+form.e2-search-box-banded[target="_blank"] input[type="search"]:focus+.e2-search-icon .e2-search-icon-blank-window {
   display: initial;
 }
 
