@@ -81,8 +81,9 @@
       <div class="form-label"><label>Logs</label></div>
       <div class="form-element">
         <p>
-          <?= $content['form-underhood']['log-files-count']?> files, 
-          <?= $content['form-underhood']['log-files-size']?> bytes
+          <?php $s = ($content['form-underhood']['log-files-count'] > 1); ?>
+          <?= $content['form-underhood']['log-files-count'] ?> <?='file'. ($s?'s':'')?>, 
+          <?= $content['form-underhood']['log-files-size'] ?> bytes
         </p>
       </div>
       <?php if (!empty ($content['form-underhood']['form-action-logs-enable'])) { ?>

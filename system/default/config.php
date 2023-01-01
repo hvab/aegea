@@ -179,8 +179,11 @@ $_config['rss_itunes_explicit'] = 'no'; /* 'yes' or 'no' */
 
 // SOCIAL NETWORKS
 
+// which networks to use for comments sign in
+$_config['sign_in_with'] = 'telegram, twitter, facebook, vk';
+
 // which networks to share to (also supported: linkedin, whatsapp)
-$_config['share_to'] = 'twitter, facebook, vkontakte, telegram, pinterest';
+$_config['share_to'] = 'telegram, twitter, facebook, vk, pinterest';
 
 // via whom to share to Twitter
 $_config['share_to_twitter_via'] = '';

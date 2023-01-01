@@ -4,6 +4,7 @@
 
   'display_name' => array (
     'en' => 'Plain',
+    'it' => 'Semplice',
     'ru' => 'Простая',
     'uk' => 'Звичайна',
   ),

@@ -131,7 +131,7 @@
 
 <?php // TITLE // ?>
 <h1 class="e2-smart-title">
-<?php if (@$note['favourite?'] and !$content['sign-in']['done?']) { ?>
+<?php if (@$note['favourite?'] and !array_key_exists ('favourite-toggle-action', $note)) { ?>
 <?= _A ('<a href="'. $note['href']. '"><span class="e2-note-favourite-title">'. $note['title']. '</span></a>') ?> 
 <?php } else { ?>
 <?= _A ('<a href="'. $note['href']. '">'. $note['title']. '</a>') ?> 

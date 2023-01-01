@@ -27,7 +27,7 @@
   // <p>Use this page to preview and adjust your theme. It is made out of elements of the blog, starting with posts. Don’t forget to check on mobile phones</p>
   // ';
 
-  if (E2_EDITION) {
+  if (defined ('E2_EDITION') and E2_EDITION) {
 
     $return['theme-preview']['no-themes'] .= '<p>The main menu display the different states of the items: '.
       'regular link, parent page link, and selected title of the current page.</p>';

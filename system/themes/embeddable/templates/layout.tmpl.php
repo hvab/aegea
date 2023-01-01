@@ -20,7 +20,6 @@
 <?php _T ('main-menu') ?>
 
 <?php _T ('heading') ?>
-<?php _T ('theme-preview') ?>
 <?php _T ('message') ?>
 <?php _T ('welcome') ?>
 <?php _T ('notes') ?>

@@ -83,12 +83,13 @@ function e2l_load_strings () {
   // uploads
   'er--cannot-create-thumbnail' => 'Не удалось создать уменьшенное изображение',
   'er--cannot-upload-file-too-big' => 'Файл слишком большой',
-  'er--cannot-upload-no-or-too-many-files' => 'Не пришло ни одного или слишком много файлов',
+  'er--cannot-upload-no-or-too-many-files' => 'Не пришло ни одного или слишком много файлов',
   'er--cannot-upload' => 'Не удалось загрузить файл (ошибка $[error])',
+  'er--cannot-register-upload' => 'Не удалось зарегистрировать загруженный файл',
 
   // see NiceError.php!
-  'er--supported-only-png-jpg-gif' => 'Поддерживаются только изображения png, wepb, jpg и gif',
-  'er--unsupported-file' => 'Поддерживаются только изображения png, wepb, jpg, gif и svg, видео mp4 и mov и аудиофайлы mp3',
+  'er--supported-only-png-jpg-gif' => 'Поддерживаются только изображения png, webp, jpg и gif',
+  'er--unsupported-file' => 'Поддерживаются только изображения png, webp, jpg, gif и svg, видео mp4 и mov и аудиофайлы mp3',
 
   'ff--gmt-offset' => 'Разница с Гринвичем',
   'ff--with-dst' => '+1 летом',
@@ -378,7 +379,7 @@ function e2l_load_strings () {
   'em--created-automatically' => 'Письмо создано автоматически.',
   'em--unsubscribe' => 'Отписаться от этого обсуждения',
   'em--reply' => 'Ответить',
-  'em--comment-replied-at' => 'Комментарий, на который ответил автор',
+  'em--comment-replied-to' => 'Комментарий, на который ответил автор',
   
   // rss
   'gs--posts-tagged' => 'заметки с тегом',
@@ -409,7 +410,6 @@ function e2l_load_strings () {
   'gs--multi-step-update-p2' => 'Эгея умеет обновляться с $[ur] или более поздней, но на этом сервере использовалась Эгея $[dr]. Чтобы не потерять ваши данные, Эгея решила ничего не трогать и просто останови. Если вы вернёте предыдущую систему, что должно продолжить работать как раньше.',
 
   'pt--update-cancelled' => 'Обновление не выполнено',
-  'gs--cannot-backup-before-update' => 'Эгея не смогла сделать бекап перед обновлением. Чтобы не потерять ваши данные, Эгея решила ничего не трогать и просто остановиться.',
   'gs--dbs-version-too-old' => 'Вы используете слишком старую версию $[dbs], $[dbv]. Обновитесь до MySQL $[minmysql] или выше или MariaDB $[minmariadb] или выше чтобы использовать Эгею $[aegearelease].',
   'gs--update-db-incomplete' => 'В вашей базе есть данные, но они неполные.',
   'gs--db-no-data-configure-or-reinstall' => 'В вашей базе данных пусто. Проверьте конфигурацию базы. Если вы хотели создать новый блог, переустановите Эгею.',

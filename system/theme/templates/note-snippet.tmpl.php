@@ -37,7 +37,7 @@
 <?php if (array_key_exists ('edit-href', $note)): ?>
   <span class="admin-links admin-links-floating">
     <?php if (array_key_exists ('favourite-toggle-action', $note)) { ?>
-     <span class="admin-icon">
+      <span class="admin-icon">
         <form action="<?= $note['favourite-toggle-action'] ?>" method="post" class="nu">
           <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
           <button type="submit" href="<?= $note['favourite-toggle-action'] ?>" class="nu e2-admin-link e2-admin-item <?= ($note['favourite?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-favourite" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
@@ -68,7 +68,7 @@
 
 <?php // TITLE // ?>
 <h1>
-<?php if (@$note['favourite?'] ) { ?>
+<?php if (@$note['favourite?'] and !array_key_exists ('favourite-toggle-action', $note)) { ?>
 <?= _A ('<a href="'. $note['href']. '"><span class="e2-note-favourite-title">'. $note['title']. '</span></a>') ?> 
 <?php } else { ?>
 <?= _A ('<a href="'. $note['href']. '">'. $note['title']. '</a>') ?> 

@@ -4,6 +4,7 @@
 
   'display_name' => array (
     'en' => 'Acute',
+    'it' => 'Acuto',
     'ru' => 'Акут',
     'uk' => 'Акут',
   ),

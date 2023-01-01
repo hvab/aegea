@@ -12,10 +12,12 @@
 <language><?= $content['_rss_language'] ?></language>
 <generator><?= $content['_e2_ua_string'] ?></generator>
 
+<?php if (!empty ($content['_itunes_email'])) { ?>
 <itunes:owner>
 <itunes:name><?= $content['author']['name'] ?></itunes:name>
 <itunes:email><?= $content['_itunes_email'] ?></itunes:email>
 </itunes:owner>
+<?php } ?>
 <itunes:subtitle><?= $content['_rss_description'] ?></itunes:subtitle>
 <?= $content['_itunes_categories_xml'] ?>
 <itunes:image href="<?= $content['_itunes_image'] ?>" />

@@ -85,10 +85,11 @@ function e2l_load_strings () {
   'er--cannot-upload-file-too-big' => 'Un fichier est trop gros',
   'er--cannot-upload-no-or-too-many-files' => 'Aucun fichier ou trop de fichiers reçus par le serveur',
   'er--cannot-upload' => 'Impossible de charger le fichier (erreur $[error])',
+  'er--cannot-register-upload' => 'Impossible d’enregistrer le fichier téléchargé',
 
   // see NiceError.php!
-  'er--supported-only-png-jpg-gif' => 'Seules les images png, wepb, jpg et gif sont prises en charge',
-  'er--unsupported-file' => 'Seuls les images png, wepb, jpg, gif et svg, vidéos mp4 et mov et les fichiers audio mp3 sont pris en charge',
+  'er--supported-only-png-jpg-gif' => 'Seules les images png, webp, jpg et gif sont prises en charge',
+  'er--unsupported-file' => 'Seuls les images png, webp, jpg, gif et svg, vidéos mp4 et mov et les fichiers audio mp3 sont pris en charge',
 
   'ff--gmt-offset' => 'Décalage GMT',
   'ff--with-dst' => '+1 en été',
@@ -378,7 +379,7 @@ function e2l_load_strings () {
   'em--created-automatically' => 'Ce message a été créé automatiquement',
   'em--unsubscribe' => 'Me désinscrire de cette discussion',
   'em--reply' => 'Répondre',
-  'em--comment-replied-at' => 'Commentaire auquel l’auteur a répondu',
+  'em--comment-replied-to' => 'Commentaire auquel l’auteur a répondu',
 
   // rss
   'gs--posts-tagged' => 'billets balisés',
@@ -409,7 +410,6 @@ function e2l_load_strings () {
   'gs--multi-step-update-p2' => 'Aegea sait comment mettre à jour depuis $[ur] ou une version ultérieure, mais le serveur a été utilisé avec Aegea $[dr]. Pour protéger vos données, Aegea a décidé de ne rien toucher et d’arrêter. Si vous rétablissez le système précédent, tout devrait fonctionner comme avant.',
 
   'pt--update-cancelled' => 'Aegea a arrêté la mise à jour',
-  'gs--cannot-backup-before-update' => 'Aegea n’a pas pu terminer la sauvegarde avant la mise à jour. Pour protéger vos données, Aegea a décidé de ne rien toucher et d’arrêter.',
   'gs--dbs-version-too-old' => 'La version de $[dbs] que vous utilisez est $[dbv], qui est trop ancienne. Mettez à niveau vers MySQL $[minmysql] ou version ultérieure ou MariaDB $[minmariadb] ou version ultérieure pour utiliser Aegea $[aegearelease].',
   'gs--update-db-incomplete' => 'Aegea a trouvé des données dans votre base de données, mais elles sont incomplètes.',
   'gs--update-db-no-data-configure-or-reinstall' => 'Votre base de données semble être vide. Vérifiez la configuration de votre base de données. Si vous vouliez un nouveau blog, réinstallez Aegea.',
