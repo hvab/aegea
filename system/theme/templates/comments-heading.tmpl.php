@@ -1,5 +1,3 @@
-<?php // mui ?>
-
 <?php if ($content['comments']['count']) { ?>
 <?php #if (array_key_exists ('comments', $content)) { ?>
 

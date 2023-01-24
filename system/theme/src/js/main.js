@@ -1,20 +1,23 @@
 import { isLocalStorageAvailable } from './lib/local-storage'
-import cssVarsPolyfill from './lib/css-variables-polyfill'
 import viewCounter from './lib/view-counter'
 import swing from './lib/swing'
 import detect from './lib/detect'
 import textEditorInit from './lib/text-editor'
 import initSmartTitle from './e2-modules/smart-title'
+import initSearchHotKeys from './e2-modules/searchHotKeys'
 import e2Ajax from './e2-modules/e2Ajax'
 import e2NiceError from './e2-modules/e2NiceError'
 import e2SpinningAnimationStartStop from './e2-modules/e2SpinningAnimationStartStop'
 import initAllPopupMenus from './e2-modules/e2PopupMenu'
 import initFormComment from './e2-modules/form-comment'
 import e2AutosizeTextFields from './e2-modules/e2AutosizeTextFields'
+import initScrollingModule from './e2-modules/band'
 
 // First init imports
 initFormComment()
 initSmartTitle()
+initSearchHotKeys()
+initScrollingModule()
 
 // Second init obsolete functions
 function initObsoleteFunction () {
@@ -178,113 +181,23 @@ function initObsoleteFunction () {
     }
   }
 
-  // subscribe popup
-  if ($('#e2-subscribe-sheet').length && $('#e2-note-subscribe-button').length) {
-    var $subscribeButton = $('#e2-note-subscribe-button')
-    var $popupSubscribe = $('#e2-subscribe-sheet')
+  // follow popup
+  if ($('#e2-follow-sheet').length && $('.e2-follow-button').length) {
+    var $followButton = $('.e2-follow-button')
+    var $popupFollow = $('#e2-follow-sheet')
 
-    $popupSubscribe.on('E2_SHOW_SUBSCRIBE_SHEET', function () {
+    $popupFollow.on('E2_SHOW_FOLLOW_SHEET', function () {
       $(this).addClass('e2-show')
-    }).on('E2_HIDE_SUBSCRIBE_SHEET', function () {
+    }).on('E2_HIDE_FOLLOW_SHEET', function () {
       $(this).removeClass('e2-show')
     }).on('click', function (event) {
-      if (event.target === this) $('#e2-subscribe-sheet').trigger('E2_HIDE_SUBSCRIBE_SHEET')
+      if (event.target === this) $('#e2-follow-sheet').trigger('E2_HIDE_FOLLOW_SHEET')
     })
 
-    $subscribeButton.addClass('e2-note-subscribe-button-visible').on('click', function (event) {
+    $followButton.addClass('e2-follow-button-visible').on('click', function (event) {
       event.preventDefault()
-      $('#e2-subscribe-sheet').trigger('E2_SHOW_SUBSCRIBE_SHEET')
+      $('#e2-follow-sheet').trigger('E2_SHOW_FOLLOW_SHEET')
       return false
-    })
-  }
-
-  // search
-  if ($('#e2-search').length) {
-    var $searchForm = $('#e2-search')
-
-    var initSearchField = function () {
-      const $searchField = $('.search-field')
-
-      function updateStyles (id, styles) {
-        if (typeof styles === 'undefined') {
-          styles = id
-          id = null
-        }
-
-        const head = document.head || document.getElementsByTagName('head')[0]
-
-        if (id) {
-          let styleNode = document.getElementById(id)
-
-          if (!styleNode) {
-            styleNode = document.createElement('style')
-            styleNode.id = id
-            styleNode.innerHTML = styles
-            head.appendChild(styleNode)
-          } else {
-            styleNode.innerHTML = styles
-          }
-        } else {
-          const styleNode = document.createElement('style')
-          styleNode.innerHTML = styles
-          head.appendChild(styleNode)
-        }
-      }
-
-      function updateSearchFieldStyles ($field, width) {
-        const fieldLeft = $field.get(0).getBoundingClientRect().left
-        let maxWidth
-
-        if ($field.hasClass('search-field-left-anchored')) {
-          maxWidth = $(window).width() - fieldLeft
-        } else {
-          maxWidth = fieldLeft
-        }
-
-        if (maxWidth < width) {
-          updateStyles('search-field__input', `.search-field { --searchFieldMaxWidth: ${maxWidth}px; }`)
-        } else {
-          updateStyles('search-field__input', `.search-field { --searchFieldMaxWidth: ${width}px; } .search-field__input { max-width: ${maxWidth}px; }`)
-        }
-
-        cssVarsPolyfill.run()
-      }
-
-      if ($searchField.length) {
-        const cssVariable = '--searchFieldMaxWidth'
-        const fieldWidth = cssVarsPolyfill.ratifiedVars
-          ? parseInt(cssVarsPolyfill.ratifiedVars[cssVariable], 10)
-          : parseInt(window.getComputedStyle($searchField.get(0)).getPropertyValue(cssVariable), 10)
-
-        updateSearchFieldStyles($searchField, fieldWidth)
-        $(window).on('resize', updateSearchFieldStyles.bind(null, $searchField, fieldWidth))
-      }
-    }
-    cssVarsPolyfill.run(initSearchField)
-
-    // don't search empty string
-    $searchForm.on('submit', function () {
-      if (/^ *$/.test($('#query').val())) return false
-    })
-
-    // search focus
-    var $searchFieldInput = $searchForm.find('.search-field__input')
-    var $searchFieldIcon = $searchForm.find('.search-field__zoom-icon')
-    var $searchFieldTagsIcon = $searchForm.find('.search-field__tags-icon')
-
-    $searchFieldInput
-      .on('focusin', function () {
-        $searchFieldInput.addClass('search-field__input_focused')
-        $searchFieldIcon.addClass('search-field__zoom-icon_focused')
-      })
-      .on('focusout', function (e) {
-        if ($(e.relatedTarget).hasClass('search-field__tags-icon') || ($searchFieldTagsIcon.length && $searchFieldTagsIcon.is(':active'))) return
-
-        $searchFieldIcon.removeClass('search-field__zoom-icon_focused')
-        $searchFieldInput.removeClass('search-field__input_focused')
-      })
-    $searchFieldIcon.on('click', function () {
-      $searchFieldInput.focus()
     })
   }
 
@@ -339,7 +252,7 @@ function initKeyboardShortcuts () {
     if (event.type === 'keyup') {
       // hide all sheets on esc
       if (event.which === 27) {
-        $('#e2-subscribe-sheet').trigger('E2_HIDE_SUBSCRIBE_SHEET')
+        $('#e2-follow-sheet').trigger('E2_HIDE_FOLLOW_SHEET')
         $('#e2-login-sheet').trigger('E2_HIDE_LOGIN_SHEET')
       }
 

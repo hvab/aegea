@@ -1,38 +1,21 @@
 import swing from '../lib/swing'
 
 function initFormComment () {
-  var mailMask = /^([a-z0-9_.-])+@[a-z0-9-]+\.([a-z]{2,11}\.)?[a-z]{2,11}$/i
+  var mailMask = /^\s*([a-z0-9_.-])+@[a-z0-9-]+\.([a-z]{2,11}\.)?[a-z]{2,11}\s*$/i
   var $formComment = $('#form-comment')
 
   function getWindowSizeAndPosition () {
-    let myWidth = 0
-    let myHeight = 0
-    let myTop = 0
-    let myLeft = 0
-    if (typeof (window.innerWidth) === 'number') {
-      /* Non-IE */
-      myWidth = window.innerWidth
-      myHeight = window.innerHeight
-      myTop = window.screenY
-      myLeft = window.screenX
-    } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-      /* IE 6+ in 'standards compliant mode' */
-      myWidth = document.documentElement.clientWidth
-      myHeight = document.documentElement.clientHeight
-      myTop = window.screenTop
-      myLeft = window.screenLeft
-    } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
-      /* IE 4 compatible */
-      myWidth = document.body.clientWidth
-      myHeight = document.body.clientHeight
-      myTop = window.screenTop
-      myLeft = window.screenLeft
-    }
+    let myWidth = window.innerWidth
+    let myHeight = window.innerHeight
+    let myTop = window.screenY
+    let myLeft = window.screenX
+
     let WindowSizeAndPosition = {}
     WindowSizeAndPosition.width = myWidth
     WindowSizeAndPosition.height = myHeight
     WindowSizeAndPosition.top = myTop
     WindowSizeAndPosition.left = myLeft
+
     return (WindowSizeAndPosition)
   }
 
@@ -57,8 +40,10 @@ function initFormComment () {
 
     if (shouldBeEnabled) {
       $submitButton.prop('disabled', false)
+      $submitButton.hide().show(0) // force repaint on stupid safari
     } else {
       $submitButton.prop('disabled', true)
+      $submitButton.hide().show(0) // force repaint on stupid safari
     }
   }
 

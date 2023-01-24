@@ -21,17 +21,17 @@
     value="<?= @$content['form-tag']['.formatter-id'] ?>"
   />
   
-  <input
+  <!-- <input
     type="hidden"
     name="cache-sensitive-hash"
     value="<?= @$content['form-tag']['.cache-sensitive-hash'] ?>"
-  />
+  /> -->
   
   <input
     type="hidden"
     id="token"
     name="token"
-    value="<?= @$content['form-tag']['.token'] ?>"
+    value="<?= $content['sign-in']['token'] ?>"
   />
 
   <div class="form">
@@ -45,7 +45,7 @@
             autofocus="autofocus"
             id="tag"
             name="tag"
-            value="<?= @$content['form-tag']['tag'] ?>"
+            value="<?= @$content['form-tag']['tag-dotted'] ?>"
           />
         </div>
       </div>

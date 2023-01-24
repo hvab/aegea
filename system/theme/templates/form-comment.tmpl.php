@@ -54,7 +54,7 @@
   type="hidden"
   id="token"
   name="token"
-  value="<?= @$content['form-comment']['.token'] ?>"
+  value="<?= $content['sign-in']['token'] ?>"
 />
 
 <script type="text/javascript">
@@ -134,14 +134,17 @@
     <?php } ?>
 
     <span class="admin-links">
-      <?php if (array_key_exists ('important-toggle-href', $comment)): ?>
-        <a href="<?= $comment['important-toggle-href'] ?>" class="nu e2-admin-item <?= ($comment['important?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-important">
+      <?php if (array_key_exists ('important-toggle-action', $comment)): ?>
+        <form action="<?= $comment['important-toggle-action'] ?>" method="post" class="nu">
+        <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
+        <button type="submit" href="<?= $comment['important-toggle-action'] ?>" class="nu e2-admin-link e2-admin-item <?= ($comment['important?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-important" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
           <span class="e2-svgi">
             <span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span>
             <span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span>
             <span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span>
           </span>
-        </a>
+        </button>
+        </form>
       <?php endif ?>
     </span>
   </div>
@@ -215,14 +218,14 @@
 
   <?php if ($content['form-comment']['show-subscribe?']) { ?>
   <div class="form-element">
-    <label class="checkbox">
+    <label class="e2-switch">
     <input
       type="checkbox"
       name="subscribe"
       class="checkbox"
       tabindex="4"
       <?= @$content['form-comment']['subscribe?']? ' checked="checked"' : ''?>
-    />&nbsp;<?= _S ('ff--subscribe-to-others-comments') ?>
+    /><i></i> <?= _S ('ff--subscribe-to-others-comments') ?>
     </label><br />
   </div>
   <?php } ?> 

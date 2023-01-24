@@ -65,7 +65,7 @@
     type="hidden"
     id="token"
     name="token"
-    value="<?= @$content['form-note']['.token'] ?>"
+    value="<?= $content['sign-in']['token'] ?>"
   />
   
   <input
@@ -114,7 +114,7 @@
               <span class="e2-svgi"><?= _SVG ('spin') ?></span>
             </span>
             <span id="livesave-button" class="e2-keyboard-shortcut e2-clickable-keyboard-shortcut e2-admin-link" style="display: none"><?= _SHORTCUT ('livesave')? _SHORTCUT ('livesave') : _S ('ff--save') ?></span>
-            <span class="e2-unsaved-led" style="display: none"></span>
+            <span class="e2-attention-led js-unsaved-led" style="display: none"></span>
           </div>
     
         </div>
@@ -151,7 +151,7 @@
       <div class="form-element">
         <select id="tags" name="tags[]" tabindex="3" class="width-4 chzn-select" multiple="multiple" data-placeholder=" " size="2">
           <?php foreach ($content['form-note']['tags-info'] as $tag) { ?>
-            <option <?= $tag['selected?']? 'selected' : '' ?>><?= $tag['name'] ?></option>
+            <option <?= $tag['selected?']? 'selected' : '' ?>><?= $tag['tag-dotted'] ?></option>
           <?php } ?>
         </select><br />
       </div>

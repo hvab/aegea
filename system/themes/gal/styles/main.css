@@ -1,0 +1,146 @@
+:root {
+    
+  --backgroundColor:             rgb( 236, 246, 244      );
+  --backgroundTransparentColor: rgba( 236, 246, 244, .8  );
+  --sheetBackgroundColor:       rgba( 240, 240, 240, .8  );
+
+  --foregroundColor:             rgb( 107, 122, 118      );
+  --thinRuleColor:              rgba( 107, 122, 118, .12 );
+
+  --headingsColor:               rgb(  20,  38,  48);
+  --headingsUnderlineColor:     rgba(  20,  38,  48, .12 );
+  --boldColor:                     var(--headingsColor);
+  --boldUnderlineColor:            var(--headingsUnderlineColor);
+  --linkColor:                   rgb(  64, 128, 208);
+  --linkUnderlineColor:         rgba(  64, 128, 208, .12 );
+  --linkColorVisited:            rgb( 128, 128, 160);
+  --linkUnderlineColorVisited:  rgba( 128, 128, 160, .12 );
+  --hoverColor:                  rgb( 205,  80,  85      );
+  --hoverUnderlineColor:        rgba( 205,  80,  85, .12 );
+  --tagColor:                    rgb( 140, 146, 144);
+  --tagUnderlineColor:          rgba( 140, 146, 144, .12 );
+  --adminColor:                  rgb(  33, 160, 170      );
+  --adminUnderlineColor:        rgba(  33, 160, 170, .12 );
+  --engineTextColor:             var(--foregroundColor);
+  --engineTextUnderlineColor:    var(--thinRuleColor);
+
+  --markedTextBackground:        rgb( 255, 242, 128);
+  --markedImageBorderColor:      rgb( 255, 242, 128);
+
+  --inputBackgroundColor:        rgb(224, 232, 230);
+  --inputTextColor:              black;
+  /* --offSwitchColor */
+  /* --onSwitchColor */
+
+  /* --imageBorderColor */
+  /* --disabledColor */
+  /* --activeColor */
+  /* --errorColor */
+  /* --verifiedColor */
+  /* --currentItemBackgroundColor */
+  /* --windowBackgroundColor */
+  /* --unsavedIndicatorColor */
+  
+  /* to match .likely */
+  --followButtonBackground: rgb(224, 232, 230);
+  --followButtonHoverBackground: rgba(212, 220, 218,.8);
+  /* --followButtonTextColor: #000; */
+
+  /* to match .likely-light */
+  /* --followButtonBackground: rgba(236,236,236,.16); */
+  /* --followButtonHoverBackground: rgba(255,255,255,.48); */
+  /* --followButtonTextColor: #fff; */
+  
+  --marginTop: 48px;
+  --marginLeft: 6%;
+  --marginRight: 6%;
+  --marginTopCompact: 14px;
+  --marginLeftCompact: 3%;
+  --marginRightCompact: 3%;
+
+  --displayLogoMarginal: none;
+  --displayLogo: block;
+  --displayLogoCompact: block;
+
+  /* --columnSpacing */
+
+  --logoTop: -8px;
+  --blogTitleFontSize: 28px;
+  --blogTitleLineHeight: 32px;
+  --pageHeadingFontSize: 36px;
+  --pageHeadingLineHeight: 42px;
+  /* --noteTitleFontSize */
+  /* --noteTitleLineHeight */
+  /* --noteLeadFontSize */
+  /* --noteLeadLineHeight */
+  /* --noteTextFontSize */
+  /* --noteTextLineHeight */
+
+  /* --mainFontFamily */
+  /* --noteMainFontFamily */
+  /* --smallFontFamily */
+
+  /* --time */
+  /* --timeLong */
+
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root .e2-responds-to-dark-mode {
+
+    --backgroundColor:             rgb(  39,  41,  42);
+    --backgroundTransparentColor: rgba(  32,  32,  32, .8  );
+    --sheetBackgroundColor:       rgba(  24,  24,  24, .8  );
+    
+    --foregroundColor:             rgb( 128, 146, 148);
+    --thinRuleColor:              rgba( 144, 144, 144, .12 );
+    
+    --headingsColor:               rgb( 255, 255, 255      );
+    --headingsUnderlineColor:     rgba( 255, 255, 255, .12 );
+    --boldColor:                   rgb( 255, 255, 255      );
+    --boldUnderlineColor:            var(--headingsUnderlineColor);
+    --linkColor:                   rgb(  64, 160, 244);
+    --linkUnderlineColor:         rgba(  64, 160, 244, .12 );
+    --linkColorVisited:            rgb( 142, 128, 152);
+    --linkUnderlineColorVisited:  rgba(  64, 160, 244, .12 );
+    --hoverColor:                  rgb( 240,  40,  32);
+    --hoverUnderlineColor:        rgba( 240,  40,  32, .12 );
+    --tagColor:                      var(--foregroundColor);
+    --tagUnderlineColor:             var(--thinRuleColor);
+    --engineTextColor:               var(--foregroundColor);
+    --engineTextUnderlineColor:      var(--thinRuleColor);
+
+    --markedTextBackground:           #4f341b;
+    --markedImageBorderColor:         #805126;
+
+    --inputBackgroundColor:        rgb(  64,  72,  72);
+    --inputTextColor:                var(--headingsColor);
+    --offSwitchColor:                var(--foregroundColor);
+    --onSwitchColor:                 var(--headingsColor);
+
+    --errorColor:                  rgb( 240,  40,  32);
+
+  }
+}
+
+.e2-text .loud {
+  font-weight: bold;
+  color: rgb(0, 217, 255); /* light + dark */
+}
+
+
+.e2-button {
+  background: #e5e7e6;
+  background: linear-gradient(to bottom, #e9ebea 0%, #e1e3e2 100%);
+}
+
+.e2-submit-button {
+  background: #1088b4;
+  background: linear-gradient(to bottom, #2098c4 0%, #0078a4 100%);
+}
+
+.e2-delete-button {
+  background: #eaded8;
+  background: linear-gradient(to bottom, #f4ece8 0%, #e0d0c8 100%);
+}

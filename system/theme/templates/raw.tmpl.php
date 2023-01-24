@@ -67,7 +67,7 @@ if (document.getElementById ('id-' + n).style.display == 'none') {
     global $_global_flipid;
     foreach ($what as $k => $v) {
       echo '<p>';
-      echo '<b>'. htmlspecialchars (var_export ($k, true), ENT_NOQUOTES, HSC_ENC) .'</b>&nbsp;= ';
+      echo '<b>'. htmlspecialchars (var_export ($k, true), ENT_NOQUOTES, 'UTF-8') .'</b>&nbsp;= ';
       ++ $_global_flipid;
       if (is_array ($v)) {
         if (
@@ -119,10 +119,10 @@ if (document.getElementById ('id-' + n).style.display == 'none') {
 
           echo '</div>';
         } else {
-          echo '<span class="s">'. htmlspecialchars (var_export ($v, true), ENT_NOQUOTES, HSC_ENC) .'</span>';
+          echo '<span class="s">'. htmlspecialchars (var_export ($v, true), ENT_NOQUOTES, 'UTF-8') .'</span>';
         }
       } else {
-        echo '<span class="o">'. htmlspecialchars (var_export ($v, true), ENT_NOQUOTES, HSC_ENC) .'</span>';
+        echo '<span class="o">'. htmlspecialchars (var_export ($v, true), ENT_NOQUOTES, 'UTF-8') .'</span>';
       }
       echo '</p>';
     }

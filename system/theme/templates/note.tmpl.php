@@ -87,21 +87,24 @@
     </span>
     <?php } ?>
 
-    <?php if (array_key_exists ('favourite-toggle-href', $note)) { ?>
-     <span class="admin-icon">
-        <a href="<?= $note['favourite-toggle-href'] ?>" class="nu e2-admin-link e2-admin-item <?= ($note['favourite?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-favourite">
-          <span class="e2-svgi">
-            <span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span>
-            <span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span>
-            <span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span>
-          </span>
-        </a>
+    <?php if (array_key_exists ('favourite-toggle-action', $note)) { ?>
+      <span class="admin-icon">
+        <form action="<?= $note['favourite-toggle-action'] ?>" method="post" class="nu">
+          <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
+          <button type="submit" href="<?= $note['favourite-toggle-action'] ?>" class="nu e2-admin-link e2-admin-item <?= ($note['favourite?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-favourite" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
+            <span class="e2-svgi">
+              <span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span>
+              <span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span>
+              <span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span>
+            </span>
+          </button>
+        </form>
       </span>
     <?php } ?>
 
     <span class="admin-icon">
       <a href="<?= $note['edit-href'] ?>" class="nu e2-admin-link <?php if (array_key_exists ('only', $content['notes'])) {?>e2-edit-link<?php } ?>">
-        <span class="e2-svgi"><?= _SVG ('edit') ?><span class="e2-unsaved-led" style="display: none"></span></span>
+        <span class="e2-svgi"><?= _SVG ('edit') ?><span class="e2-attention-led js-unsaved-led" style="display: none"></span></span>
       </a>
     </span>
     
@@ -128,7 +131,7 @@
 
 <?php // TITLE // ?>
 <h1 class="e2-smart-title">
-<?php if (@$note['favourite?'] and !$content['sign-in']['done?']) { ?>
+<?php if (@$note['favourite?'] and !array_key_exists ('favourite-toggle-action', $note)) { ?>
 <?= _A ('<a href="'. $note['href']. '"><span class="e2-note-favourite-title">'. $note['title']. '</span></a>') ?> 
 <?php } else { ?>
 <?= _A ('<a href="'. $note['href']. '">'. $note['title']. '</a>') ?> 
@@ -154,9 +157,8 @@
 <?php if (count ($note['sharing-buttons'])) { ?>
 
 <div class="e2-note-likes">
-
-<?php if (@$content['blog']['show-subscribe-button?']) { ?>
-<a id="e2-note-subscribe-button" class="e2-note-subscribe-button" href="<?= @$content['blog']['rss-href'] ?>" ><?= _S ('gs--subscribe-to-blog') ?></a>
+<?php if (@$content['blog']['show-follow-button?']) { ?>
+<a class="e2-follow-button e2-note-follow-button" href="<?= @$content['blog']['rss-href'] ?>" ><?= _S ('gs--follow-this-blog') ?></a>
 <?php } ?>
 
 <?php _LIB ('likely') ?>
@@ -211,25 +213,10 @@
 <span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $note['time'])?>"><?= _AGO ($note['time']) ?></span> &nbsp;
 <?php } ?>
 
-<?php
-$tags = array ();
-foreach ($note['tags'] as $tag) {
+<?php $content['_']['_tags_line']['_prepend'] = ''; ?>
+<?php $content['_']['_tags_line']['_tags'] = $note['tags']; ?>
+<?php _T ('tags-line') ?>
 
-  $classname = 'e2-tag'. ($tag['visible?']? '' : ' e2-tag-hidden');
-  if ($tag['current?']) {
-    $tags[] = '<mark><span class="'. $classname .'">'. $tag['name'] .'</span></mark>';
-  } else {
-    $tags[] = (
-      '<a href="'. $tag['href'] .'" '.
-      'class="'. $classname .'">'.
-      $tag['name'] .
-      '</a>'
-    );
-  }
-}
-echo implode (' &nbsp; ', $tags);
-
-?>
 </div>
 
 
@@ -237,18 +224,21 @@ echo implode (' &nbsp; ', $tags);
 
 
 <?php if (array_key_exists ('only', $content['notes'])) { ?>
-<?php if (!empty ($note['show-href'])): ?>
+<?php if (!empty ($note['show-action'])): ?>
 <div class="e2-note-visibility-toggle">
-<form action="<?= $note['show-href'] ?>" method="post"><button type="submit" class="e2-button"><?= _S ('fb--show') ?></button></form>
+<form action="<?= $note['show-action'] ?>" method="post">
+  <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
+  <input type="submit" class="e2-button" value="<?= _S ('fb--show') ?>" />
+</form>
 </div>
 <?php endif ?>
 <?php } ?>
 
 
-
 <?php $content['_']['_notes_gallery'] = $note['related']; ?>
 
-<?php if (!empty ($note['related']) and $content['class'] == 'note') { ?>
+<?php if (!empty ($note['related'])) { ?>
+<?php if ($content['class'] == 'note') { ?>
 
 <section>
 <div class="e2-section-heading"><?= $note['related']['title']?></div>
@@ -263,6 +253,7 @@ echo implode (' &nbsp; ', $tags);
 </div>
 </section>
 
+<?php } ?>
 <?php } ?>
 
 <?php _X ('note-post') ?>

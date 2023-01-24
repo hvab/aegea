@@ -2,7 +2,7 @@
   <FilesMatch ^.*$>
     Require all denied
   </FilesMatch>
-  <FilesMatch ^.*\.(jpe?g|png|js|css)$>
+  <FilesMatch ^.*\.(jpe?g|png|webp|svg|js|css|woff|woff2|eot|ttf|otf)$>
     Require all granted
   </FilesMatch>
 </IfModule>
@@ -13,7 +13,7 @@
     Deny from all
   </FilesMatch>
 
-  <FilesMatch ^.*\.(jpe?g|png|js|css)$>
+  <FilesMatch ^.*\.(jpe?g|png|webp|svg|js|css|woff|woff2|eot|ttf|otf)$>
     Allow from all
   </FilesMatch>
 </IfModule>

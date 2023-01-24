@@ -7,7 +7,7 @@
   type="hidden"
   id="token"
   name="token"
-  value="<?= @$content['form-sessions']['.token'] ?>"
+  value="<?= $content['sign-in']['token'] ?>"
 />
 
 <button type="submit" class="e2-button" id="submit-button">

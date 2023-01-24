@@ -7,7 +7,7 @@
   type="hidden"
   id="token"
   name="token"
-  value="<?= @$content['form-database']['.token'] ?>"
+  value="<?= $content['sign-in']['token'] ?>"
 />
 
 <div class="form">
@@ -37,17 +37,18 @@
     <input type="text"
       name="db-user"
       id="db-user"
-    class="text input-editable width-2"
+      class="text input-editable width-2"
       value="<?= @$content['form-database']['db-user'] ?>"
     />
   </div>
 
   <div class="form-element">
     <input type="text"
-      name="db-password"
       id="db-password"
-    class="text input-editable width-2"
-      value="<?= @$content['form-database']['db-password'] ?>"
+      class="text input-editable width-2"
+      placeholder="••••••••••"
+      value=""
+      onfocus="this.name='db-password'; this.placeholder=''"
     />
   </div>
   

@@ -1,0 +1,110 @@
+:root {
+    
+  --backgroundColor:             rgb( 254, 250, 236      );
+  --backgroundTransparentColor: rgba( 254, 250, 236, .8  );
+  --sheetBackgroundColor:       rgba( 227, 224, 211, .8  );
+
+  --foregroundColor:             rgb( 98,  87, 114       );
+  --thinRuleColor:              rgba( 98,  87, 114,  .3  );
+
+  --headingsColor:                  black;
+  --headingsUnderlineColor:     rgba(   0,   0,   0, .15 );
+  /* --boldColor */
+  /* --boldUnderlineColor */
+  --linkColor:                   rgb( 243, 129, 129      );
+  --linkUnderlineColor:         rgba( 243, 129, 129, .3  );
+  --linkColorVisited:            rgb( 249, 196, 172      );
+  --linkUnderlineColorVisited:  rgba( 249, 196, 172, .3  );
+  --hoverColor:                  rgb( 255,  92,  92      );
+  --hoverUnderlineColor:        rgba( 255,  92,  92, 1   );
+  /* --tagColor */
+  /* --tagUnderlineColor */
+  --adminColor:                  rgb(  96, 144, 144      );
+  --adminUnderlineColor:        rgba(  96, 144, 144, .12 );
+  --engineTextColor:             rgb(  86,  85, 103      );
+  --engineTextUnderlineColor:   rgba(  86,  85, 103, .25 );
+
+  --markedTextBackground:           #fce2d7;
+  --markedImageBorderColor:         #fce2d7;
+
+  --inputBackgroundColor:           #bdf0ea;
+  --inputTextColor:                 black;
+  /* --offSwitchColor */
+  /* --onSwitchColor */
+
+  /* --imageBorderColor */
+  /* --disabledColor */
+  --activeColor:                    #20bdaa;
+  /* --errorColor */
+  /* --verifiedColor */
+  /* --currentItemBackgroundColor */
+  /* --windowBackgroundColor */
+  /* --unsavedIndicatorColor */
+  
+  /* to match .likely */
+  /* --followButtonBackground: rgba(231,231,231,.8); */
+  /* --followButtonHoverBackground: rgba(212,212,212,.8); */
+  /* --followButtonTextColor: #000; */
+
+  /* to match .likely-light */
+  /* --followButtonBackground: rgba(236,236,236,.16); */
+  /* --followButtonHoverBackground: rgba(255,255,255,.48); */
+  /* --followButtonTextColor: #fff; */
+  
+  /* --marginTop */
+  /* --marginLeft */
+  /* --marginRight */
+  /* --marginTopCompact */
+  /* --marginLeftCompact */
+  /* --marginRightCompact */
+
+  /* --displayLogoMarginal */
+  /* --displayLogo */
+  /* --displayLogoCompact */
+
+  /* --columnSpacing */
+
+  /* --logoTop */
+  /* --blogTitleFontSize */
+  /* --blogTitleLineHeight */
+  /* --pageHeadingFontSize */
+  /* --pageHeadingLineHeight */
+  /* --noteTitleFontSize */
+  /* --noteTitleLineHeight */
+  /* --noteLeadFontSize */
+  /* --noteLeadLineHeight */
+  /* --noteTextFontSize */
+  /* --noteTextLineHeight */
+
+  /* --mainFontFamily */
+  --noteMainFontFamily: Georgia, serif;
+  /* --smallFontFamily */
+
+  /* --time */
+  /* --timeLong */
+
+}
+
+.e2-text .lead {
+  color: #2ebbaa;
+}
+
+.e2-text .loud {
+  color: #2ebbaa;
+  border-color: #2ebbaa;
+}
+
+.e2-button {
+  background: #f2eee0;
+  background: linear-gradient(to bottom, #f6f2e4 0%, #eeeadc 100%);
+}
+
+.e2-submit-button {
+  background: #20bdaa;
+  background: linear-gradient(to bottom, #30cdba 0%, #10ad9a 100%);
+}
+
+.e2-delete-button {
+  background: #eaded8;
+  background: linear-gradient(to bottom, #f4ece8 0%, #e0d0c8 100%);
+}

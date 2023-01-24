@@ -2,6 +2,8 @@
 
 class NeasdenGroup_tweet implements NeasdenGroup {
 
+  private $neasden = null;
+
   // done:
   function __construct ($neasden) {
     $this->neasden = $neasden;
@@ -18,9 +20,11 @@ class NeasdenGroup_tweet implements NeasdenGroup {
   function render ($group, $myconf) {
   
     $this->neasden->require_link ('https://platform.twitter.com/widgets.js');
-    $this->neasden->require_link (SYSTEM_LIBRARY_FOLDER .'embedded-tweet/embedded-tweet.js');
+    $this->neasden->require_link (SYSTEM_DIR . LIBRARY_DIRNAME .'embedded-tweet/embedded-tweet.js');
     
     $p = false;
+
+    $result = '';
 
     if (! $this->neasden->config['html.basic']) {
       $result = '<div class="'. $myconf['css-class'] .'">'."\n";

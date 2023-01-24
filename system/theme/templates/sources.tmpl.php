@@ -20,8 +20,9 @@
   <td style="padding-right: 10px"><?= $source['id'] ?></td>
   <td style="padding-right: 10px"><a href="<?= $source['href'] ?>" class="nu"><img src="<?= $source['userpic-href'] ?>" width="32" height="32" style="border-radius: 50%; vertical-align: top; margin-top: 4px" /></a></td>
   <td style="padding-right: 10px"><?= $source['title'] ?><br />by <?= $source['author'] ?></td>
-  <td style="padding-right: 10px"><?= $source['href-display'] ?></td>
-  <td style="padding-right: 10px"><?= $source['href-filtered'] ?></td>
+  <td style="padding-right: 10px"><?= $source['href-display'] ?><br />(<?= $source['href-filtered'] ?>)</td>
+  <td style="padding-right: 10px"><?= $source['notes-count'] ?></td>
+  <td style="padding-right: 10px"><span title="<?=_DT ('j {month-g} Y, H:i', $source['latest-note-time'])?>"><?= _AGO ($source['latest-note-time']) ?></span></td>
 
   <td>
   <nobr>

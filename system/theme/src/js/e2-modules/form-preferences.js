@@ -39,6 +39,14 @@ function initFormPreferences () {
     }
   })
 
+  $('#show-main-menu').on('change', function () {
+    if ($(this).is(':checked')) {
+      $('#main-menu-items').slideDown(333)
+    } else {
+      $('#main-menu-items').slideUp(333)
+    }
+  })
+
   $('.e2-template-preview-link').addClass('e2-template-preview-link_visible')
 
   $('#e2-template-selector').addClass('e2-template-selector_interactive').find('.e2-template-preview__input').on('change', function () {

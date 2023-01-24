@@ -2,7 +2,6 @@
 
   $settings_href = '../settings';
   $self_href = 'javascript:;';
-  // $self_href = $_current_url;
   
   $return['class'] = 'themepreview';
   $return['title'] = 'Предпросмотр темы';
@@ -17,9 +16,7 @@
   // </ol>
   // ';
 
-  $return['theme-preview']['no-themes'] = '
-  <p>На этой странице смотрите и настраивайте вашу тему оформления.</p>
-  ';
+  $return['theme-preview']['no-themes'] = '<p>На этой странице смотрите и настраивайте вашу тему оформления.</p>';
 
   // $return['theme-preview']['themes-before'] = '
   // <p>Выберите оформление:</p>
@@ -30,8 +27,77 @@
   // <p>На этой странице смотрите и настраивайте вашу тему. Она состоит из элементов блога, начиная с заметок. Не забудьте проверить на мобильном телефоне.</p>
   // ';
   
-  $return['notes'] = array (
-    array (
+  if (defined ('E2_EDITION') and E2_EDITION) {
+
+    $return['theme-preview']['no-themes'] .= '<p>Главное меню показывает разные состояния пунктов: '.
+      'обычная ссылка, ссылка на родительский раздел и выбранное название текущего раздела.</p>';
+
+    $return['main-menu'] = [
+      'each' => 
+      [
+        [
+          'href' => $self_href,
+          'svg-id' => 'favourite-on',
+          'title' => 'Главное меню',
+          'current?' => false,
+          'parent?' => false,
+          'visible?' => true,
+        ],
+        [
+          'href' => $settings_href,
+          'svg-id' => 'settings',
+          'title' => 'Настройка',
+          'visible?' => true,
+          'parent?' => true,
+          'current?' => false,
+        ],
+        [
+          'href' => $self_href,
+          'svg-id' => 'tags',
+          'title' => 'Теги',
+          'current?' => false,
+          'parent?' => false,
+          'visible?' => true,
+        ],
+        [
+          'tag' => 'кино',
+          'title' => 'Кино',
+          'href' => $self_href,
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => false,
+        ],
+        [
+          'tag' => 'музыка',
+          'title' => 'Музыка',
+          'href' => $self_href,
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => false,
+        ],
+        [
+          'tag' => 'книги',
+          'title' => 'Книги',
+          'href' => $self_href,
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => false,
+        ],
+        [
+          'href' => $self_href,
+          'title' => 'Предпросмотр темы',
+          'visible?' => true,
+          'parent?' => false,
+          'current?' => true,
+        ],
+      ],
+      'reorderable?' => false,
+    ];
+
+  }
+
+  $return['notes'] = [
+    [
       'id' => 1,
       'title' => 'Заметка-образец',
       'text' => '
@@ -45,6 +111,8 @@
       </div></div>
       <div class="e2-text-caption">Сотворение Адама. Микеланджело, ок. 1511 г.</div>
       </div>
+      <p>Допустим, у нас есть цитата об этой картинке:</p>
+      <p class="loud">И сотворил бог человека по образу своему</p>
       <p>За этим абзацем следует таблица. В этом абзаце — рыбный текст. Теория вчувствования свободна. Ритм изящно имеет фактографический хтонический миф. Художественное опосредование представляет собой катарсис. Литургическая драма имеет психологический параллелизм.</p>
       <div class="e2-text-table">
         <table cellpadding="0" cellspacing="0" border="0">
@@ -57,12 +125,13 @@
         </table>
       </div>
       <p>Часть текста может быть отделена горизонтальной линейкой:</p>
-      <hr />
+      <h3>Заголовок третьего уровня</h3>
       <p>Упорядоченный список:</p>
       <ol>
         <li>Это длинный элемент списка, чтобы посмотреть, как выглядит перенос на несколько строк — убедитесь что отступы между элементами списка больше, чем между строками одного элемента.</li>
         <li>А это — короткий элемент.</li>
       </ol>
+      <hr />
       <p>Неупорядоченный список:</p>
       <ul>
         <li>это длинный элемент списка, чтобы посмотреть, как выглядит перенос на несколько строк — убедитесь что отступы между элементами списка больше, чем между строками одного элемента;</li>
@@ -78,20 +147,27 @@
       'scheduled?' => false,
       'public?' => true,
       'hidden?' => false,
-      'commentable?' => true,
-      'favourite?' => true,
-      'tags' => array (
-         array (
-           'name' => 'тег',
-           'href' => '',
-           'current?' => false,
-         ),
-         array (
-           'name' => 'другой тег',
-           'href' => '',
-           'current?' => false,
-         ),
-      ),
+      'favourite?' => false,
+      'tags' => [
+        [
+          'name' => 'тег',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ],
+        [
+          'name' => 'другой тег',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ],
+        [
+          'name' => 'скрытый тег',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => false,
+        ],
+      ],
       'read-count' => 42,
       'comments-count' => 5,
       'comments-count-text' => '5 комментариев',
@@ -101,15 +177,17 @@
       'comments-link?' => true,
       'new-comments-count' => 0,
       'new-comments-count-text' => '0 new',
-      // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
+      // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
-      // 'og-images' => array (),
-    ),
-    array (
+      // 'og-images' => [],
+    ],
+    [
       'id' => 2,
-      'title' => 'Другая заметка-образец',
+      'title' => 'Избранная заметка-образец',
       'text' => '
-      <p>Это ещё один пример, чтобы вы настроили расстояние между заметками в ленте. Ещё это заметка без звезды, в отличие от предыдущей. Заголовок этой заметки не является ссылкой — как будто мы уже на её странице. Ещё один из тегов снизу подсвечен — как будто мы на его странице.</p>
+      <p class="lead">У этой заметки есть вводный абзац.</p>
+      <p>Это ещё один пример¹, чтобы вы настроили расстояние между заметками в ленте. Заголовок этой заметки не является ссылкой — как будто мы уже на её странице. Ещё один из тегов снизу подсвечен — как будто мы на его странице.</p>
+      <p class="foot">¹ А это — пример примечания. Оно весьма примечательно.</p>
       ',
       // 'summary' => '',
       // 'format-info' => array 2
@@ -120,25 +198,27 @@
       'scheduled?' => false,
       'public?' => true,
       'hidden?' => false,
-      'commentable?' => false,
-      'favourite?' => false,
-      'tags' => array (
-         array (
-           'name' => 'первый тег',
-           'href' => $self_href,
-           'current?' => false,
-         ),
-         array (
-           'name' => 'текущий тег',
-           'href' => $self_href,
-           'current?' => true,
-         ),
-         array (
-           'name' => 'и ещё один',
-           'href' => $self_href,
-           'current?' => false,
-         ),
-      ),
+      'favourite?' => true,
+      'tags' => [
+        [
+          'name' => 'первый тег',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ],
+        [
+          'name' => 'текущий тег',
+          'href' => $self_href,
+          'current?' => true,
+          'visible?' => true,
+        ],
+        [
+          'name' => 'и ещё один',
+          'href' => $self_href,
+          'current?' => false,
+          'visible?' => true,
+        ],
+      ],
       'read-count' => 147,
       // 'comments-count' => 0,
       // 'comments-count-text' => '5 комментариев',
@@ -147,16 +227,16 @@
       // 'comments-link?' => true,
       // 'new-comments-count' => 2,
       // 'new-comments-count-text' => '2 new',
-      // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
+      // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
-      // 'og-images' => array (),
-    ),
-    array (
+      // 'og-images' => [],
+    ],
+    [
       'id' => 3,
       'title' => 'Пример заметки в результатах <mark>поиска</mark>',
       'text' => '',
       'snippet-text' => '
-      <p>Так выглядит заметка в результатах <mark>поиска</mark>. Текст запроса <mark>подсвечивается</mark>, а все картинки из заметки показываются ниже. Некоторые из них тоже могут быть <mark>подсвечены</mark>. Тег <tt>mark</tt> используется для всей <mark>подсветки</mark>, включая тег в предыдущей заметке.</p>
+      <p>Так выглядит заметка в результатах <mark>поиска</mark>. Текст запроса <mark>подсвечивается</mark>, а все картинки из заметки показываются ниже. Некоторые из них тоже могут быть <mark>подсвечены</mark>. Тег <tt>mark</tt> используется для всей <mark>подсветки</mark>, включая тег в предыдущей заметке.</p>
       ',
       // 'summary' => '',
       // 'format-info' => array 2
@@ -167,7 +247,6 @@
       'scheduled?' => false,
       'public?' => true,
       'hidden?' => false,
-      'commentable?' => false,
       'favourite?' => false,
       'read-count' => 31,
       'thumbs' => [
@@ -201,13 +280,13 @@
       // 'comments-link?' => true,
       // 'new-comments-count' => 2,
       // 'new-comments-count-text' => '2 new',
-      // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
+      // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
-      // 'og-images' => array (),
-    ),
-  );
+      // 'og-images' => [],
+    ],
+  ];
 
-  $return['pages'] = array (
+  $return['pages'] = [
     'timeline?' => true,
     'count' => 2,
     'this' => 1,
@@ -219,11 +298,11 @@
     // 'prev-title' => 'Настраиваем HTTPS на хостинге TimeWeb для Эгеи',
     // 'title' => 'Posts',
     // 'this-title' => 'Музло',
-  );
+  ];
 
-  $return['comments'] = array (
-    'each' => array (
-      array (
+  $return['comments'] = [
+    'each' => [
+      [
         'gip-used?' => true,
         'gip' => 'twitter',
         'userpic-set?' => true,
@@ -231,27 +310,27 @@
         'important?' => false,
         'name' => 'Иван Петров',
         'text' => '<p>Это комментарий для примера. Далее идёт бессмысленный текст. Этот текст нужен только чтобы вы могли увидеть, как выглядит многострочный комментарий.</p><p>И ещё один абзац на всякий случай.</p>',
-        'time' => array (
+        'time' => [
           0 => strtotime ('21 May 2019, 11:21 +0300'),
-          1 => array (
+          1 => [
             'offset' => 10800,
             'is_dst' => false,
-          ),
-        ),
+          ],
+        ],
         'replied?' => true,
         'reply-visible?' => true,
         'reply-important?' => true,
         'author-name' => 'Александр Пушкин',
         'reply' => '<p>Ёмкий ответ автора.</p>',
-        'reply-time' => array (
+        'reply-time' => [
           0 => strtotime ('15 Jun 2019, 22:13 +0300'),
-          1 => array (
+          1 => [
             'offset' => 10800,
             'is_dst' => false,
-          ),
-        ),
-      ),
-      array (
+          ],
+        ],
+      ],
+      [
         'gip-used?' => true,
         'gip' => 'facebook',
         'userpic-set?' => true,
@@ -259,25 +338,28 @@
         'important?' => false,
         'name' => 'Констанция Константиновна Константинопольская',
         'text' => '<p>Короткий комментарий.</p>',
-        'time' => array (
+        'time' => [
           0 => strtotime ('29 May 2019, 11:21 +0300'),
-          1 => array (
+          1 => [
             'offset' => 10800,
             'is_dst' => false,
-          ),
-        ),
-      ),
-    ),
+          ],
+        ],
+      ],
+    ],
+    'toggle' => [
+      // 'form-action' => '',
+      'submit-text' => 'Закрыть комментарии к заметке',
+    ],
     // 'rss-href' => 'http://e2/all/muzlo/comments-rss/',
-    // 'toggle' => array 2
     'count' => 2,
-    'count-text' => '2 comments',
+    'count-text' => '2 комментария',
     // 'new-count' => 0,
     // 'new-count-text' => '0 new',
     'display-form?' => true,
-  );
+  ];
 
-  $return['form-comment'] = array (
+  $return['form-comment'] = [
     // '.note-id' => '4114',
     // '.comment-id' => 'new',
     // '.already-subscribed?' => false,
@@ -294,177 +376,9 @@
     'name' => 'Иван Петров',
     'email' => '',
     'text' => 'Это пример формы комментариев',
-  );
+  ];
 
-  $return['tags'] = array (
-    'menu-each' => array (
-      array (
-        'tag' => 'this is a list of',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'tags',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'that',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'you have chosen',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'to be shown',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'in the bottom',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'of the frontpage',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'it may',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'span',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'several',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'lines',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'depending on the number',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'of tags',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'and',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-      array (
-        'tag' => 'screen size',
-        'href' => $self_href,
-        'current?' => false,
-      ),
-    ),
-  );
 
-  // $return['popular'] = array (
-  //   'title' => 'Popular',
-  //   'each' => array (
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'These links appear under posts on their pages',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'A popular post',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Another post that everyone talks about',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Lorem ipsum dolor',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Short',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'These links appear under posts on their pages',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'A popular post',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Another post that everyone talks about',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Lorem ipsum dolor',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Short',
-  //       'current?' => false,
-  //     ),
-  //   ),
-  // );
-  
   return $return;
-
-  // $return['message']['each'] = array (
-  //   array (
-  //     'title' => 'No error, actually',
-  //     'description' => 'Error message with a title',
-  //   ),
-  //   array (
-  //     'description' => 'Error message without a title',
-  //   ),
-  //   array (
-  //     'class' => 'serious',
-  //     'description' => 'Serious error',
-  //   ),
-  //   array (
-  //     'class' => 'info',
-  //     'description' => 'Generic message',
-  //   ),
-  // );
-
-  // <div class="e2-text-picture">
-  //   <div style="width: 80%; height: 200px; background: #eee"></div>
-  //   <div class="e2-text-caption">An image or video may have a caption</div>
-  // </div>
 
 ?>

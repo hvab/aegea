@@ -1,6 +1,13 @@
 <?php
 
-// Neasden v2.76
+// Neasden v2.81
+
+// Все эти элементы сами по себе сохраняются на выходе, а эта настройка определяет, что будет сделано с их содержимым. Насколько я помню:
+
+// внутри элементов html.elements.opaque не нужно делить на абзацы автоматически и выделять разные блочные элементы вроде таблиц и картинок, но нужно понимать строчное форматирования типа жирности и ссылок и нужно наводить порядок в типографике;
+// внутри элементов html.elements.ignore всё форматтер работает как если бы их просто не было;
+// внутри элементов html.elements.sacred всё остаётся ровно как написано, форматтер туда не лезет.
+// Но с элементом code есть ещё дополнительная захардкоденная штука, которая заменяет в нём все ХТМЛ-спецсимволы так, чтобы они вывелись, а не сработали.
 
 interface NeasdenGroup {
   function render ($group, $myconf);
@@ -23,6 +30,9 @@ class Neasden {
   public $profile_name = '';
   public $explanation = '';
   public $resources_detected = [];
+  public $links_required = [];
+  public $groups_used = [];
+  public $config = [];
   // public $ctree = [];
   
   public $language_data = [];
@@ -62,10 +72,10 @@ class Neasden {
     );
 
     $host_dir = dirname ($_SERVER['PHP_SELF']); # '/meanwhile'
-    $host_dir = trim ($host_dir, '/').'/'; # 'meanwhile/' // usafe
+    $host_dir = trim ($host_dir, '/').'/'; # 'meanwhile/'
     if ($host_dir == '/') $host_dir = '';
     
-    $dir = rtrim (dirname (__FILE__), '/'). '/'; // usafe
+    $dir = rtrim (dirname (__FILE__), '/'). '/';
     $dir = str_replace ($_SERVER['DOCUMENT_ROOT'] .'/'. $host_dir, '', $dir);
     
     $this->config = require ('config.php');
@@ -95,7 +105,7 @@ class Neasden {
   
   function load_extension ($file) {
     $name = basename ($file);
-    if (substr ($name, -4) == '.php') $name = substr ($name, 0, strlen ($name) - 4); // usafe
+    if (substr ($name, -4) == '.php') $name = substr ($name, 0, strlen ($name) - 4);
     if (!array_key_exists ($name, $this->extensions)) {
       $NeasdenGroupClass = 'NeasdenGroup_' . $name;
       include_once $file;
@@ -137,7 +147,7 @@ class Neasden {
   }
   
   function special_sequence ($index) {
-    return self::RX_SPECIAL_CHAR . str_pad ($index, self::RX_SPECIAL_SEQUENCE_LENGTH, '0', STR_PAD_LEFT) . self::RX_SPECIAL_CHAR; // usafe
+    return self::RX_SPECIAL_CHAR . str_pad ($index, self::RX_SPECIAL_SEQUENCE_LENGTH, '0', STR_PAD_LEFT) . self::RX_SPECIAL_CHAR;
   }
 
 
@@ -388,13 +398,13 @@ class Neasden {
     $nobr_in = $this->isolate ('<nobr>');
     $nobr_out = $this->isolate ('</nobr>');
 
-    $text = preg_replace_callback ('/(?:\<[^\>]+\>)/u', array ($this, 'isolate'), $text); // usafe
+    $text = preg_replace_callback ('/(?:\<[^\>]+\>)/u', array ($this, 'isolate'), $text);
   
     if (@$this->config['typography.markup']) {
 
       // double parentheses and brackets
       $chars = array ('\\(', '\\)', '\\[', '\\]');
-      $text = preg_replace_callback ( // usafe
+      $text = preg_replace_callback (
         '/'.
         '(?:'. $chars[0].$chars[0] .'(?!'. $chars[0] .')(?=\S)(.*?)'.  $chars[1].$chars[1] .')'.
         '|'.
@@ -413,7 +423,7 @@ class Neasden {
         $url_regex = (
           '/'.
           '(\s|^|'. $this->rx_tags_regex .')'.
-          '((?:https?|ftps?)\:\/\/[\w\d\#\.\/&=%-_!\?\@\*]+)'.
+          '((?:https?|ftps?)\:\/\/[\w\d\#\.\/&=%-_!\?\@\*\~]+)'.
           '/isu'
         );
         $text = preg_replace_callback (
@@ -429,7 +439,7 @@ class Neasden {
         if (!@$t_in[$to]) $t_in[$to] = $this->isolate ('<'. $to .'>');
         if (!@$t_out[$to]) $t_out[$to] = $this->isolate ('</'. $to .'>');
         $char = '\\'. $from;
-        $text = preg_replace ( // usafe
+        $text = preg_replace (
           '/'.
           '(?:'. $char.$char .'(?!'. $char .')(?=\S)(.*?)'. $char.$char .')'.
           '|'.
@@ -458,21 +468,21 @@ class Neasden {
     }
   
     // dash
-    $text = preg_replace ( // usafe
-      '/(?<=^| |'. preg_quote ($nbsp) .')('. $this->rx_tags_regex .')\-('. $this->rx_tags_regex .')(?= |$)/mu', // usafe
+    $text = preg_replace (
+      '/(?<=^| |'. preg_quote ($nbsp) .')('. $this->rx_tags_regex .')\-('. $this->rx_tags_regex .')(?= |$)/mu',
       '$1'. $dash .'$2',
       $text
     );
   
     // space before dash
-    $text = preg_replace ( // usafe
-      '/ ('. $this->rx_tags_regex .')'. preg_quote ($dash) .'/', $nbsp .'$1'. $dash, $text // usafe
+    $text = preg_replace (
+      '/ ('. $this->rx_tags_regex .')'. preg_quote ($dash) .'/', $nbsp .'$1'. $dash, $text
     );
   
     // unions and prepositions
     if (1) {
       if ($nobreak_fw = $this->language_data['with-next']) {
-        $text = preg_replace ( // usafe
+        $text = preg_replace (
           "/".
           "(?<!\pL|\-)".    // not-a—Unicode-letter-or-dash lookbehind
           $nobreak_fw .     // a preposition
@@ -485,7 +495,7 @@ class Neasden {
       }
   
       if ($nobreak_bw = $this->language_data['with-prev']) {
-        $text = preg_replace ( // usafe
+        $text = preg_replace (
           "/".
           " ".             // a space
           "(". $this->rx_tags_regex .")".
@@ -583,7 +593,7 @@ class Neasden {
     foreach ($this->groups as $group_class => $group_regex) {
       if (
         !@in_array ($group_class, $this->config['banned-groups']) and
-        preg_match ('/^'. $group_regex .'$/', $rdef) // usafe
+        preg_match ('/^'. $group_regex .'$/', $rdef)
       ) {
         $this->groups_used[] = $group_class;
         return $group_class;
@@ -594,7 +604,7 @@ class Neasden {
   
   private function parse_group_line ($line) {
   
-    $line = rtrim ($line); // usafe
+    $line = rtrim ($line);
   
     $result = array (
       'content' => $line,
@@ -603,16 +613,16 @@ class Neasden {
       'class-data' => null,
     );
   
-    if (strlen ($line) == 0) { // usafe
+    if (strlen ($line) == 0) {
       $result['class'] = 'empty';
       return $result;
     }
   
     // headings
-    $line_hashless = ltrim ($line, $this->config['groups.headings.char']); // usafe
-    $heading_level = strlen ($line) - strlen ($line_hashless); // usafe
+    $line_hashless = ltrim ($line, $this->config['groups.headings.char']);
+    $heading_level = strlen ($line) - strlen ($line_hashless);
     if ($heading_level > 0 and $line_hashless[0] == ' ') {
-      $result['content'] = ltrim ($line_hashless, ' '); // usafe
+      $result['content'] = ltrim ($line_hashless, ' ');
       $result['class'] = 'h'. min (
         ($heading_level + ((int) @$this->config['groups.headings.plus'])), self::MAX_H_LEVEL
       );
@@ -626,7 +636,7 @@ class Neasden {
     // other classes
     foreach ($this->line_classes as $class => $regex) {
       $regex = '/^(?:'. $regex .')$/isu';
-      if (preg_match ($regex, $line, $matches)) { // usafe
+      if (preg_match ($regex, $line, $matches)) {
         if (
           !@$this->extensions[$class]['instance']
           or !method_exists (@$this->extensions[$class]['instance'], 'detect_line')
@@ -671,8 +681,8 @@ class Neasden {
     foreach ($src_lines as $src_line) {
   
       // quote level
-      $line_quoteless = ltrim ($src_line, $this->config['groups.quotes.char']); // usafe
-      $quote_level = strlen ($src_line) - strlen ($line_quoteless); // usafe
+      $line_quoteless = ltrim ($src_line, $this->config['groups.quotes.char']);
+      $quote_level = strlen ($src_line) - strlen ($line_quoteless);
       $src_line = $line_quoteless;
       $quote_level_changed = ($prev_quote_level != $quote_level);
       $quote_level_inc = max (0, $quote_level - $prev_quote_level);
@@ -680,8 +690,8 @@ class Neasden {
       $prev_quote_level = $quote_level;
   
       // analize spaceshifts and depth
-      $line = ltrim ($src_line, ' '); // usafe
-      $spaceshift = strlen ($src_line) - strlen ($line); // usafe
+      $line = ltrim ($src_line, ' ');
+      $spaceshift = strlen ($src_line) - strlen ($line);
       if ($spaceshift > $prev_spaceshift) {
         $depth ++;
         $depths_spaceshifts[] = $spaceshift;
@@ -772,11 +782,11 @@ class Neasden {
   // e. g. '<P Class=some>' -> 'p'
   
   private function element_name ($text) {
-    if ($text[0] != '<') return; // usafe
-    if ($text[strlen ($text) - 1] != '>') return; // usafe
-    $text = ltrim (substr ($text, 1, -1)) . ' '; // usafe: checked 128ness above
-    $text = substr ($text, 0, strpos ($text, ' ')); // usafe: paired
-    return strtolower (rtrim ($text)); // usafe: who cares
+    if ($text[0] != '<') return;
+    if ($text[strlen ($text) - 1] != '>') return;
+    $text = ltrim (substr ($text, 1, -1)) . ' '; // utf8-safe: checked 128ness above
+    $text = substr ($text, 0, strpos ($text, ' ')); // utf8-safe: paired
+    return strtolower (rtrim ($text)); // utf8-safe: who cares
   }
 
   
@@ -959,7 +969,7 @@ class Neasden {
             $tagname = substr ($tagname, 1);
           }
 
-          if (strstr (' '. $this->config['html.elements.ignore'] .' ', ' '. $tagname .' ')) {
+          if (strstr (' '. @$this->config['html.elements.ignore'] .' ', ' '. $tagname .' ')) {
 
             if ($thisfrag['content'] !== '') {
               $fragments[] = $thisfrag;
@@ -986,7 +996,7 @@ class Neasden {
             } else {
 
               if ($tagname == 'img') {
-                if ($this->config['html.img.detect']) {
+                if (@$this->config['html.img.detect']) {
                   if (preg_match (
                     '/\ssrc\=\"(?!.*?\:\/\/)(.*?)\"/i',
                     $r,
@@ -995,7 +1005,7 @@ class Neasden {
                     $this -> resource_detected ($matches[1]);
                   }
                 }
-                if ($this->config['html.img.prefix']) {
+                if (@$this->config['html.img.prefix']) {
                   $r = preg_replace (
                     '/(\s)src\=\"(?!\/|.*?\:\/\/)/i',
                     '$1src="'. $this->config['html.img.prefix'],
@@ -1236,7 +1246,7 @@ class Neasden {
         $this->explanation .= '<tr valign="top" class="frag">';
         $this->explanation .= (
           '<td style="background: #ffc; color: '. $color .'"><tt>['.
-          htmlspecialchars ($frag['content'], ENT_NOQUOTES, 'UTF-8') . // usafe
+          htmlspecialchars ($frag['content'], ENT_NOQUOTES, 'UTF-8') .
           ']</tt></td>'
         );
     
@@ -1245,15 +1255,15 @@ class Neasden {
         } else {
           $this->explanation .= '<td><tt>['. @print_r ($frag['debug'], true) .']</tt></td>';
         }
-        $this->explanation .= '<td><tt>['. htmlspecialchars ($frag['result'], ENT_NOQUOTES, 'UTF-8') .']</tt></td>'; // usafe
+        $this->explanation .= '<td><tt>['. htmlspecialchars ($frag['result'], ENT_NOQUOTES, 'UTF-8') .']</tt></td>';
         $this->explanation .= '</tr>';
     
         if (is_array (@$frag['processing'])) {
           foreach ($frag['processing'] as $group) {
             $this->explanation .= '<tr valign="top">';
-            $this->explanation .= '<td><tt>['. @htmlspecialchars  ($group['content'], ENT_NOQUOTES, 'UTF-8') .']</tt></td>'; // usafe
+            $this->explanation .= '<td><tt>['. @htmlspecialchars  ($group['content'], ENT_NOQUOTES, 'UTF-8') .']</tt></td>';
             $this->explanation .= '<td><tt>['. @str_repeat ('>', $group['depth']) .''. @$group['class'] .'<br />'. @print_r ($group['debug'], true) .']</tt></td>';
-            $this->explanation .= '<td><tt>['. @htmlspecialchars  ($group['result'], ENT_NOQUOTES, 'UTF-8') .']</tt></td>'; // usafe
+            $this->explanation .= '<td><tt>['. @htmlspecialchars  ($group['result'], ENT_NOQUOTES, 'UTF-8') .']</tt></td>';
             $this->explanation .= '</tr>';
           }
         }

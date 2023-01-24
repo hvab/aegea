@@ -1,0 +1,45 @@
+.e2-promo-box {
+  // background: var(--sheetBackgroundColor);
+  border: 1px var(--thinRuleColor) solid;
+  border-radius: var(--borderRadius);
+  padding: 12px 12px 12px 2.33em;
+  // margin: 40px 0 24px;
+  max-width: 480px;
+  font-size: 14px;
+  line-height: 18px;
+  clear: left; // because of forms
+}
+
+.e2-promo-box a,
+.e2-promo-box a:visited {
+  color: var(--adminColor);
+  border-color: var(--adminUnderlineColor);
+}
+
+.e2-promo-box a:hover,
+.e2-promo-box a.hover {
+  color: var(--hoverColor);
+  border-color: var(--hoverUnderlineColor);
+}
+
+.e2-paid {
+	display: inline-block;
+  width: 1.6em;
+  height: 1.6em;
+  position: relative;
+  font-size: 80%;
+  line-height: 1.4em;
+  font-weight: bold;
+  vertical-align: baseline;
+  text-align: center;
+  // background: var(--adminColor);
+  // color: #fff;
+  border: 1px var(--foregroundColor) solid;
+  color: var(--foregroundColor);
+  border-radius: 50%;
+}
+
+.e2-paid-hanging {
+  position: absolute;
+  margin-left: -1.93em;
+}

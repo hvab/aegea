@@ -253,7 +253,7 @@ class Mp3Info {
                 array_walk($sizeBytes, function (&$value) {
                     $value = substr(str_pad(base_convert($value, 10, 2), 8, 0, STR_PAD_LEFT), 1);
                 });
-                $size = bindec(implode(null, $sizeBytes)) + 10;
+                $size = bindec(implode('', $sizeBytes)) + 10;
                 $audioSize -= ($this->_id3Size = $size);
             }
         }

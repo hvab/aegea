@@ -3,7 +3,7 @@
 
 <?= $content['comment-href'] ?> 
 
-<?= _S ('em--comment-replied-at') ?>:
+<?= _S ('em--comment-replied-to') ?>:
 <?= $content['comment-text']?> 
 	<?= $content['commenter'] ?> 
 

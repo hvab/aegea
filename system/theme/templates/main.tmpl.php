@@ -21,11 +21,12 @@
 
 <?php _T_FOR ('rose-debug-info') ?>
 
+<?php _T_FOR ('stub') ?>
 <?php _T_FOR ('form-install') ?>
 <?php _T_FOR ('form-login') ?>
 
-<?php if (@$content['blog']['show-subscribe-button?']) { ?>
-<?php _X ('subscribe-sheet') ?>
+<?php if (@$content['blog']['show-follow-button?']) { ?>
+<?php _X ('follow-sheet') ?>
 <?php } ?>
 
 <?php if ($content['engine']['installed?']) { ?>

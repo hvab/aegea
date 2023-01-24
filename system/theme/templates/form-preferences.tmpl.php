@@ -6,13 +6,6 @@
 
   <input
     type="hidden"
-    id="token"
-    name="token"
-    value="<?= @$content['form-preferences']['.token'] ?>"
-  />
-
-  <input
-    type="hidden"
     id="e2-blog-title-default"
     name="blog-title-default"
     value="<?= @$content['form-preferences']['blog-title-default'] ?>"
@@ -25,6 +18,13 @@
     value="<?= @$content['form-preferences']['blog-author-default'] ?>"
   />
   
+  <input
+    type="hidden"
+    id="token"
+    name="token"
+    value="<?= $content['sign-in']['token'] ?>"
+  />
+
   <div class="form">
     <div class="form-part">
       <div class="form-control form-control-big">
@@ -150,14 +150,14 @@
           </div>  
         </div>
         <div class="form-element" <?php if (!$template_current['supports-dark-mode?']) {?>style="display: none;"<?php } ?>>
-          <label class="checkbox">
+          <label class="e2-switch">
             <input
               type="checkbox"
               id="respond-to-dark-mode"
               name="respond-to-dark-mode"
               class="checkbox"
               <?= @$content['form-preferences']['respond-to-dark-mode?']? ' checked="checked"' : ''?>
-            /> <?= _S ('ff--respond-to-dark-mode') ?>
+            /><i></i> <?= _S ('ff--respond-to-dark-mode') ?>
           </label>
         </div>
       </div>
@@ -183,6 +183,71 @@
         </div>
       </div>
 
+      <?php if (@$content['form-preferences']['main-menu-promo']) { ?>
+        <div class="form-part">
+          <div class="form-control">
+            <div class="form-label input-label">
+              <label><?= _S ('ff--main-menu') ?></label>
+            </div>
+            <div class="form-element">
+            <div class="e2-promo-box">
+              <span class="e2-paid e2-paid-hanging"><?= _S ('e2--currency-sign') ?></span> <?= $content['form-preferences']['main-menu-promo'] ?>
+            </div>
+            </div>
+          </div>
+        </div>
+      <?php } ?>
+
+    <?php if (@$content['form-preferences']['includes-main-menu-fields?']) { ?>
+      <div class="form-control">
+        <div class="form-subcontrol">
+          <div class="form-label"><label><?= _S ('ff--main-menu') ?></label></div>
+          <div class="form-element">
+            <label class="e2-switch">
+            <input
+              type="checkbox"
+              id="show-main-menu"
+              name="show-main-menu"
+              class="checkbox"
+              <?php if ($content['blog']['virgin?'] and !@$content['form-preferences']['show-main-menu?']) { ?>
+              disabled
+              <?php } ?>
+              <?= @$content['form-preferences']['show-main-menu?']? ' checked="checked"' : ''?>
+            /><i></i> <?= _S ('ff--show') ?><?php if ($content['blog']['virgin?']) { ?> <?= _S ('gs--after-you-publish') ?><?php } ?>
+            </label><br />
+          </div>
+          <div class="form-element">
+            <div class="form-control-sublabel">
+              <?= _S ('gs--main-menu-description'); ?>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-subcontrol" id="main-menu-items" <?php if (!$content['form-preferences']['show-main-menu?']) {?>style="display: none;"<?php } ?>>
+          <?php foreach ($content['form-preferences']['main-menu-items'] as $item) { ?>
+          <?php if ($item['available?']) { ?>
+          <div class="form-element">
+            <label class="e2-switch">
+            <input
+              type="checkbox"
+              name="show-main-menu-item-<?= $item['sort-id'] ?>"
+              class="checkbox"
+              <?= $item['visible?']? ' checked="checked"' : ''?>
+            /><i></i> <span class="e2-svgi"><?= _SVG ($item['svg-id']) ?></span> <?= $item['title'] ?>
+            </label><br />
+          </div>
+          <?php } ?>
+          <?php } ?>
+          <div class="form-element">
+            <div class="form-control-sublabel">
+              <?= str_replace ('::svg::', '<span class="e2-svgi">'. _SVG ('pinned-off') .'</span>', _S ('gs--how-to-pin-tags')) ?>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    <?php } ?>
+
       <div class="form-control">
         <div class="form-label input-label"><label><?= _S ('ff--posts') ?></label></div>
         <div class="form-element">
@@ -199,25 +264,25 @@
           </label>
         </div>
         <div class="form-element">
-          <label class="checkbox">
+          <label class="e2-switch">
           <input
             type="checkbox"
             id="show-view-counts"
             name="show-view-counts"
             class="checkbox"
             <?= @$content['form-preferences']['show-view-counts?']? ' checked="checked"' : ''?>
-          /> <?= _S ('ff--show-view-counts') ?>
+          /><i></i> <?= str_replace ('::svg::', '<span class="e2-svgi">'. _SVG ('read') .'</span>', _S ('ff--show-view-counts')) ?>
           </label><br />
         </div>
         <div class="form-element">
-          <label class="checkbox">
+          <label class="e2-switch">
           <input
             type="checkbox"
             id="show-sharing-buttons"
             name="show-sharing-buttons"
             class="checkbox"
             <?= @$content['form-preferences']['show-sharing-buttons?']? ' checked="checked"' : ''?>
-          /> <?= _S ('ff--show-sharing-buttons') ?>
+          /><i></i> <?= _S ('ff--show-sharing-buttons') ?>
           </label><br />
         </div>
       </div>
@@ -226,41 +291,41 @@
       
         <div class="form-element">
       
-          <label class="checkbox">
+          <label class="e2-switch">
           <input
             type="checkbox"
             id="comments-default-on"
             name="comments-default-on"
             class="checkbox"
             <?= @$content['form-preferences']['comments-default-on?']? ' checked="checked"' : ''?>
-          /> <?= _S ('ff--comments-enable-by-default') ?>
+          /><i></i> <?= _S ('ff--comments-enable-by-default') ?>
           </label><br />
       
         </div>
         <div class="form-element">
       
-          <label class="checkbox">
+          <label class="e2-switch">
           <input
             type="checkbox"
             id="comments-require-gip"
             name="comments-require-gip"
             class="checkbox"
             <?= @$content['form-preferences']['comments-require-gip?']? ' checked="checked"' : ''?>
-          /> <?= _S ('ff--comments-require-social-id') ?>
+          /><i></i> <?= _S ('ff--comments-require-social-id') ?>
           </label><br />
       
         </div>
       
         <div class="form-element">
       
-          <label class="checkbox">
+          <label class="e2-switch">
           <input
             type="checkbox"
             id="comments-fresh-only"
             name="comments-fresh-only"
             class="checkbox"
             <?= @$content['form-preferences']['comments-fresh-only?']? ' checked="checked"' : ''?>
-          /> <?= _S ('ff--only-for-recent-posts') ?>
+          /><i></i> <?= _S ('ff--only-for-recent-posts') ?>
           </label><br />
       
         </div>
@@ -268,14 +333,14 @@
         <?php if ($content['form-preferences']['emailing-possible?']) { ?>
         <div class="form-element">
       
-          <label class="checkbox">
+          <label class="e2-switch">
           <input
             type="checkbox"
             id="email-notify"
             name="email-notify"
             class="checkbox"
             <?= @$content['form-preferences']['email-notify?']? ' checked="checked"' : ''?>
-          /> <?= _S ('ff--send-by-email') ?>
+          /><i></i> <?= _S ('ff--send-by-email') ?>
           </label><br />
       
         </div>
@@ -312,8 +377,23 @@
       </div>
 
     </div>
-    
-    <?php if (@$content['form-preferences']['includes-yandex-metrika?']) { ?>
+
+    <?php if (@$content['form-preferences']['analytics-promo']) { ?>
+      <div class="form-part">
+        <div class="form-control">
+          <div class="form-label input-label">
+            <label><?= _S ('ff--analytics') ?></label>
+          </div>
+          <div class="form-element">
+          <div class="e2-promo-box">
+            <span class="e2-paid e2-paid-hanging"><?= _S ('e2--currency-sign') ?></span> <?= $content['form-preferences']['analytics-promo'] ?>
+          </div>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+
+    <?php if (@$content['form-preferences']['includes-analytics-fields?']) { ?>
       <div class="form-part">
         <div class="form-control">
           <div class="form-label input-label">

@@ -1,0 +1,123 @@
+:root {
+    
+  --backgroundColor:             rgb( 250, 235, 218      );
+  --backgroundTransparentColor: rgba( 250, 235, 218, .8  );
+  --sheetBackgroundColor:       rgba( 233, 216, 197, .8  );
+
+  /* --foregroundColor */
+  --thinRuleColor:              rgba(   0,   0,   0, .2  );
+
+  --headingsColor:                  black;
+  --headingsUnderlineColor:     rgba(   0,   0,   0, .2  );
+  /* --boldColor */
+  /* --boldUnderlineColor */
+  --linkColor:                   rgb(  61,  96, 119      );
+  --linkUnderlineColor:         rgba(  61,  96, 119, .2  );
+  --linkColorVisited:            rgb(  84, 121, 145      );
+  --linkUnderlineColorVisited:  rgba(  84, 121, 145, .2  );
+  --hoverColor:                  rgb( 219,   0,  36      );
+  --hoverUnderlineColor:        rgba( 219,   0,  36, .2  );
+  /* --tagColor */
+  /* --tagUnderlineColor */
+  /* --adminColor */
+  /* --adminUnderlineColor */
+  --engineTextColor:             rgb(  86,  85, 103      );
+  --engineTextUnderlineColor:   rgba(  86,  85, 103, .25 );
+
+  --markedTextBackground:           white;
+  --markedImageBorderColor:      rgb( 219,   0,  36      );
+
+  --inputBackgroundColor:        rgb( 230, 215, 198      );
+  /* --inputTextColor */
+  /* --offSwitchColor */
+  --onSwitchColor:               var(--activeColor);
+
+  /* --imageBorderColor */
+  /* --disabledColor */
+  --activeColor:                    #416077;
+  --errorColor:                  rgb( 240,  64,  32);
+  --verifiedColor:               rgb(   64, 192, 32);
+  /* --currentItemBackgroundColor */
+  /* --windowBackgroundColor */
+  /* --unsavedIndicatorColor */
+  
+  /* to match .likely */
+  /* --followButtonBackground: rgba(231,231,231,.8); */
+  /* --followButtonHoverBackground: rgba(212,212,212,.8); */
+  /* --followButtonTextColor: #000; */
+
+  /* to match .likely-light */
+  /* --followButtonBackground: rgba(236,236,236,.16); */
+  /* --followButtonHoverBackground: rgba(255,255,255,.48); */
+  /* --followButtonTextColor: #fff; */
+  
+  /* --marginTop */
+  /* --marginLeft */
+  /* --marginRight */
+  /* --marginTopCompact */
+  /* --marginLeftCompact */
+  /* --marginRightCompact */
+
+  /* --displayLogoMarginal */
+  /* --displayLogo */
+  /* --displayLogoCompact */
+
+  /* --columnSpacing */
+
+  /* --logoTop */
+  /* --blogTitleFontSize */
+  /* --blogTitleLineHeight */
+  /* --pageHeadingFontSize */
+  /* --pageHeadingLineHeight */
+  /* --noteTitleFontSize */
+  /* --noteTitleLineHeight */
+  /* --noteLeadFontSize */
+  /* --noteLeadLineHeight */
+  /* --noteTextFontSize */
+  /* --noteTextLineHeight */
+
+  --mainFontFamily: Georgia, serif;
+  --noteMainFontFamily: Georgia, serif;
+  --smallFontFamily: "Verdana", sans-serif;
+
+  /* --time */
+  /* --timeLong */
+
+}
+
+.e2-text .lead {
+  color: var(--headingsColor);
+  font-style: italic;
+}
+
+.e2-text .loud {
+  font-weight: bold;
+  border: #000 solid;
+  color: #000;
+  border-width: 10px 0 1px;
+  border-bottom-color: var(--thinRuleColor);
+  font-size: 36px;
+  line-height: 40px;
+  max-width: 720px;  
+  padding: .4em 0 .5em;
+  margin: 24px 0 36px 0;
+}
+
+.e2-text hr {
+  max-width: 720px; /* to fit with .loud lines */
+}
+
+.e2-button {
+  background: #eedfce;
+  background: linear-gradient(to bottom, #f2e3d2 0%, #ebdccb 100%);
+}
+
+.e2-submit-button {
+  background: #416077;
+  background: linear-gradient(to bottom, #517087 0%, #315067 100%);
+}
+
+.e2-delete-button {
+  background: #eaded8;
+  background: linear-gradient(to bottom, #f4ece8 0%, #e0d0c8 100%);
+}

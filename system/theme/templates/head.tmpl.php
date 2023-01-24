@@ -22,12 +22,12 @@
 <link rel="<?= $link['rel'] ?>" id="<?= $link['id'] ?>" href="<?= $link['href'] ?>" />
 <?php endforeach ?>
 
-<?php if (array_key_exists ('manifest-href', $content['meta'])): ?>
-<link rel="manifest" href="<?= $content['meta']['manifest-href'] ?>">
+<?php if (array_key_exists ('canonical-href', $content['meta'])): ?>
+<link rel="canonical" href="<?= $content['meta']['canonical-href'] ?>">
 <?php endif ?>
 
-<?php if (array_key_exists ('robots', $content['meta'])): ?>
-<meta name="robots" content="<?= $content['meta']['robots'] ?>" />
+<?php if (array_key_exists ('manifest-href', $content['meta'])): ?>
+<link rel="manifest" href="<?= $content['meta']['manifest-href'] ?>">
 <?php endif ?>
 
 <?php if (array_key_exists ('summary', $content)): ?>
