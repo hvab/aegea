@@ -68,7 +68,7 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
         />
       </div>
 
-      <a href="#" class="e2-admin-link nu e2-schedule-controls-unrevealer e2-svgi"><?= _SVG ('close') ?></a>
+      <a href="#" class="e2-admin-link nu e2-schedule-controls-unrevealer e2-svgi" style="margin-left: 6px"><?= _SVG ('close') ?></a>
 
     </div>
   </div>

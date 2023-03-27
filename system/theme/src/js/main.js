@@ -5,6 +5,7 @@ import detect from './lib/detect'
 import textEditorInit from './lib/text-editor'
 import initSmartTitle from './e2-modules/smart-title'
 import initSearchHotKeys from './e2-modules/searchHotKeys'
+import initSafariFormCmdSubmitFix from './e2-modules/e2SafariFormCmdSubmitFix'
 import e2Ajax from './e2-modules/e2Ajax'
 import e2NiceError from './e2-modules/e2NiceError'
 import e2SpinningAnimationStartStop from './e2-modules/e2SpinningAnimationStartStop'
@@ -16,6 +17,7 @@ import initScrollingModule from './e2-modules/band'
 // First init imports
 initFormComment()
 initSmartTitle()
+initSafariFormCmdSubmitFix()
 initSearchHotKeys()
 initScrollingModule()
 
@@ -73,7 +75,7 @@ function initObsoleteFunction () {
       $formLogin.find('.input-disableable').prop('disabled', true)
       $formLoginPassword.blur()
       e2SpinningAnimationStartStop($formLoginPasswordChecking, 1)
-      $formLoginPasswordChecking.fadeIn(333)
+      $formLoginPasswordChecking.fadeIn(200)
 
       var ajaxRequest = e2Ajax({
         url: $('#e2-check-password-action').attr('href'),
@@ -85,7 +87,7 @@ function initObsoleteFunction () {
 
           if (typeof response.data === 'undefined' || typeof response.data['password-correct'] === 'undefined') {
             e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
-            $formLoginPasswordChecking.fadeOut(333)
+            $formLoginPasswordChecking.fadeOut(200)
             e2NiceError({
               message: 'er--js-server-error',
               debug: {
@@ -101,13 +103,13 @@ function initObsoleteFunction () {
           if (response.data['password-correct']) {
             e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
             $formLoginPasswordChecking.hide()
-            $('#password-correct').fadeIn(333, function () {
+            $('#password-correct').fadeIn(200, function () {
               mustSubmit = true
               $formLogin.submit()
             })
           } else {
             e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
-            $formLoginPasswordChecking.fadeOut(333)
+            $formLoginPasswordChecking.fadeOut(200)
             $formLoginPassword.focus()
             swing($('#e2-login-window')[0])
           }
@@ -115,12 +117,12 @@ function initObsoleteFunction () {
         error: function () {
           $formLogin.find('.input-disableable').prop('disabled', false)
           e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
-          $formLoginPasswordChecking.fadeOut(333)
+          $formLoginPasswordChecking.fadeOut(200)
         },
         abort: function () {
           $formLogin.find('.input-disableable').prop('disabled', false)
           e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
-          $formLoginPasswordChecking.fadeOut(333)
+          $formLoginPasswordChecking.fadeOut(200)
         }
       })
 
@@ -241,7 +243,7 @@ function initKeyboardShortcuts () {
           event.preventDefault()
           if (event.ctrlKey && (event.type === 'keydown')) {
             if ($targetForm.find('#submit-button').length && !$targetForm.find('#submit-button').is(':disabled')) {
-              $targetForm.submit()
+              $targetForm.trigger('submit')
             }
           }
           return false

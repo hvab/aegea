@@ -109,14 +109,35 @@
       <?= $content['tag']['notes-count-text'] ?>: <a href="">*с первой</a> · <a href="">с последней</a>
       </div> -->
 
+      <?php if (array_key_exists ('related', $content['tag']) and count ($content['tag']['related'])) { ?>
+      
+      <div class="e2-band e2-band-meta-size e2-heading-meta">
+      <div class="e2-band-scrollable js-band-scrollable">
+        <div class="js-band-scrollable-inner">
+        <nav>
+
+        <div class="band-item">
+          <div class="band-item-inner">
+            <?= $content['tag']['notes-count-text'] ?>
+          </div>
+        </div>
+        
+        <?php $content['_']['_tags_line']['_prepend'] = _S ('gs--see-also') .':'; ?>
+        <?php $content['_']['_tags_line']['_tags'] = $content['tag']['related']; ?>
+        <?php _T ('tags-line') ?>
+
+        </nav>
+        </div>
+      </div>
+      </div>
+
+      <?php } else {?>
+
       <div class="e2-heading-meta">
         <?= $content['tag']['notes-count-text'] ?>
-        <?php if (array_key_exists ('related', $content['tag']) and count ($content['tag']['related'])) { ?>
-          <?php $content['_']['_tags_line']['_prepend'] = '   '. _S ('gs--see-also') .':  '; ?>
-          <?php $content['_']['_tags_line']['_tags'] = $content['tag']['related']; ?>
-          <?php _T ('tags-line') ?>
-        <?php } ?>
       </div>
+
+      <?php } ?>
 
       <?php if ((string) $content['tag']['description'] !== ''): ?>
       <div class="e2-heading-description e2-text">

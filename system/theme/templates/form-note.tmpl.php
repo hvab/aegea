@@ -84,144 +84,166 @@
   
   <div class="form" id="e2-note-form-wrapper">
   
-    <div class="form-control form-control-big">
-      <div class="form-label input-label">
-        <label><?= _S ('ff--title') ?></label>
+    <div class="form-part">
+
+      <div class="form-control form-control-big">
+        <div class="form-label input-label">
+          <label><?= _S ('ff--title') ?></label>
+        </div>
+        <div class="form-element">
+          <input type="text"
+            class="text big required unedited width-4 e2-smart-title"
+            autocomplete="off"
+            tabindex="1"
+            id="title"
+            name="title"
+            value="<?= @$content['form-note']['title'] ?>"
+          />
+        </div>
       </div>
-      <div class="form-element">
-        <input type="text"
-          class="text big required unedited width-4 e2-smart-title"
-          autocomplete="off"
-          tabindex="1"
-          id="title"
-          name="title"
-          value="<?= @$content['form-note']['title'] ?>"
-        />
-      </div>
-    </div>
-    
-    <div class="form-control">
-      <div class="form-subcontrol">
-    
-        <div class="form-label form-label-sticky input-label">
-          <label>
-            <?= _S ('ff--text') ?>
-            <a href="http://<?= _S ('e2--website-host') ?>/help/text/" target="_blank" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('help') ?></span></a>
-          </label>
-    
-          <div class="form-label-saveinfo">
-            <span id="livesaving" style="display: none"><?= _S ('ff--saving') ?>
-              <span class="e2-svgi"><?= _SVG ('spin') ?></span>
-            </span>
-            <span id="livesave-button" class="e2-keyboard-shortcut e2-clickable-keyboard-shortcut e2-admin-link" style="display: none"><?= _SHORTCUT ('livesave')? _SHORTCUT ('livesave') : _S ('ff--save') ?></span>
-            <span class="e2-attention-led js-unsaved-led" style="display: none"></span>
+      
+      <div class="form-control">
+        <div class="form-subcontrol">
+      
+          <div class="form-label form-label-sticky input-label">
+            <label>
+              <?= _S ('ff--text') ?>
+              <a href="http://<?= _S ('e2--website-host') ?>/help/text/" target="_blank" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('help') ?></span></a>
+            </label>
+      
+            <div class="form-label-saveinfo">
+              <span id="livesaving" style="display: none"><?= _S ('ff--saving') ?>
+                <span class="e2-svgi"><?= _SVG ('spin') ?></span>
+              </span>
+              <span id="livesave-button" class="e2-keyboard-shortcut e2-clickable-keyboard-shortcut e2-admin-link" style="display: none"><?= _SHORTCUT ('livesave')? _SHORTCUT ('livesave') : _S ('ff--save') ?></span>
+              <span class="e2-attention-led js-unsaved-led" style="display: none"></span>
+            </div>
+      
           </div>
-    
+      
+          <div class="form-element">
+            <textarea name="text"
+              class="required e2-text-textarea e2-textarea-autosize full-width height-16<?php if (@$content['form-note']['uploads-enabled?']) { ?> e2-external-drop-target e2-external-drop-target-textarea e2-external-drop-target-altable<?php } ?>"
+              id="text"
+              tabindex="2"
+            ><?=$content['form-note']['text']?></textarea>
+          </div>
+      
         </div>
-    
-        <div class="form-element">
-          <textarea name="text"
-            class="required e2-text-textarea e2-textarea-autosize full-width height-16<?php if (@$content['form-note']['uploads-enabled?']) { ?> e2-external-drop-target e2-external-drop-target-textarea e2-external-drop-target-altable<?php } ?>"
-            id="text"
-            tabindex="2"
-          ><?=$content['form-note']['text']?></textarea>
+      
+        <div class="form-subcontrol">
+          <div class="form-element">
+            <?php _T ('uploads') ?>
+          </div>
         </div>
-    
+      
+        <?php if (@$content['form-note']['space-usage']) { ?>
+        <div class="form-subcontrol">
+          <div class="form-element"><?= $content['form-note']['space-usage'] ?></div>
+        </div>
+        <?php } ?>
+      
       </div>
-    
-      <div class="form-subcontrol">
+      
+      <div class="form-control">
+        <div class="form-label input-label">
+          <label><?= _S ('ff--tags') ?></label>
+        </div>
+      
         <div class="form-element">
-          <?php _T ('uploads') ?>
+          <select id="tags" name="tags[]" tabindex="3" class="width-4 chzn-select" multiple="multiple" data-placeholder=" " size="2">
+            <?php foreach ($content['form-note']['tags-info'] as $tag) { ?>
+              <option <?= $tag['selected?']? 'selected' : '' ?>><?= $tag['tag-dotted'] ?></option>
+            <?php } ?>
+          </select><br />
         </div>
       </div>
-     
-      <?php if (@$content['form-note']['space-usage']) { ?>
-      <div class="form-subcontrol">
-        <div class="form-element"><?= $content['form-note']['space-usage'] ?></div>
+
+      <?php if (@$content['form-note']['time'] or @$content['form-note']['alias']) { ?>
+      <div class="e2-note-time-and-url">
+      <div class="form-control">
+          <div class="form-label">
+            <label><?= _S ('ff--details') ?></label>
+          </div>
+        <div class="form-element">
+          <a href="javascript: return false" onclick="$ ('.e2-note-time-and-url').slideToggle(200); return false" class="e2-pseudolink e2-admin-link"><?php if (@$content['form-note']['draft?']) { ?><?= _S ('ff--will-be-published') ?><?php } else { ?><?= _S ('ff--is-published') ?><?php } ?> <?php if (@$content['form-note']['alias']) { ?>
+          <?= _S ('ff--at-address') ?> .../<?= @$content['form-note']['alias'] ?>/
+          <?php } ?>
+          <?php if (@$content['form-note']['time']) { ?>
+          <span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $content['form-note']['time'])?>"><?= _DT ('j {month-g} Y, H:i', $content['form-note']['time']) ?></span>
+          <?php } ?>
+          </a>
+        </div>
+      </div>
       </div>
       <?php } ?>
-    
-    </div>
-    
-    <div class="form-control">
-      <div class="form-label input-label">
-        <label><?= _S ('ff--tags') ?></label>
-      </div>
-    
-      <div class="form-element">
-        <select id="tags" name="tags[]" tabindex="3" class="width-4 chzn-select" multiple="multiple" data-placeholder=" " size="2">
-          <?php foreach ($content['form-note']['tags-info'] as $tag) { ?>
-            <option <?= $tag['selected?']? 'selected' : '' ?>><?= $tag['tag-dotted'] ?></option>
-          <?php } ?>
-        </select><br />
-      </div>
+  
     </div>
     
     <?php if (@$content['form-note']['time'] or @$content['form-note']['alias']) { ?>
-      <div class="form-control">
-        <div class="form-element">
-      
-          <div class="e2-note-time-and-url">
-            <a href="javascript: return false" onclick="$ ('.e2-note-time-and-url').slideToggle(333); return false" class="e2-pseudolink e2-admin-link"><?php if (@$content['form-note']['draft?']) { ?><?= _S ('ff--will-be-published') ?><?php } else { ?><?= _S ('ff--is-published') ?><?php } ?> <?php if (@$content['form-note']['alias']) { ?>
-            <?= _S ('ff--at-address') ?> .../<?= @$content['form-note']['alias'] ?>/
-            <?php } ?>
-            <?php if (@$content['form-note']['time']) { ?>
-            <span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $content['form-note']['time'])?>"><?= _DT ('j {month-g} Y, H:i', $content['form-note']['time']) ?></span>
-            <?php } ?>
-            </a>
+      <div class="form-part e2-note-time-and-url" style="display: none">
+
+        <div class="form-control">
+          <div class="form-label input-label">
+            <label><?= _S ('ff--urlname') ?></label>
           </div>
-      
-          <div class="e2-note-time-and-url" style="display: none">
-      
-            <div class="form-subcontrol">
-              <textarea name="summary"
-                class="e2-text-textarea e2-textarea-autosize width-4 height-2"
-                id="summary"
-                tabindex="5"
-                placeholder="<?= _S ('ff--summary') ?>"
-              ><?=$content['form-note']['summary']?></textarea>
-              <div class="form-control-sublabel">
-                <?= _S ('gs--search-engines-social-networks-aggregators') ?>
-              </div>
-            </div>
-      
-            <div class="form-subcontrol">
-              <input type="text"
-                class="text required unedited width-2"
-                autocomplete="off"
-                tabindex="6"
-                id="alias"
-                name="alias"
-                placeholder="<?= @$content['form-note']['alias-autogenerated'] ?>"
-                value="<?= @$content['form-note']['alias'] ?>"
-              />
-            </div>
-      
-            <?php if (@$content['form-note']['time']) { ?>
-      
-            <div class="form-subcontrol">
-              <input type="text"
-                tabindex="7"
-                class="text width-2 goodyear"
-                name="stamp"
-                id="stamp"
-                placeholder="<?= @$content['form-note']['stamp-formatted'] ?>"
-                data-goodyear-language="<?= $content['blog']['language'] ?>"
-                data-goodyear-format="DD.MM.YYYY HH:mm:ss"
-                data-goodyear-min-year="1970"
-                data-goodyear-max-year="2035"
-                data-goodyear-min-date="01-01-1970"
-                data-goodyear-hour-picker="true"
-                data-goodyear-minute-picker="true"
-                data-goodyear-minutes-step="1"
-                value="<?= @$content['form-note']['stamp-formatted'] ?>"
-              />
-            </div>
-      
-            <?php } ?>
-      
+          <div class="form-element">
+            <input type="text"
+              class="text required unedited width-2"
+              autocomplete="off"
+              tabindex="6"
+              id="alias"
+              name="alias"
+              placeholder="<?= @$content['form-note']['alias-autogenerated'] ?>"
+              value="<?= @$content['form-note']['alias'] ?>"
+            />
           </div>
         </div>
+
+        <?php if (@$content['form-note']['time']) { ?>
+  
+        <div class="form-control">
+          <div class="form-label input-label">
+            <label><?= _S ('ff--post-time') ?></label>
+          </div>
+          <div class="form-element">
+            <input type="text"
+              tabindex="7"
+              class="text width-2 goodyear"
+              name="stamp"
+              id="stamp"
+              placeholder="<?= @$content['form-note']['stamp-formatted'] ?>"
+              data-goodyear-language="<?= $content['blog']['language'] ?>"
+              data-goodyear-format="DD.MM.YYYY HH:mm:ss"
+              data-goodyear-min-year="1970"
+              data-goodyear-max-year="2035"
+              data-goodyear-min-date="01-01-1970"
+              data-goodyear-hour-picker="true"
+              data-goodyear-minute-picker="true"
+              data-goodyear-minutes-step="1"
+              value="<?= @$content['form-note']['stamp-formatted'] ?>"
+            />
+          </div>
+        </div>
+
+        <?php } ?>
+
+        <div class="form-control">
+          <div class="form-label input-label">
+            <label><?= _S ('ff--summary') ?></label>
+          </div>
+          <div class="form-element">
+            <textarea name="summary"
+              class="e2-text-textarea e2-textarea-autosize width-4 height-2"
+              id="summary"
+              tabindex="5"
+            ><?=$content['form-note']['summary']?></textarea>
+            <div class="form-control-sublabel">
+              <?= _S ('gs--search-engines-social-networks-aggregators') ?>
+            </div>
+          </div>
+        </div>
+
       </div>
     <?php } ?>
     

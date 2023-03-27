@@ -51,7 +51,7 @@
       </div>
       
       <div class="form-control">
-        <div class="form-label input-label"><label><?= _S ('ff--tag-urlname') ?></label></div>
+        <div class="form-label input-label"><label><?= _S ('ff--urlname') ?></label></div>
         <div class="form-element">
           <input type="text"
             class="text required width-2"

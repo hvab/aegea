@@ -137,6 +137,11 @@
   font-family: var(--smallFontFamily);
 }
 
+.e2-note-meta mark {
+  border-radius: .2em;
+  padding-bottom: .1em;
+}
+
 .e2-note-publish-preview {
   max-width: 480px;
   background: var(--sheetBackgroundColor);

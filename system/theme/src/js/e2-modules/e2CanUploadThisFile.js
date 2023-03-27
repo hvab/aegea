@@ -1,11 +1,10 @@
-function e2CanUploadThisFile (filename, mask) {
+function e2CanUploadThisFile (filename, extRegex) {
   var ext = ''
-  var dot = filename.lastIndexOf('.')
-  var extensionMask = typeof mask === 'object' ? mask : /^gif|jpe?g|png|svg|mp3$/i;
+  var dotPos = filename.lastIndexOf('.')
 
-  if (dot !== -1) ext = filename.substr(dot + 1)
+  if (dotPos !== -1) ext = filename.substr(dotPos + 1)
 
-  return extensionMask.test(ext)
+  return extRegex.test(ext)
 }
 
 export default e2CanUploadThisFile

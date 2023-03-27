@@ -139,14 +139,14 @@ function initFormNote () {
       $('#title').val(generatedTitle).change()
     }
     $('#livesave-button, #livesave-button + .js-unsaved-led').hide()
-    $('#livesaving').fadeIn(333)
+    $('#livesaving').fadeIn(200)
     e2SpinningAnimationStartStop($('#livesaving'), 1)
 
     e2AjaxSave({
       onCreated: function () {
         initPO = currentPO
         if ($('#e2-drafts') && $('#e2-drafts-item')) {
-          $('#e2-drafts-item').fadeIn(333)
+          $('#e2-drafts-item').fadeIn(200)
           $('<div class="e2-admin-menu-item-frame"></div>').css({
             'position': 'absolute',
             'left': $('#e2-note-form-wrapper').offset().left,
@@ -158,7 +158,7 @@ function initFormNote () {
             'top': $('#e2-drafts').offset().top - 5,
             'width': $('#e2-drafts').width() + 20,
             'height': $('#e2-drafts').height() + 10
-          }, 667).fadeTo(333, 0.667).fadeOut(333)
+          }, 667).fadeTo(200, 0.667).fadeOut(200)
           $('#e2-drafts-count').html($('#e2-drafts-count').html() * 1 + 1)
         }
       },
@@ -168,7 +168,7 @@ function initFormNote () {
       onError: e2LiveSaveError,
       onAjaxSuccess: function () {
         e2SpinningAnimationStartStop($('#livesaving'), 0)
-        $('#livesaving').fadeOut(333)
+        $('#livesaving').fadeOut(200)
       },
       onAjaxError: function (jqXHR, textStatus) {
         e2LiveSaveError(textStatus)
@@ -209,7 +209,7 @@ function initFormNote () {
       initPO = currentPO
       e2SpinningAnimationStartStop($('#note-saving'), 0)
       $('#note-saving').hide()
-      $('#note-saved').fadeIn(333)
+      $('#note-saved').fadeIn(200)
       window.location.href = response['data']['note-url']
     }
 
@@ -247,12 +247,12 @@ function initFormNote () {
       edited = false
       $('#livesaving').hide()
       document.e2.localCopies.initLocalSaver()
-      $livesaveButton.fadeIn(333)
+      $livesaveButton.fadeIn(200)
       prevPO = Object.assign({}, newPO)
     } else if (!changed) {
       changed = false
       removeLocalCopy()
-      $livesaveButton.fadeOut(333)
+      $livesaveButton.fadeOut(200)
       prevPO = Object.assign({}, newPO)
     }
 
@@ -261,7 +261,7 @@ function initFormNote () {
     var $images = $('#e2-uploaded-images .e2-uploaded-image')
 
     if (!$images.length && !title && !text && $livesaveButton.is(':visible')) {
-      $livesaveButton.fadeOut(333)
+      $livesaveButton.fadeOut(200)
     }
   }
   $('#title').add('#tags').add('#text').add('#alias').add('#stamp').on(changesEventsList, changesListener)

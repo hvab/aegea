@@ -67,8 +67,11 @@ function e2l_load_strings () {
   'ff--save' => 'Salvare',
   'ff--summary' => 'Sommario',
   'ff--tags' => 'Parole chiavi',
-  'ff--alias' => 'Alias',
-  'ff--change-time' => 'Modificare ora',
+  'ff--details' => 'Dettagli',
+  'ff--urlname' => 'Nome nell’URL',
+  'ff--post-time' => 'Ora della pubblicazione',
+  // 'ff--alias' => 'Alias',
+  // 'ff--change-time' => 'Modificare ora',
   'ff--delete' => 'Eliminare',
   'ff--edit' => 'Modificare',
   'fb--hide' => 'Nascondere',
@@ -92,7 +95,6 @@ function e2l_load_strings () {
 
   'ff--gmt-offset' => 'Differenza da GMT',
   'ff--with-dst' => '+1 in estate',
-  'ff--post-time' => 'Ora della pubblicazione',
   
   'pt--post-deletion' => 'Eliminazione del post',
   'gs--post-will-be-deleted' => 'Il post “$[post]” sarà eliminato con tutti i commenti.',
@@ -176,7 +178,6 @@ function e2l_load_strings () {
   'er--tag-must-have-name' => 'La parola chiave deve avere un nome',
   'er--cannot-rename-tag' => 'Questo nome o nome dell’URL sono usati già da un’altra parola chiave',
   'ff--tag-name' => 'Parola chiave',
-  'ff--tag-urlname' => 'Nome nell’URL',
   'ff--tag-page-title' => 'Titolo della pagina',
   'ff--tag-introductory-text' => 'Testo introduttivo',
   'gs--tag-will-be-deleted-notes-remain' => 'La parola chiave “$[tag]” sarà rimossa dai post, ma i post rimaranno.',
@@ -233,7 +234,7 @@ function e2l_load_strings () {
   'er--settings-not-saved' => 'Impostazioni non salvate',
   'pt--password-reset' => 'Ripristino della parola d’accesso',
   'gs--password-reset-link-sent-maybe' => 'Se l’indirizzo è giusto, il link per ripristinare la parola d’accesso è stato inviato via mail',
-  'gs--password-reset-link-saved' => 'Il link per ripristinare la parola d’accesso è stato salvato a /user/password-reset.psa nella cartella server del suo blog.',
+  'gs--password-reset-link-saved' => 'Il link per ripristinare la parola d’accesso è stato salvato nel file password-reset.psa nella cartella utente del tuo blog sul server.',
   'er--cannot-reset-password' => 'Impossibile ripristinare parola d’accesso: nessuna mail è stata specificata nelle Impostazioni. Contatti l’amministratore.',
   'er--cannot-send-link-email-empty' => 'Impossibile inviare link per ripristinare la parola d’accesso: nessuna mail specificata',
   'gs--i-forgot' => 'Ho dimenticato',
@@ -378,7 +379,7 @@ function e2l_load_strings () {
   'em--created-automatically' => 'Questa lettera è stata creata automaticamente',
   'em--unsubscribe' => 'Disiscriversi da questa discussione',
   'em--reply' => 'Rispondere',
-  'em--comment-replied-at' => 'Commento con risposta',
+  'em--comment-replied-to' => 'Commento con risposta',
 
   // rss
   'gs--posts-tagged' => 'post con parola chiave',

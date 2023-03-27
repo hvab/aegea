@@ -6,7 +6,7 @@ function initFormNotePublish () {
     $('.e2-publish-now-controls').hide()
     $('.e2-schedule-controls').show()
 
-    $('.e2-post-time-control').slideDown(333, function () {
+    $('.e2-post-time-control').slideDown(200, function () {
       $('.e2-schedule-controls button').prop('disabled', false)
     })
 
@@ -32,7 +32,7 @@ function initFormNotePublish () {
   $('.e2-schedule-controls-unrevealer').on('click', function () {
     $('.e2-schedule-controls').hide()
     $('.e2-schedule-controls button').prop('disabled', true)
-    $('.e2-post-time-control').slideUp(333)
+    $('.e2-post-time-control').slideUp(200)
     $('.e2-publish-now-controls').show()
     return false
   })

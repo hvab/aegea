@@ -41,9 +41,9 @@ function initFormPreferences () {
 
   $('#show-main-menu').on('change', function () {
     if ($(this).is(':checked')) {
-      $('#main-menu-items').slideDown(333)
+      $('#main-menu-items').slideDown(200)
     } else {
-      $('#main-menu-items').slideUp(333)
+      $('#main-menu-items').slideUp(200)
     }
   })
 
@@ -59,9 +59,9 @@ function initFormPreferences () {
     $('.e2-template-preview-link').attr('href', $this.data('preview-url'))
 
     if ($this.data('supports-dark-mode')) {
-      $('#respond-to-dark-mode').parents('.form-element').eq(0).slideDown(333)
+      $('#respond-to-dark-mode').parents('.form-element').eq(0).slideDown(200)
     } else {
-      $('#respond-to-dark-mode').parents('.form-element').eq(0).slideUp(333)
+      $('#respond-to-dark-mode').parents('.form-element').eq(0).slideUp(200)
     }
   })
 }

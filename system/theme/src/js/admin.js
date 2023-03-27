@@ -528,10 +528,10 @@ function initAllAdminItems () {
             var $comment = $link.parents('.e2-comment')
 
             $comment.find('.e2-comment-author').addClass('e2-comment-author-removed')
-            $comment.find('.e2-comment-meta, .e2-comment-content').slideUp(333)
+            $comment.find('.e2-comment-meta, .e2-comment-content').slideUp(200)
 
             if (!$comment.hasClass('.e2-reply')) {
-              $comment.siblings('.e2-reply').slideUp(333)
+              $comment.siblings('.e2-reply').slideUp(200)
             }
 
             $link.trigger('E2_ADMIN_COUPLE_CHANGE_ITEM', { response: 'removed' })
@@ -544,11 +544,11 @@ function initAllAdminItems () {
           function ($link, newHref) {
             var $comment = $link.parents('.e2-comment')
 
-            $comment.find('.e2-comment-content, .e2-comment-meta').slideDown(333)
+            $comment.find('.e2-comment-content, .e2-comment-meta').slideDown(200)
             $comment.find('.e2-comment-author').removeClass('e2-comment-author-removed')
 
             if (!$comment.hasClass('.e2-reply')) {
-              $comment.siblings('.e2-reply').slideDown(333)
+              $comment.siblings('.e2-reply').slideDown(200)
             }
 
             $link.trigger('E2_ADMIN_COUPLE_CHANGE_ITEM', { response: 'recovered' })

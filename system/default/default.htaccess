@@ -1,21 +1,31 @@
+# Don’t edit this file: Aegea will reset it on update anyway
+
 DirectoryIndex index.php
 
-ErrorDocument 404 "Looks like mod_rewrite does not work. Please set url_composition to 'real' in user/config.php then go to .../system/underhood/, empty caches, and then back to front page of your blog."
+ErrorDocument 404 "Looks like mod_rewrite does not work. Please set url_composition to 'real' in user/config.php and try again."
 
 Options -Indexes
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-# Next lines fix mod_rewrite's trailing slash bug
+# Multiuser mode when users are organized by host:
+RewriteCond %{DOCUMENT_ROOT}/users/%{HTTP_HOST}/files%{REQUEST_URI} -f
+RewriteRule .* users/%{HTTP_HOST}/files/$0 [L]
+
+# For times when userpics were in user/ folder:
+# RewriteRule user/(.*) users/%{HTTP_HOST}/$1 [L]
+
+# Fix mod_rewrite's trailing slash bug:
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule (.+)[^/]$ $1/ [R=301,L]
 
-RewriteCond %{REQUEST_URI} .htaccess$
+RewriteCond %{REQUEST_URI} \.htaccess$
 RewriteRule .* - [F]
 
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
+
 RewriteRule ^index\.php$ - [L]
 RewriteRule .* index.php?go=$0 [QSA,L,B]
 </IfModule>

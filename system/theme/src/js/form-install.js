@@ -61,9 +61,9 @@ function e2CheckServerResponse () {
   $('#db-database-message-text').text(serverResponse.data.message)
 
   if (serverResponse.data.message) {
-    $('#db-database-message').slideDown(333)
+    $('#db-database-message').slideDown(200)
   } else {
-    $('#db-database-message').slideUp(333)
+    $('#db-database-message').slideUp(200)
   }
 
   if (!serverResponse.data['db-compatible']) return
@@ -75,18 +75,18 @@ function e2CheckServerResponse () {
 
   // if (serverResponse.data['db-occupied']) {
   //   if (serverResponse.data['db-migrateable']) {
-  //     $('#db-database-exists').slideDown(333)
-  //     $('#db-database-incomplete').slideUp(333)
+  //     $('#db-database-exists').slideDown(200)
+  //     $('#db-database-incomplete').slideUp(200)
   //     if (initialCheck) $e2Password.focus()
   //     $('.db-everything-ok').removeClass('e2-wrong').addClass('e2-verified')
   //   } else {
-  //     $('#db-database-incomplete').slideDown(333)
-  //     $('#db-database-exists').slideUp(333)
+  //     $('#db-database-incomplete').slideDown(200)
+  //     $('#db-database-exists').slideUp(200)
   //     $('.db-server-ok, .db-user-password-ok').removeClass('e2-wrong').addClass('e2-verified')
   //   }
   // } else {
-  //   $('#db-database-incomplete').slideUp(333)
-  //   $('#db-database-exists').slideUp(333)
+  //   $('#db-database-incomplete').slideUp(200)
+  //   $('#db-database-exists').slideUp(200)
   //   if (initialCheck) $e2Password.focus()
   //   $('.db-everything-ok').removeClass('e2-wrong').addClass('e2-verified')
   // }

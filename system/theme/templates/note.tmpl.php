@@ -194,29 +194,50 @@
 
 <?php // LIST OF KEYWORDS // ?>
 
-<div class="e2-note-meta">
-<?php if ($note['comments-link?']): ?>
-<?php if ($note['comments-count']) { ?><a href="<?= $note['href-comments'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <u><?= $note['comments-count-text'] ?></u></a><?php if ($note['new-comments-count'] == 1 and $note['comments-count'] == 1) { ?>, <?= _S ('gs--comments-all-one-new') ?><?php } elseif ($note['new-comments-count'] == $note['comments-count']) { ?>, <?= _S ('gs--comments-all-new') ?><?php } elseif ($note['new-comments-count']) { ?> · <span class="admin-links"><a href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a></span>
-<?php } ?>
-<?php } else { ?>
-<a href="<?= $note['href-comments'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <u><?= _S ('gs--no-comments') ?></u></a>
-<?php } ?> &nbsp;
-<?php endif ?>
+<div class="e2-band e2-band-meta-size e2-note-meta">
+<div class="e2-band-scrollable js-band-scrollable">
+  <div class="js-band-scrollable-inner">
+  <nav>
 
-<?php if (!empty ($note['preview-href'])) { ?>
-<span class="admin-links"><a href="<?= $note['preview-href'] ?>"><?= _S ('gs--secret-link') ?></a></span> &nbsp;
-<?php } ?>
+    <?php if ($note['comments-link?']): ?>
+    <div class="band-item">
+      <?php if ($note['comments-count']) { ?><a class="band-item-inner" href="<?= $note['href-comments'] ?>"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= $note['comments-count-text'] ?></a><?php if ($note['new-comments-count'] == 1 and $note['comments-count'] == 1) { ?>, <?= _S ('gs--comments-all-one-new') ?><?php } elseif ($note['new-comments-count'] == $note['comments-count']) { ?>, <?= _S ('gs--comments-all-new') ?><?php } elseif ($note['new-comments-count']) { ?> · <span class="admin-links"><a class="band-item-inner" href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a></span>
+      <?php } ?>
+      <?php } else { ?>
+      <a class="band-item-inner" href="<?= $note['href-comments'] ?>"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= _S ('gs--no-comments') ?></a>
+      <?php } ?>
+    </div>
+    <?php endif ?>
 
-<?php if (_READS ($note)) { ?><span><span class="e2-svgi"><?= _SVG ('read') ?></span> <?= _READS ($note) ?></span> &nbsp;<?php } ?>
+    <?php if (!empty ($note['preview-href'])) { ?>
+    <div class="band-item admin-links">
+      <a class="admin-link band-item-inner" href="<?= $note['preview-href'] ?>"><?= _S ('gs--secret-link') ?></a>
+    </div>
+    <?php } ?>
 
-<?php if (!empty ($note['time'])) { ?>
-<span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $note['time'])?>"><?= _AGO ($note['time']) ?></span> &nbsp;
-<?php } ?>
+    <?php if (_READS ($note)) { ?>
+    <div class="band-item">
+      <div class="band-item-inner">
+        <span><span class="e2-svgi"><?= _SVG ('read') ?></span> <?= _READS ($note) ?></span>
+      </div>
+    </div>
+    <?php } ?>
 
-<?php $content['_']['_tags_line']['_prepend'] = ''; ?>
-<?php $content['_']['_tags_line']['_tags'] = $note['tags']; ?>
-<?php _T ('tags-line') ?>
+    <?php if (!empty ($note['time'])) { ?>
+    <div class="band-item">
+      <div class="band-item-inner">
+        <span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $note['time'])?>"><?= _AGO ($note['time']) ?></span>
+      </div>
+    </div>
+    <?php } ?>
 
+    <?php $content['_']['_tags_line']['_prepend'] = ''; ?>
+    <?php $content['_']['_tags_line']['_tags'] = $note['tags']; ?>
+    <?php _T ('tags-line') ?>
+
+  </nav>
+  </div>
+</div>
 </div>
 
 

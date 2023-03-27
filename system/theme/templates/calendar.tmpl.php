@@ -1,5 +1,6 @@
 <?php if (array_key_exists ('years', $content['calendar'])): ?>
 
+<div class="e2-band e2-band-full-size">
 <div class="e2-band-scrollable js-band-scrollable">
 <div class="js-band-scrollable-inner">
 <nav>
@@ -19,13 +20,15 @@
 </nav>
 </div>
 </div>
+</div>
 
 <?php endif ?>
 
 
 <?php if (array_key_exists ('months', $content['calendar'])): ?>
 
-<div class="e2-band-scrollable  js-band-scrollable">
+<div class="e2-band e2-band-full-size">
+<div class="e2-band-scrollable js-band-scrollable">
 <div class="js-band-scrollable-inner">
 <nav>
 <?php foreach ($content['calendar']['months'] as $month): ?>
@@ -44,13 +47,15 @@
 </nav>
 </div>
 </div>
+</div>
 
 <?php endif ?>
 
 
 <?php if (array_key_exists ('days', $content['calendar'])): ?>
 
-<div class="e2-band-scrollable  js-band-scrollable">
+<div class="e2-band e2-band-full-size">
+<div class="e2-band-scrollable js-band-scrollable">
 <div class="js-band-scrollable-inner">
 <nav>
 <?php foreach ($content['calendar']['days'] as $day): ?>
@@ -67,6 +72,7 @@
 
 <?php endforeach ?>
 </nav>
+</div>
 </div>
 </div>
 

@@ -67,7 +67,7 @@
   <textarea name="text"
     class="required width-4 height-8 e2-textarea-autosize"
     id="text"
-    tabindex="3"
+    tabindex="1"
   ><?=$content['form-comment']['text']?></textarea>
 </div>
 
@@ -97,7 +97,7 @@
 
     <?php } ?>
     
-    <?php if ($content['form-comment']['email-comments-enabled?']) { ?>
+    <?php if ($content['form-comment']['email-comments-enabled?'] and !$content['form-comment']['email-fields-revealed?']) { ?>
       &nbsp; <a href="#" class="e2-service-color-email nu e2-email-fields-revealer">
         <span class="e2-svgi"><?= _SVG ('email')?></span>
       </a>
@@ -168,10 +168,7 @@
 
 <div
   class="e2-email-fields e2-hide-on-login"
-  style="display: <?=
-    ($content['form-comment']['create:edit?'] and !$content['form-comment']['email-comments-only?']) ?
-      'none' : 'block'
-  ?>"
+  style="display: <?= $content['form-comment']['email-fields-revealed?'] ? 'block' : 'none' ?>"
 >
 
 <div class="form-control">
@@ -179,7 +176,7 @@
   <div class="form-element">
     <input type="text"
       class="text required width-2"
-      tabindex="1"
+      tabindex="2"
       id="name"
       name="name"
       value="<?= @$content['form-comment']['name'] ?>"
@@ -205,7 +202,7 @@
       <?php /* real input */ ?>
       <input type="text"
         class="text required width-2"
-        tabindex="2"
+        tabindex="3"
         id="email"
         name="<?= $content['form-comment']['email-field-name'] ?>"
         value="<?= @$content['form-comment']['email'] ?>"

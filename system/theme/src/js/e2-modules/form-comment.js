@@ -1,8 +1,15 @@
 import swing from '../lib/swing'
 
 function initFormComment () {
-  var mailMask = /^\s*([a-z0-9_.-])+@[a-z0-9-]+\.([a-z]{2,11}\.)?[a-z]{2,11}\s*$/i
-  var $formComment = $('#form-comment')
+  const mailMask = /^\s*([a-z0-9_.-])+@[a-z0-9-]+\.([a-z]{2,11}\.)?[a-z]{2,11}\s*$/i
+  const $formComment = $('#form-comment')
+  const $name = $formComment.find('#name')
+  const $email = $formComment.find('#email')
+  const $gips = $formComment.find('.e2-gips')
+  const $emailFields = $formComment.find('.e2-email-fields')
+  const $submitButton = $formComment.find('#submit-button')
+  const cookieName = $formComment.data('cookie')
+  const cookieValue = $formComment.data('cookie-value')
 
   function getWindowSizeAndPosition () {
     let myWidth = window.innerWidth
@@ -19,24 +26,22 @@ function initFormComment () {
     return (WindowSizeAndPosition)
   }
 
-  function updateSubmittability () {
-    const $name = $formComment.find('#name')
-    const $email = $formComment.find('#email')
-    const $gips = $formComment.find('.e2-gips')
-    const $submitButton = $formComment.find('#submit-button')
+  function updateSubmitButtonEnabledness () {
 
-    var shouldBeEnabled = true
-    var emailCommentsReqired = $gips.hasClass('required')
+    var notLoggedInToGIP = $gips.hasClass('required')
+    var shouldBeEnabled = $('#text').val()
 
-    if ($name.length && emailCommentsReqired && !$name.val()) {
-      shouldBeEnabled = false
+    if (notLoggedInToGIP && $emailFields.is(':visible')) {
+
+      if ($name.length && !$name.val()) {
+        shouldBeEnabled = false
+      }
+
+      if ($email.length && !mailMask.test($email.val())) {
+        shouldBeEnabled = false
+      }
+
     }
-
-    if ($email.length && emailCommentsReqired && !mailMask.test($email.val())) {
-      shouldBeEnabled = false
-    }
-
-    shouldBeEnabled = shouldBeEnabled && $('#text').val()
 
     if (shouldBeEnabled) {
       $submitButton.prop('disabled', false)
@@ -53,21 +58,22 @@ function initFormComment () {
   }
 
   if ($formComment.length) {
-    $('.required').on('input blur cut copy paste keypress', updateSubmittability)
-    updateSubmittability()
+    $('.required').on('input blur cut copy paste keypress', updateSubmitButtonEnabledness)
+    updateSubmitButtonEnabledness()
     $formComment.on('submit', function () {
-      var $gips = $formComment.find('.e2-gips')
-      const $name = $formComment.find('#name')
-      const $email = $formComment.find('#email')
 
-      const cookieName = $formComment.data('cookie')
-      const cookieValue = $formComment.data('cookie-value')
+      var notLoggedInToGIP = $gips.hasClass('required')
 
       setNospamCookie(cookieName, cookieValue)
 
-      if (!$gips.length || !$gips.is(':visible') || !$gips.hasClass('required')) {
-        return true
-      } else if ($gips.hasClass('required') && $name.val() && mailMask.test($email.val())) {
+      if (
+        !$gips.length
+        || !$gips.is(':visible')
+        || !notLoggedInToGIP
+        || (
+          notLoggedInToGIP && $emailFields.is(':visible') && $name.val() && mailMask.test($email.val())
+        )
+      ) {
         return true
       }
 
@@ -80,8 +86,8 @@ function initFormComment () {
   $('.e2-email-fields-revealer').on('click', function (e) {
     e.preventDefault()
 
-    $('.e2-email-fields').show()
-    updateSubmittability()
+    $emailFields.show()
+    updateSubmitButtonEnabledness()
     $(this).hide()
   })
 
@@ -107,7 +113,7 @@ function initFormComment () {
       .find('.e2-gip-icon').html(data.gipIcon).end()
       .find('.e2-gip-logout-url').attr('href', data.logoutUrl).end()
       .show()
-    updateSubmittability()
+    updateSubmitButtonEnabledness()
   }
 }
 

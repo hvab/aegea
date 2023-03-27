@@ -100,6 +100,9 @@ $_config['allow_themes_preview'] = true;
 // to be overwritten by instance if needed
 $_config['allow_underhood_access'] = true;
 
+// to be overwritten by instance if needed
+$_config['allow_self_check'] = true;
+
 
 
 // MISC

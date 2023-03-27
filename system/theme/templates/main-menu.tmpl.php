@@ -1,7 +1,7 @@
 <?php if (count ($content['main-menu']['each'])) { ?>
 
 <div class="header-menu">
-<div class="e2-band">
+<div class="e2-band e2-band-full-size">
 <div class="e2-band-scrollable js-band-scrollable">
   <div class="js-band-scrollable-inner">
 
@@ -78,7 +78,7 @@
     <?php if (@$content['blog']['show-follow-button?']) { ?>
     <div class="band-right-section">
       <a class="band-follow-button e2-follow-button" href="<?= @$content['blog']['rss-href'] ?>">
-        <span>Follow this blog</span>
+        <span><?= _S ('gs--follow-this-blog') ?></span>
       </a>
     </div>
     <?php } ?>

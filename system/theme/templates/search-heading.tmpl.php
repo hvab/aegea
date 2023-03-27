@@ -11,7 +11,17 @@
 </form>
 
 <?php if (array_key_exists ('search-related-tags', $content)) { ?>
-<?php $content['_']['_tags_line']['_prepend'] = _S ('gs--see-also') .':  '; ?>
-<?php $content['_']['_tags_line']['_tags'] = $content['search-related-tags']; ?>
-<div class="e2-heading-meta"><?php _T ('tags-line') ?></div>
+
+<div class="e2-band e2-band-meta-size e2-heading-meta">
+<div class="e2-band-scrollable js-band-scrollable">
+  <div class="js-band-scrollable-inner">
+  <nav>
+    <?php $content['_']['_tags_line']['_prepend'] = _S ('gs--see-also') .':'; ?>
+    <?php $content['_']['_tags_line']['_tags'] = $content['search-related-tags']; ?>
+    <?php _T ('tags-line') ?>
+  </nav>
+  </div>
+</div>
+</div>
+
 <?php } ?>
