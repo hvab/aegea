@@ -26,4 +26,7 @@
   </div>
   <u><?= $note['title']?></u>
 </a>
+
+<a href="<?= $note['edit-href'] ?>" class="nu e2-edit-link e2-admin-link"><span class="e2-svgi"><?= _SVG ('edit') ?></span></a>
+
 </div>

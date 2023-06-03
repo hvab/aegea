@@ -89,8 +89,9 @@ function e2l_load_strings () {
   'er--cannot-upload-no-or-too-many-files' => 'Не прийшло жодного чи занадто багато файлів',
   'er--cannot-upload' => 'Не вдалося завантажити файл (помилка $[error])',
   'er--cannot-register-upload' => 'Не вдалося зареєструвати завантажений файл',
+  'er--cannot-rename-file-exists' => 'Файл вже існує',
 
-  // see NiceError.php!
+  // see e2NiceError.js!
   'er--supported-only-png-jpg-gif' => 'Підтримуються лише зображення png, webp, jpg і gif',
   'er--unsupported-file' => 'Підтримуються лише зображення png, webp, jpg, gif і svg, відео mp4 і mov і аудіофайли mp3',
 
@@ -106,6 +107,7 @@ function e2l_load_strings () {
   // uploads
   'gs--kb' => 'КБ',
   'mi--upload-file' => 'Завантажити файл',
+  'mi--rename' => 'Перейменувати',
   'mi--delete' => 'Видалити',
   'mi--insert' => 'Вставити',
 

@@ -110,12 +110,18 @@
 
     <?php if ($note['comments-link?']): ?>
     <div class="band-item">
-      <?php if ($note['comments-count']) { ?><a class="band-item-inner" href="<?= $note['href-comments'] ?>"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= $note['comments-count-text'] ?></a><?php if ($note['new-comments-count'] == 1 and $note['comments-count'] == 1) { ?>, <?= _S ('gs--comments-all-one-new') ?><?php } elseif ($note['new-comments-count'] == $note['comments-count']) { ?>, <?= _S ('gs--comments-all-new') ?><?php } elseif ($note['new-comments-count']) { ?> · <span class="admin-links"><a class="band-item-inner" href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a></span>
-      <?php } ?>
+      <?php if ($note['comments-count']) { ?>
+        <a class="band-item-inner" href="<?= $note['href-comments'] ?>"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= $note['comments-count-text'] ?><?php if ($note['new-comments-count'] == 1 and $note['comments-count'] == 1) { ?>, <?= _S ('gs--comments-all-one-new') ?><?php } elseif ($note['new-comments-count'] == $note['comments-count']) { ?>, <?= _S ('gs--comments-all-new') ?><?php } ?></a>
       <?php } else { ?>
       <a class="band-item-inner" href="<?= $note['href-comments'] ?>"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= _S ('gs--no-comments') ?></a>
       <?php } ?>
     </div>
+
+    <?php if ($note['new-comments-count'] and $note['new-comments-count'] < $note['comments-count']) { ?>
+    <div class="band-item admin-links">
+      <a class="admin-link band-item-inner" href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a>
+    </div>
+    <?php } ?>
     <?php endif ?>
 
     <?php if (!empty ($note['preview-href'])) { ?>

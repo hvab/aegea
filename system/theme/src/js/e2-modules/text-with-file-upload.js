@@ -4,7 +4,8 @@ import e2ShowUploadProgressInArc from '../e2-modules/e2ShowUploadProgressInArc'
 import e2CanUploadThisFile from './e2CanUploadThisFile'
 import e2PastePic from './e2PastePic'
 import e2UploadFile from './e2UploadFile'
-import e2Delfiles from './e2Delfiles'
+import e2DeleteFile from './e2DeleteFile'
+import e2RenameFile from './e2RenameFile'
 import e2NiceError from './e2NiceError'
 
 function initTextWithFileUpload () {
@@ -56,7 +57,7 @@ function initTextWithFileUpload () {
       $innerBad.remove()
       $innerGoodImg
         .attr('src', imageThumb + '?' + new Date().getTime())
-        .attr('alt', imageFull)
+        // .attr('alt', imageFull) // will need to change on rename if used
         .attr('width', imageWidth)
         .attr('height', imageHeight)
 
@@ -86,7 +87,13 @@ function initTextWithFileUpload () {
     if (filesToUpload.length) {
       var $progress = $uploadSpinner.find('circle.e2-progress')
       var file = filesToUpload.shift()
-      var url = $('#e2-file-upload-action').attr('href') + '?'
+      var url = $('#e2-file-upload-action').attr('href')
+
+      if (url.indexOf('?go=') == -1) {
+        url += '?'
+      } else {
+        url += '&'
+      }
 
       if (!e2CanUploadThisFile(file.name, /^(gif|jpe?g|png|webp|svg|mp3|mp4|mov)$/i)) {
         e2NiceError({
@@ -110,6 +117,8 @@ function initTextWithFileUpload () {
       if (url && file.e2AltKeyPressed) {
         url += '&overwrite'
       }
+
+      console.log(url)
 
       e2SpinningAnimationStartStop($uploadSpinner, 1)
 
@@ -338,8 +347,61 @@ function initTextWithFileUpload () {
   }
 
   $uploadedImages
+    .on('click', '[data-e2-js-action*="rename-image"]', function (event) {
+      var $this = $(event.currentTarget)
+      var $picToRename = $this.parents('.e2-uploaded-image')
+      var $mySpinner = $picToRename.find('#e2-spinner-renaming')
+      var picToRenameFile = $picToRename.data('file')
+      var newName = prompt('', picToRenameFile)
+      if (newName === null) return false
+      newName = newName.trim ()
+      if (newName === '') return false
+      if (picToRenameFile === newName) return false
+
+      // var $progress = $uploadSpinner.find('circle.e2-progress')
+      // e2ShowUploadProgressInArc($progress, 50, true)
+      $mySpinner.fadeIn(200)
+      e2SpinningAnimationStartStop($mySpinner, 1)
+
+      e2RenameFile({
+        file: picToRenameFile,
+        newName: newName,
+        success: function (response) {
+          var imageFull = response['data']['new-name']
+
+          // replace in popup menu
+          $picToRename.find('.e2-image-popup-menu-filename').text(imageFull).attr('title', imageFull)
+          $picToRename.data('file', imageFull)
+
+          // replace in listedThumbnails
+          var arrayIndex = listedThumbnails.indexOf(picToRenameFile)
+          if (arrayIndex !== -1) {
+              listedThumbnails[arrayIndex] = imageFull
+          }
+
+          // BUGBUG
+          // while renaming to an existing file with the same content,
+          // the files will merge. both original files could be in the
+          // thumbnail list in front of me. so we have to merge them here!
+          
+          // replace in text
+          var text = document.getElementById('text').value
+          const replaceRegex = new RegExp('^' + picToRenameFile + '\\b', 'gm');
+          text = text.replace(replaceRegex, imageFull)
+          document.getElementById('text').value = text
+          document.getElementById('text').dispatchEvent(new Event('input'))
+          
+        },
+        complete: function () {
+          e2SpinningAnimationStartStop($mySpinner, 0)
+          $mySpinner.hide()
+        }
+      })
+      return false
+    })
     .on('click', '[data-e2-js-action*="remove-image"]', function (event) {
-      var $picToDelete = $(event.currentTarget).parents('.e2-uploaded-image')
+      var $this = $(event.currentTarget)
+      var $picToDelete = $this.parents('.e2-uploaded-image')
       var picToDeleteFile = $picToDelete.data('file')
 
       var picToDeleteDeletingModifier = 'e2-uploaded-image_deleting'
@@ -347,13 +409,13 @@ function initTextWithFileUpload () {
 
       $picToDelete.addClass(picToDeleteDeletingModifier)
 
-      e2Delfiles({
+      e2DeleteFile({
         file: picToDeleteFile,
         success: function () {
           listedThumbnails.splice($.inArray(picToDeleteFile, listedThumbnails), 1)
 
           if (transitionEvent) {
-            $picToDelete.off(transitionEvent + '.e2Delfiles').on(transitionEvent + '.e2Delfiles', function () {
+            $picToDelete.off(transitionEvent + '.e2DeleteFile').on(transitionEvent + '.e2DeleteFile', function () {
               $picToDelete.remove()
             })
             $picToDelete.addClass(picToDeleteDeletedModifier)

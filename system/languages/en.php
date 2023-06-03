@@ -89,8 +89,9 @@ function e2l_load_strings () {
   'er--cannot-upload-no-or-too-many-files' => 'No or too many files were received by server',
   'er--cannot-upload' => 'Can’t upload file (error $[error])',
   'er--cannot-register-upload' => 'Can’t register uploaded file',
+  'er--cannot-rename-file-exists' => 'File already exists',
 
-  // see NiceError.php!
+  // see e2NiceError.js!
   'er--supported-only-png-jpg-gif' => 'Only png, webp, jpg, & gif images are supported',
   'er--unsupported-file' => 'Only png, webp, jpg, gif, & svg images, mp4 & mov videos, and mp3 audio files are supported',
 
@@ -106,6 +107,7 @@ function e2l_load_strings () {
   // uploads
   'gs--kb' => 'KB',
   'mi--upload-file' => 'Upload file',
+  'mi--rename' => 'Rename',
   'mi--delete' => 'Delete',
   'mi--insert' => 'Insert',
 

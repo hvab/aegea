@@ -1,5 +1,7 @@
 # Don’t edit this file: Aegea will reset it on update anyway
 
+##custom_htaccess_directives##
+
 DirectoryIndex index.php
 
 ErrorDocument 404 "Looks like mod_rewrite does not work. Please set url_composition to 'real' in user/config.php and try again."
@@ -8,6 +10,8 @@ Options -Indexes
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
+
+##custom_htaccess_rewrites##
 
 # Multiuser mode when users are organized by host:
 RewriteCond %{DOCUMENT_ROOT}/users/%{HTTP_HOST}/files%{REQUEST_URI} -f
@@ -82,10 +86,7 @@ php_value post_max_size 256M
 
 <IfModule mod_php8.c>
 php_flag display_errors on
-php_flag magic_quotes_gpc off
-php_flag magic_quotes_runtime off
 php_flag zlib.output_compression on
-php_flag mbstring.func_overload off
 php_value output_buffering 0
 php_value error_reporting 7 
 php_value session.use_trans_sid 0

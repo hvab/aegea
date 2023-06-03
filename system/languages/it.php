@@ -88,8 +88,10 @@ function e2l_load_strings () {
   'er--cannot-upload-file-too-big' => 'Un file è troppo grosso',
   'er--cannot-upload-no-or-too-many-files' => 'Nessun o troppi fili sono stati ricevuti dal server',
   'er--cannot-upload' => 'Non è stato possibile caricare il file (errore $[error])',
+  'er--cannot-register-upload' => 'Impossibile registrare il file caricato',
+  'er--cannot-rename-file-exists' => 'Il file già esiste',
 
-  // see NiceError.php!
+  // see e2NiceError.js!
   'er--supported-only-png-jpg-gif' => 'Sono supportati solo immagini png, webp, jpg e gif',
   'er--unsupported-file' => 'Sono supportati solo immagini png, webp, jpg, gif e svg, video mp4 e mov, e fili audio mp3',
 
@@ -105,6 +107,7 @@ function e2l_load_strings () {
   // uploads
   'gs--kb' => 'KB',
   'mi--upload-file' => 'Caricare file',
+  'mi--rename' => 'Rinominare',
   'mi--delete' => 'Eliminare',
   'mi--insert' => 'Inserire',
 

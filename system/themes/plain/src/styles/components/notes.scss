@@ -235,6 +235,9 @@
 
 .e2-note-hidden h1,
 .e2-note-hidden article,
+.e2-note-hidden .e2-text h2,
+.e2-note-hidden .e2-text h3,
+.e2-note-hidden .e2-text  .loud,
 .e2-note-hidden .e2-note-snippet-text {
   color: var(--disabledColor);
 }

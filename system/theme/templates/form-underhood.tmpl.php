@@ -3,6 +3,7 @@
 
     <div class="form-control">
       <div class="form-label"><label>Software</label></div>
+      <div class="form-element"><p><?= $content['form-underhood']['server-software'] ?></p></div>
       <div class="form-element"><p>PHP <?= PHP_VERSION ?></p></div>
       <div class="form-element"><p><?= $content['form-underhood']['db-software'] ?> <?= $content['form-underhood']['db-version'] ?></p></div>
       <div class="form-element">

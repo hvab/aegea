@@ -111,7 +111,7 @@
       </div></div>
       <div class="e2-text-caption">La creazione di Adamo. Michelangelo Buonarroti, c. 1511</div>
       </div>
-      <p>Let’s say we have a quote about this image:</p>
+      <p>Let’s say we have an important idea about this image:</p>
       <p class="loud">God created man in his own image</p>
       <p>A table follows this paragraph. This paragraph has just a filler text. The theory of empathy is free. The rhythm has an elegant factographic chthonic myth. Artistic mediation is a catharsis. The liturgical drama has psychological parallelism.</p>      
       <div class="e2-text-table">
@@ -125,13 +125,14 @@
         </table>
       </div>
       <p>Some text may be separated with a horisontal rule:</p>
+      <hr />
+      <p>Some other text.</p>
       <h3>Third-level heading</h3>
       <p>Ordered list:</p>
       <ol>
         <li>This is a long list item so that you see what it looks like spanning several lines. Make sure the spacing between the items is bigger than the line height.</li>
         <li>This is a short element.</li>
       </ol>
-      <hr />
       <p>Unordered list:</p>
       <ul>
         <li>This is a long list item so that you see what it looks like spanning several lines. Make sure the spacing between the items is bigger than the line height.</li>

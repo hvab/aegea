@@ -77,7 +77,6 @@ $_config['url_composition'] = 'auto'; /* 'auto', 'real', 'synthetic' */
 
 // add “all/” in front of urls in case of 404
 $_config['try_redirect_to_all'] = false;
-  
 
 
 // ENABLED FEATURES
@@ -155,6 +154,11 @@ $_config['license_url'] = 'http://blogengine.ru/licenses/?domain=';
 // url to check lincense information
 $_config['paid_features_url'] = 'http://blogengine.ru/features/';
 
+// this will be added in the beginning of .htaccess on install/update
+$_config['custom_htaccess_directives'] = '';  
+
+// this will be added before any native RewriteRules on install/update
+$_config['custom_htaccess_rewrites'] = '';  
 
 
 // BACKUP

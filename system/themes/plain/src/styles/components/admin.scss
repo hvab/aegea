@@ -203,6 +203,7 @@ border-color: var(--hoverUnderlineColor);
 
 
 .e2-draft-preview {
+  position: relative;
   min-height: 160px;
   margin-bottom: 1.4em;
   font-family: var(--smallFontFamily);
@@ -267,6 +268,30 @@ border-color: var(--hoverUnderlineColor);
   border-radius: 12px; 
 }
 
+.e2-draft-preview .e2-edit-link {
+  position: absolute;
+  top: 0; 
+  right: 0;
+  display: block;
+  opacity: 0;
+  padding: 4px;
+  transition-duration: var(--time);
+  transition-timing-function: ease-out;
+  transition-property: opacity;
+}
+
+.e2-draft-preview:hover .e2-edit-link,
+.e2-draft-preview.hover .e2-edit-link {
+  opacity: 1;
+  transition: none;
+}
+
+@media #{$ShouldSmallItemsBeSparse} {
+  .e2-draft-preview .e2-edit-link {
+    opacity: 1;
+    transition: none;
+  }
+}
 
 
 .e2-notes-unsaved {

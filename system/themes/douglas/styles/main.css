@@ -5,7 +5,7 @@
   --sheetBackgroundColor:       rgba(  74,  81,  89, .8  );
 
   --foregroundColor:                white;
-  --thinRuleColor:               rgb( 255,  93,  87     );
+  --thinRuleColor:               rgb( 255,  93,  87, .25);
 
   --headingsColor:               rgb( 255,  93,  87     );
   --headingsUnderlineColor:     rgba( 255,  93,  87, .25);

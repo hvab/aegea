@@ -10,8 +10,14 @@ import e2Ajax from './e2Ajax'
  * @param {function}  [options.abort]
  **/
 
-function e2Delfiles (options) {
-  var url = $('#e2-file-remove-action').attr('href') + '?'
+function e2DeleteFile (options) {
+  var url = $('#e2-file-remove-action').attr('href')
+
+  if (url.indexOf('?go=') == -1) {
+    url += '?'
+  } else {
+    url += '&'
+  }
 
   if ($('#form-note').length) {
     url += 'entity=note&entity-id=' + $('#note-id').val()
@@ -31,4 +37,4 @@ function e2Delfiles (options) {
   })
 }
 
-export default e2Delfiles
+export default e2DeleteFile

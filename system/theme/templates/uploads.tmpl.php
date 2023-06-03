@@ -1,4 +1,5 @@
 <a id="e2-file-upload-action" href="<?= $content['uploads']['upload-action'] ?>"></a>
+<a id="e2-file-rename-action" href="<?= $content['uploads']['rename-action'] ?>"></a>
 <a id="e2-file-remove-action" href="<?= $content['uploads']['remove-action'] ?>"></a>
 
 <div id="e2-uploaded-image-prototype" class="e2-uploaded-image" style="display: none">
@@ -21,6 +22,11 @@
           <span class="e2-popup-menu-widget-item-text-row e2-image-popup-menu-filesize"></span>
         </span>
       </div>
+
+      <button type="button" class="e2-popup-menu-widget-item" data-e2-js-action="rename-image" data-e2-popup-menu-action="do-not-close-popup-menu">
+        <span class="e2-popup-menu-widget-item-icon"><span id="e2-spinner-renaming" style="display: none"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span></span>
+        <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--rename') ?></span>
+      </button>
 
       <hr class="e2-popup-menu-widget-separator">
 
