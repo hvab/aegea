@@ -17,7 +17,7 @@
   --linkUnderlineColorVisited:  rgba( 176, 128, 112, .25 );
   --hoverColor:                  rgb( 255, 255, 255      );
   --hoverUnderlineColor:        rgba( 255, 255, 255, .25 );
-  --tagColor:                      var(--linkColor);
+  --tagColor:                      var(--linkColor);
   --tagUnderlineColor:             var(--linkUnderlineColor);
   --adminColor:                  rgb( 151, 192, 137      );
   --adminUnderlineColor:        rgba( 151, 192, 137, .25 );

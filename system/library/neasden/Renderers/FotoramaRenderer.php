@@ -1,38 +1,35 @@
 <?php
 
-class NeasdenGroup_fotorama implements NeasdenGroup {
+namespace Neasden;
+
+class FotoramaRenderer implements RendererExtension {
 
   private $neasden = null;
   
   function __construct ($neasden) {
     $this->neasden = $neasden;
-
-    $neasden->require_line_class ('picture');
-    $neasden->define_line_class ('fotorama-settings', '\[thumbs\]|\[fotorama .*\]');
-
-    $neasden->define_group ('fotorama', '(-picture-){2,}(-fotorama-settings-)?(-p-)*');
   }
 
-  function render ($group, $myconf) {
-    
-    $this->neasden->require_link (@$this->neasden->config['library']. 'jquery/jquery.js');
-    $this->neasden->require_link (@$this->neasden->config['library']. 'fotorama/fotorama.css');
-    $this->neasden->require_link (@$this->neasden->config['library']. 'fotorama/fotorama.js');
-    
+  public function render ($interpretation, $myconf) {
+
     $result = '<div class="'. $myconf['css-class'] .'">'."\n";
     $p_opened = false;
     $div_opened = false;
+    
+    foreach ($interpretation as $line) {
 
-    foreach ($group as $line) {
-
-      if ($line['class'] == 'picture') {
+      if ($line['class'] == 'Picture') {
     
         list ($filebasename, $alt) = explode (' ', $line['content'].' ', 2);
         $alt = trim ((string) $alt);
         
-        $this->neasden->resource_detected ($filebasename);
+        // $this->neasden -> resourceDetected ($filebasename); moved to interpreter
         
-        $filename = $myconf['folder'] . $filebasename;
+        $filename = (
+          $this->neasden -> getConfiguration () -> pathMedia .
+          $myconf['folder'] .
+          $filebasename
+        );
 
         $size = e2_getimagesize ($filename);
         list ($width, $height) = $size;
@@ -46,7 +43,11 @@ class NeasdenGroup_fotorama implements NeasdenGroup {
         if ($height) $ratio = $width / $height;
 
         $image_html = (
-          '<img src="'. $myconf['src-prefix'] . $filebasename .'" '.
+          '<img src="'. (
+            $this->neasden -> getConfiguration () -> baseUrl .
+            $myconf['src-prefix'] .
+            $filebasename
+          ) .'" '.
           'width="'. $width .'" height="'. $height.'" '.
           // 'data-caption="'. $alt.'" '.
           'alt="'. $alt .'" />'. "\n"

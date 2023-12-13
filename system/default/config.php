@@ -59,6 +59,12 @@ $_config['raw_template_data_with_param'] = false;
 // default maximum image width
 $_config['max_image_width'] = 2560; /* pixels */
 
+// userpic jpeg width and height
+$_config['userpic_size'] = 80; /* device pixels */
+
+// userpic jpeg quality
+$_config['userpic_jpeg_quality'] = 90; /* 0...100 */
+
 
 
 // URLS
@@ -77,6 +83,7 @@ $_config['url_composition'] = 'auto'; /* 'auto', 'real', 'synthetic' */
 
 // add “all/” in front of urls in case of 404
 $_config['try_redirect_to_all'] = false;
+
 
 
 // ENABLED FEATURES
@@ -159,6 +166,7 @@ $_config['custom_htaccess_directives'] = '';
 
 // this will be added before any native RewriteRules on install/update
 $_config['custom_htaccess_rewrites'] = '';  
+
 
 
 // BACKUP

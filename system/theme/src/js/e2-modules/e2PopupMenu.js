@@ -42,6 +42,9 @@ function initAllPopupMenus () {
       } else {
         openPopupMenu()
       }
+    }).on('dblclick.' + popupMenuOpenModifier + '-' + thisId, function () {
+      $popupMenu.find('.e2-popup-menu-widget-item_default').trigger('click')
+      closePopupMenu()
     })
 
     $popupMenu.find('.e2-popup-menu-widget-item').on('click', function () {

@@ -58,12 +58,14 @@ class E2GIPFacebook extends E2GIP {
         }
         $accessToken = $helper -> getAccessToken ();
 
+        $avatar_size = $this -> get_avatar_size ();
+
         // Returns a `Facebook\FacebookResponse` object
         $response = $fb -> get (
           '/me?fields=id,name,email,link,picture.width('.
-          $this -> get_avatar_width () .
+          $avatar_size .
           ').height('.
-          $this -> get_avatar_height () .
+          $avatar_size .
           ')',
           $accessToken
         );

@@ -423,7 +423,7 @@ function e2l_load_strings () {
   'um--month-g' => '$[month.monthname]',
   
   // promo
-  'pm--main-menu' => 'In the paid version of Aegea, you configure the main menu here. It can contain pinned tags, as wall as links to selected, most discussed, and popular posts, tags, calendar, and a random post. <a href="$[url]">Learn more</a>',
+  'pm--main-menu' => 'In the paid version of Aegea, you configure the main menu here. It can contain pinned tags, as well as links to selected, most discussed, and popular posts, tags, calendar, and a random post. <a href="$[url]">Learn more</a>',
   'pm--analytics' => 'In the paid version of Aegea, you can easily connect Google Analytics and Yandex Metrika from here. <a href="$[url]">Learn more</a>',
   'pm--secret-link' => 'In the paid version of Aegea, you can share a draft privately, say, to approve a post before publishing. <a href="$[url]">Learn more</a>',
   'pm--scheduling' => 'In the paid version of Aegea, you can schedule a post to be published at particular time or publish it in the past. <a href="$[url]">Learn more</a>',

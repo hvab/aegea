@@ -1,38 +1,28 @@
 <?php
 
-class NeasdenGroup_tweet implements NeasdenGroup {
+namespace Neasden;
+
+class TweetRenderer implements RendererExtension {
 
   private $neasden = null;
 
-  // done:
   function __construct ($neasden) {
+
     $this->neasden = $neasden;
-  
-    $neasden->define_line_class (
-      'tweet',
-      'https?\:\/\/(?:www\.)?(?:twitter\.com\/(#!\/)?(\w+)\/status\/)(\d+)([&#?].*)?'
-    );
-    $neasden->define_group ('tweet', '(-tweet-)');
   
   }
 
-  // not done:  
-  function render ($group, $myconf) {
-  
-    $this->neasden->require_link ('https://platform.twitter.com/widgets.js');
-    $this->neasden->require_link (SYSTEM_DIR . LIBRARY_DIRNAME .'embedded-tweet/embedded-tweet.js');
-    
-    $p = false;
+  public function render ($interpretation, $myconf) {
 
     $result = '';
 
-    if (! $this->neasden->config['html.basic']) {
+    if (! $this->neasden -> getConfiguration () -> htmlBasic) {
       $result = '<div class="'. $myconf['css-class'] .'">'."\n";
     }
+
+    foreach ($interpretation as $line) {
     
-    foreach ($group as $line) {
-    
-      if ($line['class'] == 'tweet') {
+      if ($line['class'] === 'tweet') {
         
         $who = $line['class-data'][1];
         $id = $line['class-data'][2];
@@ -41,15 +31,24 @@ class NeasdenGroup_tweet implements NeasdenGroup {
         // we need to isolate it, otherwise typography.autohref
         // will wrap the link into another a href:       
 
-        $link_to_tweet = $this->neasden->isolate (
+        // $link_to_tweet = $this->neasden -> isolate (
+        //   '<p><a href="'. $line['class-data'][0] .'">'.
+        //   $line['class-data'][0].
+        //   '</a></p>'
+        // );
+
+        $link_text = parse_url ($line['class-data'][0]);
+        $link_text = str_replace ($link_text['scheme']. '://', '', $line['class-data'][0]);
+
+        $link_to_tweet = (
           '<p><a href="'. $line['class-data'][0] .'">'.
-          $line['class-data'][0].
+          $link_text.
           '</a></p>'
         );
 
         // transform into live tweet with a script later
 
-        if (! $this->neasden->config['html.basic']) {
+        if (! $this->neasden -> getConfiguration () -> htmlBasic) {
           
           $link_to_tweet = (
             '<div class="e2-embedded-tweet" data-tweet-id="'. $id .'">'.
@@ -65,7 +64,7 @@ class NeasdenGroup_tweet implements NeasdenGroup {
       
     }
   
-    if (! $this->neasden->config['html.basic']) {
+    if (! $this->neasden -> getConfiguration () -> htmlBasic) {
       $result .= '</div>'."\n";
     }
   

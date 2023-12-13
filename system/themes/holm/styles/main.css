@@ -17,8 +17,8 @@
   --linkUnderlineColorVisited:  rgba( 160,  80,  32, .12 );
   --hoverColor:                  rgb( 238, 218,  35      );
   --hoverUnderlineColor:        rgba( 238, 218,  35, .25 );
-  /* --tagColor */
-  /* --tagUnderlineColor  */
+  --tagColor:                    rgb( 128, 160, 176);
+  --tagUnderlineColor:          rgba( 128, 160, 176, .25 );
   --adminColor:                  rgb(  64, 176,  96      );
   --adminUnderlineColor:        rgba(  64, 176,  96, .25 );
   --engineTextColor:             rgb(  87,  86,  85      );

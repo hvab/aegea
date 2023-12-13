@@ -28,8 +28,6 @@
         <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--rename') ?></span>
       </button>
 
-      <hr class="e2-popup-menu-widget-separator">
-
       <button type="button" class="e2-popup-menu-widget-item e2-popup-menu-widget-item_remove" data-e2-js-action="remove-image">
         <span class="e2-popup-menu-widget-item-icon">
           <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('trash') ?></span></span>
@@ -38,7 +36,9 @@
         <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--delete') ?></span>
       </button>
 
-      <button type="button" class="e2-popup-menu-widget-item" data-e2-js-action="paste-image">
+      <hr class="e2-popup-menu-widget-separator">
+
+      <button type="button" class="e2-popup-menu-widget-item e2-popup-menu-widget-item_default" data-e2-js-action="paste-image">
         <span class="e2-popup-menu-widget-item-icon"><span class="e2-svgi"><?= _SVG ('insert') ?></span></span>
         <span class="e2-popup-menu-widget-item-text"><?= _S ('mi--insert') ?></span>
       </button>

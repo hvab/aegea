@@ -1,27 +1,25 @@
 <?php
 
-class NeasdenGroup_list implements NeasdenGroup {
+// List Interpreter Extension Version 1 for Neasden 3
+// Legacy implementation with fake interpretation
 
+namespace Neasden;
+
+class AeOldListRenderer implements RendererExtension {
+
+  private $neasden = null;
+  
+  private $depth = 0;
+  
   function __construct ($neasden) {
-  
-    if (!($chars_ul_items = @$_neasden_config['groups.lists.chars'])) {
-      $chars_ul_items = array ('-', '*');
-    }
-    
-    $ul_item_regex = array ();
-    foreach ($chars_ul_items as $item) {
-      $ul_item_regex[] = '(\\'. $item .' (?:$|[^'. $item .'].*))';
-    }
-    $ul_item_regex = implode ('|', $ul_item_regex);
-    
-    $neasden->define_line_class ('ol-item', '([1234567890]+)\.(?:$| +.*)');
-    $neasden->define_line_class ('ul-item', $ul_item_regex);
-    
-    $neasden->define_group ('list', '(((-ol-item-)|(-ul-item-))(-p-)*)+');
-    
+
+    $this->neasden = $neasden;
+
   }
-  
-  function render ($group, $myconf) {
+
+  public function render ($interpretation, $myconf) {
+
+    $group = $interpretation;
 
     $result = '';
     
@@ -35,8 +33,9 @@ class NeasdenGroup_list implements NeasdenGroup {
     // at each depth level we track list kind:
     $is_ordered_list[0] = ($group[0]['class'] == 'ol-item');
 
-    $start = $group[0]['class-data'][1];
-    if ($start_number = $group[0]['class-data'][1]) {
+    $start = '';
+    if ((string) $group[0]['class-data'][1] !== '') {
+      $start_number = (int) $group[0]['class-data'][1];
       $start = ' start="'. $start_number .'"';
     }
     
@@ -64,7 +63,8 @@ class NeasdenGroup_list implements NeasdenGroup {
         }
 
         $start = '';
-        if ($start_number = $line['class-data'][1]) {
+        if ((string) $line['class-data'][1] !== '') {
+          $start_number = (int) $line['class-data'][1];
           $start = ' start="'. $start_number .'"';
         }
     
@@ -133,7 +133,6 @@ class NeasdenGroup_list implements NeasdenGroup {
     } else {
       $result .= '</ul>'."\n";
     }
-    
     
     return $result;
 

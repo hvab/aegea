@@ -149,8 +149,8 @@
   }
 
   function getControlMetadataByHref(href) {
-    const youtubeId = getYoutubeIdFromUrl(href);
 
+    const youtubeId = getYoutubeIdFromUrl(href);
     if (youtubeId) {
       return {
         type: CONTROL_TYPES.YOUTUBE,
@@ -166,9 +166,12 @@
       }
     }
 
-    return {
-      type: CONTROL_TYPES.PLAIN,
-      selector: `video[src$="${href}"]`,
+    const plainId = getPlainIdFromUrl(href);
+    if (plainId) {
+      return {
+        type: CONTROL_TYPES.PLAIN,
+        selector: `video[src^="${plainId}"]`,
+      }
     }
   }
 
@@ -176,7 +179,6 @@
     const noteSelector = getNoteSelectorByChildElement(control);
     const videoSelector = `${noteSelector} ${selector}`;
     const $video = $(videoSelector).first();
-
     return $video.get()[0];
   }
 
@@ -196,6 +198,11 @@
   function getVimeoIdFromUrl(url) {
     const match = url.match(/^https?:\/\/(www\.)?vimeo\.com\/(\d*)/);
     return (match && match[2].length > 0) ? match[2] : null;
+  }
+
+  function getPlainIdFromUrl(url) {
+    const match = url.match(/^([^#&?]+)/);
+    return (match && match[1].length > 0) ? match[1] : null;
   }
 
   function timeStringToSeconds(str) {
