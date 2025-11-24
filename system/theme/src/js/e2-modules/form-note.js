@@ -260,7 +260,7 @@ function initFormNote () {
     var text = newPO.text.trim()
     var $images = $('#e2-uploaded-images .e2-uploaded-image')
 
-    if (!$images.length && !title && !text && $livesaveButton.is(':visible')) {
+    if (!text && $livesaveButton.is(':visible')) {
       $livesaveButton.fadeOut(200)
     }
   }

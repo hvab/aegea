@@ -1,21 +1,26 @@
+.e2-service-color-telegram:link, .e2-service-color-telegram:visited { 
+  color: #35a3dc;
+  border-color: transparentize(#35a3dc, $thin);
+}
+
+.e2-service-color-x:link, .e2-service-color-x:visited { 
+  color: #000;
+  border-color: transparentize(#000, $thin);
+}
+
 .e2-service-color-twitter:link, .e2-service-color-twitter:visited { 
   color: #1da1f2;
   border-color: transparentize(#1da1f2, $thin);
 }
 
 .e2-service-color-facebook:link, .e2-service-color-facebook:visited { 
-  color: #1877f2;
-  border-color: transparentize(#1877f2, $thin);
+  color: #0866ff;
+  border-color: transparentize(#0866ff, $thin);
 }
 
 .e2-service-color-vk:link, .e2-service-color-vk:visited { 
   color: #0077ff;
   border-color: transparentize(#0077ff, $thin);
-}
-
-.e2-service-color-telegram:link, .e2-service-color-telegram:visited { 
-  color: #35a3dc;
-  border-color: transparentize(#35a3dc, $thin);
 }
 
 .e2-service-color-linkedin:link, .e2-service-color-linkedin:visited { 
@@ -24,8 +29,8 @@
 }
 
 .e2-service-color-odnoklassniki:link, .e2-service-color-odnoklassniki:visited { 
-  color: #ee8208;
-  border-color: transparentize(#ee8208, $thin);
+  color: #Ff7700;
+  border-color: transparentize(#Ff7700, $thin);
 }
 
 .e2-service-color-pinterest:link, .e2-service-color-pinterest:visited { 
@@ -63,14 +68,16 @@
   border-color: var(--thinRuleColor);
 }
 
+.e2-service-color-telegram:hover,
+.e2-service-color-telegram.hover,
+.e2-service-color-x:hover,
+.e2-service-color-x.hover,
 .e2-service-color-twitter:hover,
 .e2-service-color-twitter.hover,
 .e2-service-color-facebook:hover,
 .e2-service-color-facebook.hover,
 .e2-service-color-vk:hover,
 .e2-service-color-vk.hover,
-.e2-service-color-telegram:hover,
-.e2-service-color-telegram.hover,
 .e2-service-color-linkedin:hover,
 .e2-service-color-linkedin.hover,
 .e2-service-color-odnoklassniki:hover,

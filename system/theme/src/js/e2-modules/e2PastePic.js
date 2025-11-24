@@ -6,27 +6,37 @@ function e2PastePic (pic) {
   if (!text) return
   var field = document.getElementById('text')
   field.focus()
-  if (field.selectionStart || field.selectionStart === '0') {
+  if (field.selectionStart || field.selectionStart === 0) {
     var selStart = field.selectionStart
     var selEnd = field.selectionEnd
-    var textToPaste = text
+    var paragraphStart = selStart
+    var textToPaste = text + '\n\n'
+    var insertedWithCommand = false
 
-    if (selStart === selEnd) {
-      while ((field.value.charAt(selStart) !== '\r') && (field.value.charAt(selStart) !== '\n') && (selStart > 0)) {
-        selStart -= 1
-      }
-      while ((field.value.charAt(selStart) === '\r') || (field.value.charAt(selStart) === '\n')) {
-        selStart += 1
-      }
-      textToPaste = textToPaste + '\n\n'
-      selEnd = selStart
+    while ((field.value.charAt(paragraphStart) !== '\r') && (field.value.charAt(paragraphStart) !== '\n') && (paragraphStart > 0)) {
+      paragraphStart -= 1
+    }
+    while ((field.value.charAt(paragraphStart) === '\r') || (field.value.charAt(paragraphStart) === '\n')) {
+      paragraphStart += 1
     }
 
-    field.value = field.value.substring(0, selStart) + textToPaste +
-      field.value.substring(selEnd, field.value.length)
+    // try to keep native undo stack intact when browser allows it
+    if (typeof document.execCommand === 'function') {
+      try {
+        field.setSelectionRange(paragraphStart, paragraphStart)
+        insertedWithCommand = document.execCommand('insertText', false, textToPaste)
+      } catch (error) {
+        insertedWithCommand = false
+      }
+    }
 
-    field.selectionStart = // selStart
-      field.selectionEnd = selStart + textToPaste.length - 2
+    if (!insertedWithCommand) {
+      field.value = field.value.substring(0, paragraphStart) + textToPaste +
+        field.value.substring(paragraphStart, field.value.length)
+    }
+
+    var shift = textToPaste.length
+    field.setSelectionRange(selStart + shift, selEnd + shift)
   } else {
     field.value += '\r\n\r\n' + text
   }

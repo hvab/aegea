@@ -18,7 +18,6 @@ function e2l_load_strings () {
   // installer
   'pt--install' => 'Установка Эгеи',
   'gs--user-fixes-needed' => 'Так, нужно кое-что поправить.',
-  'gs--following-folders-missing' => 'Не найдены следующие папки из дистрибутива движка:',
   'gs--could-not-create-them-automatically' => 'Создать их автоматически не удалось из-за недостатка прав. Загрузите на сервер полный дистрибутив.',
   'gs--and-reload-installer' => 'И перезагрузите установщик',
   'fb--begin' => 'Начать блог',
@@ -32,6 +31,7 @@ function e2l_load_strings () {
   'gs--data-exists' => 'В этой базе уже есть блог. Установщик просто подключится к ней.',
   'er--db-data-incomplete' => 'Данные в этой базе — неполные.',
   'er--db-data-incomplete-install' => 'Данные в этой базе — неполные. Возможно, с ней использовалась другая версия Эгеи. Установите Эгею той версии, от которой данные в базе, а потом обновите, если нужно. Для чистой установки предоставьте чистую базу.',
+  'er--cannot-run-installer-missing-htaccess' => 'Установщик не запускается, потому что в корневой папке нет файла «.htaccess». Загрузите полный пакет (включая «.htaccess») и обновите страницу.',
 
   // diags
   'et--fix-permissions-on-server' => 'Настройте права на сервере',
@@ -92,8 +92,8 @@ function e2l_load_strings () {
   'er--cannot-rename-file-exists' => 'Файл уже существует',
 
   // see e2NiceError.js!
-  'er--supported-only-png-jpg-gif' => 'Поддерживаются только изображения png, webp, jpg и gif',
-  'er--unsupported-file' => 'Поддерживаются только изображения png, webp, jpg, gif и svg, видео mp4 и mov и аудиофайлы mp3',
+  'er--supported-image-types' => 'Поддерживаемые типы изображений:',
+  'er--supported-file-types' => 'Поддерживаемые типы файлов:',
 
   'ff--gmt-offset' => 'Разница с Гринвичем',
   'ff--with-dst' => '+1 летом',
@@ -233,6 +233,8 @@ function e2l_load_strings () {
   'er--could-not-change-password' => 'Не получилось изменить пароль',
   'er--no-password-entered' => 'Вы не ввели пароль',
   'er--wrong-password' => 'Неправильный пароль',
+  'er--wrong-password-wait' => 'Неправильный пароль, попробуйте через $[s] с',
+  'er--password-wait' => 'Попробуйте через $[s] с',
   'ff--displayed-as-plain-text' => 'отображается при вводе',
   'er--settings-not-saved' => 'Настройка не сохранена',
   'pt--password-reset' => 'Сброс пароля',
@@ -390,11 +392,12 @@ function e2l_load_strings () {
   'gs--follow-this-blog' => 'Подписаться на блог',
 
   // social networks
+  'sn--telegram-verb' => 'Отправить',
+  'sn--x-verb' => 'Твитнуть',
   'sn--twitter-verb' => 'Твитнуть',
   'sn--facebook-verb' => 'Поделиться',
   'sn--linkedin-verb' => 'Поделиться',
-  'sn--vkontakte-verb' => 'Поделиться',
-  'sn--telegram-verb' => 'Отправить',
+  'sn--vk-verb' => 'Поделиться',
   'sn--whatsapp-verb' => 'Отправить',
   'sn--pinterest-verb' => 'Запинить',
 
@@ -445,7 +448,6 @@ function e2l_load_strings () {
   'gs--pgt' => 'Время генерации',
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Выполнено обновление с версии $[from] до версии $[to]',
-  'gs--good-blogs' => 'Хорошие блоги и сайты',
 
   'gs--range-separator' => '<span style="margin-left: .07em; letter-spacing: .07em">...</span>',
   

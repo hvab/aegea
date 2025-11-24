@@ -18,7 +18,6 @@ function e2l_load_strings () {
   // installer
   'pt--install' => 'Встановлення Егеї',
   'gs--user-fixes-needed' => 'Стоп, треба дещо виправити.',
-  'gs--following-folders-missing' => 'Не знайдено ці папки із дистрибутиву рушія:',
   'gs--could-not-create-them-automatically' => 'Їх не вдалося створити автоматично, оскільки у вас недостатньо прав. Завантажте на сервер повний дистрибутив.',
   'gs--and-reload-installer' => 'І перезавантажте встановлювач',
   'fb--begin' => 'Почати блог',
@@ -32,6 +31,7 @@ function e2l_load_strings () {
   'gs--data-exists' => 'У цій базі вже є блог. Встановлювач просто підключиться до неї.',
   'er--db-data-incomplete' => 'Дані в цій базі — неповні.',
   'er--db-data-incomplete-install' => 'Дані в цій базі — неповні. Можливо, вона використовувалась в іншій версії Егеї. Встановіть відповідну версію Егеї та оновіть, якщо потрібно. Для чистого встановлення потрібна чиста база.',
+  'er--cannot-run-installer-missing-htaccess' => 'Встановлювач не запускається, бо у кореневій теці немає файла «.htaccess». Завантажте повний пакет (разом із «.htaccess») і перезавантажте сторінку.',
 
   // diags
   'et--fix-permissions-on-server' => 'Налаштуйте права на сервері',
@@ -47,7 +47,7 @@ function e2l_load_strings () {
   'pt--nth-day-of-nth-month-of-nth-year' => '$[day] $[month.monthname.genitive] $[year]-го',
   'gs--nth-month-of-nth-year' => '$[month.monthname] $[year]',
   'gs--nth-day-of-nth-month-of-nth-year' => '$[day] $[month.monthname.genitive] $[year]',
-  'gs--everything' => 'Все',
+  'gs--everything' => 'Усе',
   'gs--calendar' => 'Календар',
   'gs--part-x-of-y' => 'частина $[part] з $[of]',
   
@@ -92,8 +92,8 @@ function e2l_load_strings () {
   'er--cannot-rename-file-exists' => 'Файл вже існує',
 
   // see e2NiceError.js!
-  'er--supported-only-png-jpg-gif' => 'Підтримуються лише зображення png, webp, jpg і gif',
-  'er--unsupported-file' => 'Підтримуються лише зображення png, webp, jpg, gif і svg, відео mp4 і mov і аудіофайли mp3',
+  'er--supported-image-types' => 'Підтримувані типи зображень:',
+  'er--supported-file-types' => 'Підтримувані типи файлів:',
 
   'ff--gmt-offset' => 'Різниця з Гринвічем',
   'ff--with-dst' => '+1 влітку',
@@ -233,6 +233,8 @@ function e2l_load_strings () {
   'er--could-not-change-password' => 'Не вдалося змінити пароль',
   'er--no-password-entered' => 'Ви не ввели пароль',
   'er--wrong-password' => 'Неправильний пароль',
+  'er--wrong-password-wait' => 'Неправильний пароль, спробуйте через $[s] с',
+  'er--password-wait' => 'Спробуйте через $[s] с',
   'ff--displayed-as-plain-text' => 'відображається під час введення',
   'er--settings-not-saved' => 'Налаштування не збережено',
   'pt--password-reset' => 'Відновлення пароля',
@@ -390,11 +392,12 @@ function e2l_load_strings () {
   'gs--follow-this-blog' => 'Підписатися на блог',
   
   // social networks
+  'sn--telegram-verb' => 'Надіслати',
+  'sn--x-verb' => 'Твітнути',
   'sn--twitter-verb' => 'Твітнути',
   'sn--facebook-verb' => 'Поділитись',
   'sn--linkedin-verb' => 'Поділитись',
-  'sn--vkontakte-verb' => 'Поділитись',
-  'sn--telegram-verb' => 'Надіслати',
+  'sn--vk-verb' => 'Поділитись',
   'sn--whatsapp-verb' => 'Надіслати',
   'sn--pinterest-verb' => 'Запінити',
 
@@ -445,7 +448,6 @@ function e2l_load_strings () {
   'gs--pgt' => 'Час генерації',
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Виконано оновлення з версії $[from] до версії $[to]',
-  'gs--good-blogs' => 'Хороші блоги та сайти',
 
   'gs--range-separator' => '<span style="margin-left: .07em; letter-spacing: .07em">...</span>',
 

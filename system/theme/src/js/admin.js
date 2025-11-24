@@ -13,7 +13,7 @@ import initFormTag from './e2-modules/form-tag'
 import e2UploadFile from './e2-modules/e2UploadFile'
 import initTextWithFileUpload from './e2-modules/text-with-file-upload'
 import e2NiceError from './e2-modules/e2NiceError'
-import e2CanUploadThisFile from './e2-modules/e2CanUploadThisFile'
+import e2ParseAcceptExtensions from './e2-modules/e2ParseAcceptExtensions'
 import initSortable from './e2-modules/sortable'
 
 /* First init modules */
@@ -25,6 +25,13 @@ initTextWithFileUpload()
 initFormNotePublish()
 initFormPreferences()
 initFormTag()
+registerOfflineNewWorker()
+
+var $userpicInput = $('#e2-user-picture-input')
+
+var userpicAcceptAttr = $userpicInput.attr('accept')
+var userpicSupportedMessage = $userpicInput.data('e2SupportedMessage')
+var userpicAccept = e2ParseAcceptExtensions(userpicAcceptAttr)
 
 function initSortableModule () {
   var isTouchDevice = (('ontouchstart' in window) ||
@@ -35,6 +42,25 @@ function initSortableModule () {
 }
 
 initSortableModule()
+
+function registerOfflineNewWorker () {
+  if (!('serviceWorker' in navigator)) return
+
+  var basePath = (document.e2 && document.e2.basePath) || '/'
+  if (basePath.slice(-1) !== '/') basePath += '/'
+
+  var path = window.location && window.location.pathname
+  if (!path || !/\/(new)\/?$/.test (path)) return
+
+  navigator.serviceWorker.register (
+    basePath + 'e2-sw-offline-new.js',
+    { scope: basePath + 'new/' }
+  ).catch (function (error) {
+    if (window.console && console.warn) {
+      console.warn ('Offline New support unavailable', error)
+    }
+  })
+}
 
 /* Second init obsolete functions */
 function initObsoleteFunction () {
@@ -121,9 +147,9 @@ function initObsoleteFunction () {
 
       file = dt.files[0]
 
-      if (!e2CanUploadThisFile(file.name, /^gif|jpe?g|png$/i)) {
+      if (userpicAccept && !userpicAccept.allows(file.name)) {
         e2NiceError({
-          message: 'er--supported-only-png-jpg-gif',
+          message: userpicSupportedMessage,
           debug: {
             data: {
               file: file
@@ -148,6 +174,18 @@ function initObsoleteFunction () {
 
     function uploadUserPic ($currentDropZone, file) {
       var uploadHref = $currentDropZone.data('href')
+
+      if (userpicAccept && !userpicAccept.allows(file.name)) {
+        e2NiceError({
+          message: userpicSupportedMessage,
+          debug: {
+            data: {
+              file: file
+            }
+          }
+        })
+        return false
+      }
 
       isUserpicLoaded = !$currentDropZone.hasClass(dropZoneEmptyModificator)
 

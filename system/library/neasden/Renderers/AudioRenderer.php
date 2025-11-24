@@ -34,12 +34,25 @@ class AudioRenderer implements RendererExtension {
         $myconf['folder'] .
         $filebasename
       );
-      
-      if (array_key_exists ('mp3info-path', $myconf)) {
+
+      if (array_key_exists ('getid3-path', $myconf)) {
+        try {
+          require_once $myconf['getid3-path'];
+          $getid3 = new \getID3 ();
+          $fileinfo = $getid3->analyze ($filename);
+          if (!empty ($fileinfo['playtime_seconds'])) {
+            $jouele_data_length_attr = 'data-length="'. floor ($fileinfo['playtime_seconds']) . '" ';
+          }
+        } catch (\Exception $e) {}
+      }
+
+      if (($jouele_data_length_attr === '') and array_key_exists ('mp3info-path', $myconf)) {
         try {
           require_once $myconf['mp3info-path'];
           $audio = new \wapmorgan\Mp3Info\Mp3Info ($filename);
-          $jouele_data_length_attr = 'data-length="'. floor ($audio->duration) . '" ';          
+          if (!empty ($audio->duration)) {
+            $jouele_data_length_attr = 'data-length="'. floor ($audio->duration) . '" ';
+          }
         } catch (\Exception $e) {}
       }
 

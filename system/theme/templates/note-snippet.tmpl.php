@@ -52,7 +52,7 @@
       <span class="admin-icon">
         <form action="<?= $note['favourite-toggle-action'] ?>" method="post" class="nu">
           <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
-          <button type="submit" href="<?= $note['favourite-toggle-action'] ?>" class="nu e2-admin-link e2-admin-item <?= ($note['favourite?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-favourite" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
+          <button type="submit" class="nu e2-admin-link e2-admin-item <?= ($note['favourite?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-favourite" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
             <span class="e2-svgi">
               <span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span>
               <span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span>

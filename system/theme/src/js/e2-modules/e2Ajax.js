@@ -19,6 +19,51 @@ function e2Ajax (options) {
     cache: false
   }
 
+  // options.data shows up in several formats (FormData for uploads, plain objects,
+  // handcrafted query strings, even jQuery-style arrays). For now we add the token
+  // in whichever shape the caller provided so we don’t break existing helpers.
+  // If you simplify the callers later, feel free to trim these branches.
+  function appendTokenToData (data, token) {
+    if (!token) return data
+
+    if (typeof window.FormData !== 'undefined' && data instanceof window.FormData) {
+      if (typeof data.has !== 'function' || !data.has('token')) {
+        data.append('token', token)
+      }
+      return data
+    }
+
+    if (data === undefined || data === null) {
+      return { token: token }
+    }
+
+    if (typeof data === 'string') {
+      if (!/(?:^|&)token=/.test(data)) {
+        data += (data.length ? '&' : '') + 'token=' + encodeURIComponent(token)
+      }
+      return data
+    }
+
+    if (Array.isArray(data)) {
+      var hasTokenEntry = data.some(function (entry) {
+        return entry && entry.name === 'token'
+      })
+      if (!hasTokenEntry) {
+        data.push({ name: 'token', value: token })
+      }
+      return data
+    }
+
+    if (typeof data === 'object') {
+      if (!Object.prototype.hasOwnProperty.call(data, 'token')) {
+        data.token = token
+      }
+      return data
+    }
+
+    return data
+  }
+
   var onSuccess = options.success
   var onError = options.error
   var onComplete = options.complete
@@ -28,6 +73,12 @@ function e2Ajax (options) {
   delete options.error
   delete options.complete
   delete options.abort
+
+  var meta = document.querySelector ('meta[name="csrf-token"]')
+  var token = (meta && meta.content) ? meta.content : null
+  if (token) {
+    options.data = appendTokenToData (options.data, token)
+  }
 
   var jqXHR = $.ajax($.extend(defaultOptions, options))
 
@@ -39,28 +90,20 @@ function e2Ajax (options) {
         }
       } else {
         if (typeof response['error'] === 'object') {
-          if (typeof response['error']['message'] === 'string') {
-            e2NiceError({
-              message: response['error']['message'],
-              debug: {
-                data: {
-                  requestData: options.data,
-                  response: response
-                }
+          var errorObject = response['error']
+          var message = typeof errorObject['message'] === 'string'
+            ? errorObject['message']
+            : 'er--js-server-error'
+
+          e2NiceError({
+            message: message,
+            debug: {
+              data: {
+                requestData: options.data,
+                response: response
               }
-            })
-          } else {
-            e2NiceError({
-              message: 'er--js-server-error',
-              debug: {
-                message: 'Server responce malformed: `response.error.message` is not available',
-                data: {
-                  requestData: options.data,
-                  response: response
-                }
-              }
-            })
-          }
+            }
+          })
         } else {
           e2NiceError({
             message: 'er--js-server-error',

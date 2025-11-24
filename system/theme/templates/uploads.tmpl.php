@@ -80,7 +80,14 @@
         <span class="e2-admin-item-text"><?= _S ('mi--upload-file') ?></span>
       </span>
       <label for="e2-upload-button" class="e2-upload-controls-attach-label">
-        <input type="file" multiple="multiple" class="e2-upload-controls-attach-input" id="e2-upload-button"/>
+        <input
+          type="file"
+          multiple="multiple"
+          class="e2-upload-controls-attach-input"
+          id="e2-upload-button"
+          accept="<?= $content['uploads']['allowed-extensions-list'] ?>"
+          data-e2-supported-message="<?= $content['uploads']['allowed-extensions-message'] ?>"
+        />
       </label>
     </div>
     <div class="e2-upload-controls-uploading e2-upload-controls-uploading_hidden">
@@ -88,4 +95,3 @@
     </div>
   </div>
 <?php } ?>
-

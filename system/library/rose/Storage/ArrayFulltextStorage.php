@@ -25,11 +25,11 @@ class ArrayFulltextStorage implements FulltextProxyInterface
     }
 
     /**
-     * @param array $fulltextIndex
+     * @param array|null $fulltextIndex
      *
      * @return ArrayFulltextStorage
      */
-    public function setFulltextIndex(array $fulltextIndex = null)
+    public function setFulltextIndex($fulltextIndex = null)
     {
         $this->fulltextIndex = $fulltextIndex;
 

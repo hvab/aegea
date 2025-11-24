@@ -1,11 +1,17 @@
 <IfModule mod_authz_core.c>
-  <FilesMatch .*>
+  <FilesMatch "\.(?:mp4|mov)$">
   Require all granted
+  </FilesMatch>
+  <FilesMatch "\.">
+  Require all denied
   </FilesMatch>
 </IfModule>
 
 <IfModule !mod_authz_core.c>
-  <FilesMatch .*>
+  <FilesMatch "\.(?:mp4|mov)$">
   Allow from all
+  </FilesMatch>
+  <FilesMatch "\.">
+  Deny from all
   </FilesMatch>
 </IfModule>

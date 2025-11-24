@@ -1,7 +1,7 @@
 import getTransitionEvent from '../lib/getTransitionEvent'
 import e2SpinningAnimationStartStop from '../e2-modules/e2SpinningAnimationStartStop'
 import e2ShowUploadProgressInArc from '../e2-modules/e2ShowUploadProgressInArc'
-import e2CanUploadThisFile from './e2CanUploadThisFile'
+import e2ParseAcceptExtensions from './e2ParseAcceptExtensions'
 import e2PastePic from './e2PastePic'
 import e2UploadFile from './e2UploadFile'
 import e2DeleteFile from './e2DeleteFile'
@@ -32,6 +32,10 @@ function initTextWithFileUpload () {
   var $uploadButtonWrapper = $uploadControls.find('.e2-upload-controls-attach')
   var $uploadButton = $uploadButtonWrapper.find('.e2-upload-controls-attach-input')
   var $uploadSpinner = $uploadControls.find('.e2-upload-controls-uploading')
+
+  var uploadAcceptAttr = $uploadButton.attr('accept')
+  var uploadSupportedMessage = $uploadButton.data('e2SupportedMessage')
+  var uploadAccept = e2ParseAcceptExtensions(uploadAcceptAttr)
 
   var uploadControlsHiddenModifier = 'e2-upload-controls_hidden'
   var uploadButtonWrapperHiddenModifier = 'e2-upload-controls-attach_hidden'
@@ -84,7 +88,7 @@ function initTextWithFileUpload () {
   }
 
   function e2ClearUploadBuffer () {
-    if (filesToUpload.length) {
+    while (filesToUpload.length) {
       var $progress = $uploadSpinner.find('circle.e2-progress')
       var file = filesToUpload.shift()
       var url = $('#e2-file-upload-action').attr('href')
@@ -95,16 +99,22 @@ function initTextWithFileUpload () {
         url += '&'
       }
 
-      if (!e2CanUploadThisFile(file.name, /^(gif|jpe?g|png|webp|svg|mp3|mp4|mov)$/i)) {
+      if (uploadAccept && !uploadAccept.allows(file.name)) {
         e2NiceError({
-          message: 'er--unsupported-file',
+          message: uploadSupportedMessage,
           debug: {
             data: {
               file: file
             }
           }
         })
-        return false
+        if (!filesToUpload.length) {
+          // stop spinner if previous uploads left it spinning
+          e2SpinningAnimationStartStop($uploadSpinner, 0)
+          $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
+          $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
+        }
+        continue
       }
 
       if (typeof $('#note-id').val() !== 'undefined') {
@@ -118,7 +128,7 @@ function initTextWithFileUpload () {
         url += '&overwrite'
       }
 
-      console.log(url)
+      // console.log(url)
 
       e2SpinningAnimationStartStop($uploadSpinner, 1)
 
@@ -216,12 +226,12 @@ function initTextWithFileUpload () {
       })
 
       return false
-    } else {
-      totalUploadSize = 0
-      completedUploadSize = 0
-
-      return true
     }
+
+    totalUploadSize = 0
+    completedUploadSize = 0
+
+    return true
   }
 
   function e2LoadImagesFromDrop (e) {

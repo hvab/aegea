@@ -34,7 +34,7 @@ class Indexable
     protected $description = '';
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $date;
 
@@ -145,7 +145,7 @@ class Indexable
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getDate()
     {
@@ -153,11 +153,11 @@ class Indexable
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTime|null $date
      *
      * @return Indexable
      */
-    public function setDate(\DateTime $date = null)
+    public function setDate($date = null)
     {
         $this->date = $date;
 
@@ -189,7 +189,7 @@ class Indexable
      */
     public function toTocEntry()
     {
-        return new TocEntry($this->getTitle(), $this->getDescription(), $this->getDate(), $this->getUrl(), $this->calcHash());
+        return new TocEntry($this->getTitle(), $this->getDescription(), $this->getUrl(), $this->calcHash(), $this->getDate());
     }
 
     /**

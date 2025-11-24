@@ -69,7 +69,13 @@
                 <?= _SVG ('spin-progress') ?>
               </span>
               <label for="e2-user-picture-input" class="e2-user-picture-inputlabel">
-                <input type="file" id="e2-user-picture-input" class="e2-user-picture-input"/>
+                <input
+                  type="file"
+                  id="e2-user-picture-input"
+                  class="e2-user-picture-input"
+                  accept="<?= $content['form-preferences']['userpic-extensions-list'] ?>"
+                  data-e2-supported-message="<?= $content['form-preferences']['userpic-extensions-message'] ?>"
+                />
               </label>
             </div>
             <button

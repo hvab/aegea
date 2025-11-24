@@ -7,6 +7,18 @@
 
     <div class="e2-follow-matrix">
       <div class="e2-follow-element">
+        <a href="" class="e2-service-color-telegram">
+          <span class="e2-svgi e2-svgi-double"><?= _SVG ('telegram')?></span><br />
+          Telegram
+        </a>
+      </div>
+      <div class="e2-follow-element">
+        <a href="" class="e2-service-color-x">
+          <span class="e2-svgi e2-svgi-double"><?= _SVG ('x')?></span><br />
+          X
+        </a>
+      </div>
+      <div class="e2-follow-element">
         <a href="" class="e2-service-color-twitter">
           <span class="e2-svgi e2-svgi-double"><?= _SVG ('twitter')?></span><br />
           Twitter
@@ -22,12 +34,6 @@
         <a href="" class="e2-service-color-vk">
           <span class="e2-svgi e2-svgi-double"><?= _SVG ('vk')?></span><br />
           VK
-        </a>
-      </div>
-      <div class="e2-follow-element">
-        <a href="" class="e2-service-color-telegram">
-          <span class="e2-svgi e2-svgi-double"><?= _SVG ('telegram')?></span><br />
-          Telegram
         </a>
       </div>
       <div class="e2-follow-element">
@@ -77,10 +83,10 @@
     <p>Sample text.</p>
 
     <p>
-      <a href="" class="e2-service-color-twitter"><span class="e2-svgi"><?= _SVG ('twitter')?></span> Twitter</a>,
+      <a href="" class="e2-service-color-telegram"><span class="e2-svgi"><?= _SVG ('telegram')?></span> Telegram</a>,
+      <a href="" class="e2-service-color-x"><span class="e2-svgi"><?= _SVG ('x')?></span> X</a> or <a href="" class="e2-service-color-twitter"><span class="e2-svgi"><?= _SVG ('twitter')?></span> Twitter</a>,
       <a href="" class="e2-service-color-facebook"><span class="e2-svgi"><?= _SVG ('facebook')?></span> Facebook</a>,
       <a href="" class="e2-service-color-vk"><span class="e2-svgi"><?= _SVG ('vk')?></span> VK</a>,
-      <a href="" class="e2-service-color-telegram"><span class="e2-svgi"><?= _SVG ('telegram')?></span> Telegram</a>,
       <a href="" class="e2-service-color-linkedin"><span class="e2-svgi"><?= _SVG ('linkedin')?></span> LinkedIn</a>,
       <a href="" class="e2-service-color-odnoklassniki"><span class="e2-svgi"><?= _SVG ('odnoklassniki')?></span> Odnoklassniki</a>,
       <a href="" class="e2-service-color-pinterest"><span class="e2-svgi"><?= _SVG ('pinterest')?></span> Pinterest</a>,

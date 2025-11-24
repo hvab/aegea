@@ -22,9 +22,9 @@ function e2NiceError (error) {
       'er--js-file-upload-not-supported': 'The browser does not support file upload',
       'er--js-no-files-to-upload': 'No files to upload',
       'er--js-can-upload-only-one-file': 'Only one file may be uploaded here',
-      'er--supported-only-png-jpg-gif': 'Only png, webp, jpg, & gif images are supported',
-      'er--unsupported-file': 'Only png, webp, jpg, gif, & svg images, mp4 & mov videos, and mp3 audio files are supported',
-    },
+      'er--supported-image-types': 'Supported image types:',
+      'er--supported-file-types': 'Supported file types:',
+          },
     'ru': {
       'er--js-server-error': 'Ошибка на сервере',
       'er--js-appears-offline': 'Похоже, что нет интернета',
@@ -32,9 +32,9 @@ function e2NiceError (error) {
       'er--js-file-upload-not-supported': 'Браузер не поддерживает загрузку файлов',
       'er--js-no-files-to-upload': 'Нет файлов для загрузки',
       'er--js-can-upload-only-one-file': 'Можно загрузить только одно изображение',
-      'er--supported-only-png-jpg-gif': 'Поддерживаются только изображения png, webp, jpg и gif',
-      'er--unsupported-file': 'Поддерживаются только изображения png, webp, jpg, gif и svg, видео mp4 и mov и аудиофайлы mp3',
-    },
+      'er--supported-image-types': 'Поддерживаемые типы изображений:',
+      'er--supported-file-types': 'Поддерживаемые типы файлов:',
+          },
     'fr': {
       'er--js-server-error': 'Erreur sur le serveur',
       'er--js-appears-offline': 'La connexion semble être hors ligne',
@@ -42,9 +42,9 @@ function e2NiceError (error) {
       'er--js-file-upload-not-supported': 'Le navigateur ne prend pas en charge le téléchargement de fichiers',
       'er--js-no-files-to-upload': 'Aucun fichier à télécharger',
       'er--js-can-upload-only-one-file': 'Un seul fichier peut être téléchargé ici',
-      'er--supported-only-png-jpg-gif': 'Seules les images png, webp, jpg et gif sont prises en charge',
-      'er--unsupported-file': 'Seuls les images png, webp, jpg, gif et svg, vidéos mp4 et mov et les fichiers audio mp3 sont pris en charge',
-    },
+      'er--supported-image-types': 'Types d’image pris en charge :',
+      'er--supported-file-types': 'Types de fichiers pris en charge :',
+          },
     'it': {
       'er--js-server-error': 'Errore sul server',
       'er--js-appears-offline': 'La connessione sembra di mancare',
@@ -52,19 +52,19 @@ function e2NiceError (error) {
       'er--js-file-upload-not-supported': 'Il navigatore web non supporta caricamento dei fili',
       'er--js-no-files-to-upload': 'Non ci sono fili da caricare',
       'er--js-can-upload-only-one-file': 'Solo un file può essere caricato qui',
-      'er--supported-only-png-jpg-gif': 'Sono supportati solo immagini png, webp, jpg e gif',
-      'er--unsupported-file': 'Sono supportati solo immagini png, webp, jpg, gif e svg, video mp4 e mov, e fili audio mp3',
-    },
+      'er--supported-image-types': 'Tipi di immagine supportati:',
+      'er--supported-file-types': 'Tipi di file supportati:',
+          },
     'be': {
       'er--js-server-error': 'Памылка на серверы',
       'er--js-appears-offline': 'Падобна на тое, што няма інтэрнэту',
       'er--js-connection-timeout': 'Сервер не адказвае занадта доўга',
-      'er--js-file-upload-not-supported': 'Браўзэр не падтрымлівае загрузку файлаў',
+      'er--js-file-upload-not-supported': 'Браузэр не падтрымлівае загрузку файлаў',
       'er--js-no-files-to-upload': 'Няма файлаў для загрузкі',
-      'er--js-can-upload-only-one-file': 'Можна загрузіць толькі адна выява',
-      'er--supported-only-png-jpg-gif': 'Падтрымлiваюцца толькi выявы png, webp, jpg i gif',
-      'er--unsupported-file': 'Падтрымлiваюцца толькi выявы png, webp, jpg, gif i svg, відэа mp4 і mov i аудыёфайлы mp3',
-    },
+      'er--js-can-upload-only-one-file': 'Можна загрузіць толькі адну выяву',
+      'er--supported-image-types': 'Падтрымлiваемыя тыпы выяў:',
+      'er--supported-file-types': 'Падтрымлiваемыя тыпы файлаў:',
+          },
     'uk': {
       'er--js-server-error': 'Помилка на сервері',
       'er--js-appears-offline': 'Схоже, що немає інтернету',
@@ -72,9 +72,9 @@ function e2NiceError (error) {
       'er--js-file-upload-not-supported': 'Браузер не підтримує завантаження файлів',
       'er--js-no-files-to-upload': 'Немає файлів для завантаження',
       'er--js-can-upload-only-one-file': 'Можна завантажити лише одне зображення',
-      'er--supported-only-png-jpg-gif': 'Підтримуються лише зображення png, webp, jpg і gif',
-      'er--unsupported-file': 'Підтримуються лише зображення png, webp, jpg, gif і svg, відео mp4 і mov і аудіофайли mp3',
-    }
+      'er--supported-image-types': 'Підтримувані типи зображень:',
+      'er--supported-file-types': 'Підтримувані типи файлів:',
+          }
   }
 
   var transitionEvent = getTransitionEvent()
@@ -84,7 +84,7 @@ function e2NiceError (error) {
     var lang = $('html').attr('lang') || 'en'
 
     if (errorText) {
-      if (typeof stringLocalizations[lang][error.message] !== 'undefined') {
+      if (typeof stringLocalizations[lang] !== 'undefined' && typeof stringLocalizations[lang][error.message] !== 'undefined') {
         errorText = stringLocalizations[lang][error.message]
       } else if (typeof stringLocalizations['en'][error.message] !== 'undefined') {
         errorText = stringLocalizations['en'][error.message]
@@ -112,8 +112,8 @@ function e2NiceError (error) {
     }
 
     if (typeof error.debug === 'object' && typeof console === 'object') {
-      var errorColor;
-      var backgroundColor;
+      var errorColor
+      var backgroundColor
 
       if (typeof window.getComputedStyle === 'function' && typeof window.getComputedStyle(document.documentElement).getPropertyValue === 'function') {
         errorColor = window.getComputedStyle(document.documentElement).getPropertyValue('--errorColor')
@@ -134,7 +134,7 @@ function e2NiceError (error) {
             if (typeof debugDataValue === 'object' && debugDataValue instanceof FormData && typeof debugDataValue.entries === 'function') {
               console.log(debugDataKey)
               for (var formDataObject of debugDataValue.entries()) {
-                console.dir(formDataObject[1]);
+                console.dir(formDataObject[1])
               }
             } else {
               console.log(debugDataKey)

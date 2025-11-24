@@ -12,7 +12,7 @@
 
       <?php if (array_key_exists ('tag', $content)): ?>
       <?php if (array_key_exists ('pinned-toggle-action', $content['tag'])): ?>
-      <span class="admin-icon"><form action="<?= $content['tag']['pinned-toggle-action'] ?>" method="post" class="nu"><input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" /><button type="submit" href="<?= $content['tag']['pinned-toggle-action'] ?>" class="e2-admin-link nu e2-admin-item <?= ($content['tag']['pinned?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-pinned" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('pinned-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('pinned-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></button></form></span>
+      <span class="admin-icon"><form action="<?= $content['tag']['pinned-toggle-action'] ?>" method="post" class="nu"><input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" /><button type="submit" class="e2-admin-link nu e2-admin-item <?= ($content['tag']['pinned?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-pinned" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('pinned-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('pinned-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></button></form></span>
       <?php endif ?>
       <?php endif ?>
 

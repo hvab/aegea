@@ -51,7 +51,7 @@
     <?php if (array_key_exists ('reply-important-toggle-action', $comment)): ?>
       <form action="<?= $comment['reply-important-toggle-action'] ?>" method="post" class="nu">
       <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
-      <button type="submit" href="<?= $comment['reply-important-toggle-action'] ?>" class="nu e2-admin-link e2-admin-item <?= ($comment['reply-important?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-important" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
+      <button type="submit" class="nu e2-admin-link e2-admin-item <?= ($comment['reply-important?']? 'e2-admin-item_on' : '') ?>" data-e2-js-action="toggle-important" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
         <span class="e2-svgi">
           <span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span>
           <span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span>

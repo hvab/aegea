@@ -18,7 +18,6 @@ function e2l_load_strings () {
   // installer
   'pt--install' => 'Усталяванне Эгеі',
   'gs--user-fixes-needed' => 'Трэба сёе-тое падправіць.',
-  'gs--following-folders-missing' => 'Не знойдзены наступныя папкі з дыстрыбутыва двіжка:',
   'gs--could-not-create-them-automatically' => 'Стварыць іх аўтаматычна не атрымалася з-за недастатковасці правоў. Запампуйце на сервер поўны дыстрыбутыў.',
   'gs--and-reload-installer' => 'І перазаладкуйце ўсталёўнік',
   'fb--begin' => 'Пачаць блог',
@@ -92,8 +91,8 @@ function e2l_load_strings () {
   'er--cannot-rename-file-exists' => 'Файл ужо існуе',
 
   // see e2NiceError.js!
-  'er--supported-only-png-jpg-gif' => 'Падтрымлiваюцца толькi выявы png, webp, jpg i gif',
-  'er--unsupported-file' => 'Падтрымлiваюцца толькi выявы png, webp, jpg, gif i svg, відэа mp4 і mov i аудыёфайлы mp3',
+  'er--supported-image-types' => 'Падтрымлiваемыя тыпы выяў:',
+  'er--supported-file-types' => 'Падтрымлiваемыя тыпы файлаў:',
 
   'ff--gmt-offset' => 'Розніца з Грынвічам',
   'ff--with-dst' => '+1 летам',
@@ -233,6 +232,8 @@ function e2l_load_strings () {
   'er--could-not-change-password' => 'Не атрымалася памяняць пароль',
   'er--no-password-entered' => 'Вы не ўвялі пароль',
   'er--wrong-password' => 'Няправільны пароль',
+  'er--wrong-password-wait' => 'Няправільны пароль, паспрабуйце праз $[s] с',
+  'er--password-wait' => 'Паспрабуйце праз $[s] с',
   'ff--displayed-as-plain-text' => 'адлюстроўваецца пры ўводзе',
   'er--settings-not-saved' => 'Наладка не захавана',
   'pt--password-reset' => 'Аднаўленне пароля',
@@ -390,11 +391,12 @@ function e2l_load_strings () {
   'gs--follow-this-blog' => 'Падпісацца на блог',
   
   // social networks
+  'sn--telegram-verb' => 'Адаслаць',
+  'sn--x-verb' => 'Твітнуць',
   'sn--twitter-verb' => 'Твітнуць',
   'sn--facebook-verb' => 'Падзяліцца',
   'sn--linkedin-verb' => 'Падзяліцца',
-  'sn--vkontakte-verb' => 'Падзяліцца',
-  'sn--telegram-verb' => 'Адаслаць',
+  'sn--vk-verb' => 'Падзяліцца',
   'sn--whatsapp-verb' => 'Адаслаць',
   'sn--pinterest-verb' => 'Запініць',
 
@@ -445,7 +447,6 @@ function e2l_load_strings () {
   'gs--pgt' => 'Час генерацыі',
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Выканана абнаўленне з версіі $[from] да версіі $[to]',
-  'gs--good-blogs' => 'Добрыя блогі ды сайты',
 
   'gs--range-separator' => '<span style="margin-left: .07em; letter-spacing: .07em">...</span>',
   

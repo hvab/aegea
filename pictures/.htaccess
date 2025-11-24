@@ -1,11 +1,17 @@
 <IfModule mod_authz_core.c>
-  <FilesMatch .*>
-  Require all granted
+  <FilesMatch ".*">
+    Require all denied
+  </FilesMatch>
+  <FilesMatch "(?i)\.(?:jpe?g|png|gif|webp|avif|svg)$">
+    Require all granted
   </FilesMatch>
 </IfModule>
 
 <IfModule !mod_authz_core.c>
-  <FilesMatch .*>
-  Allow from all
+  <FilesMatch ".*">
+    Deny from all
+  </FilesMatch>
+  <FilesMatch "(?i)\.(?:jpe?g|png|gif|webp|avif|svg)$">
+    Allow from all
   </FilesMatch>
 </IfModule>

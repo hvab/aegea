@@ -142,6 +142,12 @@ $_config['retain_search_indexes_on_db_switch'] = false;
 
 // influence password recovery UI
 $_config['user_has_access_to_filesystem'] = true;
+  
+// enable cookies over http? (not https)
+$_config['insecure_cookies'] = false;
+
+// try to enable cookies over http? (not https) on local mochines
+$_config['insecure_cookies_local'] = true;
 
 // url to ping when posts become available
 $_config['broadcast_url'] = 'http://blogengine.ru/blogs/@notify';
@@ -200,8 +206,11 @@ $_config['rss_itunes_explicit'] = 'no'; /* 'yes' or 'no' */
 // which networks to use for comments sign in
 $_config['sign_in_with'] = 'telegram, twitter, facebook, vk';
 
-// which networks to share to (also supported: linkedin, whatsapp)
-$_config['share_to'] = 'telegram, twitter, facebook, vk, pinterest';
+// which networks to share to (also supported: twitter, linkedin, whatsapp)
+$_config['share_to'] = 'telegram, vk, x, facebook, pinterest';
+
+// via whom to share to X
+$_config['share_to_x_via'] = '';
 
 // via whom to share to Twitter
 $_config['share_to_twitter_via'] = '';

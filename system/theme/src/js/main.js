@@ -83,9 +83,7 @@ function initObsoleteFunction () {
           password: $formLoginPassword.val()
         },
         success: function (response) {
-          $formLogin.find('.input-disableable').prop('disabled', false)
-
-          if (typeof response.data === 'undefined' || typeof response.data['password-correct'] === 'undefined') {
+          if (typeof response.data === 'undefined' || typeof response.data['password-status'] === 'undefined') {
             e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
             $formLoginPasswordChecking.fadeOut(200)
             e2NiceError({
@@ -100,18 +98,35 @@ function initObsoleteFunction () {
             return false
           }
 
-          if (response.data['password-correct']) {
+          if (response.data['password-status'] === 'incorrect') {
+            setTimeout(function () {
+              $formLogin.find('.input-disableable').prop('disabled', false)
+              e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
+              $formLoginPasswordChecking.fadeOut(200)
+              $formLoginPassword.focus()
+              swing($('#e2-login-window')[0])
+            }, response.data.timeout)
+          } else {
+            $formLogin.find('.input-disableable').prop('disabled', false)
             e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
             $formLoginPasswordChecking.hide()
-            $('#password-correct').fadeIn(200, function () {
-              mustSubmit = true
-              $formLogin.submit()
-            })
-          } else {
-            e2SpinningAnimationStartStop($formLoginPasswordChecking, 0)
-            $formLoginPasswordChecking.fadeOut(200)
-            $formLoginPassword.focus()
-            swing($('#e2-login-window')[0])
+            if (response.data['password-status'] === 'correct') {
+              $('#password-correct').fadeIn(200, function () {
+                mustSubmit = true
+                $formLogin.submit()
+              })
+            }
+            if (response.data['password-status'] === 'waiting') {
+              e2NiceError({
+                message: 'er--js-server-error',
+                debug: {
+                  message: 'Server response malformed',
+                  data: {
+                    response: response
+                  }
+                }
+              })
+            }
           }
         },
         error: function () {
@@ -204,7 +219,7 @@ function initObsoleteFunction () {
   }
 
   // autosize text fields
-  $('.e2-textarea-autosize').each(e2AutosizeTextFields)
+  document.querySelectorAll('.e2-textarea-autosize').forEach(e2AutosizeTextFields)
 
   // notes
   var $notes = $('.e2-note')
@@ -238,8 +253,18 @@ function initKeyboardShortcuts () {
       if (target) {
         if (target.form) {
           var $targetForm = $(target.form)
+          var $target = $(target)
           if ($targetForm.hasClass('e2-enterable')) return
-          if (!event.ctrlKey && $(target).is('textarea')) return
+          if (!event.ctrlKey && $target.is('textarea')) return
+          // the following line allows plain Enter
+          // to bubble for search inputs and Chosen tag fields.
+          // Android keyboards rely on that key event to confirm
+          // a suggestion; if we swallow it here,
+          // the dropdown never fires. iOS Safari dispatches
+          // Enter differently (submit without triggering 
+          // this handler), so it "worked" before—document
+          // it to avoid regressions. so, the fix:
+          if (!event.ctrlKey && ($target.hasClass('js-search-query') || $target.closest('.chzn-container').length)) return
           event.preventDefault()
           if (event.ctrlKey && (event.type === 'keydown')) {
             if ($targetForm.find('#submit-button').length && !$targetForm.find('#submit-button').is(':disabled')) {

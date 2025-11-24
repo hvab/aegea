@@ -262,9 +262,9 @@ class PdoStorage implements StorageWriteInterface, StorageReadInterface, Storage
             $tocEntry = new TocEntry(
                 $row['title'],
                 $row['description'],
-                $date,
                 $row['url'],
-                $row['hash']
+                $row['hash'],
+                $date
             );
             $tocEntry->setInternalId($row['id']);
 

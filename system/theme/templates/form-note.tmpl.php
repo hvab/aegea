@@ -166,7 +166,7 @@
             <label><?= _S ('ff--details') ?></label>
           </div>
         <div class="form-element">
-          <a href="javascript: return false" onclick="$ ('.e2-note-time-and-url').slideToggle(200); return false" class="e2-pseudolink e2-admin-link"><?php if (@$content['form-note']['draft?']) { ?><?= _S ('ff--will-be-published') ?><?php } else { ?><?= _S ('ff--is-published') ?><?php } ?> <?php if (@$content['form-note']['alias']) { ?>
+          <a href="javascript: return false" onclick="$('.e2-note-time-and-url').slideToggle(200, function() { document.querySelectorAll('.e2-textarea-autosize').forEach(e2AutosizeTextFields); }); return false" class="e2-pseudolink e2-admin-link"><?php if (@$content['form-note']['draft?']) { ?><?= _S ('ff--will-be-published') ?><?php } else { ?><?= _S ('ff--is-published') ?><?php } ?> <?php if (@$content['form-note']['alias']) { ?>
           <?= _S ('ff--at-address') ?> .../<?= @$content['form-note']['alias'] ?>/
           <?php } ?>
           <?php if (@$content['form-note']['time']) { ?>

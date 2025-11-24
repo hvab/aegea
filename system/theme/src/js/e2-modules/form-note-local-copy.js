@@ -3,7 +3,7 @@ import { isLocalStorageAvailable } from '../lib/local-storage'
 function initFormNoteLocalCopy () {
   const $formNote = $('#form-note')
 
-  if (!isLocalStorageAvailable || !$formNote) return
+  if (!isLocalStorageAvailable || !$formNote.length) return
 
   const $noteId = $('#note-id')
   const $isNotePublished = $('#is-note-published')
@@ -20,14 +20,24 @@ function initFormNoteLocalCopy () {
   const serverTime = +$('#server-time').val() * 1000
   const initNoteId = $noteId.val()
 
-  let prevLiveSaveButtonVisibility = $liveSaveButon.is(':visible')
-  let caretPosition = null
+  let caretState = { field: null, position: null }
   let localSaverInited = false
   let localSaverInterval = null
 
   document.e2.localCopies.loadLocalCopy = loadLocalCopy
   document.e2.localCopies.initLocalSaver = initLocalSaver
   document.e2.localCopies.destroyLocalSaver = destroyLocalSaver
+
+  function ensureLocalSaverInitialized () {
+    initLocalSaver ()
+  }
+
+  const caretTrackingEvents = 'input keyup mouseup focus'
+
+  $title.on('input', ensureLocalSaverInitialized)
+  $text.on('input', ensureLocalSaverInitialized)
+  $tags.on('change', ensureLocalSaverInitialized)
+  $summary.on('input', ensureLocalSaverInitialized)
 
   function initLocalSaver () {
     if (localSaverInited) return
@@ -46,7 +56,8 @@ function initFormNoteLocalCopy () {
     $formNote
       .on('submit', destroyLocalSaver)
       .on('ajaxError', initLocalSaver)
-    $text.on('input', saveCaretPosition)
+    $text.on(caretTrackingEvents, saveTextCaretPosition)
+    $title.on(caretTrackingEvents, saveTitleCaretPosition)
 
     localSaverInited = true
   }
@@ -57,7 +68,8 @@ function initFormNoteLocalCopy () {
     window.removeEventListener('pagehide', removeBeforeUnloadListener)
 
     $formNote.off('submit', destroyLocalSaver)
-    $text.off('input', saveCaretPosition)
+    $text.off(caretTrackingEvents, saveTextCaretPosition)
+    $title.off(caretTrackingEvents, saveTitleCaretPosition)
 
     localSaverInited = false
   }
@@ -66,10 +78,21 @@ function initFormNoteLocalCopy () {
     window.removeEventListener('beforeunload', saveLocalCopy)
   }
 
-  function saveCaretPosition () {
-    if ($text[0].selectionEnd) {
-      caretPosition = $text[0].selectionEnd
+  function setCaretState ($element, field) {
+    if ($element[0] && typeof $element[0].selectionEnd === 'number') {
+      caretState = {
+        field,
+        position: $element[0].selectionEnd
+      }
     }
+  }
+
+  function saveTextCaretPosition () {
+    setCaretState($text, 'text')
+  }
+
+  function saveTitleCaretPosition () {
+    setCaretState($title, 'title')
   }
 
   function loadLocalCopy () {
@@ -77,7 +100,11 @@ function initFormNoteLocalCopy () {
 
     if (!copy) return
 
-    if (copy.caretPosition) {
+    const caretField = copy.caretField || (copy.caretPosition ? 'text' : null)
+    const hasTextCaret = caretField === 'text' && typeof copy.caretPosition === 'number'
+    const textValue = typeof copy.text === 'string' ? copy.text : ''
+
+    if (hasTextCaret) {
       // when we paste new text, textarea will be autosized, so we subscribe to `autosized` event
       // and scroll page after that
       $text.one('autosized', function () {
@@ -96,12 +123,16 @@ function initFormNoteLocalCopy () {
       document.execCommand('insertText', false, copy.title)
       $title.trigger('input')
 
-      $text.addClass('e2-textarea-autosize_off').focus().select()
-      document.execCommand('insertText', false, copy.text)
-      $text.removeClass('e2-textarea-autosize_off').trigger('input')
+      if (textValue) {
+        $text.addClass('e2-textarea-autosize_off').focus().select()
+        document.execCommand('insertText', false, textValue)
+        $text.removeClass('e2-textarea-autosize_off').trigger('input')
+      } else {
+        $text.val(textValue).trigger('input')
+      }
     } else {
       $title.val(copy.title).trigger('input')
-      $text.val(copy.text).trigger('input')
+      $text.val(textValue).trigger('input')
     }
 
     // here we need to check, does select contain all tags, or some of them were added locally
@@ -164,30 +195,47 @@ function initFormNoteLocalCopy () {
       $('.e2-note-time-and-url').slideToggle()
     }
 
-    $liveSaveButon.show()
-    $copyIndicator.show()
+    if ($text.val().trim()) {
+      $liveSaveButon.show()
+      $copyIndicator.show()
+    } else {
+      $liveSaveButon.hide()
+      $copyIndicator.hide()
+    }
 
-    if (copy.caretPosition) {
+    if (hasTextCaret) {
       $text.focus()
-      $text[0].selectionStart = $text[0].selectionEnd = caretPosition = copy.caretPosition
+      $text[0].selectionStart = $text[0].selectionEnd = copy.caretPosition
+      caretState = { field: 'text', position: copy.caretPosition }
+    } else if (caretField === 'title' && typeof copy.caretPosition === 'number') {
+      const titleLength = ($title.val() || '').length
+      const position = Math.min(copy.caretPosition, titleLength)
+      $title.focus()
+      $title[0].selectionStart = $title[0].selectionEnd = position
+      caretState = { field: 'title', position }
+    } else if (!textValue) {
+      const titleLength = ($title.val() || '').length
+      $title.focus()
+      $title[0].selectionStart = $title[0].selectionEnd = titleLength
+      caretState = { field: 'title', position: titleLength }
     }
   }
 
   function saveLocalCopy () {
-    const liveSaveButtonVisibility = $liveSaveButon.is(':visible')
+    const stamp = getStamp()
 
-    if (liveSaveButtonVisibility || prevLiveSaveButtonVisibility) {
-      prevLiveSaveButtonVisibility = liveSaveButtonVisibility
-
-      const stamp = getStamp()
-
-      if (!stamp.images.length && !stamp.title.trim() && !stamp.text.trim()) {
-        document.e2.localCopies.remove(stamp.id)
-        return
-      }
-
-      document.e2.localCopies.save(stamp.id, stamp)
+    if (
+      !stamp.images.length &&
+      !stamp.title.trim() &&
+      !stamp.text.trim() &&
+      !(stamp.tags && stamp.tags.length) &&
+      !(stamp.summary && stamp.summary.trim())
+    ) {
+      document.e2.localCopies.remove(stamp.id)
+      return
     }
+
+    document.e2.localCopies.save(stamp.id, stamp)
   }
 
   function getStamp () {
@@ -223,7 +271,8 @@ function initFormNoteLocalCopy () {
       timestamp: (new Date()).getTime(),
       link: window.location.pathname,
       isPublished: $isNotePublished.val(),
-      caretPosition
+      caretPosition: caretState.position,
+      caretField: caretState.field
     }
   }
 }

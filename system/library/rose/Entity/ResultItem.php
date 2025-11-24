@@ -67,7 +67,7 @@ class ResultItem
      * @param int|null  $instanceId
      * @param string    $title
      * @param string    $description
-     * @param \DateTime $date
+     * @param \DateTime|null $date
      * @param string    $url
      * @param string    $highlightTemplate
      */
@@ -76,7 +76,7 @@ class ResultItem
         $instanceId,
         $title,
         $description,
-        \DateTime $date = null,
+        $date = null,
         $url,
         $highlightTemplate
     ) {
@@ -146,7 +146,7 @@ class ResultItem
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getDate()
     {

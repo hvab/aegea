@@ -1,41 +1,54 @@
-function e2AutosizeTextFields () {
-  var $element = $(this)
+function e2AutosizeTextFields (element) {
+  // ‘element’ is the <textarea> to autosize
+  element.addEventListener ('input',  e2SetTextField)
+  element.addEventListener ('change', e2SetTextField)
+  element.addEventListener ('resize', e2SetTextField)
 
-  $element.on('input change resize', e2SetSizeTextField)
-
-  e2SetSizeTextField.call(this)
+  // Perform an initial sizing right away
+  e2SetTextField.call (element)
 }
 
-function e2SetSizeTextField () {
-  var element = this
-  var $element = $(element)
+function e2SetTextField () {
+  var element = this;
 
-  if ($element.hasClass('e2-textarea-autosize_off')) {
-    return
-  }
+  // used by local copier
+  if (element.classList.contains ('e2-textarea-autosize_off')) return
 
-  var myHeight = parseInt(element.clientHeight)
+  var myHeight = parseInt (element.clientHeight, 10)
   var lastHeight
 
   if (element.scrollHeight > myHeight) {
-    element.style.height = (element.scrollHeight) + 'px'
+    element.style.height = element.scrollHeight + 'px'
   } else {
-    var $clonedElement = $element.clone()
-    $clonedElement.css('visibility', 'hidden').css('position', 'absolute').css('width', $element.width())
-    $element.before($clonedElement)
 
-    while (parseInt($clonedElement[0].scrollHeight) === myHeight) {
+    var clonedElement = element.cloneNode (true)
+    clonedElement.style.visibility = 'hidden'
+    clonedElement.style.position   = 'absolute'
+    clonedElement.style.width = element.offsetWidth + 'px'
+
+    // insert clone before the original
+    element.parentNode.insertBefore (clonedElement, element);
+
+    // shrink clone until scrollHeight changes
+    while (parseInt (clonedElement.scrollHeight, 10) === myHeight) {
       myHeight -= 50
-      $clonedElement[0].style.height = myHeight + 'px'
-      lastHeight = parseInt($clonedElement[0].scrollHeight)
-      $clonedElement[0].style.height = lastHeight + 'px'
+      clonedElement.style.height = myHeight + 'px'
+      lastHeight = parseInt (clonedElement.scrollHeight, 10)
+      clonedElement.style.height = lastHeight + 'px'
     }
 
-    $clonedElement.remove()
-    element.style.height = lastHeight + 'px'
+    clonedElement.parentNode.removeChild (clonedElement)
+
+    // apply the measured height to the real element
+    element.style.height = lastHeight + 'px';
+
   }
 
-  $element.trigger('autosized')
+  // trigger a custom 'autosized' event for local copier
+  element.dispatchEvent (new CustomEvent ('autosized'))
+
 }
 
-export default e2AutosizeTextFields
+window.e2AutosizeTextFields = e2AutosizeTextFields
+
+export default e2AutosizeTextFields;

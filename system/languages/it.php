@@ -18,7 +18,6 @@ function e2l_load_strings () {
   // installer
   'pt--install' => 'Installare Aegea',
   'gs--user-fixes-needed' => 'Ebbene, qualcosa dev’essere risolto.',
-  'gs--following-folders-missing' => 'Le seguenti cartelle mancato nel pacchetto:',
   'gs--could-not-create-them-automatically' => 'Non è stato possibile crearli automaticamente a causa di accesso negato. Carichi per favore al server l’intero pacchetto.',
   'gs--and-reload-installer' => 'E rilanci l’installatore',
   'fb--begin' => 'Cominciare a bloggare',
@@ -32,6 +31,7 @@ function e2l_load_strings () {
   'gs--data-exists' => 'In questa banca dati c’è già un blog. L’installatore si collegherà ad essa.',
   'er--db-data-incomplete' => 'I dati in questa banca dati non sono completi.',
   'er--db-data-incomplete-install' => 'I dati in questa banca dati non sono completi. È probabilmente stata usata con una versione diversa di Aegea. Installi la versione d’Aegea con cui sono creati questi dati, poi aggiorni se necessario. Per un’installazione fresca, fornisca per favore una banca dati pulita',
+  'er--cannot-run-installer-missing-htaccess' => 'L’installatore non può avviarsi perché manca il file «.htaccess» nella cartella di installazione. Carichi il pacchetto completo (compreso «.htaccess») e ricarichi questa pagina.',
 
   // diags
   'et--fix-permissions-on-server' => 'Aggiusti le autorizzazioni sul server',
@@ -86,14 +86,14 @@ function e2l_load_strings () {
   // uploads
   'er--cannot-create-thumbnail' => 'Non è stato possibile creare la miniatura',
   'er--cannot-upload-file-too-big' => 'Un file è troppo grosso',
-  'er--cannot-upload-no-or-too-many-files' => 'Nessun o troppi fili sono stati ricevuti dal server',
+  'er--cannot-upload-no-or-too-many-files' => 'Nessun o troppi file sono stati ricevuti dal server',
   'er--cannot-upload' => 'Non è stato possibile caricare il file (errore $[error])',
   'er--cannot-register-upload' => 'Impossibile registrare il file caricato',
   'er--cannot-rename-file-exists' => 'Il file già esiste',
 
   // see e2NiceError.js!
-  'er--supported-only-png-jpg-gif' => 'Sono supportati solo immagini png, webp, jpg e gif',
-  'er--unsupported-file' => 'Sono supportati solo immagini png, webp, jpg, gif e svg, video mp4 e mov, e fili audio mp3',
+  'er--supported-image-types' => 'Tipi di immagine supportati:',
+  'er--supported-file-types' => 'Tipi di file supportati:',
 
   'ff--gmt-offset' => 'Differenza da GMT',
   'ff--with-dst' => '+1 in estate',
@@ -233,11 +233,13 @@ function e2l_load_strings () {
   'er--could-not-change-password' => 'Non è stato possibile cambiare la parola d’accesso',
   'er--no-password-entered' => 'Non ha entrato una parola d’accesso',
   'er--wrong-password' => 'Parola d’accesso sbagliata',
+  'er--wrong-password-wait' => 'Parola d’accesso sbagliata, riprovate tra $[s] s',
+  'er--password-wait' => 'Riprovate tra $[s] s',
   'ff--displayed-as-plain-text' => 'mostrato in testo visibile',
   'er--settings-not-saved' => 'Impostazioni non salvate',
   'pt--password-reset' => 'Ripristino della parola d’accesso',
   'gs--password-reset-link-sent-maybe' => 'Se l’indirizzo è giusto, il link per ripristinare la parola d’accesso è stato inviato via mail',
-  'gs--password-reset-link-saved' => 'Il link per ripristinare la parola d’accesso è stato salvato nel file password-reset.psa nella cartella utente del tuo blog sul server.',
+  'gs--password-reset-link-saved' => 'Il link per ripristinare la parola d’accesso è stato salvato nel file password-reset.psa nella cartella utente del suo blog sul server.',
   'er--cannot-reset-password' => 'Impossibile ripristinare parola d’accesso: nessuna mail è stata specificata nelle Impostazioni. Contatti l’amministratore.',
   'er--cannot-send-link-email-empty' => 'Impossibile inviare link per ripristinare la parola d’accesso: nessuna mail specificata',
   'gs--i-forgot' => 'Ho dimenticato',
@@ -390,11 +392,12 @@ function e2l_load_strings () {
   'gs--follow-this-blog' => 'Seguire questo blog',
 
   // social networks
+  'sn--telegram-verb' => 'Inviare',
+  'sn--x-verb' => 'Twittare',
   'sn--twitter-verb' => 'Twittare',
   'sn--facebook-verb' => 'Condividere',
   'sn--linkedin-verb' => 'Condividere',
-  'sn--vkontakte-verb' => 'Condividere',
-  'sn--telegram-verb' => 'Inviare',
+  'sn--vk-verb' => 'Condividere',
   'sn--whatsapp-verb' => 'Inviare',
   'sn--pinterest-verb' => 'Pinnare',
 
@@ -445,7 +448,6 @@ function e2l_load_strings () {
   'gs--updated-successfully' => 'Aggiornato con successo dalla versione $[from] alla versione $[to]',
   'gs--pgt' => 'Tempo di generazione',
   'gs--seconds-contraction' => 's',
-  'gs--good-blogs' => 'Bei blog e siti',
 
   'gs--range-separator' => '–',
   

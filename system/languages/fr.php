@@ -18,7 +18,6 @@ function e2l_load_strings () {
   // installer
   'pt--install' => 'Installer Aegea',
   'gs--user-fixes-needed' => 'Hum, quelque chose est à réparer.',
-  'gs--following-folders-missing' => 'Les répertoires suivants manquent dans le package :',
   'gs--could-not-create-them-automatically' => 'Impossible de les créer automatiquement en raison d’un accès refusé. Veuillez télécharger l’archive entière sur le serveur.',
   'gs--and-reload-installer' => 'Et rechargez l’installateur',
   'fb--begin' => 'Veuillez commencer à bloguer',
@@ -32,13 +31,14 @@ function e2l_load_strings () {
   'gs--data-exists' => 'Il y a déjà un blog dans cette base de données. L’installateur va simplement s’y connecter.',
   'er--db-data-incomplete' => 'Les données de cette base de données sont incomplètes.',
   'er--db-data-incomplete-install' => 'Les données de cette base de données sont incomplètes. Elle a probablement été utilisée avec une version différente d’Aegea. Installez la version d’Aegea avec laquelle ces données ont été créées, puis mettez-la à jour si nécessaire. Pour une installation propre, veuillez fournir une base de données propre',
+  'er--cannot-run-installer-missing-htaccess' => 'L’installateur ne peut pas démarrer, car le fichier « .htaccess » manque dans le répertoire d’installation. Téléchargez le paquet complet (y compris « .htaccess ») puis rechargez cette page.',
 
   // diags
   'et--fix-permissions-on-server' => 'Veuillez configurer les autorisations sur le serveur',
   'gs--enable-write-permissions-for-the-following' => 'Veuillez activer les autorisations d’écriture ici :',
   
   // sign in
-  'pt--sign-in' => 'Connection',
+  'pt--sign-in' => 'Connexion',
   'er--cannot-write-auth-data' => 'Impossible d’inscrire les données d’authentification',
 
   // archive
@@ -92,8 +92,8 @@ function e2l_load_strings () {
   'er--cannot-rename-file-exists' => 'Le fichier existe déjà',
 
   // see e2NiceError.js!
-  'er--supported-only-png-jpg-gif' => 'Seules les images png, webp, jpg et gif sont prises en charge',
-  'er--unsupported-file' => 'Seuls les images png, webp, jpg, gif et svg, vidéos mp4 et mov et les fichiers audio mp3 sont pris en charge',
+  'er--supported-image-types' => 'Types d’image pris en charge :',
+  'er--supported-file-types' => 'Types de fichiers pris en charge :',
 
   'ff--gmt-offset' => 'Décalage GMT',
   'ff--with-dst' => '+1 en été',
@@ -101,7 +101,7 @@ function e2l_load_strings () {
   'pt--post-deletion' => 'Suppression du billet',
   'gs--post-will-be-deleted' => 'Le billet “$[post]” sera supprimé avec tous les commentaires.',
 
-  'gs--post-will-be-hidden' => 'Le billet restera en place, mais ne sera visible que par vous. D’autres ne verront même y pas par un lien direct. Peut être rendu visible à nouveau',
+  'gs--post-will-be-hidden' => 'Le billet restera en place, mais ne sera visible que par vous. D’autres ne le verront même pas avec un lien direct. Peut être rendu visible à nouveau',
   'gs--post-will-be-withdrawn' => 'Les commentaires seront supprimés, la date de publication sera oubliée. Peut être republié',
 
   // uploads
@@ -150,7 +150,7 @@ function e2l_load_strings () {
   'er--name-email-text-required' => 'Le nom, l’adresse de courriel et le texte du commentaire sont tous requis',
   'ff--notify-subscribers' => 'Avertisser l’auteur et les autres abonnés par le courriel',
   'gs--your-comment' => 'Votre commentaire',
-  'gs--sign-in-via' => 'Connection via',
+  'gs--sign-in-via' => 'Connexion via',
   'ff--full-name' => 'Nom complet',
   'ff--email' => 'Adresse de courriel',
   'ff--subscribe-to-others-comments' => 'Obtenir d’autres commentaires par le courriel',
@@ -233,6 +233,8 @@ function e2l_load_strings () {
   'er--could-not-change-password' => 'Impossible de changer le mot de passe',
   'er--no-password-entered' => 'Vous n’avez pas saisi le mot de passe',
   'er--wrong-password' => 'Mauvais mot de passe',
+  'er--wrong-password-wait' => 'Mot de passe incorrect, réessayez dans $[s] s',
+  'er--password-wait' => 'Réessayez dans $[s] s',
   'ff--displayed-as-plain-text' => 'affiché en texte brut',
   'er--settings-not-saved' => 'Paramètres non enregistrés',
   'pt--password-reset' => 'Réinitialisation du mot de passe',
@@ -285,12 +287,12 @@ function e2l_load_strings () {
   'ff--yandex-metrika' => 'Yandex.Metrika',
   'ff--google-analytics' => 'Google Analytics',
   'gs--password' => 'Mot de passe',
-  'gs--db-connection' => 'Connection à la base de données',
+  'gs--db-connection' => 'Connexion à la base de données',
   'gs--get-backup' => 'Obtenir la dernière sauvegarde',
   'gs--not-paid' => 'Aegea n’est pas payée',
   'gs--paid-until' => 'Aegea est payée jusqu’au',
   'gs--paid-period-ended' => 'Période payée terminée',
-  'bt--learn-about-payment' => 'Apprendre au sujet du paiement',
+  'bt--learn-about-payment' => 'En savoir plus sur le paiement',
   'gs--used' => 'Utilisé $[used] sur $[total] Mo ($[percent]%)',
   'gs--used-all' => 'Tout l’espace est utilisé : $[total] Mo',
   
@@ -305,7 +307,7 @@ function e2l_load_strings () {
   'ff--db-host' => 'Serveur',
   'ff--db-username-and-password' => 'Nom d’utilisateur et mot de passe',
   'ff--db-name' => 'Nom de la base de données',
-  'fb--connect-to-this-db' => 'Connection utilisant ces paramètres',
+  'fb--connect-to-this-db' => 'Connexion avec ces paramètres',
   'er--cannot-save-data' => 'Impossible de sauvegarder les données',
   'gs--drag-userpic-here' => 'Faites glisser votre photo ici',
 
@@ -320,7 +322,7 @@ function e2l_load_strings () {
   // need for password
   'gs--need-password' => 'Votre mot de passe',
   'ff--public-computer' => 'Ordinateur public',
-  'gs--frontpage' => 'Domicile',
+  'gs--frontpage' => 'Accueil',
   
   // form buttons
   'fb--submit' => 'Soumettre',
@@ -332,8 +334,8 @@ function e2l_load_strings () {
   'fb--select' => 'Choisir',
   'fb--apply' => 'Appliquer',
   'fb--delete' => 'Supprimer',
-  'fb--sign-in' => 'Connection',
-  'fb--sign-out' => 'Déconnection',
+  'fb--sign-in' => 'Connexion',
+  'fb--sign-out' => 'Déconnexion',
   'fb--send-link-by-email' => 'Envoyer le lien à cette adresse de courriel',
   
   // time
@@ -390,11 +392,12 @@ function e2l_load_strings () {
   'gs--follow-this-blog' => 'M’abonner à ce blog',
 
   // social networks
+  'sn--telegram-verb' => 'Envoyer',
+  'sn--x-verb' => 'Tweeter',
   'sn--twitter-verb' => 'Tweeter',
   'sn--facebook-verb' => 'Partager',
   'sn--linkedin-verb' => 'Partager',
-  'sn--vkontakte-verb' => 'Partager',
-  'sn--telegram-verb' => 'Envoyer',
+  'sn--vk-verb' => 'Partager',
   'sn--whatsapp-verb' => 'Envoyer',
   'sn--pinterest-verb' => 'Épingler',
 
@@ -445,7 +448,6 @@ function e2l_load_strings () {
   'gs--updated-successfully' => 'Mise à jour réussie à partir de la version $[from] à la version $[to]',
   'gs--pgt' => 'Temps de génération',
   'gs--seconds-contraction' => 's',
-  'gs--good-blogs' => 'Bons blogs et sites',
 
   'gs--range-separator' => '–',
   

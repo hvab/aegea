@@ -10,7 +10,10 @@ abstract class AbstractStemmer implements IrregularWordsStemmerInterface
 {
     protected $nextStemmer;
 
-    public function __construct(StemmerInterface $nextStemmer = null)
+    /**
+     * @param StemmerInterface|null $nextStemmer
+     */
+    public function __construct($nextStemmer = null)
     {
         $this->nextStemmer = $nextStemmer;
     }

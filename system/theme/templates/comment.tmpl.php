@@ -3,6 +3,8 @@
 
 <?php if ($comment['first-new?']) { ?><a name="new"></a><?php } ?>
 
+<a name="comment-<?= $comment['number'] ?>"></a>
+
 <div class="e2-comment-and-reply">
   <div class="<?= $comment['spam-suspect?']? 'e2-spam' : '' ?>">
     <div class="e2-comment">
@@ -61,7 +63,7 @@
                 <?php if (array_key_exists ('important-toggle-action', $comment)): ?>
                   <form action="<?= $comment['important-toggle-action'] ?>" method="post">
                   <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
-                  <button type="submit" href="<?= $comment['important-toggle-action'] ?>" class="nu e2-popup-menu-widget-item <?= ($comment['important?']? 'e2-admin-item_on' : '') ?>" data-e2-popup-menu-action="do-not-close-popup-menu" data-e2-js-action="toggle-important" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
+                  <button type="submit" class="nu e2-popup-menu-widget-item <?= ($comment['important?']? 'e2-admin-item_on' : '') ?>" data-e2-popup-menu-action="do-not-close-popup-menu" data-e2-js-action="toggle-important" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
                     <span class="e2-popup-menu-widget-item-icon">
                       <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('favourite-off') ?></span></span>
                       <span class="e2-toggle-state-on"><span class="e2-svgi"><?= _SVG ('favourite-on') ?></span></span>
@@ -77,7 +79,7 @@
                 <?php if (array_key_exists ('removed-action', $comment)): ?>
                   <form action="<?= $comment['removed-action'] ?>" method="post" style="line-height: 0">
                   <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
-                  <button type="submit" href="<?= $comment['removed-action'] ?>" class="nu e2-popup-menu-widget-item e2-popup-menu-widget-item_remove" data-e2-js-action="removed-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
+                  <button type="submit" class="nu e2-popup-menu-widget-item e2-popup-menu-widget-item_remove" data-e2-js-action="removed-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
                     <span class="e2-popup-menu-widget-item-icon">
                       <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('trash') ?></span></span>
                       <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
@@ -93,7 +95,7 @@
               <?php if (array_key_exists ('replaced-action', $comment)): ?>
                 <form action="<?= $comment['replaced-action'] ?>" method="post" style="line-height: 0">
                 <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
-                <button type="submit" href="<?= $comment['replaced-action'] ?>" class="nu e2-admin-link e2-admin-item" data-e2-js-action="replaced-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>" title="<?= _S ('gs--replace') ?>">
+                <button type="submit" class="nu e2-admin-link e2-admin-item" data-e2-js-action="replaced-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>" title="<?= _S ('gs--replace') ?>">
                   <span class="e2-admin-item-icon">
                     <span class="e2-svgi"><?= _SVG ('replace') ?></span>
                   </span>
@@ -163,7 +165,7 @@
                   <?php if (array_key_exists ('reply-important-toggle-action', $comment)): ?>
                     <form action="<?= $comment['reply-important-toggle-action'] ?>" method="post">
                     <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
-                    <button type="submit" href="<?= $comment['reply-important-toggle-action'] ?>" class="nu e2-popup-menu-widget-item <?= ($comment['reply-important?']? 'e2-admin-item_on' : '') ?>" data-e2-popup-menu-action="do-not-close-popup-menu" data-e2-js-action="toggle-important" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
+                    <button type="submit" class="nu e2-popup-menu-widget-item <?= ($comment['reply-important?']? 'e2-admin-item_on' : '') ?>" data-e2-popup-menu-action="do-not-close-popup-menu" data-e2-js-action="toggle-important" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
                       <span class="e2-popup-menu-widget-item-icon">
                         <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('favourite-off') ?></span></span>
                         <span class="e2-toggle-state-on"><span class="e2-svgi"><?= _SVG ('favourite-on') ?></span></span>
@@ -179,7 +181,7 @@
                   <?php if (array_key_exists ('removed-reply-action', $comment)): ?>
                     <form action="<?= $comment['removed-reply-action'] ?>" method="post" style="line-height: 0">
                     <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
-                    <button type="submit" href="<?= $comment['removed-reply-action'] ?>" class="nu e2-popup-menu-widget-item e2-popup-menu-widget-item_remove" data-e2-js-action="removed-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
+                    <button type="submit" class="nu e2-popup-menu-widget-item e2-popup-menu-widget-item_remove" data-e2-js-action="removed-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>">
                       <span class="e2-popup-menu-widget-item-icon">
                         <span class="e2-toggle-state-off"><span class="e2-svgi"><?= _SVG ('trash') ?></span></span>
                         <span class="e2-toggle-state-thinking"><span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
@@ -195,7 +197,7 @@
                 <?php if (array_key_exists ('replaced-reply-action', $comment)): ?>
                   <form action="<?= $comment['replaced-reply-action'] ?>" method="post" style="line-height: 0">
                   <input type="hidden" name="token" value="<?= $content['sign-in']['token'] ?>" />
-                  <button type="submit" href="<?= $comment['replaced-reply-action'] ?>" class="nu e2-admin-link e2-admin-item" data-e2-js-action="replaced-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>" title="<?= _S ('gs--replace') ?>">
+                  <button type="submit" class="nu e2-admin-link e2-admin-item" data-e2-js-action="replaced-href,couple-trigger" data-e2-js-action-token="<?= $content['sign-in']['token'] ?>" title="<?= _S ('gs--replace') ?>">
                     <span class="e2-admin-item-icon">
                       <span class="e2-svgi"><?= _SVG ('replace') ?></span>
                     </span>

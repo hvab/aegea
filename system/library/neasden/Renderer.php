@@ -23,10 +23,23 @@ class Renderer {
 
   const MAX_H_LEVEL = 6;
 
-  function __construct (
-    Configuration $configuration = null,
-    Model $model = null
-  ) {
+  /**
+   * @param Configuration|null $configuration
+   * @param Model|null $model
+   */
+  function __construct ($configuration = null, $model = null) {
+
+    if ($configuration !== null && !($configuration instanceof Configuration)) {
+      throw new \InvalidArgumentException(
+        'Renderer configuration must be an instance of Neasden\\Configuration or null.'
+      );
+    }
+
+    if ($model !== null && !($model instanceof Model)) {
+      throw new \InvalidArgumentException(
+        'Renderer model must be an instance of Neasden\\Model or null.'
+      );
+    }
 
     $this->rx_tags_regex = (
       '(?:'. 

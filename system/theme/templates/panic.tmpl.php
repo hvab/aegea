@@ -4,7 +4,7 @@
 <!-- <?= $content['exception-message'] ?> -->
 
 <head>
-<title><?= $content['title'] ?></title>
+<title><?= _ESCAPE ($content['title']) ?></title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta charset="utf-8"/>
 <style type="text/css">

@@ -10,7 +10,7 @@ class PictureInterpreter implements InterpreterExtension {
 
     $this->neasden = $neasden;
 
-    $this->neasden -> defineLineClass ('Picture', '.*\.(jpe?g|gif|png|webp|svg)(?: +(.+))?');
+    $this->neasden -> defineLineClass ('Picture', '.*\.(jpe?g|gif|png|webp|avif|svg)(?: +(.+))?');
 
     $this->neasden -> defineGroup ('Picture', '(-Picture-)(-p-)*');
 

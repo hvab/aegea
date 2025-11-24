@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title><?= $content['title'] ?></title>
+<title><?= _ESCAPE ($content['title']) ?></title>
 
 <base href="<?= $content['meta']['base-href'] ?>" />
 
@@ -35,10 +35,14 @@
 <meta name="og:description" content="<?= $content['summary'] ?>" />
 <?php endif ?>
 
+<?php if (!empty ($content['sign-in']['token'])): ?>
+<meta name="csrf-token" content="<?= $content['sign-in']['token'] ?>">
+<?php endif ?>
+
 <meta name="viewport" content="<?= $content['meta']['viewport'] ?>">
 
 <meta property="og:type" content="website" />
-<meta property="og:title" content="<?= $content['title'] ?>" />
+<meta property="og:title" content="<?= _ESCAPE_ATTR ($content['title']) ?>" />
 <meta property="og:url" content="<?= $content['meta']['current-href'] ?>" />
 
 <?php foreach ($content['meta']['og-images'] as $image): ?>
@@ -48,4 +52,3 @@
 <meta name="twitter:card" content="<?= $content['meta']['twitter-card'] ?>" />
 
 <?php _X ('head-extras') ?>
-

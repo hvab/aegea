@@ -18,7 +18,6 @@ function e2l_load_strings () {
   // installer
   'pt--install' => 'Install Aegea',
   'gs--user-fixes-needed' => 'OK, something has to be fixed.',
-  'gs--following-folders-missing' => 'The following folders are missing from the package:',
   'gs--could-not-create-them-automatically' => 'Could not create them automatically due to denied access. Please upload the whole package to the server.',
   'gs--and-reload-installer' => 'And reload the installer',
   'fb--begin' => 'Start blogging',
@@ -92,8 +91,8 @@ function e2l_load_strings () {
   'er--cannot-rename-file-exists' => 'File already exists',
 
   // see e2NiceError.js!
-  'er--supported-only-png-jpg-gif' => 'Only png, webp, jpg, & gif images are supported',
-  'er--unsupported-file' => 'Only png, webp, jpg, gif, & svg images, mp4 & mov videos, and mp3 audio files are supported',
+  'er--supported-image-types' => 'Supported image types:',
+  'er--supported-file-types' => 'Supported file types:',
 
   'ff--gmt-offset' => 'GMT offset',
   'ff--with-dst' => '+1 in summer',
@@ -233,6 +232,8 @@ function e2l_load_strings () {
   'er--could-not-change-password' => 'Could not change password',
   'er--no-password-entered' => 'You have not entered a password',
   'er--wrong-password' => 'Wrong password',
+  'er--wrong-password-wait' => 'Wrong password, try again in $[s] s',
+  'er--password-wait' => 'Try again in $[s] s',
   'ff--displayed-as-plain-text' => 'displayed in plain text',
   'er--settings-not-saved' => 'Settings not saved',
   'pt--password-reset' => 'Password reset',
@@ -390,11 +391,12 @@ function e2l_load_strings () {
   'gs--follow-this-blog' => 'Follow this blog',
 
   // social networks
+  'sn--telegram-verb' => 'Send',
+  'sn--x-verb' => 'Tweet',
   'sn--twitter-verb' => 'Tweet',
   'sn--facebook-verb' => 'Share',
   'sn--linkedin-verb' => 'Share',
-  'sn--vkontakte-verb' => 'Share',
-  'sn--telegram-verb' => 'Send',
+  'sn--vk-verb' => 'Share',
   'sn--whatsapp-verb' => 'Send',
   'sn--pinterest-verb' => 'Pin',
 
@@ -445,7 +447,6 @@ function e2l_load_strings () {
   'gs--updated-successfully' => 'Updated successfully from version $[from] to version $[to]',
   'gs--pgt' => 'Generation time',
   'gs--seconds-contraction' => 's',
-  'gs--good-blogs' => 'Good blogs and sites',
 
   'gs--range-separator' => '–',
   

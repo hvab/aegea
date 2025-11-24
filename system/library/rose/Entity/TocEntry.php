@@ -24,7 +24,7 @@ class TocEntry
     protected $description = '';
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $date;
 
@@ -41,17 +41,17 @@ class TocEntry
     /**
      * @param string    $title
      * @param string    $description
-     * @param \DateTime $date
      * @param string    $url
      * @param string    $hash
+     * @param \DateTime|null $date
      */
-    public function __construct($title, $description, \DateTime $date = null, $url, $hash)
+    public function __construct($title, $description, $url, $hash, $date = null)
     {
         $this->title       = $title;
         $this->description = $description;
-        $this->date        = $date;
         $this->url         = $url;
         $this->hash        = $hash;
+        $this->date        = $date;
     }
 
     /**
@@ -71,7 +71,7 @@ class TocEntry
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getDate()
     {

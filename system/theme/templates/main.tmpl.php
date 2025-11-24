@@ -33,6 +33,8 @@
 <?php _T ('layout'); ?>
 <?php } ?>
 
+<?php _T ('niceerror'); ?>
+
 <?= @$content['embed']['pre-body-end'] ?>
 
 </body>

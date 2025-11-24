@@ -10,7 +10,7 @@ class AudioInterpreter implements InterpreterExtension {
 
     $this->neasden = $neasden;
 
-    $this->neasden -> defineLineClass ('Audio', '.*\.(mp3)(?: +(.+))?');
+    $this->neasden -> defineLineClass ('Audio', '.*\.(mp3|ogg)(?: +(.+))?');
     $this->neasden -> defineLineClass ('audio-play', '(?:\[play\])(.*)');
     $this->neasden -> requireLineClass ('media-timecode');
 
