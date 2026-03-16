@@ -39,6 +39,21 @@ function initFormPreferences () {
     }
   })
 
+  var $email = $('#email')
+  var $showEmailInFooter = $('#show-email-in-footer')
+
+  $showEmailInFooter.on('change', function () {
+    if ($(this).is(':checked') && !$.trim($email.val())) {
+      $email.focus()
+    }
+  })
+
+  $email.on('blur', function () {
+    if (!$.trim($(this).val())) {
+      $showEmailInFooter.prop('checked', false)
+    }
+  })
+
   $('#show-main-menu').on('change', function () {
     if ($(this).is(':checked')) {
       $('#main-menu-items').slideDown(200)

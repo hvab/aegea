@@ -15,9 +15,15 @@
   max-width: 720px;
   margin: 0 0 8px;
   padding-right: 25px;
-  word-break: break-word;
-  word-wrap: break-word;
   overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+@media #{$AreHeadingsHypenized} {
+  .e2-note h1 {
+    hyphens: auto;
+    text-wrap-style: balance;
+  }
 }
 
 .e2-note h1 a,
@@ -47,12 +53,11 @@
 }
 
 .e2-note-favourite-title:after {
-  content: '★';
-  position: absolute;
-  display: inline-block;
-  margin-left: .33em;
-  margin-top: .07em;
   font-size: 80%;
+  content: '\00a0★';
+  display: inline;
+  vertical-align: .09em;
+  font-size: 66.7%;
 }
 
 .e2-note .admin-links-floating {
@@ -184,7 +189,7 @@
   max-width: 720px;
   padding-right: 25px;
   margin: 0;
-  word-break: break-word;
+  overflow-wrap: break-word;
   word-wrap: break-word;
 }
 

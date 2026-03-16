@@ -471,6 +471,7 @@ function initAllAdminItems () {
 
     if ($link.hasClass('e2-admin-item_disabled')) return true
     if ($link.hasClass('e2-popup-menu-widget-item_disabled')) return true
+    var url = $link.attr('href') || $link.closest('form').attr('action')
 
     var beforeAjaxState = $link.hasClass('e2-admin-item_on') ? 'on' : 'off'
     var isCoupleTrigger = typeof $link.data('e2-js-action') !== 'undefined' && $link.data('e2-js-action').indexOf('couple-trigger') >= 0
@@ -481,7 +482,7 @@ function initAllAdminItems () {
     toggleDisabledStatus($link, 1)
 
     e2Ajax({
-      url: $link.attr('href'),
+      url: url,
       data: 'token=' + $link.data('e2-js-action-token') + '&result=ajaxresult',
       success: function (response) {
         if (typeof response.data === 'undefined' || typeof response.data['flag-now-on'] === 'undefined') {

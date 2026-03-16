@@ -273,6 +273,7 @@ select > .e2-button {
   transition-property: (border-bottom, border-color, background, color, fill);
   transition-duration: var(--time);
   transition-timing-function: ease-out;
+  visibility: visible;
 }
 
 .e2-clickable-keyboard-shortcut:hover,

@@ -82,6 +82,9 @@
 <div class="footer">
 <?php _X ('footer-pre') ?>
 © <span id="e2-blog-author"><?= @$content['blog']['author'] ?></span>, <?=$content['blog']['years-range']?>
+<?php if (array_key_exists ('author-email', $content['blog'])) { ?>
+ · <a href="mailto:<?=$content['blog']['author-email']?>"><?=$content['blog']['author-email']?></a> · 
+<?php } ?>
 
 <a class="e2-rss-button" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
 

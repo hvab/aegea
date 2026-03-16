@@ -1,3 +1,9 @@
+<?php if (array_key_exists ('note', $content['form-comment'])) { ?>
+<?php $content['_']['_note'] = $content['form-comment']['note']; ?>
+<?php $content['_']['_note']['_pubpreview'] = true; ?>
+<?php _T ('note-snippet') ?>
+<?php } ?>
+
 <form
   action="<?=$content['form-comment']['form-action']?>"
   method="post"

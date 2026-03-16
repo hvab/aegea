@@ -176,6 +176,7 @@ function inlineParse ({ pattern, text, start, end, isConsequent }) {
 
 function inlineWrap ({ elem, start, end, prefix, suffix }) {
   const word = getWordByCursorPosition({ elem, start, end })
+  if (word.ignore) return
 
   insertText({
     elem,
@@ -232,6 +233,7 @@ function inlineUnwrap ({ elem, start, end, parsed: { realStart, realEnd, unwrapp
 
 function linkWrap ({ elem, start, end, prefix, suffix }) {
   const word = getWordByCursorPosition({ elem, start, end })
+  if (word.ignore) return
   let wrapped = word.value
   let cursorPosition
 
@@ -476,6 +478,7 @@ function getWordByCursorPosition ({ elem, start, end }) {
   let realStart = start
   let realEnd = end
   let value = elem.value.substr(start, end - start)
+  let ignore = false
 
   if (start === end) {
     const { value: line, start: lineStart } = getLineInfo({ text: elem.value, start, end })
@@ -489,7 +492,12 @@ function getWordByCursorPosition ({ elem, start, end }) {
     if (wordInfo) {
       realStart = wordInfo.start + lineStart
       realEnd = wordInfo.end + lineStart
-      value = wordInfo.value
+
+      if (/[^()[\]/*\s]/.test(wordInfo.value)) {
+        value = wordInfo.value
+      } else {
+        ignore = true
+      }
     }
   }
 
@@ -497,6 +505,7 @@ function getWordByCursorPosition ({ elem, start, end }) {
     start: realStart,
     end: realEnd,
     value,
+    ignore,
   }
 }
 

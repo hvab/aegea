@@ -1,0 +1,187 @@
+.e2-popup-menu-widget .jouele-info-control-text {
+  display: none;
+}
+
+.e2-popup-menu-widget-item-icon_audio {
+  display: none;
+}
+
+.e2-popup-menu-widget-item-icon_audio .e2-upload-popup-menu-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: var(--foregroundColor);
+  cursor: pointer;
+  transition: color 0.16s linear;
+}
+
+.e2-popup-menu-widget-item-icon_audio .e2-upload-popup-menu-play:hover,
+.e2-popup-menu-widget-item-icon_audio .e2-upload-popup-menu-play.hover {
+  color: var(--hoverColor);
+  transition: none;
+}
+
+.e2-popup-menu-widget-item-icon_audio .e2-upload-popup-menu-play.jouele-is-playing {
+  color: var(--activeColor);
+}
+
+.e2-popup-menu-widget-item-icon_audio .jouele-svg {
+  width: 16px;
+  height: 16px;
+}
+
+.e2-popup-menu-widget-item-icon_audio .jouele-svg-color {
+  fill: currentColor;
+}
+
+.e2-image-popup-menu-audio {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* --- Jouele timeline overrides tailored for the popup --- */
+
+.e2-upload-popup-menu-timeline {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 0.8em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.e2-upload-popup-menu-timeline::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--thinRuleColor);
+  transform: translateY(-50%);
+}
+
+.e2-upload-popup-menu-timeline.jouele-is-available {
+  cursor: pointer;
+}
+
+.e2-upload-popup-menu-timeline-elapsed {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0;
+  height: 1px;
+  margin-top: -0.5px;
+  background-color: var(--foregroundColor);
+  transition: background-color 0.16s linear;
+}
+
+.e2-upload-popup-menu-timeline-elapsed.jouele-is-unavailable {
+  display: none;
+}
+
+.e2-upload-popup-menu-timeline-elapsed.jouele-is-playing {
+  background-color: var(--activeColor);
+}
+
+.e2-upload-popup-menu-timeline:hover .e2-upload-popup-menu-timeline-elapsed {
+  background-color: var(--hoverColor);
+  transition: none;
+}
+
+.e2-upload-popup-menu-timeline-elapsed::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 5px;
+  height: 5px;
+  margin-top: -2px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background-color: var(--foregroundColor);
+  transition: width 0.16s linear, height 0.16s linear, margin 0.16s linear, background-color 0.16s linear;
+}
+
+.e2-upload-popup-menu-timeline-elapsed.jouele-is-playing::after {
+  background-color: var(--activeColor);
+}
+
+.e2-upload-popup-menu-timeline:hover .e2-upload-popup-menu-timeline-elapsed::after {
+  background-color: var(--hoverColor);
+  width: 7px;
+  height: 7px;
+  margin-top: -3px;
+  margin-left: -3px;
+  transition: none;
+}
+
+/* --- Copied from the default Jouele skin to keep buffering animation workable in the custom timeline --- */
+
+.e2-upload-popup-menu-timeline-elapsed::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 5px;
+  height: 5px;
+  margin-top: -2px;
+  margin-left: -2px;
+  border-radius: 50%;
+  border: 1px solid var(--foregroundColor);
+  opacity: 0;
+  transition: border-color 0.16s linear, opacity 0.16s linear;
+  animation: preloader-animate 0.75s ease infinite;
+  display: none;
+}
+
+.e2-upload-popup-menu-timeline-elapsed.jouele-is-buffering::before {
+  opacity: 1;
+  display: block;
+}
+
+.e2-upload-popup-menu-timeline-elapsed.jouele-is-playing::before {
+  border-color: var(--activeColor);
+}
+
+.e2-upload-popup-menu-timeline:hover .e2-upload-popup-menu-timeline-elapsed::before {
+  border-color: var(--hoverColor);
+  transition: none;
+}
+
+@-webkit-keyframes preloader-animate {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes preloader-animate {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

@@ -4,6 +4,7 @@
 <?php _LIB ('goodyear') ?>
 <?php _LIB ('textarea-caret-position') ?>
 <?php _LIB ('chosen') ?>
+<?php _LIB ('jouele') ?>
 
 <form
   id="form-note"
@@ -115,8 +116,7 @@
               <span id="livesaving" style="display: none"><?= _S ('ff--saving') ?>
                 <span class="e2-svgi"><?= _SVG ('spin') ?></span>
               </span>
-              <span id="livesave-button" class="e2-keyboard-shortcut e2-clickable-keyboard-shortcut e2-admin-link" style="display: none"><?= _SHORTCUT ('livesave')? _SHORTCUT ('livesave') : _S ('ff--save') ?></span>
-              <span class="e2-attention-led js-unsaved-led" style="display: none"></span>
+              <span id="livesave-button" class="e2-keyboard-shortcut e2-clickable-keyboard-shortcut e2-admin-link" style="display: none"><?= _SHORTCUT ('livesave')? _SHORTCUT ('livesave') : _S ('ff--save') ?></span> <span class="e2-attention-led js-unsaved-led" style="display: none"></span>
             </div>
       
           </div>
@@ -177,9 +177,8 @@
       </div>
       </div>
       <?php } ?>
-  
     </div>
-    
+  
     <?php if (@$content['form-note']['time'] or @$content['form-note']['alias']) { ?>
       <div class="form-part e2-note-time-and-url" style="display: none">
 

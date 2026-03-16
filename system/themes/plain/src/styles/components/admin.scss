@@ -17,6 +17,13 @@
     transition: none;
   }
 
+  &_highlighted,
+  &_highlighted:hover,
+  &_highlighted.hover {
+    box-shadow: 0 0 0 4px var(--markedImageBorderColor);
+    transition: none;
+  }
+
   &_deleting,
   &_deleting:hover,
   &_deleting.hover {

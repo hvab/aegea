@@ -89,10 +89,11 @@
   max-height: 60px;
 }
 .e2-notes-gallery-text {
-  word-break: break-word;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
   padding-right: 20px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  text-wrap-style: balance;
 }
 .e2-notes-gallery-item-title {
   color: var(--headingsColor); // for text-overflow: ellipsis dots color
@@ -109,7 +110,6 @@
   line-height: 78px;
   margin: -8px 0 4px 0;
   overflow: hidden;
-  text-overflow: ellipsis;
   padding-bottom: 12px;
 }
 .e2-notes-gallery-item-title a {

@@ -56,8 +56,12 @@
 .jouele-info-control-text {
   color: var(--boldColor);
   font-weight: bold;
-  font-feature-settings: 'tnum'; 
 }
+
+.jouele-info-time {
+  font-feature-settings: 'tnum';
+}
+
 
 .jouele-control.jouele-is-unavailable {
   opacity: .2;

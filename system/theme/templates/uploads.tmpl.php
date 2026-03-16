@@ -17,9 +17,18 @@
 
     <div class="e2-popup-menu-widget">
       <div class="e2-popup-menu-widget-item e2-popup-menu-widget-item_info" data-e2-popup-menu-action="do-not-close-popup-menu">
+        <span class="e2-popup-menu-widget-item-icon e2-popup-menu-widget-item-icon_audio">
+          <span class="jouele-control e2-upload-popup-menu-play e2-upload-jouele-target" data-type="play-pause" data-href=""><span class="e2-svgi"><?= _SVG ('play') ?></span></span>
+        </span>
         <span class="e2-popup-menu-widget-item-text">
           <span class="e2-popup-menu-widget-item-text-row e2-image-popup-menu-filename"></span>
           <span class="e2-popup-menu-widget-item-text-row e2-image-popup-menu-filesize"></span>
+          <span class="e2-popup-menu-widget-item-text-row e2-image-popup-menu-audio" style="display: none">
+            <span class="jouele-control e2-upload-popup-menu-timeline e2-upload-jouele-target" data-type="timeline" data-href="">
+              <span class="jouele-control e2-upload-popup-menu-timeline-elapsed e2-upload-jouele-target" data-type="elapsed" data-href=""></span>
+            </span>
+            <!-- <span class="jouele-control e2-upload-popup-menu-time e2-upload-jouele-target" data-type="time-remaining" data-href=""></span> -->
+          </span>
         </span>
       </div>
 
@@ -47,22 +56,30 @@
 </div>
 
 <div class="e2-uploaded-images">
-  <?php foreach ($content['uploads']['each'] as $image) { ?>
+  <?php foreach ($content['uploads']['each'] as $upload_thumb) { ?>
     <div class="e2-uploaded-image">
-      <?php if ($image['is-available?']) { ?>
+      <?php if ($upload_thumb['is-available?']) { ?>
         <div class="e2-uploaded-image-inner e2-uploaded-image-inner_good">
             <img
-              src="<?= $image['src'] ?>"
-              alt="<?= $image['original-filename'] ?>"
-              width="<?= $image['width'] ?>"
-              height="<?= $image['height'] ?>"
-              data-filename="<?= $image['original-filename'] ?>"
-              data-filesize="<?= $image['original-filesize'] ?>"
+              src="<?= $upload_thumb['src'] ?>"
+              alt="<?= $upload_thumb['original-filename'] ?>"
+              width="<?= $upload_thumb['width'] ?>"
+              height="<?= $upload_thumb['height'] ?>"
+              data-filename="<?= $upload_thumb['original-filename'] ?>"
+              data-filesize="<?= $upload_thumb['original-filesize'] ?>"
+              data-href="<?= $upload_thumb['original-href'] ?>"
+              data-is-audio="<?= $upload_thumb['is-audio?'] ? 'true' : '' ?>"
             />
         </div>
       <?php } else { ?>
         <div class="e2-uploaded-image-inner e2-uploaded-image-inner_bad">
-          <span class="e2-uploaded-image-noimage" data-src="<?= $image['src'] ?>" data-filename="<?= $image['original-filename'] ?>"></span>
+          <span
+            class="e2-uploaded-image-noimage"
+            data-src="<?= $upload_thumb['src'] ?>"
+            data-filename="<?= $upload_thumb['original-filename'] ?>"
+            data-href="<?= $upload_thumb['original-href'] ?>"
+            data-is-audio="<?= $upload_thumb['is-audio?'] ? 'true' : '' ?>"
+          ></span>
         </div>
       <?php } ?>
     </div>

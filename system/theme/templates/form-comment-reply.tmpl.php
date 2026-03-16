@@ -1,3 +1,12 @@
+<?php $content['_']['_note'] = $content['form-comment-reply']['note']; ?>
+<?php $content['_']['_note']['_pubpreview'] = true; ?>
+<?php _T ('note-snippet') ?>
+
+<div class="e2-comments <?= $content['form-comment-reply']['note']['hidden?']? 'e2-comments-hidden' : '' ?>">
+<?php $content['_']['_comment'] = $content['form-comment-reply']['comment']; ?>
+<?php _T ('comment') ?>
+</div>
+
 <form
   action="<?=$content['form-comment-reply']['form-action']?>"
   method="post"
@@ -20,6 +29,12 @@
 
 <input
   type="hidden"
+  name="comment-number"
+  value="<?= @$content['form-comment-reply']['.comment-number'] ?>"
+/>
+
+<input
+  type="hidden"
   name="reply-action"
   id="reply-action"
   value="<?= @$content['form-comment-reply']['.reply-action'] ?>"
@@ -34,7 +49,7 @@
 
 <div class="form">
 
-<?php $comment = $content['comments']['each']['only'] ?>
+<?php $comment = $content['form-comment-reply']['comment'] ?>
 
 <div class="form-control">
   <textarea name="text"

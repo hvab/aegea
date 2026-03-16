@@ -32,7 +32,6 @@
         <div class="form-element">
           <input type="text"
             class="text width-4"
-            autofocus="autofocus"
             id="blog-title"
             name="blog-title"
             value="<?= $content['form-preferences']['blog-title'] ?>"
@@ -364,6 +363,17 @@
             name="email"
             value="<?= $content['form-preferences']['email'] ?>"
           />
+        </div>
+        <div class="form-element">
+          <label class="e2-switch">
+          <input
+            type="checkbox"
+            id="show-email-in-footer"
+            name="show-email-in-footer"
+            class="checkbox"
+            <?= @$content['form-preferences']['show-email-in-footer?']? ' checked="checked"' : ''?>
+          /><i></i> <?= _S ('ff--show-email-in-footer') ?>
+          </label><br />
         </div>
       </div>
       <?php } ?>

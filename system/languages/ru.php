@@ -102,7 +102,7 @@ function e2l_load_strings () {
   'gs--post-will-be-deleted' => 'Заметка «$[post]» будет удалена вместе со всеми комментариями.',
 
   'gs--post-will-be-hidden' => 'Заметка останется на месте, но будет видна только вам. Другие не увидят даже по прямой ссылке. Можно будет снова сделать видимой',
-  'gs--post-will-be-withdrawn' => 'Комментарии удалятся, дата публикации забудется. Можно будет опубликовать ещё раз',
+  'gs--post-will-be-withdrawn' => 'Дата публикации забудется. Можно будет опубликовать ещё раз',
 
   // uploads
   'gs--kb' => 'КБ',
@@ -283,6 +283,7 @@ function e2l_load_strings () {
   'ff--comments-require-social-id' => 'Только при входе через соцсеть',
   'ff--only-for-recent-posts' => 'Только к свежим заметкам',
   'ff--send-by-email' => 'Присылать по почте',
+  'ff--show-email-in-footer' => 'Показывать в подвале',
   'ff--analytics' => 'Аналитика',
   'ff--yandex-metrika' => 'Яндекс.​Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',

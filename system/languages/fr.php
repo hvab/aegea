@@ -102,7 +102,7 @@ function e2l_load_strings () {
   'gs--post-will-be-deleted' => 'Le billet “$[post]” sera supprimé avec tous les commentaires.',
 
   'gs--post-will-be-hidden' => 'Le billet restera en place, mais ne sera visible que par vous. D’autres ne le verront même pas avec un lien direct. Peut être rendu visible à nouveau',
-  'gs--post-will-be-withdrawn' => 'Les commentaires seront supprimés, la date de publication sera oubliée. Peut être republié',
+  'gs--post-will-be-withdrawn' => 'La date de publication sera oubliée. Peut être republié',
 
   // uploads
   'gs--kb' => 'Ko',
@@ -283,6 +283,7 @@ function e2l_load_strings () {
   'ff--comments-require-social-id' => 'Identification depuis un réseau social requise',
   'ff--only-for-recent-posts' => 'Uniquement pour les billets récents',
   'ff--send-by-email' => 'Envoyer par courriel',
+  'ff--show-email-in-footer' => 'Afficher en bas de page',
   'ff--analytics' => 'Analyse',
   'ff--yandex-metrika' => 'Yandex.Metrika',
   'ff--google-analytics' => 'Google Analytics',

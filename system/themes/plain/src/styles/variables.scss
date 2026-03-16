@@ -9,13 +9,12 @@ $hoverColor: #b03000;
 $engineTextColor: #a0a0a0;
 $adminColor: #009030;
 
-$ArePagesMultiline: 'screen and (max-width: 375px)';
-
 $AreCommentsVertical: 'screen and (max-width: 735px)';
 $AreGalleriesVertical: 'screen and (max-width: 735px)';
 $AreRelatedVertical: 'screen and (max-width: 735px)';
 $AreFormsVertical: 'screen and (max-width: 735px)';
 $AreWindowsFullWidth: 'screen and (max-width: 735px)';
+$AreHeadingsHypenized: 'screen and (max-width: 511px)';
 
 $AreFormControlsFullWidth: 'screen and (max-width: 1023px)';
 $AreTextIndentsProportional: 'screen and (max-width: 1023px)';
@@ -52,7 +51,7 @@ $IsCompact: 'screen and (max-width: 1023px)';
   --engineTextUnderlineColor: #{transparentize($engineTextColor, $thin)};
 
   --markedTextBackground: #fffada;
-  --markedImageBorderColor: #fff8b8;
+  --markedImageBorderColor: #fff5a0;
 
   --inputBackgroundColor: #f0f0f0;
   --inputTextColor: #000;

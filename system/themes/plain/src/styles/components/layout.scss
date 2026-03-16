@@ -140,6 +140,11 @@
   }
 }
 
+.footer a, .footer a:link, .footer a:visited {
+  color: var(--foregroundColor);
+  border-color: var(--thinRuleColor);
+}
+
 .engine {
   color: var(--engineTextColor);
 }
@@ -149,6 +154,7 @@
   border-color: var(--engineTextUnderlineColor);
 }
 
+.footer a:hover, .footer a:active,
 .engine a:hover, .engine a:active {
   color: var(--hoverColor);
   border-color: var(--hoverUnderlineColor);

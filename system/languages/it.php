@@ -102,7 +102,7 @@ function e2l_load_strings () {
   'gs--post-will-be-deleted' => 'Il post “$[post]” sarà eliminato con tutti i commenti.',
 
   'gs--post-will-be-hidden' => 'Il post rimarrà sul suo posto, ma sarà visibile solo a lei. Altri non potranno vederlo anche con il link diretto. Lei potrà renderlo visibile dopo',
-  'gs--post-will-be-withdrawn' => 'I commenti saranno eliminati, la data di pubblicazione dimenticata. Potrà ripubblicare dopo',
+  'gs--post-will-be-withdrawn' => 'La data di pubblicazione sarà dimenticata. Potrà ripubblicare dopo',
 
   // uploads
   'gs--kb' => 'KB',
@@ -283,6 +283,7 @@ function e2l_load_strings () {
   'ff--comments-require-social-id' => 'Richiedere identificazione con social',
   'ff--only-for-recent-posts' => 'Solo per post recenti',
   'ff--send-by-email' => 'Inviare via mail',
+  'ff--show-email-in-footer' => 'Mostrare nel piè di pagina',
   'ff--analytics' => 'Analitiche',
   'ff--yandex-metrika' => 'Yandex.Metrika',
   'ff--google-analytics' => 'Google Analytics',

@@ -1,3 +1,4 @@
+<?php _LIB ('jouele') ?>
 <form
   id="form-tag"
   action="<?= @$content['form-tag']['form-action'] ?>"

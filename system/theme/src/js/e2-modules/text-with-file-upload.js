@@ -40,36 +40,169 @@ function initTextWithFileUpload () {
   var uploadControlsHiddenModifier = 'e2-upload-controls_hidden'
   var uploadButtonWrapperHiddenModifier = 'e2-upload-controls-attach_hidden'
   var uploadSpinnerHiddenModifier = 'e2-upload-controls-uploading_hidden'
+  var uploadedImageHighlightedModifier = 'e2-uploaded-image_highlighted'
+  var uploadedImageDeletingModifier = 'e2-uploaded-image_deleting'
+  var uploadedImageDeletedModifier = 'e2-uploaded-image_deleted'
+  var $text = $('#text')
 
-  function $e2AddPasteableImage (imageThumb, imageFull, imageFilesize, imageWidth, imageHeight) {
+  // keep upload highlighting derived from the current selection so the upload
+  // list always reflects whichever filename directives are covered by it
+  // checks whether a line starts with a given filename and only allows
+  // whitespace after it, matching the editor’s filename-directive syntax
+  function e2LineStartsWithFilename (line, filename) {
+    if (!filename || line.indexOf(filename) !== 0) return false
+
+    var nextChar = line.charAt(filename.length)
+    return nextChar === '' || /\s/.test(nextChar)
+  }
+
+  // returns every text line touched by the current selection, but only while
+  // the editor textarea is focused because highlight must disappear on blur
+  function e2GetCurrentTextLines () {
+    if (!$text.length || document.activeElement !== $text[0]) return ''
+
+    var field = $text[0]
+    var lineStart = field.selectionStart
+    var lineEnd = field.selectionEnd
+
+    while (
+      lineStart > 0 &&
+      field.value.charAt(lineStart - 1) !== '\n' &&
+      field.value.charAt(lineStart - 1) !== '\r'
+    ) {
+      lineStart -= 1
+    }
+
+    while (
+      lineEnd < field.value.length &&
+      field.value.charAt(lineEnd) !== '\n' &&
+      field.value.charAt(lineEnd) !== '\r'
+    ) {
+      lineEnd += 1
+    }
+
+    return field.value.substring(lineStart, lineEnd).split(/\r\n|\r|\n/)
+  }
+
+  // collects upload filenames still present in the list
+  // and skips items that are already being deleted
+  // or are waiting for removal animation to finish
+  function e2GetUploadedFilenames () {
+    return $uploadedImages.find('.e2-uploaded-image').map(function () {
+      var $this = $(this)
+      if ($this.hasClass(uploadedImageDeletingModifier) || $this.hasClass(uploadedImageDeletedModifier)) return null
+      return $this.data('file')
+    }).get().filter(Boolean).sort(function (a, b) {
+      return b.length - a.length
+    })
+  }
+
+  // finds every uploaded filename referenced by the current selection.
+  // longer filenames go first so shared prefixes do not match too early
+  function e2GetHighlightedFilenames () {
+    var currentLines = e2GetCurrentTextLines()
+    var uploadedFilenames = e2GetUploadedFilenames()
+    var highlightedFilenames = []
+
+    if (!currentLines.length) return highlightedFilenames
+
+    for (var i = 0; i < uploadedFilenames.length; i++) {
+      for (var j = 0; j < currentLines.length; j++) {
+        if (e2LineStartsWithFilename(currentLines[j], uploadedFilenames[i])) {
+          highlightedFilenames.push(uploadedFilenames[i])
+          break
+        }
+      }
+    }
+
+    return highlightedFilenames
+  }
+
+  // removes the visual highlight from every upload item
+  function e2ClearHighlightedUpload () {
+    $uploadedImages.find('.' + uploadedImageHighlightedModifier).removeClass(uploadedImageHighlightedModifier)
+  }
+
+  // recomputes which uploads should be highlighted from the current selection
+  // and applies the visual state to matching upload items in the list
+  function e2UpdateHighlightedUpload () {
+    var highlightedFilenames = e2GetHighlightedFilenames()
+
+    e2ClearHighlightedUpload()
+    if (!highlightedFilenames.length) return
+
+    $uploadedImages.find('.e2-uploaded-image').each(function () {
+      var $this = $(this)
+      if ($.inArray($this.data('file'), highlightedFilenames) !== -1) {
+        $this.addClass(uploadedImageHighlightedModifier)
+      }
+    })
+  }
+
+  function initJouelePlayers ($context, forceReinit) {
+    if (!$context || !$context.length) return
+    if (typeof $.fn === 'undefined' || typeof $.fn.jouele !== 'function') return
+
+    $context.find('.e2-upload-jouele-target').each(function () {
+      var $control = $(this)
+      if (!$control.attr('data-href')) return
+
+      if (forceReinit && $control.data('jouele')) {
+        try {
+          $control.jouele('destroy')
+        } catch (e) {}
+        $control.removeData('jouele')
+      }
+
+      if (!$control.data('jouele')) {
+        $control.jouele()
+      }
+    })
+  }
+
+  function $e2AddPasteableUpload (uploadThumb, uploadFilename, uploadFilesize, uploadWidth, uploadHeight, uploadOriginalHref, uploadIsAudio) {
     var $newImage = $('#e2-uploaded-image-prototype').clone(true)
     var $innerGood = $newImage.find('.e2-uploaded-image-inner_good')
     var $innerGoodImg = $innerGood.find('img')
     var $innerBad = $newImage.find('.e2-uploaded-image-inner_bad')
     var $innerBadNoImage = $innerBad.find('.e2-uploaded-image-noimage')
     var $popupMenu = $newImage.find('.e2-popup-menu')
+    var $audioRow = $popupMenu.find('.e2-image-popup-menu-audio')
+    var $audioIcon = $popupMenu.find('.e2-popup-menu-widget-item-icon_audio')
+    var $audioControls = $popupMenu.find('.e2-upload-jouele-target')
 
     $newImage
       .removeAttr('id')
       .attr('style', '')
-      .data('file', imageFull)
+      .data('file', uploadFilename)
+      .data('audioHref', uploadOriginalHref || '')
+      .data('isAudio', !!uploadIsAudio)
       .css('width', '')
 
-    $popupMenu.find('.e2-image-popup-menu-filename').text(imageFull).attr('title', imageFull)
+    $popupMenu.find('.e2-image-popup-menu-filename').text(uploadFilename).attr('title', uploadFilename)
+    if (uploadIsAudio && uploadOriginalHref) {
+      $audioRow.show()
+      $audioIcon.show()
+      $audioControls.attr('data-href', uploadOriginalHref)
+    } else {
+      $audioRow.hide()
+      $audioIcon.hide()
+      $audioControls.attr('data-href', '')
+    }
 
-    if (imageWidth && imageHeight) { // picture is available on server
+    if (uploadWidth && uploadHeight) { // picture is available on server
       $innerBad.remove()
       $innerGoodImg
-        .attr('src', imageThumb + '?' + new Date().getTime())
-        // .attr('alt', imageFull) // will need to change on rename if used
-        .attr('width', imageWidth)
-        .attr('height', imageHeight)
+        .attr('src', uploadThumb + '?' + new Date().getTime())
+        // .attr('alt', uploadFilename) // will need to change on rename if used
+        .attr('width', uploadWidth)
+        .attr('height', uploadHeight)
 
-      $popupMenu.find('.e2-image-popup-menu-filesize').text(imageFilesize)
+      $popupMenu.find('.e2-image-popup-menu-filesize').text(uploadFilesize)
     } else { // picture is not available on server
       $newImage.addClass('e2-uploaded-image_broken')
       $innerGood.remove()
-      $innerBadNoImage.attr('data-src', imageThumb)
+      $innerBadNoImage.attr('data-src', uploadThumb)
 
       $popupMenu
         .find('.e2-popup-menu-widget-item').filter(':not(.e2-popup-menu-widget-item_info):not(.e2-popup-menu-widget-item_remove)')
@@ -80,8 +213,8 @@ function initTextWithFileUpload () {
       $popupMenu: $popupMenu
     })
 
-    if ($.inArray(imageFull, listedThumbnails) === -1) {
-     listedThumbnails.push(imageFull)
+    if ($.inArray(uploadFilename, listedThumbnails) === -1) {
+     listedThumbnails.push(uploadFilename)
     }
 
     return $newImage
@@ -162,14 +295,18 @@ function initTextWithFileUpload () {
             }
 
             if ($thumbToUpdate.length) {
-              $e2AddPasteableImage(
+              var $insertedOverwrite = $e2AddPasteableUpload(
                 response['data']['thumb'],
                 response['data']['new-name'],
                 response['data']['filesize'],
                 response['data']['width'],
-                response['data']['height']
+                response['data']['height'],
+                response['data']['original-href'],
+                response['data']['is-audio?']
               ).insertAfter($thumbToUpdateParent)
+              initJouelePlayers($insertedOverwrite, false)
               $thumbToUpdateParent.remove()
+              e2UpdateHighlightedUpload()
             }
           } else {
             if (file.e2DroppedIntoTextarea) e2PastePic(response['data']['new-name'])
@@ -177,13 +314,18 @@ function initTextWithFileUpload () {
             var alreadyListed = ($.inArray(response['data']['new-name'], listedThumbnails) !== -1)
 
             if (!alreadyListed) {
-              $e2AddPasteableImage(
+              var $newlyAppended = $e2AddPasteableUpload(
                 response['data']['thumb'],
                 response['data']['new-name'],
                 response['data']['filesize'],
                 response['data']['width'],
-                response['data']['height']
-              ).appendTo($uploadedImages).show(200, function () {
+                response['data']['height'],
+                response['data']['original-href'],
+                response['data']['is-audio?']
+              ).appendTo($uploadedImages)
+              initJouelePlayers($newlyAppended, false)
+              $newlyAppended.show(200, function () {
+                e2UpdateHighlightedUpload()
                 if (!filesToUpload.length) {
                   e2SpinningAnimationStartStop($uploadSpinner, 0)
                   $uploadSpinner.addClass(uploadSpinnerHiddenModifier)
@@ -197,14 +339,18 @@ function initTextWithFileUpload () {
                 $uploadButtonWrapper.removeClass(uploadButtonWrapperHiddenModifier)
               }
               if ($thumbToUpdate.length) {
-                $e2AddPasteableImage(
+                var $insertedDuplicate = $e2AddPasteableUpload(
                   response['data']['thumb'],
                   response['data']['new-name'],
                   response['data']['filesize'],
                   response['data']['width'],
-                  response['data']['height']
+                  response['data']['height'],
+                  response['data']['original-href'],
+                  response['data']['is-audio?']
                 ).insertAfter($thumbToUpdateParent)
+                initJouelePlayers($insertedDuplicate, false)
                 $thumbToUpdateParent.remove()
+                e2UpdateHighlightedUpload()
               }
             }
           }
@@ -333,24 +479,38 @@ function initTextWithFileUpload () {
       var $img = $this.find('img')
       var $noimage = $this.find('.e2-uploaded-image-noimage')
 
-      var imageThumb
-      var imageFull
-      var imageFilesize
-      var imageWidth
-      var imageHeight
+      var uploadThumb
+      var uploadFilename
+      var uploadFilesize
+      var uploadWidth
+      var uploadHeight
+      var uploadOriginalHref
+      var uploadIsAudio
 
       if ($img.length) {
-        imageThumb = $img.attr('src')
-        imageFull = $img.data('filename')
-        imageFilesize = $img.data('filesize')
-        imageWidth = $img.attr('width')
-        imageHeight = $img.attr('height')
+        uploadThumb = $img.attr('src')
+        uploadFilename = $img.data('filename')
+        uploadFilesize = $img.data('filesize')
+        uploadWidth = $img.attr('width')
+        uploadHeight = $img.attr('height')
+        uploadOriginalHref = $img.data('href')
+        uploadIsAudio = !!$img.data('isAudio')
       } else {
-        imageThumb = $noimage.data('src')
-        imageFull = $noimage.data('filename')
+        uploadThumb = $noimage.data('src')
+        uploadFilename = $noimage.data('filename')
+        uploadOriginalHref = $noimage.data('href')
+        uploadIsAudio = !!$noimage.data('isAudio')
       }
 
-      imagesArray.push($e2AddPasteableImage(imageThumb, imageFull, imageFilesize, imageWidth, imageHeight))
+      imagesArray.push($e2AddPasteableUpload(
+        uploadThumb,
+        uploadFilename,
+        uploadFilesize,
+        uploadWidth,
+        uploadHeight,
+        uploadOriginalHref,
+        uploadIsAudio
+      ))
     })
 
     return imagesArray
@@ -359,9 +519,9 @@ function initTextWithFileUpload () {
   $uploadedImages
     .on('click', '[data-e2-js-action*="rename-image"]', function (event) {
       var $this = $(event.currentTarget)
-      var $picToRename = $this.parents('.e2-uploaded-image')
-      var $mySpinner = $picToRename.find('#e2-spinner-renaming')
-      var picToRenameFile = $picToRename.data('file')
+      var $whatToRename = $this.parents('.e2-uploaded-image')
+      var $mySpinner = $whatToRename.find('#e2-spinner-renaming')
+      var picToRenameFile = $whatToRename.data('file')
       var newName = prompt('', picToRenameFile)
       if (newName === null) return false
       newName = newName.trim ()
@@ -377,16 +537,29 @@ function initTextWithFileUpload () {
         file: picToRenameFile,
         newName: newName,
         success: function (response) {
-          var imageFull = response['data']['new-name']
+          var uploadFilename = response['data']['new-name']
 
           // replace in popup menu
-          $picToRename.find('.e2-image-popup-menu-filename').text(imageFull).attr('title', imageFull)
-          $picToRename.data('file', imageFull)
+          $whatToRename.find('.e2-image-popup-menu-filename').text(uploadFilename).attr('title', uploadFilename)
+          $whatToRename.data('file', uploadFilename)
+          if ($whatToRename.data('isAudio')) {
+            var newAudioHref = response['data']['original-href']
+            var $audioRow = $whatToRename.find('.e2-image-popup-menu-audio')
+            var $audioIcon = $whatToRename.find('.e2-popup-menu-widget-item-icon_audio')
+            var $audioControls = $whatToRename.find('.e2-upload-jouele-target')
+            if (newAudioHref) {
+              $whatToRename.data('audioHref', newAudioHref)
+              $audioControls.attr('data-href', newAudioHref)
+              $audioRow.show()
+              $audioIcon.show()
+            }
+            initJouelePlayers($whatToRename, true)
+          }
 
           // replace in listedThumbnails
           var arrayIndex = listedThumbnails.indexOf(picToRenameFile)
           if (arrayIndex !== -1) {
-              listedThumbnails[arrayIndex] = imageFull
+              listedThumbnails[arrayIndex] = uploadFilename
           }
 
           // BUGBUG
@@ -394,12 +567,16 @@ function initTextWithFileUpload () {
           // the files will merge. both original files could be in the
           // thumbnail list in front of me. so we have to merge them here!
           
-          // replace in text
+          // Replace only filename directives at the beginning of a line so
+          // the editor and upload highlighting keep following the same rule.
           var text = document.getElementById('text').value
-          const replaceRegex = new RegExp('^' + picToRenameFile + '\\b', 'gm');
-          text = text.replace(replaceRegex, imageFull)
+          text = text.replace(/^.*$/gm, function (line) {
+            if (!e2LineStartsWithFilename(line, picToRenameFile)) return line
+            return uploadFilename + line.substring(picToRenameFile.length)
+          })
           document.getElementById('text').value = text
           document.getElementById('text').dispatchEvent(new Event('input'))
+          e2UpdateHighlightedUpload()
           
         },
         complete: function () {
@@ -414,27 +591,28 @@ function initTextWithFileUpload () {
       var $picToDelete = $this.parents('.e2-uploaded-image')
       var picToDeleteFile = $picToDelete.data('file')
 
-      var picToDeleteDeletingModifier = 'e2-uploaded-image_deleting'
-      var picToDeleteDeletedModifier = 'e2-uploaded-image_deleted'
-
-      $picToDelete.addClass(picToDeleteDeletingModifier)
+      $picToDelete.addClass(uploadedImageDeletingModifier)
 
       e2DeleteFile({
         file: picToDeleteFile,
         success: function () {
           listedThumbnails.splice($.inArray(picToDeleteFile, listedThumbnails), 1)
+          e2UpdateHighlightedUpload()
 
           if (transitionEvent) {
             $picToDelete.off(transitionEvent + '.e2DeleteFile').on(transitionEvent + '.e2DeleteFile', function () {
               $picToDelete.remove()
+              e2UpdateHighlightedUpload()
             })
-            $picToDelete.addClass(picToDeleteDeletedModifier)
+            $picToDelete.addClass(uploadedImageDeletedModifier)
           } else {
             $picToDelete.remove()
+            e2UpdateHighlightedUpload()
           }
         },
         error: function () {
-          $picToDelete.removeClass(picToDeleteDeletingModifier)
+          $picToDelete.removeClass(uploadedImageDeletingModifier)
+          e2UpdateHighlightedUpload()
         }
       })
 
@@ -448,7 +626,12 @@ function initTextWithFileUpload () {
 
   if ($uploadedImagesInstances.length) {
     $uploadedImages.html(e2ChangeImagesToPasteableImages())
+    initJouelePlayers($uploadedImages, false)
   }
+
+  $text
+    .on('focus click keyup input change mouseup select', e2UpdateHighlightedUpload)
+    .on('blur', e2ClearHighlightedUpload)
 
   $uploadControls.removeClass(uploadControlsHiddenModifier)
   $uploadButton.on('change', e2LoadImagesFromInput)

@@ -12,7 +12,7 @@
   <th><?= _S ('gs--sessions-when') ?></th>
   <th><?= _S ('gs--sessions-from-where') ?></th>
   <th></th>
-<tr>
+</tr>
 </thead>
 
 <tbody>
@@ -22,7 +22,7 @@
   <td><span title="<?=_DT ('j {month-g} Y, H:i', $session['opened'])?>"><?= _AGO ($session['opened']) ?></span></td>
   <td><?= $session['source'] ?></td>
   <td><?= $session['current?']? '•' : '' ?></td>
-<tr>
+</tr>
 <?php endforeach ?>
 </tbody>
 

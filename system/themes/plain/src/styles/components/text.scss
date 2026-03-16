@@ -1,6 +1,14 @@
 /* text */
 .e2-text {
   overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+@media #{$AreHeadingsHypenized} {
+  .e2-text {
+    hyphens: auto;
+    text-wrap-style: balance;
+  }
 }
 
 .e2-text h2,

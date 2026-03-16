@@ -319,9 +319,9 @@ class ResultSet
             $externalId->getInstanceId(),
             $tocEntry->getTitle(),
             $tocEntry->getDescription(),
-            $tocEntry->getDate(),
             $tocEntry->getUrl(),
-            $this->highlightTemplate
+            $this->highlightTemplate,
+            $tocEntry->getDate()
         );
     }
 

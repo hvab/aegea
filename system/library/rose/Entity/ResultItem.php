@@ -67,18 +67,18 @@ class ResultItem
      * @param int|null  $instanceId
      * @param string    $title
      * @param string    $description
-     * @param \DateTime|null $date
      * @param string    $url
      * @param string    $highlightTemplate
+     * @param \DateTime|null $date
      */
     public function __construct(
         $id,
         $instanceId,
         $title,
         $description,
-        $date = null,
         $url,
-        $highlightTemplate
+        $highlightTemplate,
+        $date = null
     ) {
         $this->id                = $id;
         $this->instanceId        = $instanceId;

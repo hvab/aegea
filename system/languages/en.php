@@ -101,7 +101,7 @@ function e2l_load_strings () {
   'gs--post-will-be-deleted' => 'The post “$[post]” will be deleted with all comments.',
 
   'gs--post-will-be-hidden' => 'The post will remain in place, but will be visible only to you. Others won’t be able to access it even by a direct link. You can show it back later',
-  'gs--post-will-be-withdrawn' => 'Comments will be deleted, the publish date forgotten. You can publish again later',
+  'gs--post-will-be-withdrawn' => 'Publish date will be forgotten. You can publish again later',
 
   // uploads
   'gs--kb' => 'KB',
@@ -282,6 +282,7 @@ function e2l_load_strings () {
   'ff--comments-require-social-id' => 'Require identification with a social network',
   'ff--only-for-recent-posts' => 'Only for recent posts',
   'ff--send-by-email' => 'Send by email',
+  'ff--show-email-in-footer' => 'Show in footer',
   'ff--analytics' => 'Analytics',
   'ff--yandex-metrika' => 'Yandex.Metrika',
   'ff--google-analytics' => 'Google Analytics',

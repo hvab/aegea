@@ -112,7 +112,7 @@
 <?php endif ?>
 
 
-<article>
+<article itemscope itemtype="https://schema.org/BlogPosting">
 
 <?php if (@$note['userpic-href']) { ?>
 <div class="e2-note-author-picture">
@@ -130,7 +130,7 @@
 <?php if ($note['scheduled?']) { ?><div class="e2-nonpublic-label"><?= _S ('gs--will-be-published') ?> <?=_DT ('j {month-g} Y, H:i', @$note['time'])?></div><?php } ?>
 
 <?php // TITLE // ?>
-<h1 class="e2-smart-title">
+<h1 class="e2-smart-title" itemprop="headline">
 <?php if (@$note['favourite?'] and !array_key_exists ('favourite-toggle-action', $note)) { ?>
 <?= _A ('<a href="'. $note['href']. '"><span class="e2-note-favourite-title">'. $note['title']. '</span></a>') ?> 
 <?php } else { ?>
@@ -143,7 +143,7 @@
 <?php // TEXT // ?>
 
 <?php if (array_key_exists ('text', $note) and $note['text'] != '') { ?>
-<div class="e2-note-text e2-text">
+<div class="e2-note-text e2-text" itemprop="articleBody">
 <?= $note['text'] ?>
 </div>
 <?php } ?>
@@ -204,15 +204,23 @@
       <?php if ($note['comments-count']) { ?>
         <a class="band-item-inner" href="<?= $note['href-comments'] ?>"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= $note['comments-count-text'] ?><?php if ($note['new-comments-count'] == 1 and $note['comments-count'] == 1) { ?>, <?= _S ('gs--comments-all-one-new') ?><?php } elseif ($note['new-comments-count'] == $note['comments-count']) { ?>, <?= _S ('gs--comments-all-new') ?><?php } ?></a>
       <?php } else { ?>
-      <a class="band-item-inner" href="<?= $note['href-comments'] ?>"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= _S ('gs--no-comments') ?></a>
+        <a class="band-item-inner" href="<?= $note['href-comments'] ?>"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= _S ('gs--no-comments') ?></a>
       <?php } ?>
     </div>
 
     <?php if ($note['new-comments-count'] and $note['new-comments-count'] < $note['comments-count']) { ?>
-    <div class="band-item admin-links">
-      <a class="admin-link band-item-inner" href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a>
-    </div>
+      <div class="band-item admin-links">
+        <a class="admin-link band-item-inner" href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a>
+      </div>
     <?php } ?>
+    <?php else: ?>
+      <?php if ($note['draft?'] and $note['comments-count']) { ?>
+        <div class="band-item">
+        <div class="band-item-inner">
+        <span class="e2-svgi"><?= _SVG ('comments') ?></span> <?= $note['comments-count-text'] ?>
+        </div>
+        </div>
+      <?php } ?>
     <?php endif ?>
 
     <?php if (!empty ($note['preview-href'])) { ?>
@@ -267,18 +275,18 @@
 <?php if (!empty ($note['related'])) { ?>
 <?php if ($content['class'] == 'note') { ?>
 
-<section>
+<aside role="complementary">
 <div class="e2-section-heading"><?= $note['related']['title']?></div>
 <?php _T ('notes-gallery') ?>
-</section>
+</aside>
 
 <?php } elseif ($content['class'] == 'frontpage') { ?>
 
-<section>
+<aside role="complementary">
 <div class="e2-note-splitter">
 <?php _T ('notes-gallery') ?>
 </div>
-</section>
+</aside>
 
 <?php } ?>
 <?php } ?>

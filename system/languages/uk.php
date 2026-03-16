@@ -102,7 +102,7 @@ function e2l_load_strings () {
   'gs--post-will-be-deleted' => 'Буде видалено допис «$[post]» і всі коментарі до нього.',
 
   'gs--post-will-be-hidden' => 'Допис залишиться на місці, але буде видно тільки вам. Інші не побачать навіть за прямим посиланням. Можна буде знову зробити видимої',
-  'gs--post-will-be-withdrawn' => 'Коментарі видаляться, дата публікації забудеться. Можна буде опублікувати ще раз',
+  'gs--post-will-be-withdrawn' => 'Дата публікації забудеться. Можна буде опублікувати ще раз',
 
   // uploads
   'gs--kb' => 'КБ',
@@ -283,6 +283,7 @@ function e2l_load_strings () {
   'ff--comments-require-social-id' => 'Тільки при вході через соцмережу',
   'ff--only-for-recent-posts' => 'Тільки до нових дописів',
   'ff--send-by-email' => 'Надсилати ел. поштою',
+  'ff--show-email-in-footer' => 'Показувати внизу сторінки',
   'ff--analytics' => 'Аналітика',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
   'ff--google-analytics' => 'Гугль-аналітика',

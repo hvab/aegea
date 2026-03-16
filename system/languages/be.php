@@ -101,7 +101,7 @@ function e2l_load_strings () {
   'gs--post-will-be-deleted' => 'Нататка «$[post]» будзе выдалена разам з усімі каментарамі.',
 
   'gs--post-will-be-hidden' => 'Нататка застанецца на месцы, але будзе бачная толькі вам. Іншыя не ўбачаць нават па прамой спасылцы. Можна будзе зноў зрабіць бачнай',
-  'gs--post-will-be-withdrawn' => 'Каментары адыдуць, дата публікацыі забудзецца. Можна будзе апублікаваць яшчэ раз',
+  'gs--post-will-be-withdrawn' => 'Дата публікацыі забудзецца. Можна будзе апублікаваць яшчэ раз',
 
   // uploads
   'gs--kb' => 'КБ',
@@ -282,6 +282,7 @@ function e2l_load_strings () {
   'ff--comments-require-social-id' => 'Толькі пры ўваходзе праз сацсетку',
   'ff--only-for-recent-posts' => 'Толькі да новых нататак',
   'ff--send-by-email' => 'Дасылаць па пошце',
+  'ff--show-email-in-footer' => 'Паказваць у падвале',
   'ff--analytics' => 'Аналітыка',
   'ff--yandex-metrika' => 'Яндэкс.Метрыка',
   'ff--google-analytics' => 'Гугль-аналітыка',
